@@ -1,0 +1,78 @@
+{% load static %}
+{% load i18n %}
+
+{% translate "title_meta_text" as the_title %}
+
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8"/>
+     <link rel="shortcut icon" href="{% static 'ico/logo.ico' %}" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>{{ the_title }}</title>
+    <link rel="stylesheet" href="{% static 'css/foundation.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/app.css' %}">
+</head>
+<body>
+<header>
+    <div class="top-bar main-top">
+        <div class="top-bar-left">
+            <ul class="dropdown menu menu_custom" data-dropdown-menu>
+                <img src="{% static 'svg/logo.svg' %}" alt="СУНКАР"></li>
+                {% for item in menu_items %}
+                    {% if item.children %}
+                        <li>
+                            <a href="{{ item.link }}">{{ item.name }}</a>
+                            <ul class="menu">
+                                {% for k, v in item.children.items %}
+                                    <li><a href="{{ v.link }}">{{ v.name }}</a></li>
+                                {% endfor %}
+                            </ul>
+                        </li>
+                    {% elif not item.parent %}
+                        <li><a href="{{ item.link }}">{{ item.name }}</a></li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="top-bar-right">
+            <form action="{% url 'set_language' %}" method="post">
+                {% csrf_token %}
+                <input name="next" type="hidden" value="{{ request.get_full_path|slice:'3:' }}"/>
+                <ul class="menu">
+                    {% get_current_language as LANGUAGE_CODE %}
+                    {% get_available_languages as LANGUAGES %}
+                    {% get_language_info_list for LANGUAGES as languages %}
+                    {% for language in languages %}
+                        <li style="margin-right: 10px;">
+                            <button type="submit"
+                                    name="language"
+                                    value="{{ language.code }}"
+                                    class="{% if language.code == LANGUAGE_CODE %}selected{% endif %}">
+                                {{ language.name_local }}
+                            </button>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </form>
+
+        </div>
+    </div>
+
+
+</header>
+
+<main>
+    {% block main %}
+    {% endblock %}
+</main>
+
+
+<script src="{% static 'js/vendor/jquery.js' %}"></script>
+<script src="{% static 'js/vendor/foundation.min.js' %}"></script>
+<script src="{% static 'js/app.js' %}"></script>
+<script>
+    $(document).foundation();
+</script>
+</body>
+</html>

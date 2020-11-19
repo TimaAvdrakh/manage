@@ -1,0 +1,23 @@
+
+.menu_custom a {
+    line-height: 16px;
+    color: #0a0a0a;
+    font-size: 14px;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+.top-bar-left .menu {
+    background: #f1f1f1 !important;
+}
+
+.main-top {
+    position: relative;
+    background: #f1f1f1 !important;
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    border: none;
+    z-index: 99;
+    box-shadow: 0 0px 20px rgba(0, 0, 0, 0.17);
+}
