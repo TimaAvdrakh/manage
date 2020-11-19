@@ -17,8 +17,4 @@ urlpatterns = [
         )(views.TemplateView.as_view),
         name='index'
     ),
-    path(
-      'organizations',
-
-    ),
 ]

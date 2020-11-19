@@ -21,3 +21,42 @@
     z-index: 99;
     box-shadow: 0 0px 20px rgba(0, 0, 0, 0.17);
 }
+
+.button_custom {
+    margin-bottom: 0;
+}
+
+.headers_section {
+    margin: 0;
+    font-weight: 600;
+    padding: 9px 20px 9px 42px;
+    color: #b6010e;
+    outline: none;
+    border-radius: 0;
+    user-select: none;
+}
+
+.headers_local {
+    border: 1px solid #e6e6e6;
+    border-left: 3px solid #b6010e;
+    margin: 0;
+    font-weight: 600;
+    padding: 9px 20px 9px 42px;
+    color: #b6010e;
+    outline: none;
+    border-radius: 0;
+    user-select: none;
+}
+
+.orgs:hover,
+.orgs.choice {
+    background: #f3dddf;
+    text-decoration: none;
+}
+
+/*** OVERRIDE ***/
+
+
+.card-divider {
+    padding: 0 !important;
+}

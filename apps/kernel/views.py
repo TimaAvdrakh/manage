@@ -6,7 +6,3 @@ from django.views.generic import (
 
 class IndexView(TemplateView):
     template_name = 'kernel/index.html'
-
-
-class OrganizationsView(ListView):
-    template_name = ''

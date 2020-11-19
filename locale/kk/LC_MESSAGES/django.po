@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-19 06:21+0000\n"
+"POT-Creation-Date: 2020-11-19 10:14+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,9 +18,51 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n!=1);\n"
 
-#: apps/dictionary/models.py:17
+#: apps/dictionary/models.py:7
+msgid "ORG_ORM"
+msgstr "ORM корпусы"
+
+#: apps/dictionary/models.py:8
+msgid "ORG_SUPERVISION"
+msgstr "Қадағалаушы орган"
+
+#: apps/dictionary/models.py:22
 msgid "organization_name"
 msgstr "ОРМ және қадағалау органдары"
+
+#: apps/dictionary/models.py:26
+#: apps/dictionary/templates/dictionary/organization/index.html:61
+msgid "organization_kind"
+msgstr "Орган түрі"
+
+#: apps/dictionary/templates/dictionary/organization/index.html:7
+#: apps/dictionary/templates/dictionary/organization/index.html:43
+msgid "add_button"
+msgstr "Қосу"
+
+#: apps/dictionary/templates/dictionary/organization/index.html:10
+msgid "edit_button"
+msgstr "Өңдеу"
+
+#: apps/dictionary/templates/dictionary/organization/index.html:13
+msgid "delete_button"
+msgstr "Жою"
+
+#: apps/dictionary/templates/dictionary/organization/index.html:17
+msgid "header_section_organization"
+msgstr "ОРМ органдары мен қадағалау органдарының тізімін қалыптастыру"
+
+#: apps/dictionary/templates/dictionary/organization/index.html:26
+msgid "header_adding_action_organization"
+msgstr "ORM немесе қадағалау органын қосу"
+
+#: apps/dictionary/templates/dictionary/organization/index.html:54
+msgid "query_result_header"
+msgstr "Сұрау нәтижелері"
+
+#: apps/dictionary/templates/dictionary/organization/index.html:60
+msgid "name_tag"
+msgstr "Аты-жөні"
 
 #: apps/kernel/models.py:18
 msgid "folder_task_name"
@@ -59,8 +101,6 @@ msgid "menu_view_sanction"
 msgstr "Санкциялар"
 
 #: apps/system/__init__.py:31
-#, fuzzy
-#| msgid "menu_view_sanction"
 msgid "menu_view_sanction_interception"
 msgstr "Хабарламаларды ұстап алу"
 
@@ -69,28 +109,20 @@ msgid "menu_view_sanction_information"
 msgstr "Қызмет туралы ақпарат"
 
 #: apps/system/__init__.py:49
-#, fuzzy
-#| msgid "menu_view_account"
 msgid "menu_view_journal"
 msgstr "Журнал"
 
 #: apps/system/__init__.py:54
-#, fuzzy
-#| msgid "menu_view_sanction"
 msgid "menu_view_person_identifiers"
 msgstr "Жазылушының идентификаторлары"
 
 #: apps/system/__init__.py:59
-#, fuzzy
-#| msgid "menu_view_organization"
 msgid "menu_view_communication_objects"
-msgstr "ОРМ және қадағалау органдары"
+msgstr "Байланыс объектілері"
 
 #: apps/system/__init__.py:64
-#, fuzzy
-#| msgid "menu_view_task"
 msgid "menu_view_change_password"
-msgstr "Тапсырмалар"
+msgstr "Құпия сөзді өзгерту"
 
 #: apps/system/templates/system/base.html:4
 msgid "title_meta_text"

@@ -1,0 +1,103 @@
+{% extends 'dictionary/organization/base_org.html' %}
+{% load i18n %}
+
+{% block actions %}
+
+    <a class="button small button_custom" onclick="onAdd()">
+        {% translate 'add_button' %}
+    </a>
+    <a class="button small clear button_custom action_button" disabled onclick="">
+        {% translate 'edit_button' %}
+    </a>
+    <a class="button small clear alert button_custom action_button" disabled onclick="onRemoveElement()">
+        {% translate 'delete_button' %}
+    </a>
+
+    <span class="headers_section">
+        {% translate 'header_section_organization' %}
+    </span>
+
+{% endblock %}
+
+{% block main %}
+    <div class="card" id="add_org" style="display: none;">
+        <div class="card-divider">
+            <span class="headers_local">
+                {% translate 'header_adding_action_organization' %}
+            </span>
+        </div>
+
+        <div class="card-section">
+            <form action="{% url 'dictionary:organization_create' %}" method="POST">
+                {% csrf_token %}
+
+                <div class="grid-x grid-padding-x">
+                    <div class="medium-7 cell">
+                        {{ add_form.name }}
+                    </div>
+                    <div class="medium-3 cell">
+                        {{ add_form.kind }}
+                    </div>
+                    <div class="medium-2 cell">
+                        <button class="success button small button_custom"
+                                type="submit"> {% translate 'add_button' %}</button>
+                        <a class="alert button small  button_custom" onclick="onClose('add_org')">Закрыть</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-divider">
+            <span class="headers_local">
+                {% translate 'query_result_header' %}
+            </span>
+        </div>
+        <div class="card-section">
+            {% for org in organization_list %}
+                <div class="callout secondary small orgs" id="org_{{ org.id }}">
+                    <b>{% translate 'name_tag' %}</b> {{ org.name }} &nbsp;
+                    <b>{% translate 'organization_kind' %}</b> {{ org.get_kind_display }}
+                </div>
+            {% endfor %}
+
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block local_script %}
+    <script>
+        function onAdd() {
+            $("#add_org").css("display", "block")
+        }
+
+        function onClose(element_id) {
+            $("#" + element_id).css("display", "none")
+        }
+
+
+        $('.orgs').click(function () {
+            if ($(this).hasClass("choice")) {
+                $(this).removeClass("choice")
+                $(".action_button").attr('disabled', true).attr("id", null)
+            } else {
+                $(".orgs").removeClass("choice")
+                $(this).addClass("choice")
+                $(".action_button").attr('disabled', false).attr("id", this.id)
+            }
+        });
+
+        function onRemoveElement() {
+            let elem = $('.orgs.choice')
+            let id = elem.attr("id")
+            if (id !== undefined) {
+                let modal = new Foundation.Reveal(element, options);
+                modal
+            }
+            console.log(elem.attr("id"));
+        }
+
+    </script>
+{% endblock %}

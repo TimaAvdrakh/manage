@@ -1,3 +1,9 @@
 from django.contrib import admin
 
-# Register your models here.
+from apps.dictionary import models
+
+
+@admin.register(models.Organization)
+class OrganizationAdmin(admin.ModelAdmin):
+    list_display = ('name', 'kind')
+    list_filter = ('kind',)

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-19 06:21+0000\n"
+"POT-Creation-Date: 2020-11-19 10:14+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,9 +18,51 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n!=1);\n"
 
-#: apps/dictionary/models.py:17
+#: apps/dictionary/models.py:7
+msgid "ORG_ORM"
+msgstr "Орган ОРМ"
+
+#: apps/dictionary/models.py:8
+msgid "ORG_SUPERVISION"
+msgstr "Орган надзора"
+
+#: apps/dictionary/models.py:22
 msgid "organization_name"
 msgstr "Органы ОРМ и надзора"
+
+#: apps/dictionary/models.py:26
+#: apps/dictionary/templates/dictionary/organization/index.html:61
+msgid "organization_kind"
+msgstr "Вид органа"
+
+#: apps/dictionary/templates/dictionary/organization/index.html:7
+#: apps/dictionary/templates/dictionary/organization/index.html:43
+msgid "add_button"
+msgstr "Добавить"
+
+#: apps/dictionary/templates/dictionary/organization/index.html:10
+msgid "edit_button"
+msgstr "Редактировать"
+
+#: apps/dictionary/templates/dictionary/organization/index.html:13
+msgid "delete_button"
+msgstr "Удалить"
+
+#: apps/dictionary/templates/dictionary/organization/index.html:17
+msgid "header_section_organization"
+msgstr "Формирование списка органов ОРМ и органов надзора"
+
+#: apps/dictionary/templates/dictionary/organization/index.html:26
+msgid "header_adding_action_organization"
+msgstr "Добавление органа ОРМ или надзора"
+
+#: apps/dictionary/templates/dictionary/organization/index.html:54
+msgid "query_result_header"
+msgstr "Результаты запроса"
+
+#: apps/dictionary/templates/dictionary/organization/index.html:60
+msgid "name_tag"
+msgstr "Наименование"
 
 #: apps/kernel/models.py:18
 msgid "folder_task_name"
@@ -75,16 +117,12 @@ msgid "menu_view_person_identifiers"
 msgstr "Идентификаторы абонентов"
 
 #: apps/system/__init__.py:59
-#, fuzzy
-#| msgid "menu_view_organization"
 msgid "menu_view_communication_objects"
-msgstr "Органы ОРМ и надзора"
+msgstr "Объекты коммуникации"
 
 #: apps/system/__init__.py:64
-#, fuzzy
-#| msgid "menu_view_task"
 msgid "menu_view_change_password"
-msgstr "Задания"
+msgstr "Сменить пароль"
 
 #: apps/system/templates/system/base.html:4
 msgid "title_meta_text"

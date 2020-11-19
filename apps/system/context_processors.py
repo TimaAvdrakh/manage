@@ -19,7 +19,6 @@ def menu_context(request):
     for perm in permissions:
         if 'menu_view' in perm.codename:
             item = MENU_ITEMS.get(perm.codename)
-            print(item)
             if item:
                 items.append(item)
 
