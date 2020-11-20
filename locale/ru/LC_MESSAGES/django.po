@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-19 10:14+0000\n"
+"POT-Creation-Date: 2020-11-20 10:21+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -26,25 +26,28 @@ msgstr "Орган ОРМ"
 msgid "ORG_SUPERVISION"
 msgstr "Орган надзора"
 
-#: apps/dictionary/models.py:22
+#: apps/dictionary/models.py:23
 msgid "organization_name"
 msgstr "Органы ОРМ и надзора"
 
-#: apps/dictionary/models.py:26
+#: apps/dictionary/models.py:27
 #: apps/dictionary/templates/dictionary/organization/index.html:61
 msgid "organization_kind"
 msgstr "Вид органа"
 
 #: apps/dictionary/templates/dictionary/organization/index.html:7
 #: apps/dictionary/templates/dictionary/organization/index.html:43
+#: apps/userapp/templates/userapp/index.html:10
 msgid "add_button"
 msgstr "Добавить"
 
 #: apps/dictionary/templates/dictionary/organization/index.html:10
+#: apps/userapp/templates/userapp/index.html:13
 msgid "edit_button"
 msgstr "Редактировать"
 
 #: apps/dictionary/templates/dictionary/organization/index.html:13
+#: apps/userapp/templates/userapp/index.html:16
 msgid "delete_button"
 msgstr "Удалить"
 
@@ -125,28 +128,49 @@ msgid "menu_view_change_password"
 msgstr "Сменить пароль"
 
 #: apps/system/templates/system/base.html:4
+#: apps/userapp/templates/userapp/auth/base_auth.html:4
 msgid "title_meta_text"
 msgstr "Пульт СОРМ"
 
 #: apps/userapp/models.py:14
 msgid "SENIOR_ADMIN"
-msgstr ""
+msgstr "Супер Администратор"
 
 #: apps/userapp/models.py:15
 msgid "HANDLER"
-msgstr ""
+msgstr "Обработчик"
 
 #: apps/userapp/models.py:16
 msgid "SUPERVISOR"
-msgstr ""
+msgstr "Надзорщик"
 
-#: apps/userapp/models.py:33
+#: apps/userapp/models.py:34
 msgid "first_name"
 msgstr "Имя"
 
-#: apps/userapp/models.py:34
+#: apps/userapp/models.py:35
 msgid "last_name"
 msgstr "Фамилия"
+
+#: apps/userapp/templates/userapp/auth/password_change_done.html:9
+msgid "Your password was changed."
+msgstr ""
+
+#: apps/userapp/templates/userapp/index.html:7
+msgid "view_button"
+msgstr "Просмотр"
+
+#: apps/userapp/templates/userapp/index.html:20
+msgid "header_section_accounts"
+msgstr "Учётные записи"
+
+#: apps/userapp/templates/userapp/index.html:31
+msgid "header_list_accounts"
+msgstr "Список учётных записей"
+
+#: apps/userapp/templates/userapp/index.html:77
+msgid "header_add_accounts"
+msgstr "Добавление учётной записи"
 
 #: project_py/settings.py:116
 msgid "Russian"

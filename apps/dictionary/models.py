@@ -29,4 +29,4 @@ class Organization(TimestampMixin):
     )
 
     def __str__(self):
-        return f'{self.kind}: {self.name}'
+        return self.name

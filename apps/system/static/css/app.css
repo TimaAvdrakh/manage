@@ -48,7 +48,10 @@
     user-select: none;
 }
 
-.orgs:hover,
+.orgs:hover {
+    color: #9e0c0f;
+}
+
 .orgs.choice {
     background: #f3dddf;
     text-decoration: none;
@@ -86,4 +89,9 @@
 
 .card-divider {
     padding: 0 !important;
+}
+
+.shadow {
+    -webkit-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .16), 0 2px 10px 0 rgba(0, 0, 0, .12) !important;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .16), 0 2px 10px 0 rgba(0, 0, 0, .12) !important;
 }

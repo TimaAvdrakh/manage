@@ -29,13 +29,28 @@ class MainUser(AbstractBaseUser, PermissionsMixin):
             ('menu_view_change_password', 'Смена пароля - в Меню'),
         )
 
-    identifier = models.CharField(max_length=64, primary_key=True, unique=True)
+    id = models.AutoField(primary_key=True)
+    identifier = models.CharField(max_length=64, unique=True)
     first_name = models.CharField(max_length=200, verbose_name=_('first_name'))
     last_name = models.CharField(max_length=200, verbose_name=_('last_name'))
     role = models.CharField(
         max_length=20,
         verbose_name='Роль',
         choices=ROLE_TYPES
+    )
+    organization = models.ForeignKey(
+        'dictionary.Organization',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name='Органы ОРМ и надзора'
+    )
+    folder = models.ForeignKey(
+        'kernel.FolderTask',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name='Папка заданий'
     )
 
     is_staff = models.BooleanField(default=False)

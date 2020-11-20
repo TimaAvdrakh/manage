@@ -54,15 +54,15 @@
                             </button>
                         </li>
                     {% endfor %}
-                <li>
+                    <li>
 
-                </li>
+                    </li>
                 </ul>
             </form>
 
 
         </div>
-    <div style="padding-left: 25px"><a id="logout" href="{% url 'userapp:logout' %}">Выход</a></div>
+        <div style="padding-left: 25px"><a id="logout" href="{% url 'userapp:logout' %}">Выход</a></div>
     </div>
 
 
@@ -74,12 +74,10 @@
     </div>
 </div>
 
-<main>
+<main class="margin-horizontal-1">
     {% block main %}
     {% endblock %}
 </main>
-
-
 
 <script src="{% static 'js/vendor/jquery.js' %}"></script>
 <script src="{% static 'js/vendor/foundation.min.js' %}"></script>

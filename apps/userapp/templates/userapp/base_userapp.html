@@ -1,0 +1,15 @@
+{% extends 'system/base.html' %}
+
+
+{% block main %}
+    <div class="grid-x grid-padding-x">
+        <div class="cell small-6">
+            {% block content_list %}
+            {% endblock %}
+        </div>
+        <div class="cell small-6">
+            {% block content_view %}
+            {% endblock %}
+        </div>
+    </div>
+{% endblock %}

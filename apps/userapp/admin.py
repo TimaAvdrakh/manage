@@ -12,7 +12,9 @@ class MainUserAdmin(UserAdmin):
     fieldsets = (
         (
             None,
-            {'fields': ('first_name', 'last_name', 'role')}
+            {'fields': (
+                'first_name', 'last_name', 'role', 'organization', 'folder'
+            )}
         ),
         (
             'Password', {'fields': ('password',)}
