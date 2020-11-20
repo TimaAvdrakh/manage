@@ -1,0 +1,44 @@
+{% extends 'userapp/auth/base_auth.html' %}
+{% load static %}
+
+{% block main %}
+    <div class="row">
+        <div class="small-12 medium-8 large-8 columns" id="login">
+            <div class="text-center">
+                <img src="{% static 'svg/logo_login.svg' %}" style="margin-bottom: 30px;" width="190px" height="auto">
+            </div>
+
+            <div class="card shadow" style="width: 400px;">
+                <div class="card-divider">
+                    <span style="padding: 10px 0 10px 20px;"><b>Авторизация</b></span>
+                </div>
+                <div class="card-section">
+                    {% if form.errors %}
+                        <p>Логин или пароль указаны неверно!</p>
+                    {% endif %}
+                    <form method="post" action="{% url 'userapp:login' %}">
+                        {% csrf_token %}
+                        <div class="row collapse">
+                            <div class="small-12 medium-5 columns">
+                                <label>Логин
+                                    {#                                    <input type="text" name="username" placeholder="Логин"/>#}
+                                    {{ form.username }}
+                                </label>
+                            </div>
+                            <div class="small-12 medium-5 columns">
+                                <label>Пароль
+                                    {#                                    <input type="password" name="password" placeholder="Пароль"/>#}
+                                    {{ form.password }}
+                                </label>
+                            </div>
+                            <div class="small-12 medium-2 small-centered medium-uncentered columns">
+                                <input type="submit" class="button expanded" value="ОК"/>
+                            </div>
+                            <input type="hidden" name="next" value="{{ next }}">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

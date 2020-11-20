@@ -54,6 +54,33 @@
     text-decoration: none;
 }
 
+
+/*** AUTH ***/
+
+#login {
+    position: absolute;
+    left: 50%;
+    top: 40%;
+
+    transform: translate(-50%, -40%);
+    -webkit-transform: translate(-50%, -40%);
+    -o-transform: translate(-50%, -40%);
+    -ms-transform: translate(-50%, -40%);
+}
+
+
+#logout::before {
+    position: absolute;
+    display: block;
+    content: '';
+    width: 13px;
+    height: 13px;
+    top: 1px;
+    left: -23px;
+    background: url(../svg/ico_exit.svg);
+}
+
+
 /*** OVERRIDE ***/
 
 

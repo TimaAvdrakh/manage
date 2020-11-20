@@ -8,7 +8,7 @@ from apps.kernel import views
 
 app_name = 'kernel'
 urlpatterns = [
-    path('', views.IndexView.as_view()),
+    path('', login_required(views.IndexView.as_view(), login_url='/login/')),
     path(
         'index',
         permission_required(
