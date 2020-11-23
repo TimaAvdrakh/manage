@@ -1,14 +1,20 @@
-from django.urls import path
+from django.urls import path, include
 from django.contrib.auth.decorators import (
     login_required,
     permission_required,
 )
-
+from rest_framework import routers
 from apps.kernel import views
+
+
+router = routers.DefaultRouter()
+
+
 
 app_name = 'kernel'
 urlpatterns = [
-    path('', login_required(views.IndexView.as_view(), login_url='/login/')),
+    # path('api/', include(router.urls)),
+
     path(
         'index',
         permission_required(
@@ -16,5 +22,15 @@ urlpatterns = [
             login_url='/login/'
         )(views.TemplateView.as_view),
         name='index'
+    ),
+    path(
+        'folder_task/',
+        views.FolderTaskView.as_view(),
+        name='folder_task'
+    ),
+    path(
+        'api/folder_task/',
+        views.FolderTaskViewAPI.as_view(),
+        name='folder_task_api'
     ),
 ]

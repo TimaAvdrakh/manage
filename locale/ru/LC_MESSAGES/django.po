@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-20 10:21+0000\n"
+"POT-Creation-Date: 2020-11-23 11:06+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -31,39 +31,52 @@ msgid "organization_name"
 msgstr "Органы ОРМ и надзора"
 
 #: apps/dictionary/models.py:27
-#: apps/dictionary/templates/dictionary/organization/index.html:61
+#: apps/dictionary/templates/dictionary/organization/index.html:62
 msgid "organization_kind"
 msgstr "Вид органа"
 
-#: apps/dictionary/templates/dictionary/organization/index.html:7
-#: apps/dictionary/templates/dictionary/organization/index.html:43
+#: apps/dictionary/templates/dictionary/organization/index.html:6
+#: apps/userapp/templates/userapp/index.html:7
+msgid "view_button"
+msgstr "Просмотр"
+
+#: apps/dictionary/templates/dictionary/organization/index.html:9
+#: apps/dictionary/templates/dictionary/organization/index.html:44
+#: apps/kernel/templates/kernel/folder_task/index.html:13
 #: apps/userapp/templates/userapp/index.html:10
 msgid "add_button"
 msgstr "Добавить"
 
-#: apps/dictionary/templates/dictionary/organization/index.html:10
+#: apps/dictionary/templates/dictionary/organization/index.html:12
+#: apps/kernel/templates/kernel/folder_task/index.html:16
 #: apps/userapp/templates/userapp/index.html:13
 msgid "edit_button"
 msgstr "Редактировать"
 
-#: apps/dictionary/templates/dictionary/organization/index.html:13
+#: apps/dictionary/templates/dictionary/organization/index.html:15
+#: apps/kernel/templates/kernel/folder_task/index.html:19
 #: apps/userapp/templates/userapp/index.html:16
 msgid "delete_button"
 msgstr "Удалить"
 
-#: apps/dictionary/templates/dictionary/organization/index.html:17
+#: apps/dictionary/templates/dictionary/organization/index.html:19
 msgid "header_section_organization"
 msgstr "Формирование списка органов ОРМ и органов надзора"
 
-#: apps/dictionary/templates/dictionary/organization/index.html:26
+#: apps/dictionary/templates/dictionary/organization/index.html:27
 msgid "header_adding_action_organization"
 msgstr "Добавление органа ОРМ или надзора"
 
-#: apps/dictionary/templates/dictionary/organization/index.html:54
+#: apps/dictionary/templates/dictionary/organization/index.html:55
+#: apps/kernel/templates/kernel/folder_task/index.html:68
 msgid "query_result_header"
 msgstr "Результаты запроса"
 
-#: apps/dictionary/templates/dictionary/organization/index.html:60
+#: apps/dictionary/templates/dictionary/organization/index.html:61
+#: apps/kernel/templates/kernel/folder_task/index.html:38
+#: apps/kernel/templates/kernel/folder_task/index.html:39
+#: apps/kernel/templates/kernel/folder_task/index.html:56
+#: apps/kernel/templates/kernel/folder_task/index.html:57
 msgid "name_tag"
 msgstr "Наименование"
 
@@ -71,17 +84,29 @@ msgstr "Наименование"
 msgid "folder_task_name"
 msgstr "Папки заданий"
 
-#: apps/kernel/models.py:33
+#: apps/kernel/models.py:44
 msgid "task_name"
 msgstr "Задания"
 
-#: apps/kernel/models.py:56
+#: apps/kernel/models.py:70
 msgid "sanction_name"
 msgstr "Санкции"
 
-#: apps/kernel/models.py:74
+#: apps/kernel/models.py:91
 msgid "person_identifiers_name"
 msgstr ""
+
+#: apps/kernel/templates/kernel/folder_task/index.html:23
+msgid "header_section_folder_task"
+msgstr "Формирование папок заданий"
+
+#: apps/kernel/templates/kernel/folder_task/index.html:32
+msgid "query_folder_add"
+msgstr "Запрос 1.1б - Добавление папки заданий"
+
+#: apps/kernel/templates/kernel/folder_task/index.html:50
+msgid "query_folder_edit"
+msgstr "Запрос 1.1б - Редактирование папки заданий"
 
 #: apps/system/__init__.py:6
 msgid "menu_view_organization"
@@ -156,26 +181,22 @@ msgstr "Фамилия"
 msgid "Your password was changed."
 msgstr ""
 
-#: apps/userapp/templates/userapp/index.html:7
-msgid "view_button"
-msgstr "Просмотр"
-
 #: apps/userapp/templates/userapp/index.html:20
 msgid "header_section_accounts"
 msgstr "Учётные записи"
 
-#: apps/userapp/templates/userapp/index.html:31
+#: apps/userapp/templates/userapp/index.html:40
 msgid "header_list_accounts"
 msgstr "Список учётных записей"
 
-#: apps/userapp/templates/userapp/index.html:77
+#: apps/userapp/templates/userapp/index.html:86
 msgid "header_add_accounts"
 msgstr "Добавление учётной записи"
 
-#: project_py/settings.py:116
+#: project_py/settings.py:118
 msgid "Russian"
 msgstr ""
 
-#: project_py/settings.py:117
+#: project_py/settings.py:119
 msgid "Kazakh"
 msgstr ""

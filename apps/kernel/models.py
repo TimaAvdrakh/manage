@@ -17,6 +17,17 @@ class FolderTask(TimestampMixin):
         max_length=256,
         verbose_name=_('folder_task_name')
     )
+    parent = models.ForeignKey(
+        'self',
+        on_delete=models.SET_NULL,
+        null=True,
+        related_name='children',
+        blank=True,
+        verbose_name='Дочерние папки'
+    )
+
+    def __str__(self):
+        return self.name
 
 
 class Task(TimestampMixin):
@@ -32,6 +43,9 @@ class Task(TimestampMixin):
         max_length=256,
         verbose_name=_('task_name')
     )
+
+    def __str__(self):
+        return self.name
 
 
 class Sanction(TimestampMixin):
@@ -56,6 +70,9 @@ class Sanction(TimestampMixin):
         verbose_name=_('sanction_name')
     )
 
+    def __str__(self):
+        return self.name
+
 
 class PersonIdentifiers(TimestampMixin):
     class Meta:
@@ -73,3 +90,6 @@ class PersonIdentifiers(TimestampMixin):
         max_length=256,
         verbose_name=_('person_identifiers_name')
     )
+
+    def __str__(self):
+        return self.name

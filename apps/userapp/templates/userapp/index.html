@@ -22,9 +22,18 @@
 
 {% endblock %}
 
+            {% block sidebar_left %}
+                <b>Папки заданий</b>
+            {% endblock %}
+
+{% block content %}
+
+    <form action="" method="get">
+        {{ filter.form.as_p }}
+        <input type="submit" />
+    </form>
 
 
-{% block content_list %}
     <div class="card">
         <div class="card-divider ">
             <span class="headers_local">
@@ -68,9 +77,9 @@
 
         </div>
     </div>
-{% endblock %}
 
-{% block content_view %}
+
+
     <div class="card" id="add_card" style="display: none">
         <div class="card-divider ">
             <span class="headers_local">

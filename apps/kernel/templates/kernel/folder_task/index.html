@@ -1,0 +1,119 @@
+{% extends 'kernel/folder_task/base_folder_task.html' %}
+{% load static %}
+{% load i18n %}
+
+
+{% block local_style %}
+    <link rel="stylesheet" href="{% static 'jstree/themes/default/style.min.css' %}"/>
+{% endblock %}
+
+
+{% block actions %}
+    <a class="button small button_custom" onclick="onAdd()">
+        {% translate 'add_button' %}
+    </a>
+    <a class="button small clear button_custom action_button" disabled onclick="onEdit(this)">
+        {% translate 'edit_button' %}
+    </a>
+    <a class="button small clear alert button_custom action_button" disabled onclick="onRemoveElement()">
+        {% translate 'delete_button' %}
+    </a>
+
+    <span class="headers_section">
+        {% translate 'header_section_folder_task' %}
+    </span>
+{% endblock %}
+
+
+{% block content %}
+    <div class="card query-tag" id="query_folder_add" style="display: none">
+        <div class="card-divider">
+            <span class="headers_local">
+                {% translate 'query_folder_add' %}
+            </span>
+        </div>
+        <div class="card-section">
+            <form action="" method="POST">
+                {% csrf_token %}
+                <label>{% translate 'name_tag' %}
+                    <input type="text" placeholder="{% translate 'name_tag' %}"/>
+                    <button type="submit" class="button success small">Отправить</button>
+                    <span class="button secondary small" onclick="onClose()">Отменить</span>
+                </label>
+            </form>
+        </div>
+    </div>
+
+    <div class="card query-tag" id="query_folder_edit" style="display: none">
+        <div class="card-divider">
+            <span class="headers_local">
+                {% translate 'query_folder_edit' %}
+            </span>
+        </div>
+        <div class="card-section">
+            <form action="" method="POST">
+                {% csrf_token %}
+                <label>{% translate 'name_tag' %}
+                    <input type="text" id="edit_query_input" placeholder="{% translate 'name_tag' %}"/>
+                    <button type="submit" class="button success small">Отправить</button>
+                    <span class="button secondary small" onclick="onClose()">Отменить</span>
+                </label>
+            </form>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-divider">
+            <span class="headers_local">
+                {% translate 'query_result_header' %}
+            </span>
+        </div>
+        <div class="card-section">
+            <div id="folders"></div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block local_script %}
+    <script src="{% static 'jstree/jstree.min.js' %}"></script>
+    <script>
+
+        $('#folders').on("changed.jstree", function (e, data) {
+            console.log(data);
+            $(".action_button").attr('disabled', false).attr("id", this.id)
+            $('#edit_query_input').val(data.node.text)
+        });
+
+
+        $.ajax({
+            type: "GET",
+            url: "http://127.0.0.1:8011/api/folder_task/?format=json",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data) {
+                $('#folders').jstree(data)
+            },
+            error: function (errMsg) {
+                alert(errMsg);
+            }
+        });
+
+        function onAdd() {
+            $('#query_folder_edit').css('display', 'none')
+            $('#query_folder_add').css('display', 'block')
+        }
+
+        function onEdit(elem) {
+            if ($(elem).attr('disabled') !== 'disabled') {
+                $('#query_folder_add').css('display', 'none')
+                $('#query_folder_edit').css('display', 'block');
+            }
+        }
+
+        function onClose() {
+            $('.query-tag').css('display', 'none')
+        }
+
+    </script>
+{% endblock %}
