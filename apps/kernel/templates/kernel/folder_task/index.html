@@ -3,11 +3,6 @@
 {% load i18n %}
 
 
-{% block local_style %}
-    <link rel="stylesheet" href="{% static 'jstree/themes/default/style.min.css' %}"/>
-{% endblock %}
-
-
 {% block actions %}
     <a class="button small button_custom" onclick="onAdd()">
         {% translate 'add_button' %}
@@ -76,7 +71,7 @@
 {% endblock %}
 
 {% block local_script %}
-    <script src="{% static 'jstree/jstree.min.js' %}"></script>
+
     <script>
 
         $('#folders').on("changed.jstree", function (e, data) {
@@ -85,19 +80,7 @@
             $('#edit_query_input').val(data.node.text)
         });
 
-
-        $.ajax({
-            type: "GET",
-            url: "http://127.0.0.1:8011/api/folder_task/?format=json",
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            success: function (data) {
-                $('#folders').jstree(data)
-            },
-            error: function (errMsg) {
-                alert(errMsg);
-            }
-        });
+        getFolderList($('#folders'))
 
         function onAdd() {
             $('#query_folder_edit').css('display', 'none')

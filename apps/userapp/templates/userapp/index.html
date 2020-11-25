@@ -3,7 +3,7 @@
 
 
 {% block actions %}
-    <a class="button small clear button_custom" onclick="onView()" disabled>
+    <a class="button small clear button_custom" onclick="onView()">
         {% translate 'view_button' %}
     </a>
     <a class="button small button_custom" onclick="onAdd()">
@@ -22,16 +22,27 @@
 
 {% endblock %}
 
-            {% block sidebar_left %}
-                <b>Папки заданий</b>
-            {% endblock %}
+{% block sidebar_left %}
+    <b>Папки заданий</b>
+    <div id="folders"></div>
+{% endblock %}
 
 {% block content %}
+    <div class="card query-tag" id="query_user_view" style="display: none">
+        <div class="card-divider">
+            <span class="headers_local">
+                {% translate 'query_user_view' %}
+            </span>
+        </div>
+        <div class="card-section">
+            <form action="" method="get">
+                {{ filter.form.as_p }}
+                <input type="submit"/>
+            </form>
 
-    <form action="" method="get">
-        {{ filter.form.as_p }}
-        <input type="submit" />
-    </form>
+        </div>
+    </div>
+
 
 
     <div class="card">
@@ -91,7 +102,7 @@
             <form method="POST" action="{% url 'userapp:add_user' %}">
                 {% csrf_token %}
                 <div class="row">
-                {{ add_form }}
+                    {{ add_form }}
                 </div>
                 <button type="submit" class="button small">Отправить</button>
             </form>
@@ -103,11 +114,26 @@
 
 {% block local_script %}
     <script>
+
+        $('#folders').on("changed.jstree", function (e, data) {
+            console.log(data);
+            $(".action_button").attr('disabled', false).attr("id", this.id)
+            $('#edit_query_input').val(data.node.text)
+        });
+
+
+        getFolderList($('#folders'))
+
+        function onView() {
+            $('#query_user_view').css('display', 'block')
+        }
+
         function onChangeState(elem) {
             console.log(elem.id)
         }
 
         function onAdd() {
+            $('#query_user_view').css('display', 'none')
             $("#add_card").css("display", "block")
         }
     </script>
