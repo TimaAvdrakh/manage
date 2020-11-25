@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-23 11:06+0000\n"
+"POT-Creation-Date: 2020-11-23 12:08+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -42,19 +42,19 @@ msgstr "Просмотр"
 
 #: apps/dictionary/templates/dictionary/organization/index.html:9
 #: apps/dictionary/templates/dictionary/organization/index.html:44
-#: apps/kernel/templates/kernel/folder_task/index.html:13
+#: apps/kernel/templates/kernel/folder_task/index.html:8
 #: apps/userapp/templates/userapp/index.html:10
 msgid "add_button"
 msgstr "Добавить"
 
 #: apps/dictionary/templates/dictionary/organization/index.html:12
-#: apps/kernel/templates/kernel/folder_task/index.html:16
+#: apps/kernel/templates/kernel/folder_task/index.html:11
 #: apps/userapp/templates/userapp/index.html:13
 msgid "edit_button"
 msgstr "Редактировать"
 
 #: apps/dictionary/templates/dictionary/organization/index.html:15
-#: apps/kernel/templates/kernel/folder_task/index.html:19
+#: apps/kernel/templates/kernel/folder_task/index.html:14
 #: apps/userapp/templates/userapp/index.html:16
 msgid "delete_button"
 msgstr "Удалить"
@@ -68,15 +68,15 @@ msgid "header_adding_action_organization"
 msgstr "Добавление органа ОРМ или надзора"
 
 #: apps/dictionary/templates/dictionary/organization/index.html:55
-#: apps/kernel/templates/kernel/folder_task/index.html:68
+#: apps/kernel/templates/kernel/folder_task/index.html:63
 msgid "query_result_header"
 msgstr "Результаты запроса"
 
 #: apps/dictionary/templates/dictionary/organization/index.html:61
-#: apps/kernel/templates/kernel/folder_task/index.html:38
-#: apps/kernel/templates/kernel/folder_task/index.html:39
-#: apps/kernel/templates/kernel/folder_task/index.html:56
-#: apps/kernel/templates/kernel/folder_task/index.html:57
+#: apps/kernel/templates/kernel/folder_task/index.html:33
+#: apps/kernel/templates/kernel/folder_task/index.html:34
+#: apps/kernel/templates/kernel/folder_task/index.html:51
+#: apps/kernel/templates/kernel/folder_task/index.html:52
 msgid "name_tag"
 msgstr "Наименование"
 
@@ -96,15 +96,15 @@ msgstr "Санкции"
 msgid "person_identifiers_name"
 msgstr ""
 
-#: apps/kernel/templates/kernel/folder_task/index.html:23
+#: apps/kernel/templates/kernel/folder_task/index.html:18
 msgid "header_section_folder_task"
 msgstr "Формирование папок заданий"
 
-#: apps/kernel/templates/kernel/folder_task/index.html:32
+#: apps/kernel/templates/kernel/folder_task/index.html:27
 msgid "query_folder_add"
 msgstr "Запрос 1.1б - Добавление папки заданий"
 
-#: apps/kernel/templates/kernel/folder_task/index.html:50
+#: apps/kernel/templates/kernel/folder_task/index.html:45
 msgid "query_folder_edit"
 msgstr "Запрос 1.1б - Редактирование папки заданий"
 
@@ -185,11 +185,15 @@ msgstr ""
 msgid "header_section_accounts"
 msgstr "Учётные записи"
 
-#: apps/userapp/templates/userapp/index.html:40
+#: apps/userapp/templates/userapp/index.html:34
+msgid "query_user_view"
+msgstr "Запрос 1.4 - Просмотр списка администраторов, обработчиков, надзорщиков"
+
+#: apps/userapp/templates/userapp/index.html:51
 msgid "header_list_accounts"
 msgstr "Список учётных записей"
 
-#: apps/userapp/templates/userapp/index.html:86
+#: apps/userapp/templates/userapp/index.html:97
 msgid "header_add_accounts"
 msgstr "Добавление учётной записи"
 
