@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-23 12:08+0000\n"
+"POT-Creation-Date: 2020-11-25 11:46+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -32,10 +32,12 @@ msgstr "ОРМ және қадағалау органдары"
 
 #: apps/dictionary/models.py:27
 #: apps/dictionary/templates/dictionary/organization/index.html:62
+#: apps/kernel/templates/kernel/task/index.html:71
 msgid "organization_kind"
 msgstr "Орган түрі"
 
 #: apps/dictionary/templates/dictionary/organization/index.html:6
+#: apps/kernel/templates/kernel/task/index.html:6
 #: apps/userapp/templates/userapp/index.html:7
 #, fuzzy
 #| msgid "edit_button"
@@ -44,19 +46,26 @@ msgstr "Өңдеу"
 
 #: apps/dictionary/templates/dictionary/organization/index.html:9
 #: apps/dictionary/templates/dictionary/organization/index.html:44
+#: apps/kernel/templates/kernel/communication_object/index.html:6
 #: apps/kernel/templates/kernel/folder_task/index.html:8
+#: apps/kernel/templates/kernel/task/index.html:9
+#: apps/kernel/templates/kernel/task/index.html:53
 #: apps/userapp/templates/userapp/index.html:10
 msgid "add_button"
 msgstr "Қосу"
 
 #: apps/dictionary/templates/dictionary/organization/index.html:12
+#: apps/kernel/templates/kernel/communication_object/index.html:9
 #: apps/kernel/templates/kernel/folder_task/index.html:11
+#: apps/kernel/templates/kernel/task/index.html:12
 #: apps/userapp/templates/userapp/index.html:13
 msgid "edit_button"
 msgstr "Өңдеу"
 
 #: apps/dictionary/templates/dictionary/organization/index.html:15
+#: apps/kernel/templates/kernel/communication_object/index.html:12
 #: apps/kernel/templates/kernel/folder_task/index.html:14
+#: apps/kernel/templates/kernel/task/index.html:15
 #: apps/userapp/templates/userapp/index.html:16
 msgid "delete_button"
 msgstr "Жою"
@@ -66,11 +75,13 @@ msgid "header_section_organization"
 msgstr "ОРМ органдары мен қадағалау органдарының тізімін қалыптастыру"
 
 #: apps/dictionary/templates/dictionary/organization/index.html:27
+#: apps/kernel/templates/kernel/task/index.html:36
 msgid "header_adding_action_organization"
 msgstr "ORM немесе қадағалау органын қосу"
 
 #: apps/dictionary/templates/dictionary/organization/index.html:55
 #: apps/kernel/templates/kernel/folder_task/index.html:63
+#: apps/kernel/templates/kernel/task/index.html:64
 msgid "query_result_header"
 msgstr "Сұрау нәтижелері"
 
@@ -79,28 +90,67 @@ msgstr "Сұрау нәтижелері"
 #: apps/kernel/templates/kernel/folder_task/index.html:34
 #: apps/kernel/templates/kernel/folder_task/index.html:51
 #: apps/kernel/templates/kernel/folder_task/index.html:52
+#: apps/kernel/templates/kernel/task/index.html:70
 msgid "name_tag"
 msgstr "Аты-жөні"
 
-#: apps/kernel/models.py:18
+#: apps/kernel/__init__.py:4
+msgid "WAIT"
+msgstr "Күтуде"
+
+#: apps/kernel/__init__.py:5
+msgid "ERROR"
+msgstr "Қате"
+
+#: apps/kernel/__init__.py:6
+msgid "COMPLETED"
+msgstr "Аяқталды"
+
+#: apps/kernel/__init__.py:7
+msgid "PERFORMED"
+msgstr "Белсенді"
+
+#: apps/kernel/__init__.py:11
+msgid "ACTIVE_TASK"
+msgstr "Белсенді"
+
+#: apps/kernel/__init__.py:12
+msgid "DELETED_TASK"
+msgstr "Жойылды"
+
+#: apps/kernel/models.py:50
 msgid "folder_task_name"
 msgstr "Жұмыс папкалары"
 
-#: apps/kernel/models.py:44
+#: apps/kernel/models.py:76
 msgid "task_name"
 msgstr "Тапсырмалар"
 
-#: apps/kernel/models.py:70
+#: apps/kernel/models.py:151
 msgid "sanction_name"
 msgstr "Санкциялар"
 
-#: apps/kernel/models.py:91
+#: apps/kernel/models.py:172
 msgid "person_identifiers_name"
 msgstr ""
 
+#: apps/kernel/templates/kernel/communication_object/index.html:16
+msgid "header_section_communication_object"
+msgstr "Байланыс объектілерінің тізімін қалыптастыру"
+
+#: apps/kernel/templates/kernel/communication_object/index.html:24
+msgid "header_list_communication_objects"
+msgstr "Нысандар тізімі"
+
+#: apps/kernel/templates/kernel/communication_object/index.html:71
+msgid "header_add_communication_objects"
+msgstr "Жаңа байланыс нысаны"
+
+#: apps/kernel/templates/kernel/communication_object/index.html:87
+msgid "header_edit_communication_objects"
+msgstr "Сілтеме нысанын редакциялау"
+
 #: apps/kernel/templates/kernel/folder_task/index.html:18
-#, fuzzy
-#| msgid "header_section_accounts"
 msgid "header_section_folder_task"
 msgstr "Есеп"
 
@@ -111,6 +161,10 @@ msgstr ""
 #: apps/kernel/templates/kernel/folder_task/index.html:45
 msgid "query_folder_edit"
 msgstr ""
+
+#: apps/kernel/templates/kernel/task/index.html:19
+msgid "header_section_tasks"
+msgstr "Абоненттік хабарламаларды ұстап қалуға арналған тапсырмалармен жұмыс"
 
 #: apps/system/__init__.py:6
 msgid "menu_view_organization"

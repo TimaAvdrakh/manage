@@ -16,3 +16,9 @@ class FolderTaskAdmin(admin.ModelAdmin):
 @admin.register(models.Sanction)
 class SanctionAdmin(admin.ModelAdmin):
     pass
+
+
+@admin.register(models.CommunicationObject)
+class CommunicationObjectAdmin(admin.ModelAdmin):
+    list_display = ('name', 'port', 'state')
+    list_filter = ('state',)

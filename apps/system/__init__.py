@@ -19,7 +19,7 @@ MENU_ITEMS = {
     'menu_view_task': {
         'priority': 40,
         'name': _('menu_view_task'),
-        'link': '/task/',
+        'link': '/tasks/',
     },
     'menu_view_sanction': {
         'priority': 50,

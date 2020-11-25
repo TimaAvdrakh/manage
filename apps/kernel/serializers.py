@@ -14,3 +14,9 @@ class FolderTaskSerializer(serializers.ModelSerializer):
         fields = super().get_fields()
         fields['children'] = FolderTaskSerializer(many=True, required=False)
         return fields
+
+
+class CommunicationObjectSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.CommunicationObject
+        fields = ('id', 'name', 'ip_address', 'port', 'state')

@@ -1,0 +1,142 @@
+{% extends 'kernel/communication_object/base_communication_object.html' %}
+{% load i18n %}
+
+{% block actions %}
+    <a class="button small hollow button_custom" onclick="onAdd()">
+        {% translate 'add_button' %}
+    </a>
+    <a class="button small hollow button_custom action_button" disabled onclick="onEdit(this)">
+        {% translate 'edit_button' %}
+    </a>
+    <a class="button small hollow alert button_custom action_button" disabled onclick="onRemoveElement()">
+        {% translate 'delete_button' %}
+    </a>
+
+    <span class="headers_section">
+        {% translate 'header_section_communication_object' %}
+    </span>
+{% endblock %}
+
+{% block content %}
+    <div class="card">
+        <div class="card-divider">
+            <span class="headers_local">
+                {% translate 'header_list_communication_objects' %}
+            </span>
+        </div>
+        <div class="card-section">
+            <table class="unstriped">
+                <thead>
+                <tr>
+                    <th>Название</th>
+                    <th>IP Адрес</th>
+                    <th>Порт</th>
+                    <th>Статус</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for obj in communication_objects %}
+                    <tr class="items" id="{{ obj.id }}">
+                        <td>
+                            {{ obj.name }}
+                        </td>
+                        <td>
+                            {{ obj.ip_address }}
+                        </td>
+                        <td>
+                            {{ obj.port }}
+                        </td>
+                        <td>
+                            {% if obj.state %}
+                                <span class="badge success">&nbsp;</span>
+                            {% else %}
+                                <span class="badge alert">&nbsp;</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+
+
+        </div>
+    </div>
+{% endblock %}
+
+{% block form_block %}
+    <div class="card query-tag" id="query_add_communication_obj" style="display: none;">
+        <div class="card-divider">
+            <span class="headers_local">
+                {% translate 'header_add_communication_objects' %}
+            </span>
+        </div>
+        <div class="card-section">
+          <form method="POST" action="{% url 'kernel:communication_object_create' %}">
+                {% csrf_token %}
+                {{ form_obj.as_p }}
+              <button type="submit" class="button small hollow button_custom">Отправить</button>
+              <span type="submit" class="button small hollow alert button_custom" onclick="onClose()">Отменить</span>
+            </form>
+        </div>
+    </div>
+
+    <div class="card query-tag" id="query_edit_communication_obj" style="display: none;">
+        <div class="card-divider">
+            <span class="headers_local">
+                {% translate 'header_edit_communication_objects' %}
+            </span>
+        </div>
+        <div class="card-section">
+            <form class="edit_form" id="query_edit_communication_obj_form"  method="post">
+                {% csrf_token %}
+                {{ form_obj.as_p }}
+                <button type="submit" class="button small hollow button_custom">Отправить</button>
+                <span type="submit" class="button small hollow alert button_custom" onclick="onClose()">Отменить</span>
+            </form>
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block local_script %}
+    <script>
+        function onView() {
+            $('.query-tag').css('display', 'none')
+
+            $('#query_view_communication_obj').css('display', 'block')
+        }
+
+        function onEdit(elem) {
+            getCommunicationObj(elem.id, function (data){
+                onClose();
+                $('#query_edit_communication_obj').css('display', 'block')
+                $('#query_edit_communication_obj_form').attr('action', 'communication_objects/edit/' + elem.id + '/')
+
+                $('.edit_form #id_name').val(data.name);
+                $('.edit_form #id_ip_address').val(data.ip_address);
+                $('.edit_form #id_port').val(data.port);
+                $('.edit_form #id_state').val(data.state);
+            })
+        }
+
+        function onAdd() {
+            onClose();
+            $("#query_add_communication_obj").css("display", "block")
+        }
+
+        $('.items').click(function () {
+            if ($(this).hasClass("choice")) {
+                $(this).removeClass("choice")
+                $(".action_button").attr('disabled', true).attr("id", null)
+            } else {
+                $(".items").removeClass("choice")
+                $(this).addClass("choice")
+                $(".action_button").attr('disabled', false).attr("id", this.id)
+            }
+        });
+
+        function onClose() {
+            $('.query-tag').css('display', 'none')
+        }
+    </script>
+{% endblock %}

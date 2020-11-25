@@ -1,4 +1,4 @@
-{% extends 'dictionary/organization/base_org.html' %}
+{% extends 'kernel/task/base_task.html' %}
 {% load i18n %}
 
 {% block actions %}
@@ -16,11 +16,20 @@
     </a>
 
     <span class="headers_section">
-        {% translate 'header_section_organization' %}
+        {% translate 'header_section_tasks' %}
     </span>
+
 {% endblock %}
 
+{% block sidebar_left %}
+    <b>Папки заданий</b>
+    <div id="folders"></div>
+{% endblock %}
+
+
 {% block content %}
+
+
     <div class="card" id="add_org" style="display: none;">
         <div class="card-divider">
             <span class="headers_local">
@@ -66,39 +75,33 @@
         </div>
     </div>
 
+
 {% endblock %}
+
 
 {% block local_script %}
     <script>
-        function onAdd() {
-            $("#add_org").css("display", "block")
-        }
 
-        function onClose(element_id) {
-            $("#" + element_id).css("display", "none")
-        }
-
-
-        $('.orgs').click(function () {
-            if ($(this).hasClass("choice")) {
-                $(this).removeClass("choice")
-                $(".action_button").attr('disabled', true).attr("id", null)
-            } else {
-                $(".orgs").removeClass("choice")
-                $(this).addClass("choice")
-                $(".action_button").attr('disabled', false).attr("id", this.id)
-            }
+        $('#folders').on("changed.jstree", function (e, data) {
+            console.log(data);
+            $(".action_button").attr('disabled', false).attr("id", this.id)
+            $('#edit_query_input').val(data.node.text)
         });
 
-        function onRemoveElement() {
-            let elem = $('.orgs.choice')
-            let id = elem.attr("id")
-            if (id !== undefined) {
-                let modal = new Foundation.Reveal(element, options);
-                modal
-            }
-            console.log(elem.attr("id"));
+
+        getFolderList($('#folders'))
+
+        function onView() {
+            $('#query_user_view').css('display', 'block')
         }
 
+        function onChangeState(elem) {
+            console.log(elem.id)
+        }
+
+        function onAdd() {
+            $('#query_user_view').css('display', 'none')
+            $("#add_card").css("display", "block")
+        }
     </script>
 {% endblock %}

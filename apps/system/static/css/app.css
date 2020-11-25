@@ -48,6 +48,15 @@
     user-select: none;
 }
 
+.items:hover {
+    color: #9e0c0f;
+}
+
+.items.choice {
+    background: #f3dddf;
+    text-decoration: none;
+}
+
 .orgs:hover {
     color: #9e0c0f;
 }
