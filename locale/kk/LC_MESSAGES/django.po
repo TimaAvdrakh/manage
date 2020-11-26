@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-25 11:46+0000\n"
+"POT-Creation-Date: 2020-11-26 09:56+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -48,6 +48,7 @@ msgstr "Өңдеу"
 #: apps/dictionary/templates/dictionary/organization/index.html:44
 #: apps/kernel/templates/kernel/communication_object/index.html:6
 #: apps/kernel/templates/kernel/folder_task/index.html:8
+#: apps/kernel/templates/kernel/person_identifier/index.html:6
 #: apps/kernel/templates/kernel/task/index.html:9
 #: apps/kernel/templates/kernel/task/index.html:53
 #: apps/userapp/templates/userapp/index.html:10
@@ -57,14 +58,16 @@ msgstr "Қосу"
 #: apps/dictionary/templates/dictionary/organization/index.html:12
 #: apps/kernel/templates/kernel/communication_object/index.html:9
 #: apps/kernel/templates/kernel/folder_task/index.html:11
+#: apps/kernel/templates/kernel/person_identifier/index.html:9
 #: apps/kernel/templates/kernel/task/index.html:12
 #: apps/userapp/templates/userapp/index.html:13
 msgid "edit_button"
 msgstr "Өңдеу"
 
 #: apps/dictionary/templates/dictionary/organization/index.html:15
-#: apps/kernel/templates/kernel/communication_object/index.html:12
+#: apps/kernel/templates/kernel/communication_object/index.html:13
 #: apps/kernel/templates/kernel/folder_task/index.html:14
+#: apps/kernel/templates/kernel/person_identifier/index.html:13
 #: apps/kernel/templates/kernel/task/index.html:15
 #: apps/userapp/templates/userapp/index.html:16
 msgid "delete_button"
@@ -118,27 +121,47 @@ msgstr "Белсенді"
 msgid "DELETED_TASK"
 msgstr "Жойылды"
 
-#: apps/kernel/models.py:50
+#: apps/kernel/__init__.py:16
+msgid "PERSON_ID_KIND_IP_ADDR"
+msgstr "IP мекен-жайы"
+
+#: apps/kernel/__init__.py:17
+msgid "PERSON_ID_KIND_PHONE"
+msgstr "Телефон"
+
+#: apps/kernel/__init__.py:18
+msgid "PERSON_ID_KIND_ACC"
+msgstr "Тіркелгі"
+
+#: apps/kernel/__init__.py:19
+msgid "PERSON_ID_KIND_EMAIL"
+msgstr "Электрондық пошта"
+
+#: apps/kernel/models.py:51
 msgid "folder_task_name"
 msgstr "Жұмыс папкалары"
 
-#: apps/kernel/models.py:76
+#: apps/kernel/models.py:77
 msgid "task_name"
 msgstr "Тапсырмалар"
 
-#: apps/kernel/models.py:151
+#: apps/kernel/models.py:153
 msgid "sanction_name"
 msgstr "Санкциялар"
 
-#: apps/kernel/models.py:172
+#: apps/kernel/models.py:174
 msgid "person_identifiers_name"
-msgstr ""
+msgstr "Абоненттің жеке куәлігі"
 
-#: apps/kernel/templates/kernel/communication_object/index.html:16
+#: apps/kernel/models.py:179
+msgid "person_identifiers_kind"
+msgstr "Идентификатор түрі"
+
+#: apps/kernel/templates/kernel/communication_object/index.html:17
 msgid "header_section_communication_object"
 msgstr "Байланыс объектілерінің тізімін қалыптастыру"
 
-#: apps/kernel/templates/kernel/communication_object/index.html:24
+#: apps/kernel/templates/kernel/communication_object/index.html:25
 msgid "header_list_communication_objects"
 msgstr "Нысандар тізімі"
 
@@ -161,6 +184,43 @@ msgstr ""
 #: apps/kernel/templates/kernel/folder_task/index.html:45
 msgid "query_folder_edit"
 msgstr ""
+
+#: apps/kernel/templates/kernel/person_identifier/index.html:17
+msgid "header_section_person_id"
+msgstr "Жазылушының идентификаторлары"
+
+#: apps/kernel/templates/kernel/person_identifier/index.html:27
+msgid "header_list_person_id"
+msgstr "Жазылушының жеке куәлігі"
+
+#: apps/kernel/templates/kernel/person_identifier/index.html:34
+msgid "person_id_table_kind"
+msgstr "Идентификатор түрі"
+
+#: apps/kernel/templates/kernel/person_identifier/index.html:35
+msgid "person_id_table_id"
+msgstr "Идентификатор"
+
+#: apps/kernel/templates/kernel/person_identifier/index.html:36
+msgid "person_id_table_state"
+msgstr "Күй"
+
+#: apps/kernel/templates/kernel/person_identifier/index.html:69
+msgid "header_add_person_id"
+msgstr "Абонент идентификаторын қосу"
+
+#: apps/kernel/templates/kernel/person_identifier/index.html:77
+#: apps/kernel/templates/kernel/person_identifier/index.html:97
+msgid "button_send"
+msgstr "Хат жіберу"
+
+#: apps/kernel/templates/kernel/person_identifier/index.html:80
+msgid "button_cancel"
+msgstr "Бас тарту"
+
+#: apps/kernel/templates/kernel/person_identifier/index.html:89
+msgid "header_edit_person_id"
+msgstr "Жазылушы идентификаторын редакциялау"
 
 #: apps/kernel/templates/kernel/task/index.html:19
 msgid "header_section_tasks"

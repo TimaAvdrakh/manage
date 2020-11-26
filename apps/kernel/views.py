@@ -78,3 +78,33 @@ class Task(ListView):
     template_name = 'kernel/task/index.html'
     model = models.Task
     context_object_name = 'tasks'
+
+
+class PersonIdentifierView(ListView):
+    template_name = 'kernel/person_identifier/index.html'
+    model = models.PersonIdentifier
+    context_object_name = 'person_identifiers'
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        ctx = super().get_context_data(**kwargs)
+        ctx['form_obj'] = forms.PersonIdentifierForm
+        return ctx
+
+
+class PersonIdentifierViewAPI(mixins.RetrieveModelMixin,
+                              viewsets.GenericViewSet):
+    model = models.PersonIdentifier
+    serializer_class = serializers.PersonIdentifierSerializer
+    queryset = models.PersonIdentifier.objects.all()
+
+
+class PersonIdentifierCreateView(CreateView):
+    model = models.PersonIdentifier
+    form_class = forms.PersonIdentifierForm
+    success_url = '/person_identifiers/'
+
+
+class PersonIdentifierEditView(UpdateView):
+    model = models.PersonIdentifier
+    form_class = forms.PersonIdentifierForm
+    success_url = '/person_identifiers/'

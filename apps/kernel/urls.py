@@ -17,6 +17,8 @@ urlpatterns = [
         views.IndexView.as_view(),
         name='index'
     ),
+
+    ## folder_task
     path(
         'folder_task/',
         views.FolderTaskView.as_view(),
@@ -27,11 +29,15 @@ urlpatterns = [
         views.FolderTaskViewAPI.as_view(),
         name='folder_task_api'
     ),
+
+    ## tasks
     path(
         'tasks/',
         views.Task.as_view(),
         name='task_index'
     ),
+
+    ## communication_objects
     path(
         'communication_objects/',
         views.CommunicationObjectView.as_view(),
@@ -55,5 +61,26 @@ urlpatterns = [
         'communication_objects/delete/<int:pk>/',
         views.CommunicationObjectDeleteView.as_view(),
         name='communication_object_delete'
+    ),
+
+    ## person_identifiers
+    path(
+        'person_identifiers/',
+        views.PersonIdentifierView.as_view(),
+        name='person_identifier_view'
+    ),
+    path(
+        'api/person_identifiers/<int:pk>/',
+        views.PersonIdentifierViewAPI.as_view({'get': 'retrieve'})
+    ),
+    path(
+        'person_identifiers/create/',
+        views.PersonIdentifierCreateView.as_view(),
+        name='person_identifiers_create'
+    ),
+    path(
+        'person_identifiers/edit/<int:pk>/',
+        views.PersonIdentifierEditView.as_view(),
+        name='person_identifiers_edit'
     ),
 ]

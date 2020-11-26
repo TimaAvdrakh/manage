@@ -22,3 +22,9 @@ class SanctionAdmin(admin.ModelAdmin):
 class CommunicationObjectAdmin(admin.ModelAdmin):
     list_display = ('name', 'port', 'state')
     list_filter = ('state',)
+
+
+@admin.register(models.PersonIdentifier)
+class PersonIdentifierAdmin(admin.ModelAdmin):
+    list_display = ('name', 'kind', 'state')
+    list_filter = ('kind', 'state')

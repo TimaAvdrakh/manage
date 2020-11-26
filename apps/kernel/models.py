@@ -5,6 +5,7 @@ from apps.system.models import TimestampMixin
 from apps.kernel import (
     INTERCEPTION_STATE,
     TASK_STATE,
+    PERSONIDENTIFIER_KIND,
 )
 
 
@@ -75,6 +76,7 @@ class Task(TimestampMixin):
         max_length=256,
         verbose_name=_('task_name')
     )
+
     # organization = models.ForeignKey(
     #     'dictionary.Organization',
     #     on_delete=models.SET_NULL,
@@ -155,7 +157,7 @@ class Sanction(TimestampMixin):
         return self.name
 
 
-class PersonIdentifiers(TimestampMixin):
+class PersonIdentifier(TimestampMixin):
     class Meta:
         verbose_name = 'Идентификатор абонента'
         verbose_name_plural = 'Идентификаторы абонентов'
@@ -170,6 +172,15 @@ class PersonIdentifiers(TimestampMixin):
     name = models.CharField(
         max_length=256,
         verbose_name=_('person_identifiers_name')
+    )
+    kind = models.CharField(
+        max_length=16,
+        choices=PERSONIDENTIFIER_KIND,
+        verbose_name=_('person_identifiers_kind')
+    )
+    state = models.BooleanField(
+        default=True,
+        verbose_name='Статус'
     )
 
     def __str__(self):

@@ -32,3 +32,18 @@ function getCommunicationObj(id, func) {
         }
     });
 }
+
+function getPersonId(id, func) {
+    $.ajax({
+        type: "GET",
+        url: HOST + "api/person_identifiers/" + id + "/?format=json",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (data) {
+            func(data);
+        },
+        error: function (errMsg) {
+            alert(errMsg);
+        }
+    });
+}

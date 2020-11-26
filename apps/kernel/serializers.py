@@ -20,3 +20,9 @@ class CommunicationObjectSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.CommunicationObject
         fields = ('id', 'name', 'ip_address', 'port', 'state')
+
+
+class PersonIdentifierSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.PersonIdentifier
+        fields = ('id', 'name', 'kind', 'state')

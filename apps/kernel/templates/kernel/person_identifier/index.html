@@ -1,4 +1,4 @@
-{% extends 'kernel/communication_object/base_communication_object.html' %}
+{% extends 'kernel/person_identifier/base_person_identifier.html' %}
 {% load i18n %}
 
 {% block actions %}
@@ -14,38 +14,36 @@
     </button>
 
     <span class="headers_section">
-        {% translate 'header_section_communication_object' %}
+        {% translate 'header_section_person_id' %}
     </span>
 {% endblock %}
+
+
 
 {% block content %}
     <div class="card">
         <div class="card-divider">
             <span class="headers_local">
-                {% translate 'header_list_communication_objects' %}
+                {% translate 'header_list_person_id' %}
             </span>
         </div>
         <div class="card-section">
             <table class="unstriped">
                 <thead>
                 <tr>
-                    <th>Название</th>
-                    <th>IP Адрес</th>
-                    <th>Порт</th>
-                    <th>Статус</th>
+                    <th>{% translate 'person_id_table_kind' %}</th>
+                    <th>{% translate 'person_id_table_id' %}</th>
+                    <th>{% translate 'person_id_table_state' %}</th>
                 </tr>
                 </thead>
                 <tbody>
-                {% for obj in communication_objects %}
+                {% for obj in person_identifiers %}
                     <tr class="items" id="{{ obj.id }}">
                         <td>
                             {{ obj.name }}
                         </td>
                         <td>
-                            {{ obj.ip_address }}
-                        </td>
-                        <td>
-                            {{ obj.port }}
+                            {{ obj.get_kind_display }}
                         </td>
                         <td>
                             {% if obj.state %}
@@ -65,43 +63,51 @@
 {% endblock %}
 
 {% block form_block %}
-    <div class="card query-tag" id="query_add_communication_obj" style="display: none;">
+    <div class="card query-tag" id="query_add_person_id" style="display: none;">
         <div class="card-divider">
             <span class="headers_local">
-                {% translate 'header_add_communication_objects' %}
+                {% translate 'header_add_person_id' %}
             </span>
         </div>
         <div class="card-section">
-            <form method="POST" action="{% url 'kernel:communication_object_create' %}">
+            <form method="POST" action="{% url 'kernel:person_identifiers_create' %}">
                 {% csrf_token %}
                 {{ form_obj.as_p }}
-                <button type="submit" class="button small hollow button_custom">Отправить</button>
-                <span type="submit" class="button small hollow alert button_custom" onclick="onClose()">Отменить</span>
+                <button type="submit" class="button small hollow button_custom">
+                    {% translate 'button_send' %}
+                </button>
+                <span type="submit" class="button small hollow alert button_custom" onclick="onClose()">
+                    {% translate 'button_cancel' %}
+                </span>
             </form>
         </div>
     </div>
 
-    <div class="card query-tag" id="query_edit_communication_obj" style="display: none;">
+    <div class="card query-tag" id="query_edit_person_id" style="display: none;">
         <div class="card-divider">
             <span class="headers_local">
-                {% translate 'header_edit_communication_objects' %}
+                {% translate 'header_edit_person_id' %}
             </span>
         </div>
         <div class="card-section">
-            <form class="edit_form" id="query_edit_communication_obj_form" method="post">
+            <form class="edit_form" id="query_edit_person_id_form" method="post">
                 {% csrf_token %}
                 {{ form_obj.as_p }}
-                <button type="submit" class="button small hollow button_custom">Отправить</button>
-                <span type="submit" class="button small hollow alert button_custom" onclick="onClose()">Отменить</span>
+                <button type="submit" class="button small hollow button_custom">
+                    {% translate 'button_send' %}
+                </button>
+                <span type="submit" class="button small hollow alert button_custom" onclick="onClose()">
+                    {% translate 'button_cancel' %}
+                </span>
             </form>
         </div>
     </div>
 
     <div class="reveal" id="delete-window" data-reveal data-close-on-click="true" data-animation-in="spin-in"
          data-animation-out="spin-out">
-        <h4 class="text-center">Удаление "Объекта связи"</h4>
+        <h4 class="text-center">Удаление "идентификатор абонента"</h4>
         <p class="text-center alert">
-            Вы точно уверены что надо удалить "Объекта связи" за номером: <span id="com-obj"></span>
+            Вы точно уверены что надо удалить "идентификатор абонента" за номером: <span id="com-obj"></span>
         </p>
         <form method="POST" id="com-obj-delete-form">
             {% csrf_token %}
@@ -119,21 +125,20 @@
 {% block local_script %}
     <script>
         function onEdit(elem) {
-            getCommunicationObj(elem.id, function (data) {
+            getPersonId(elem.id, function (data) {
                 onClose();
-                $('#query_edit_communication_obj').css('display', 'block')
-                $('#query_edit_communication_obj_form').attr('action', '/communication_objects/edit/' + elem.id + '/')
+                $('#query_edit_person_id').css('display', 'block')
+                $('#query_edit_person_id_form').attr('action', '/person_identifiers/edit/' + elem.id + '/')
 
                 $('.edit_form #id_name').val(data.name);
-                $('.edit_form #id_ip_address').val(data.ip_address);
-                $('.edit_form #id_port').val(data.port);
-                $('.edit_form #id_state').val(data.state);
+                $('.edit_form #id_kind').val(data.kind);
+                $('.edit_form #id_state').attr('checked', data.state);
             })
         }
 
         function onAdd() {
             onClose();
-            $("#query_add_communication_obj").css("display", "block")
+            $("#query_add_person_id").css("display", "block")
         }
 
         $('.items').click(function () {
