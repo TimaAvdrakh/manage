@@ -6,6 +6,7 @@ from django.views.generic import (
     ListView,
     CreateView,
     UpdateView,
+    DeleteView,
 )
 
 from apps.kernel import (
@@ -46,6 +47,11 @@ class CommunicationObjectCreateView(CreateView):
 class CommunicationObjectEditView(UpdateView):
     model = models.CommunicationObject
     form_class = forms.CommunicationObjectForm
+    success_url = '/communication_objects/'
+
+
+class CommunicationObjectDeleteView(DeleteView):
+    model = models.CommunicationObject
     success_url = '/communication_objects/'
 
 

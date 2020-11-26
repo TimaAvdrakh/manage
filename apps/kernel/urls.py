@@ -51,4 +51,9 @@ urlpatterns = [
         views.CommunicationObjectEditView.as_view(),
         name='communication_object_edit'
     ),
+    path(
+        'communication_objects/delete/<int:pk>/',
+        views.CommunicationObjectDeleteView.as_view(),
+        name='communication_object_delete'
+    ),
 ]

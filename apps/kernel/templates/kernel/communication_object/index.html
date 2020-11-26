@@ -5,12 +5,13 @@
     <a class="button small hollow button_custom" onclick="onAdd()">
         {% translate 'add_button' %}
     </a>
-    <a class="button small hollow button_custom action_button" disabled onclick="onEdit(this)">
+    <button class="button small hollow button_custom action_button" disabled onclick="onEdit(this)">
         {% translate 'edit_button' %}
-    </a>
-    <a class="button small hollow alert button_custom action_button" disabled onclick="onRemoveElement()">
+    </button>
+    <button class="button small hollow alert button_custom action_button" disabled data-open="delete-window"
+            onclick="onDelete(this)">
         {% translate 'delete_button' %}
-    </a>
+    </button>
 
     <span class="headers_section">
         {% translate 'header_section_communication_object' %}
@@ -71,11 +72,11 @@
             </span>
         </div>
         <div class="card-section">
-          <form method="POST" action="{% url 'kernel:communication_object_create' %}">
+            <form method="POST" action="{% url 'kernel:communication_object_create' %}">
                 {% csrf_token %}
                 {{ form_obj.as_p }}
-              <button type="submit" class="button small hollow button_custom">Отправить</button>
-              <span type="submit" class="button small hollow alert button_custom" onclick="onClose()">Отменить</span>
+                <button type="submit" class="button small hollow button_custom">Отправить</button>
+                <span type="submit" class="button small hollow alert button_custom" onclick="onClose()">Отменить</span>
             </form>
         </div>
     </div>
@@ -87,13 +88,30 @@
             </span>
         </div>
         <div class="card-section">
-            <form class="edit_form" id="query_edit_communication_obj_form"  method="post">
+            <form class="edit_form" id="query_edit_communication_obj_form" method="post">
                 {% csrf_token %}
                 {{ form_obj.as_p }}
                 <button type="submit" class="button small hollow button_custom">Отправить</button>
                 <span type="submit" class="button small hollow alert button_custom" onclick="onClose()">Отменить</span>
             </form>
         </div>
+    </div>
+
+    <div class="reveal" id="delete-window" data-reveal data-close-on-click="true" data-animation-in="spin-in"
+         data-animation-out="spin-out">
+        <h4 class="text-center">Удаление "Объекта связи"</h4>
+        <p class="text-center alert">
+            Вы точно уверены что надо удалить "Объекта связи" за номером: <span id="com-obj"></span>
+        </p>
+        <form method="POST" id="com-obj-delete-form">
+            {% csrf_token %}
+            <div class="text-center">
+                <button class="button alert">УДАЛИТЬ!</button>
+            </div>
+        </form>
+        <button class="close-button" data-close aria-label="Close modal" type="button">
+            <span aria-hidden="true">&times;</span>
+        </button>
     </div>
 {% endblock %}
 
@@ -102,15 +120,14 @@
     <script>
         function onView() {
             $('.query-tag').css('display', 'none')
-
             $('#query_view_communication_obj').css('display', 'block')
         }
 
         function onEdit(elem) {
-            getCommunicationObj(elem.id, function (data){
+            getCommunicationObj(elem.id, function (data) {
                 onClose();
                 $('#query_edit_communication_obj').css('display', 'block')
-                $('#query_edit_communication_obj_form').attr('action', 'communication_objects/edit/' + elem.id + '/')
+                $('#query_edit_communication_obj_form').attr('action', '/communication_objects/edit/' + elem.id + '/')
 
                 $('.edit_form #id_name').val(data.name);
                 $('.edit_form #id_ip_address').val(data.ip_address);
@@ -132,11 +149,20 @@
                 $(".items").removeClass("choice")
                 $(this).addClass("choice")
                 $(".action_button").attr('disabled', false).attr("id", this.id)
+
+                $("#com-obj").text(this.id)
+                $("#com-obj-delete-form").attr('action', '/communication_objects/delete/' + this.id + '/')
             }
         });
 
         function onClose() {
             $('.query-tag').css('display', 'none')
+        }
+
+        function onDelete(obj) {
+            if ($(obj).is('[disabled]') === true) {
+                obj.preventDefault()
+            }
         }
     </script>
 {% endblock %}
