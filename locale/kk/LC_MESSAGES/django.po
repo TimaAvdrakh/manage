@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-26 09:56+0000\n"
+"POT-Creation-Date: 2020-11-26 10:49+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -66,7 +66,7 @@ msgstr "Өңдеу"
 
 #: apps/dictionary/templates/dictionary/organization/index.html:15
 #: apps/kernel/templates/kernel/communication_object/index.html:13
-#: apps/kernel/templates/kernel/folder_task/index.html:14
+#: apps/kernel/templates/kernel/folder_task/index.html:15
 #: apps/kernel/templates/kernel/person_identifier/index.html:13
 #: apps/kernel/templates/kernel/task/index.html:15
 #: apps/userapp/templates/userapp/index.html:16
@@ -83,16 +83,15 @@ msgid "header_adding_action_organization"
 msgstr "ORM немесе қадағалау органын қосу"
 
 #: apps/dictionary/templates/dictionary/organization/index.html:55
-#: apps/kernel/templates/kernel/folder_task/index.html:63
+#: apps/kernel/templates/kernel/folder_task/index.html:28
 #: apps/kernel/templates/kernel/task/index.html:64
 msgid "query_result_header"
 msgstr "Сұрау нәтижелері"
 
 #: apps/dictionary/templates/dictionary/organization/index.html:61
-#: apps/kernel/templates/kernel/folder_task/index.html:33
-#: apps/kernel/templates/kernel/folder_task/index.html:34
-#: apps/kernel/templates/kernel/folder_task/index.html:51
-#: apps/kernel/templates/kernel/folder_task/index.html:52
+#: apps/kernel/forms.py:8
+#: apps/kernel/templates/kernel/folder_task/index.html:71
+#: apps/kernel/templates/kernel/folder_task/index.html:72
 #: apps/kernel/templates/kernel/task/index.html:70
 msgid "name_tag"
 msgstr "Аты-жөні"
@@ -137,6 +136,10 @@ msgstr "Тіркелгі"
 msgid "PERSON_ID_KIND_EMAIL"
 msgstr "Электрондық пошта"
 
+#: apps/kernel/forms.py:9
+msgid "paren_tag"
+msgstr "Ата-ана жазбасы"
+
 #: apps/kernel/models.py:51
 msgid "folder_task_name"
 msgstr "Жұмыс папкалары"
@@ -173,15 +176,29 @@ msgstr "Жаңа байланыс нысаны"
 msgid "header_edit_communication_objects"
 msgstr "Сілтеме нысанын редакциялау"
 
-#: apps/kernel/templates/kernel/folder_task/index.html:18
+#: apps/kernel/templates/kernel/folder_task/index.html:19
 msgid "header_section_folder_task"
 msgstr "Есеп"
 
-#: apps/kernel/templates/kernel/folder_task/index.html:27
+#: apps/kernel/templates/kernel/folder_task/index.html:42
 msgid "query_folder_add"
 msgstr ""
 
-#: apps/kernel/templates/kernel/folder_task/index.html:45
+#: apps/kernel/templates/kernel/folder_task/index.html:52
+#: apps/kernel/templates/kernel/folder_task/index.html:74
+#: apps/kernel/templates/kernel/person_identifier/index.html:77
+#: apps/kernel/templates/kernel/person_identifier/index.html:97
+msgid "button_send"
+msgstr "Хат жіберу"
+
+#: apps/kernel/templates/kernel/folder_task/index.html:55
+#: apps/kernel/templates/kernel/folder_task/index.html:77
+#: apps/kernel/templates/kernel/person_identifier/index.html:80
+#: apps/kernel/templates/kernel/person_identifier/index.html:100
+msgid "button_cancel"
+msgstr "Бас тарту"
+
+#: apps/kernel/templates/kernel/folder_task/index.html:65
 msgid "query_folder_edit"
 msgstr ""
 
@@ -208,15 +225,6 @@ msgstr "Күй"
 #: apps/kernel/templates/kernel/person_identifier/index.html:69
 msgid "header_add_person_id"
 msgstr "Абонент идентификаторын қосу"
-
-#: apps/kernel/templates/kernel/person_identifier/index.html:77
-#: apps/kernel/templates/kernel/person_identifier/index.html:97
-msgid "button_send"
-msgstr "Хат жіберу"
-
-#: apps/kernel/templates/kernel/person_identifier/index.html:80
-msgid "button_cancel"
-msgstr "Бас тарту"
 
 #: apps/kernel/templates/kernel/person_identifier/index.html:89
 msgid "header_edit_person_id"

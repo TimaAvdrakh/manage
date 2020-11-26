@@ -1,6 +1,12 @@
 from django import forms
+from django.utils.translation import ugettext_lazy as _
 
 from apps.kernel import models
+
+
+class FolderTaskForm(forms.Form):
+    name = forms.CharField(label=_('name_tag'))
+    parent = forms.IntegerField(label=_('paren_tag'), required=False)
 
 
 class CommunicationObjectForm(forms.ModelForm):

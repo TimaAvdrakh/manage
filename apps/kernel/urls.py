@@ -29,6 +29,11 @@ urlpatterns = [
         views.FolderTaskViewAPI.as_view(),
         name='folder_task_api'
     ),
+    path(
+      'folder_task/create/',
+      views.folder_task_create,
+      name='folder_task_create'
+    ),
 
     ## tasks
     path(

@@ -7,12 +7,13 @@
     <a class="button small hollow button_custom" onclick="onAdd()">
         {% translate 'add_button' %}
     </a>
-    <a class="button small hollow button_custom action_button" disabled onclick="onEdit(this)">
+    <button class="button small hollow button_custom action_button" disabled onclick="onEdit(this)">
         {% translate 'edit_button' %}
-    </a>
-    <a class="button small hollow alert button_custom action_button" disabled onclick="onRemoveElement()">
+    </button>
+    <button class="button small hollow alert button_custom action_button" disabled data-open="delete-window"
+            onclick="onDelete(this)">
         {% translate 'delete_button' %}
-    </a>
+    </button>
 
     <span class="headers_section">
         {% translate 'header_section_folder_task' %}
@@ -21,6 +22,20 @@
 
 
 {% block content %}
+    <div class="card">
+        <div class="card-divider">
+            <span class="headers_local">
+                {% translate 'query_result_header' %}
+            </span>
+        </div>
+        <div class="card-section">
+            <div id="folders"></div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block form_block %}
     <div class="card query-tag" id="query_folder_add" style="display: none">
         <div class="card-divider">
             <span class="headers_local">
@@ -28,13 +43,23 @@
             </span>
         </div>
         <div class="card-section">
-            <form action="" method="POST">
+            <form action="{% url 'kernel:folder_task_create' %}" method="POST">
                 {% csrf_token %}
                 <label>{% translate 'name_tag' %}
-                    <input type="text" placeholder="{% translate 'name_tag' %}"/>
-                    <button type="submit" class="button success small">Отправить</button>
-                    <span class="button secondary small" onclick="onClose()">Отменить</span>
+                    <input type="text" name="name" placeholder="{% translate 'name_tag' %}" required/>
                 </label>
+                <label>{% translate 'paren_tag' %}
+                    <select name="parent">
+                        <option id="form_add_parent"></option>
+                    </select>
+                </label>
+                <button type="submit" class="button small hollow button_custom">
+                    {% translate 'button_send' %}
+                </button>
+                <span type="submit" class="button small hollow alert button_custom" onclick="onClose()">
+                    {% translate 'button_cancel' %}
+                </span>
+
             </form>
         </div>
     </div>
@@ -50,24 +75,16 @@
                 {% csrf_token %}
                 <label>{% translate 'name_tag' %}
                     <input type="text" id="edit_query_input" placeholder="{% translate 'name_tag' %}"/>
-                    <button type="submit" class="button success small">Отправить</button>
-                    <span class="button secondary small" onclick="onClose()">Отменить</span>
+                    <button type="submit" class="button small hollow button_custom">
+                        {% translate 'button_send' %}
+                    </button>
+                    <span type="submit" class="button small hollow alert button_custom" onclick="onClose()">
+                    {% translate 'button_cancel' %}
+                </span>
                 </label>
             </form>
         </div>
     </div>
-
-    <div class="card">
-        <div class="card-divider">
-            <span class="headers_local">
-                {% translate 'query_result_header' %}
-            </span>
-        </div>
-        <div class="card-section">
-            <div id="folders"></div>
-        </div>
-    </div>
-
 {% endblock %}
 
 {% block local_script %}
@@ -75,21 +92,26 @@
     <script>
 
         $('#folders').on("changed.jstree", function (e, data) {
-            console.log(data);
-            $(".action_button").attr('disabled', false).attr("id", this.id)
-            $('#edit_query_input').val(data.node.text)
+            console.log('THIS: ', data);
+            $(".action_button").attr('disabled', false).attr("id", this.id);
+            $('#edit_query_input').val(data.node.text);
+
+            let parent_option = $('#form_add_parent');
+            parent_option.val(data.node.id);
+            parent_option.text(data.node.text);
+
         });
 
         getFolderList($('#folders'))
 
         function onAdd() {
-            $('#query_folder_edit').css('display', 'none')
-            $('#query_folder_add').css('display', 'block')
+            $('#query_folder_edit').css('display', 'none');
+            $('#query_folder_add').css('display', 'block');
         }
 
         function onEdit(elem) {
             if ($(elem).attr('disabled') !== 'disabled') {
-                $('#query_folder_add').css('display', 'none')
+                $('#query_folder_add').css('display', 'none');
                 $('#query_folder_edit').css('display', 'block');
             }
         }

@@ -1,3 +1,4 @@
+from django.http import HttpResponse, HttpResponseRedirect
 from rest_framework import viewsets, mixins, views
 from rest_framework.response import Response
 
@@ -60,6 +61,11 @@ class FolderTaskView(ListView):
     model = models.FolderTask
     context_object_name = 'folders'
 
+    def get_context_data(self, *, object_list=None, **kwargs):
+        ctx = super().get_context_data(**kwargs)
+        # ctx['form_obj'] = forms.FolderTaskForm
+        return ctx
+
 
 class FolderTaskViewAPI(views.APIView):
 
@@ -74,11 +80,42 @@ class FolderTaskViewAPI(views.APIView):
         })
 
 
+class FolderTaskCreateView(CreateView):
+    model = models.FolderTask
+    form_class = forms.FolderTaskForm
+    success_url = '/folder_task/'
+
+    def form_valid(self, form):
+        print('FORM: ', form)
+        ft = form.save(commit=False)
+        print(ft)
+        return HttpResponseRedirect(self.get_success_url())
+
+
+def folder_task_create(request):
+
+    form = forms.FolderTaskForm(request.POST)
+
+    if form.is_valid():
+        obj = models.FolderTask.objects.create(
+            name=form.cleaned_data.get('name'),
+            parent_id=form.cleaned_data.get('parent'),
+        )
+        print(f'OBJ: {obj}')
+
+    print('NO OU NOU VALID: ', form)
+    return HttpResponse(status=200)
+
+
+# Task
+
 class Task(ListView):
     template_name = 'kernel/task/index.html'
     model = models.Task
     context_object_name = 'tasks'
 
+
+# PersonIdentifier
 
 class PersonIdentifierView(ListView):
     template_name = 'kernel/person_identifier/index.html'
