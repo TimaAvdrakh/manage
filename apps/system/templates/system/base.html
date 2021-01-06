@@ -70,6 +70,21 @@
 
 
 </header>
+
+<div class="messages-block">
+    {% if messages %}
+        {% for message in messages %}
+            <div class="callout {{ message.tags }}" data-closable="slide-out-right">
+                <p>{{ message }}</p>
+                <button class="close-button" aria-label="Dismiss alert" type="button" data-close>
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        {% endfor %}
+    {% endif %}
+</div>
+
+
 <div class="callout">
     <div class="actions">
         {% block actions %}
