@@ -30,9 +30,14 @@ urlpatterns = [
         name='folder_task_api'
     ),
     path(
-      'folder_task/create/',
-      views.folder_task_create,
-      name='folder_task_create'
+        'folder_task/create/',
+        views.folder_task_create,
+        name='folder_task_create'
+    ),
+    path(
+        'folder_task/delete/<int:pk>/',
+        views.FolderTaskDeleteView.as_view(),
+        name='folder_task_delete'
     ),
 
     ## tasks

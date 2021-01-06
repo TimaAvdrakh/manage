@@ -59,7 +59,6 @@
                 <span type="submit" class="button small hollow alert button_custom" onclick="onClose()">
                     {% translate 'button_cancel' %}
                 </span>
-
             </form>
         </div>
     </div>
@@ -71,19 +70,42 @@
             </span>
         </div>
         <div class="card-section">
-            <form action="" method="POST">
+            <form method="POST">
                 {% csrf_token %}
                 <label>{% translate 'name_tag' %}
-                    <input type="text" id="edit_query_input" placeholder="{% translate 'name_tag' %}"/>
-                    <button type="submit" class="button small hollow button_custom">
-                        {% translate 'button_send' %}
-                    </button>
-                    <span type="submit" class="button small hollow alert button_custom" onclick="onClose()">
+                    <input type="text" name="name" id="edit_query_input_name" placeholder="{% translate 'name_tag' %}"
+                           required/>
+                </label>
+                <label>{% translate 'paren_tag' %}
+                    <select name="parent">
+                        <option id="form_add_parent_edit"></option>
+                    </select>
+                </label>
+                <button type="submit" class="button small hollow button_custom">
+                    {% translate 'button_send' %}
+                </button>
+                <span type="submit" class="button small hollow alert button_custom" onclick="onClose()">
                     {% translate 'button_cancel' %}
                 </span>
-                </label>
             </form>
         </div>
+    </div>
+
+    <div class="reveal" id="delete-window" data-reveal data-close-on-click="true" data-animation-in="spin-in"
+         data-animation-out="spin-out">
+        <h4 class="text-center">Удаление "Папки задания"</h4>
+        <p class="text-center alert">
+            Вы точно уверены что надо удалить "Папку задания" за номером: <span id="com-obj"></span>
+        </p>
+        <form method="POST" id="com-obj-delete-form">
+            {% csrf_token %}
+            <div class="text-center">
+                <button class="button alert">УДАЛИТЬ!</button>
+            </div>
+        </form>
+        <button class="close-button" data-close aria-label="Close modal" type="button">
+            <span aria-hidden="true">&times;</span>
+        </button>
     </div>
 {% endblock %}
 
@@ -92,14 +114,26 @@
     <script>
 
         $('#folders').on("changed.jstree", function (e, data) {
-            console.log('THIS: ', data);
+            console.log(data);
             $(".action_button").attr('disabled', false).attr("id", this.id);
             $('#edit_query_input').val(data.node.text);
+
+            $('#com-obj').text(data.node.id)
+            $("#com-obj-delete-form").attr('action', '/folder_task/delete/' + data.node.id + '/')
 
             let parent_option = $('#form_add_parent');
             parent_option.val(data.node.id);
             parent_option.text(data.node.text);
 
+            let name_input_edit = $('#edit_query_input_name');
+            name_input_edit.text(data.node.text);
+
+
+            /*if (data.instance.get_parent(data.node) !== "#") {
+                let parent_option_edit = $('#form_add_parent_edit');
+                parent_option_edit.val(data.node.parent);
+                parent_option_edit.text(data.instance.get_parent(data.node));
+            }*/
         });
 
         getFolderList($('#folders'))
@@ -113,6 +147,12 @@
             if ($(elem).attr('disabled') !== 'disabled') {
                 $('#query_folder_add').css('display', 'none');
                 $('#query_folder_edit').css('display', 'block');
+            }
+        }
+
+        function onDelete(obj) {
+            if ($(obj).is('[disabled]') === true) {
+                obj.preventDefault()
             }
         }
 

@@ -52,7 +52,7 @@ class FolderTask(TimestampMixin):
     )
     parent = models.ForeignKey(
         'self',
-        on_delete=models.SET_NULL,
+        on_delete=models.PROTECT,
         null=True,
         related_name='children',
         blank=True,

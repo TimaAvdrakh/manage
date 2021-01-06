@@ -1,4 +1,7 @@
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse
+from django.shortcuts import redirect
+from django.contrib import messages
+
 from rest_framework import viewsets, mixins, views
 from rest_framework.response import Response
 
@@ -80,20 +83,7 @@ class FolderTaskViewAPI(views.APIView):
         })
 
 
-class FolderTaskCreateView(CreateView):
-    model = models.FolderTask
-    form_class = forms.FolderTaskForm
-    success_url = '/folder_task/'
-
-    def form_valid(self, form):
-        print('FORM: ', form)
-        ft = form.save(commit=False)
-        print(ft)
-        return HttpResponseRedirect(self.get_success_url())
-
-
 def folder_task_create(request):
-
     form = forms.FolderTaskForm(request.POST)
 
     if form.is_valid():
@@ -101,10 +91,35 @@ def folder_task_create(request):
             name=form.cleaned_data.get('name'),
             parent_id=form.cleaned_data.get('parent'),
         )
-        print(f'OBJ: {obj}')
-
-    print('NO OU NOU VALID: ', form)
+        messages.success(
+            request,
+            message=f'Папка задания "{obj.name}" успешно создана!'
+        )
+        return redirect('/folder_task/')
     return HttpResponse(status=200)
+
+
+class FolderTaskDeleteView(DeleteView):
+    model = models.FolderTask
+    success_url = '/folder_task/'
+
+    def delete(self, request, *args, **kwargs):
+        parents = models.FolderTask.objects.filter(
+            parent_id=self.kwargs.get('pk')
+        ).exists()
+        if parents:
+            messages.warning(
+                request,
+                f'Ошибка удаления папки: {self.kwargs.get("pk")}. У записи ' +
+                f'существуют дочерние элементы'
+            )
+            return redirect(self.success_url)
+        messages.info(
+            request,
+            extra_tags='success',
+            message=f'Папка заданий {self.kwargs.get("pk")} успешно удалена.'
+        )
+        return super().delete(request, *args, **kwargs)
 
 
 # Task
