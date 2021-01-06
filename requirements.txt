@@ -3,3 +3,4 @@ django-filter
 djangorestframework
 
 asn1tools==0.153.2
+pyasn1==0.4.8
