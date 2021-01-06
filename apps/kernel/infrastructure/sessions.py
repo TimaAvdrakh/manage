@@ -9,15 +9,19 @@ import typing
 import pyasn1.error as asn1_error
 from pyasn1.codec.ber.decoder import decode as ber_decode
 
-from ..gnrl import exceptions
-from ..gnrl import logger
-from .messaging import asn1
-from .messaging import base
-from .messaging.session import connect
-from .messaging.session import adjustment
-from .messaging.trap import trap
-from .messaging.report import report
-from .messaging.unformatted import unformatted
+from apps.system.lib import (
+    exceptions,
+    logger,
+    asn1,
+)
+from apps.kernel.infrastructure.messaging import base
+from apps.kernel.infrastructure.messaging.session import (
+    connect,
+    adjustment,
+)
+from apps.kernel.infrastructure.messaging.trap import trap
+from apps.kernel.infrastructure.messaging.report import report
+from apps.kernel.infrastructure.messaging.unformatted import unformatted
 
 
 class ChannelParameters:

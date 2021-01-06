@@ -2,20 +2,27 @@ from __future__ import print_function
 import time
 import threading
 
-from ..gnrl import basic
-from ..gnrl import exceptions
-from . import sessions
-from .messaging.task import create_task
-from .messaging.task import data_ready
-from .messaging.task import data_load
-from .messaging.task import data_interrupt
-from .messaging.task import data_drop
-from .messaging.report import report
-from .messaging.report.payload import dictionary as dictionary_report
-from .messaging.report.payload import subscriber as subscriber_report
-from .messaging.report.payload import payment as payment_report
-from .messaging.report.payload import connection as connection_report
-from .messaging.report.payload import data_content as data_content_report
+from apps.system.lib import (
+    exceptions,
+    basic,
+)
+
+from apps.kernel.infrastructure import sessions
+from apps.kernel.infrastructure.messaging.task import (
+    create_task,
+    data_ready,
+    data_load,
+    data_interrupt,
+    data_drop,
+)
+from apps.kernel.infrastructure.messaging.report import report
+from apps.kernel.infrastructure.messaging.report.payload import (
+    dictionary as dictionary_report,
+    subscriber as subscriber_report,
+    payment as payment_report,
+    connection as connection_report,
+    data_content as data_content_report,
+)
 
 
 class TaskExecutionStatus:
@@ -290,7 +297,11 @@ class TaskManager:
                 if task_info is not None:
                     self.session.channel(1).send_request(data_load.DataLoadRequest(task_info.task_id))
 
-            self.wait_for_responses(time.time() + (timeout_ if timeout_ is not None else self.session.channel(1).channel_parameters.request_response_timeout))
+            self.wait_for_responses(
+                time.time() + (
+                    timeout_ if timeout_ is not None else self.session.channel(1).channel_parameters.request_response_timeout
+                )
+            )
             return reported_info
 
     def interrupt_tasks(self, tasks_=None, timeout_=None):
