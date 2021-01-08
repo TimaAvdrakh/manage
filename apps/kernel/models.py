@@ -25,7 +25,8 @@ class CommunicationObject(TimestampMixin):
     ip_address = models.GenericIPAddressField(
         verbose_name='IP адрес'
     )
-    port = models.IntegerField(
+    port = models.CharField(
+        max_length=128,
         verbose_name='порт'
     )
     state = models.BooleanField(

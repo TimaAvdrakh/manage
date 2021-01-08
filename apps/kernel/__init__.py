@@ -1,5 +1,7 @@
 from django.utils.translation import ugettext_lazy as _
 
+default_app_config = 'apps.kernel.apps.KernelConfig'
+
 INTERCEPTION_STATE = (
     ('wait', _('WAIT')),
     ('error', _('ERROR')),
