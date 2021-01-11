@@ -1612,20 +1612,188 @@ class NRST_CrossAccountReportData(univ.SequenceOf):
 
 NRST_CrossAccountReportData.componentType = NRST_CrossAccountRecord()
 
+
 class NRST_DataAAARecordContent(univ.Sequence):
     pass
 
 
-NRST_DataAAARecordContent.componentType = namedtype.NamedTypes(namedtype.NamedType('telco-id', NRST_TelcoID()), namedtype.NamedType('point-id', univ.Integer().subtype(subtypeSpec=(constraint.ValueRangeConstraint(0, 1000)))), namedtype.NamedType('aaa-connection-time', NRST_DateAndTime()), namedtype.NamedType('aaa-login-type', univ.Enumerated(namedValues=(namedval.NamedValues(('connect',
-                                                                                                                                                                                                                                                                                                                                                                                          0), ('disconnect',
-                                                                                                                                                                                                                                                                                                                                                                                               1), ('lac-update',
-                                                                                                                                                                                                                                                                                                                                                                                                    2))))), namedtype.NamedType('aaa-session-id', char.UTF8String().subtype(subtypeSpec=(constraint.ValueSizeConstraint(1, 64)))), namedtype.NamedType('aaa-allocated-ip', NRST_IPAddress()), namedtype.NamedType('aaa-user-name', char.UTF8String().subtype(subtypeSpec=(constraint.ValueSizeConstraint(1, 128)))), namedtype.NamedType('aaa-connect-type', univ.Integer().subtype(subtypeSpec=(constraint.ValueRangeConstraint(0, 65535)))), namedtype.NamedType('aaa-calling-number', char.UTF8String().subtype(subtypeSpec=(constraint.ValueSizeConstraint(2, 32)))), namedtype.NamedType('aaa-called-number', char.UTF8String().subtype(subtypeSpec=(constraint.ValueSizeConstraint(2, 32)))), namedtype.NamedType('aaa-nas', NRST_NetworkPeerInfo()), namedtype.NamedType('aaa-in-bytes-count', univ.Integer()), namedtype.NamedType('aaa-out-bytes-count', univ.Integer()), namedtype.OptionalNamedType('aaa-user-password', char.UTF8String().subtype(subtypeSpec=(constraint.ValueSizeConstraint(1, 128))).subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 0)))), namedtype.OptionalNamedType('aaa-user-equipment', NRST_DataNetworkEquipment().subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 1)))), namedtype.OptionalNamedType('aaa-apn', char.UTF8String().subtype(subtypeSpec=(constraint.ValueSizeConstraint(1, 128))).subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 2)))), namedtype.OptionalNamedType('aaa-sgsn-ip', NRST_IPAddress().subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 3)))), namedtype.OptionalNamedType('aaa-ggsn-ip', NRST_IPAddress().subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 4)))), namedtype.OptionalNamedType('aaa-service-area-code', univ.Integer().subtype(subtypeSpec=(constraint.ValueRangeConstraint(0, 65535))).subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 5)))), namedtype.OptionalNamedType('aaa-location-start', NRST_Location().subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 6)))), namedtype.OptionalNamedType('aaa-location-end', NRST_Location().subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 7)))), namedtype.OptionalNamedType('phone-card-number', char.NumericString().subtype(subtypeSpec=(constraint.ValueSizeConstraint(20, 20))).subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 8)))), namedtype.OptionalNamedType('aaa-imsi', char.NumericString().subtype(subtypeSpec=(constraint.ValueSizeConstraint(2, 18))).subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 9)))), namedtype.OptionalNamedType('aaa-imei', char.NumericString().subtype(subtypeSpec=(constraint.ValueSizeConstraint(2, 18))).subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 10)))), namedtype.OptionalNamedType('aaa-esn', char.NumericString().subtype(subtypeSpec=(constraint.ValueSizeConstraint(10, 18))).subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 11)))), namedtype.OptionalNamedType('aaa-pool-number', char.UTF8String().subtype(subtypeSpec=(constraint.ValueSizeConstraint(1, 64))).subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 12)))), namedtype.OptionalNamedType('aaa-mcc', char.UTF8String().subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 13)))), namedtype.OptionalNamedType('aaa-mnc', char.UTF8String().subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 14)))), namedtype.OptionalNamedType('aaa-allocated-ip-mask', NRST_IPMask().subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 15)))))
+NRST_DataAAARecordContent.componentType = namedtype.NamedTypes(
+    namedtype.NamedType('telco-id', NRST_TelcoID()),
+    namedtype.NamedType(
+        'point-id',
+        univ.Integer().subtype(
+            subtypeSpec=(constraint.ValueRangeConstraint(0, 1000))
+        )
+    ),
+    namedtype.NamedType('aaa-connection-time', NRST_DateAndTime()),
+    namedtype.NamedType(
+        'aaa-login-type',
+        univ.Enumerated(namedValues=(namedval.NamedValues(
+            ('connect', 0),
+            ('disconnect', 1),
+            ('lac-update', 2)))
+        )
+    ),
+    namedtype.NamedType(
+        'aaa-session-id', char.UTF8String().subtype(
+            subtypeSpec=(constraint.ValueSizeConstraint(1, 64))
+        )
+    ),
+    namedtype.NamedType('aaa-allocated-ip', NRST_IPAddress()),
+    namedtype.NamedType(
+        'aaa-user-name', char.UTF8String().subtype(
+            subtypeSpec=(constraint.ValueSizeConstraint(1, 128))
+        )
+    ),
+    namedtype.NamedType(
+        'aaa-connect-type',
+        univ.Integer().subtype(
+            subtypeSpec=(constraint.ValueRangeConstraint(0, 65535))
+        )
+    ),
+    namedtype.NamedType(
+        'aaa-calling-number',
+        char.UTF8String().subtype(
+            subtypeSpec=(constraint.ValueSizeConstraint(2, 32))
+        )
+    ),
+    namedtype.NamedType(
+        'aaa-called-number',
+        char.UTF8String().subtype(
+            subtypeSpec=(constraint.ValueSizeConstraint(2, 32))
+        )
+    ),
+    namedtype.NamedType('aaa-nas', NRST_NetworkPeerInfo()),
+    namedtype.NamedType('aaa-in-bytes-count', univ.Integer()),
+    namedtype.NamedType('aaa-out-bytes-count', univ.Integer()),
+    namedtype.OptionalNamedType(
+        'aaa-user-password',
+        char.UTF8String().subtype(
+            subtypeSpec=(constraint.ValueSizeConstraint(1, 128))
+        ).subtype(
+            implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 0)))
+    ),
+    namedtype.OptionalNamedType(
+        'aaa-user-equipment',
+        NRST_DataNetworkEquipment().subtype(
+            implicitTag=(
+                tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 1)
+            )
+        )
+    ),
+    namedtype.OptionalNamedType(
+        'aaa-apn',
+        char.UTF8String().subtype(
+            subtypeSpec=(constraint.ValueSizeConstraint(1, 128))
+        ).subtype(
+            implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 2)))
+    ),
+    namedtype.OptionalNamedType(
+        'aaa-sgsn-ip',
+        NRST_IPAddress().subtype(
+            implicitTag=(
+                tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 3)
+            )
+        )
+    ),
+    namedtype.OptionalNamedType(
+        'aaa-ggsn-ip',
+        NRST_IPAddress().subtype(
+            implicitTag=(
+                tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 4)
+            )
+        )
+    ),
+    namedtype.OptionalNamedType(
+        'aaa-service-area-code',
+        univ.Integer().subtype(
+            subtypeSpec=(constraint.ValueRangeConstraint(0, 65535))
+        ).subtype(
+            implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 5)))
+    ),
+    namedtype.OptionalNamedType(
+        'aaa-location-start',
+        NRST_Location().subtype(
+            implicitTag=(
+                tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 6)
+            )
+        )
+    ),
+    namedtype.OptionalNamedType(
+        'aaa-location-end',
+        NRST_Location().subtype(
+            implicitTag=(
+                tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 7)
+            )
+        )
+    ),
+    namedtype.OptionalNamedType(
+        'phone-card-number',
+        char.NumericString().subtype(
+            subtypeSpec=(constraint.ValueSizeConstraint(20, 20))
+        ).subtype(
+            implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 8)))
+    ),
+    namedtype.OptionalNamedType(
+        'aaa-imsi',
+        char.NumericString().subtype(
+            subtypeSpec=(constraint.ValueSizeConstraint(2, 18))
+        ).subtype(
+            implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 9)))
+    ),
+    namedtype.OptionalNamedType(
+        'aaa-imei',
+        char.NumericString().subtype(
+            subtypeSpec=(constraint.ValueSizeConstraint(2, 18))
+        ).subtype(
+            implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 10))
+        )
+    ),
+    namedtype.OptionalNamedType(
+        'aaa-esn',
+        char.NumericString().subtype(
+            subtypeSpec=(constraint.ValueSizeConstraint(10, 18))
+        ).subtype(
+            implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 11))
+        )
+    ),
+    namedtype.OptionalNamedType(
+        'aaa-pool-number',
+        char.UTF8String().subtype(
+            subtypeSpec=(constraint.ValueSizeConstraint(1, 64))
+        ).subtype(
+            implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 12))
+        )
+    ),
+    namedtype.OptionalNamedType(
+        'aaa-mcc',
+        char.UTF8String().subtype(
+            implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 13))
+        )
+    ),
+    namedtype.OptionalNamedType(
+        'aaa-mnc',
+        char.UTF8String().subtype(
+            implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 14))
+        )
+    ),
+    namedtype.OptionalNamedType(
+        'aaa-allocated-ip-mask',
+        NRST_IPMask().subtype(
+            implicitTag=(
+                tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 15)
+            )
+        )
+    )
+)
+
 
 class NRST_DataAAARecordData(univ.SequenceOf):
     pass
 
 
 NRST_DataAAARecordData.componentType = NRST_DataAAARecordContent()
+
 
 class NRST_DataAddressTranslationRecordContent(univ.Sequence):
     pass
@@ -1689,7 +1857,10 @@ class NRST_DataContentReport(univ.Sequence):
     pass
 
 
-NRST_DataContentReport.componentType = namedtype.NamedTypes(namedtype.NamedType('id', useful.ObjectDescriptor()), namedtype.NamedType('data', univ.Any()))
+NRST_DataContentReport.componentType = namedtype.NamedTypes(
+    namedtype.NamedType('id', useful.ObjectDescriptor()),
+    namedtype.NamedType('data', univ.Any())
+)
 
 
 class NRST_DataDropRequest(NRST_TaskID):
@@ -1700,7 +1871,17 @@ class NRST_DataDropResponse(univ.Sequence):
     pass
 
 
-NRST_DataDropResponse.componentType = namedtype.NamedTypes(namedtype.NamedType('task-id', NRST_TaskID()), namedtype.NamedType('successful', univ.Boolean()), namedtype.OptionalNamedType('error-description', char.UTF8String().subtype(subtypeSpec=(constraint.ValueSizeConstraint(1, 256)))))
+NRST_DataDropResponse.componentType = namedtype.NamedTypes(
+    namedtype.NamedType('task-id', NRST_TaskID()),
+    namedtype.NamedType('successful', univ.Boolean()),
+    namedtype.OptionalNamedType(
+        'error-description',
+        char.UTF8String().subtype(
+            subtypeSpec=(constraint.ValueSizeConstraint(1, 256))
+        )
+    )
+)
+
 
 class NRST_EmailEvent(univ.Enumerated):
     pass
@@ -1733,53 +1914,240 @@ class NRST_IP_AAAInformation(univ.Sequence):
     pass
 
 
-NRST_IP_AAAInformation.componentType = namedtype.NamedTypes(namedtype.NamedType('username', char.UTF8String().subtype(subtypeSpec=(constraint.ValueSizeConstraint(0, 64)))), namedtype.OptionalNamedType('aaaResult', NRST_IP_AAAResult()))
+NRST_IP_AAAInformation.componentType = namedtype.NamedTypes(
+    namedtype.NamedType(
+        'username',
+        char.UTF8String().subtype(
+            subtypeSpec=(constraint.ValueSizeConstraint(0, 64))
+        )
+    ),
+    namedtype.OptionalNamedType('aaaResult', NRST_IP_AAAResult()))
+
 
 class NRST_DataNetworkCdrHeaderData(univ.Sequence):
     pass
 
 
-NRST_DataNetworkCdrHeaderData.componentType = namedtype.NamedTypes(namedtype.NamedType('telco-id', NRST_TelcoID()), namedtype.NamedType('begin-connection-time', NRST_DateAndTime()), namedtype.NamedType('end-connection-time', NRST_DateAndTime()), namedtype.NamedType('client-info', NRST_NetworkPeerInfo()), namedtype.NamedType('server-info', NRST_NetworkPeerInfo()), namedtype.NamedType('protocol-code', univ.Integer().subtype(subtypeSpec=(constraint.ValueRangeConstraint(0, 65535)))), namedtype.OptionalNamedType('point-id', univ.Integer().subtype(subtypeSpec=(constraint.ValueRangeConstraint(0, 1000)))))
+NRST_DataNetworkCdrHeaderData.componentType = namedtype.NamedTypes(
+    namedtype.NamedType('telco-id', NRST_TelcoID()),
+    namedtype.NamedType('begin-connection-time', NRST_DateAndTime()),
+    namedtype.NamedType('end-connection-time', NRST_DateAndTime()),
+    namedtype.NamedType('client-info', NRST_NetworkPeerInfo()),
+    namedtype.NamedType('server-info', NRST_NetworkPeerInfo()),
+    namedtype.NamedType(
+        'protocol-code',
+        univ.Integer().subtype(
+            subtypeSpec=(constraint.ValueRangeConstraint(0, 65535))
+        )
+    ),
+    namedtype.OptionalNamedType(
+        'point-id',
+        univ.Integer().subtype(
+            subtypeSpec=(constraint.ValueRangeConstraint(0, 1000))
+        )
+    )
+)
+
 
 class NRST_DataNetworkCdrHeader(univ.Sequence):
     pass
 
 
-NRST_DataNetworkCdrHeader.componentType = namedtype.NamedTypes(namedtype.NamedType('id', useful.ObjectDescriptor()), namedtype.NamedType('data', NRST_DataNetworkCdrHeaderData()))
+NRST_DataNetworkCdrHeader.componentType = namedtype.NamedTypes(
+    namedtype.NamedType('id', useful.ObjectDescriptor()),
+    namedtype.NamedType('data', NRST_DataNetworkCdrHeaderData())
+)
+
 
 class NRST_DataEmailRecordContentAAA(univ.Sequence):
     pass
 
 
-NRST_DataEmailRecordContentAAA.componentType = namedtype.NamedTypes(namedtype.NamedType('mail-cdr-header', NRST_DataNetworkCdrHeader()), namedtype.NamedType('mail-event', NRST_EmailEvent()), namedtype.NamedType('mail-aaa-info', NRST_IP_AAAInformation()), namedtype.OptionalNamedType('mail-message', char.UTF8String().subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 10)))), namedtype.OptionalNamedType('mail-nat-info', univ.SequenceOf(componentType=(NRST_NetworkPeerInfo())).subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 11)))), namedtype.OptionalNamedType('mail-location', NRST_Location().subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 12)))), namedtype.OptionalNamedType('mail-data-content-id', NRST_DataContentID().subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 13)))))
+NRST_DataEmailRecordContentAAA.componentType = namedtype.NamedTypes(
+    namedtype.NamedType('mail-cdr-header', NRST_DataNetworkCdrHeader()),
+    namedtype.NamedType('mail-event', NRST_EmailEvent()),
+    namedtype.NamedType('mail-aaa-info', NRST_IP_AAAInformation()),
+    namedtype.OptionalNamedType(
+        'mail-message',
+        char.UTF8String().subtype(
+            implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 10))
+        )
+    ),
+    namedtype.OptionalNamedType(
+        'mail-nat-info',
+        univ.SequenceOf(
+            componentType=(NRST_NetworkPeerInfo())
+        ).subtype(
+            implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 11))
+        )
+    ),
+    namedtype.OptionalNamedType(
+        'mail-location',
+        NRST_Location().subtype(
+            implicitTag=(
+                tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 12)
+            )
+        )
+    ),
+    namedtype.OptionalNamedType(
+        'mail-data-content-id',
+        NRST_DataContentID().subtype(
+            implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 13))
+        )
+    )
+)
+
 
 class NRST_EmailServers(univ.Sequence):
     pass
 
 
-NRST_EmailServers.componentType = namedtype.NamedTypes(namedtype.NamedType('data', univ.SequenceOf(componentType=char.UTF8String().subtype(subtypeSpec=(constraint.ValueSizeConstraint(1, 512))))))
+NRST_EmailServers.componentType = namedtype.NamedTypes(
+    namedtype.NamedType(
+        'data',
+        univ.SequenceOf(
+            componentType=char.UTF8String().subtype(
+                subtypeSpec=(constraint.ValueSizeConstraint(1, 512))
+            )
+        )
+    )
+)
+
 
 class NRST_EmailReceivers(univ.Sequence):
     pass
 
 
-NRST_EmailReceivers.componentType = namedtype.NamedTypes(namedtype.NamedType('data', univ.SequenceOf(componentType=char.UTF8String().subtype(subtypeSpec=(constraint.ValueSizeConstraint(1, 512))))))
+NRST_EmailReceivers.componentType = namedtype.NamedTypes(
+    namedtype.NamedType(
+        'data',
+        univ.SequenceOf(
+            componentType=char.UTF8String().subtype(
+                subtypeSpec=(constraint.ValueSizeConstraint(1, 512)))
+        )
+    )
+)
+
 
 class NRST_DataEmailRecordContentIPDR(univ.Sequence):
     pass
 
 
-NRST_DataEmailRecordContentIPDR.componentType = namedtype.NamedTypes(namedtype.NamedType('mail-cdr-header', NRST_DataNetworkCdrHeader()), namedtype.NamedType('mail-event', NRST_EmailEvent()), namedtype.NamedType('mail-sender', char.UTF8String().subtype(subtypeSpec=(constraint.ValueSizeConstraint(1, 512)))), namedtype.NamedType('mail-receiver', NRST_EmailReceivers()), namedtype.NamedType('mail-cc', NRST_EmailReceivers()), namedtype.NamedType('mail-subject', char.UTF8String().subtype(subtypeSpec=(constraint.ValueSizeConstraint(0, 2048)))), namedtype.NamedType('mail-size', univ.Integer().subtype(subtypeSpec=(constraint.ValueRangeConstraint(0, 4294967295)))), namedtype.NamedType('attachements', univ.Integer().subtype(subtypeSpec=(constraint.ValueRangeConstraint(0, 1)))), namedtype.NamedType('mail-servers', NRST_EmailServers()), namedtype.NamedType('mail-term-cause', univ.Integer().subtype(subtypeSpec=(constraint.ValueRangeConstraint(0, 16384)))), namedtype.OptionalNamedType('mail-reply-to', char.UTF8String().subtype(subtypeSpec=(constraint.ValueSizeConstraint(1, 256)))), namedtype.OptionalNamedType('mail-protocol', univ.Enumerated(namedValues=(namedval.NamedValues(('smtp',
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            0), ('pop3',
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 1), ('imap',
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      2), ('web-mail',
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           3))))), namedtype.OptionalNamedType('mail-abonent-id', char.UTF8String().subtype(subtypeSpec=(constraint.ValueSizeConstraint(0, 64))).subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 0)))), namedtype.OptionalNamedType('mail-message', char.UTF8String().subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 10)))), namedtype.OptionalNamedType('mail-nat-info', univ.SequenceOf(componentType=(NRST_NetworkPeerInfo())).subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 11)))), namedtype.OptionalNamedType('mail-location', NRST_Location().subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 12)))), namedtype.OptionalNamedType('mail-data-content-id', NRST_DataContentID().subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 13)))))
+NRST_DataEmailRecordContentIPDR.componentType = namedtype.NamedTypes(
+    namedtype.NamedType(
+        'mail-cdr-header',
+        NRST_DataNetworkCdrHeader()
+    ),
+    namedtype.NamedType('mail-event', NRST_EmailEvent()),
+    namedtype.NamedType(
+        'mail-sender',
+        char.UTF8String().subtype(
+            subtypeSpec=(constraint.ValueSizeConstraint(1, 512))
+        )
+    ),
+    namedtype.NamedType('mail-receiver', NRST_EmailReceivers()),
+    namedtype.NamedType('mail-cc', NRST_EmailReceivers()),
+    namedtype.NamedType(
+        'mail-subject',
+        char.UTF8String().subtype(
+            subtypeSpec=(constraint.ValueSizeConstraint(0, 2048))
+        )
+    ),
+    namedtype.NamedType(
+        'mail-size',
+        univ.Integer().subtype(
+            subtypeSpec=(constraint.ValueRangeConstraint(0, 4294967295))
+        )
+    ),
+    namedtype.NamedType(
+        'attachements',
+        univ.Integer().subtype(
+            subtypeSpec=(constraint.ValueRangeConstraint(0, 1))
+        )
+    ),
+    namedtype.NamedType('mail-servers', NRST_EmailServers()),
+    namedtype.NamedType(
+        'mail-term-cause',
+        univ.Integer().subtype(
+            subtypeSpec=(constraint.ValueRangeConstraint(0, 16384))
+        )
+    ),
+    namedtype.OptionalNamedType(
+        'mail-reply-to',
+        char.UTF8String().subtype(
+            subtypeSpec=(constraint.ValueSizeConstraint(1, 256))
+        )
+    ),
+    namedtype.OptionalNamedType(
+        'mail-protocol',
+        univ.Enumerated(namedValues=(namedval.NamedValues(
+            ('smtp', 0),
+            ('pop3', 1),
+            ('imap', 2),
+            ('web-mail', 3)))
+        )
+    ),
+    namedtype.OptionalNamedType(
+        'mail-abonent-id',
+        char.UTF8String().subtype(
+            subtypeSpec=(constraint.ValueSizeConstraint(0, 64))
+        ).subtype(
+            implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 0)))
+    ),
+    namedtype.OptionalNamedType(
+        'mail-message',
+        char.UTF8String().subtype(
+            implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 10))
+        )
+    ),
+    namedtype.OptionalNamedType(
+        'mail-nat-info',
+        univ.SequenceOf(
+            componentType=(NRST_NetworkPeerInfo())
+        ).subtype(
+            implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 11))
+        )
+    ),
+    namedtype.OptionalNamedType(
+        'mail-location',
+        NRST_Location().subtype(
+            implicitTag=(
+                tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 12)
+            )
+        )
+    ),
+    namedtype.OptionalNamedType(
+        'mail-data-content-id',
+        NRST_DataContentID().subtype(
+            implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 13))
+        )
+    )
+)
+
 
 class NRST_DataEmailRecordContent(univ.Choice):
     pass
 
 
-NRST_DataEmailRecordContent.componentType = namedtype.NamedTypes(namedtype.NamedType('mail-aaa', NRST_DataEmailRecordContentAAA().subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 0)))), namedtype.NamedType('mail-ipdr', NRST_DataEmailRecordContentIPDR().subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 1)))))
+NRST_DataEmailRecordContent.componentType = namedtype.NamedTypes(
+    namedtype.NamedType(
+        'mail-aaa',
+        NRST_DataEmailRecordContentAAA().subtype(
+            implicitTag=(
+                tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 0)
+            )
+        )
+    ),
+    namedtype.NamedType(
+        'mail-ipdr',
+        NRST_DataEmailRecordContentIPDR().subtype(
+            implicitTag=(
+                tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 1)
+            )
+        )
+    )
+)
+
 
 class NRST_DataEmailRecordData(univ.SequenceOf):
     pass
@@ -1787,11 +2155,79 @@ class NRST_DataEmailRecordData(univ.SequenceOf):
 
 NRST_DataEmailRecordData.componentType = NRST_DataEmailRecordContent()
 
+
 class NRST_DataFileTransferRecordContent(univ.Sequence):
     pass
 
 
-NRST_DataFileTransferRecordContent.componentType = namedtype.NamedTypes(namedtype.NamedType('file-cdr-header', NRST_DataNetworkCdrHeader()), namedtype.NamedType('file-server-name', char.UTF8String().subtype(subtypeSpec=(constraint.ValueSizeConstraint(1, 256)))), namedtype.NamedType('file-user-name', char.UTF8String().subtype(subtypeSpec=(constraint.ValueSizeConstraint(0, 128)))), namedtype.NamedType('file-user-password', char.UTF8String().subtype(subtypeSpec=(constraint.ValueSizeConstraint(0, 256)))), namedtype.OptionalNamedType('file-server-type', univ.Boolean()), namedtype.NamedType('file-in-bytes-count', univ.Integer()), namedtype.NamedType('file-out-bytes-count', univ.Integer()), namedtype.NamedType('file-term-cause', univ.Integer().subtype(subtypeSpec=(constraint.ValueRangeConstraint(0, 16384)))), namedtype.OptionalNamedType('file-abonent-id', char.UTF8String().subtype(subtypeSpec=(constraint.ValueSizeConstraint(0, 64))).subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 0)))), namedtype.OptionalNamedType('file-nat-info', univ.SequenceOf(componentType=(NRST_NetworkPeerInfo())).subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 10)))), namedtype.OptionalNamedType('file-location', NRST_Location().subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 11)))), namedtype.OptionalNamedType('file-data-content-id', NRST_DataContentID().subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 12)))))
+NRST_DataFileTransferRecordContent.componentType = namedtype.NamedTypes(
+    namedtype.NamedType(
+        'file-cdr-header',
+        NRST_DataNetworkCdrHeader()
+    ),
+    namedtype.NamedType(
+        'file-server-name',
+        char.UTF8String().subtype(
+            subtypeSpec=(constraint.ValueSizeConstraint(1, 256))
+        )
+    ),
+    namedtype.NamedType(
+        'file-user-name',
+        char.UTF8String().subtype(
+            subtypeSpec=(constraint.ValueSizeConstraint(0, 128))
+        )
+    ),
+    namedtype.NamedType(
+        'file-user-password',
+        char.UTF8String().subtype(
+            subtypeSpec=(constraint.ValueSizeConstraint(0, 256))
+        )
+    ),
+    namedtype.OptionalNamedType(
+        'file-server-type', univ.Boolean()
+    ),
+    namedtype.NamedType(
+        'file-in-bytes-count', univ.Integer()
+    ),
+    namedtype.NamedType('file-out-bytes-count', univ.Integer()),
+    namedtype.NamedType(
+        'file-term-cause',
+        univ.Integer().subtype(
+            subtypeSpec=(constraint.ValueRangeConstraint(0, 16384))
+        )
+    ),
+    namedtype.OptionalNamedType(
+        'file-abonent-id',
+        char.UTF8String().subtype(
+            subtypeSpec=(constraint.ValueSizeConstraint(0, 64))
+        ).subtype(
+            implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 0))
+        )
+    ),
+    namedtype.OptionalNamedType(
+        'file-nat-info',
+        univ.SequenceOf(
+            componentType=(NRST_NetworkPeerInfo())
+        ).subtype(
+            implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 10))
+        )
+    ),
+    namedtype.OptionalNamedType(
+        'file-location',
+        NRST_Location().subtype(
+            implicitTag=(
+                tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 11)
+            )
+        )
+    ),
+    namedtype.OptionalNamedType(
+        'file-data-content-id',
+        NRST_DataContentID().subtype(
+            implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 12))
+        )
+    )
+)
+
 
 class NRST_DataFileTransferRecordData(univ.SequenceOf):
     pass
@@ -1799,11 +2235,26 @@ class NRST_DataFileTransferRecordData(univ.SequenceOf):
 
 NRST_DataFileTransferRecordData.componentType = NRST_DataFileTransferRecordContent()
 
+
 class NRST_ImReceiver(univ.Sequence):
     pass
 
 
-NRST_ImReceiver.componentType = namedtype.NamedTypes(namedtype.NamedType('im-receiver-screen-name', char.UTF8String().subtype(subtypeSpec=(constraint.ValueSizeConstraint(1, 256)))), namedtype.NamedType('im-receiver-uin', char.UTF8String().subtype(subtypeSpec=(constraint.ValueSizeConstraint(1, 256)))))
+NRST_ImReceiver.componentType = namedtype.NamedTypes(
+    namedtype.NamedType(
+        'im-receiver-screen-name',
+        char.UTF8String().subtype(
+            subtypeSpec=(constraint.ValueSizeConstraint(1, 256))
+        )
+    ),
+    namedtype.NamedType(
+        'im-receiver-uin',
+        char.UTF8String().subtype(
+            subtypeSpec=(constraint.ValueSizeConstraint(1, 256))
+        )
+    )
+)
+
 
 class NRST_ImReceivers(univ.SequenceOf):
     pass
@@ -1811,24 +2262,117 @@ class NRST_ImReceivers(univ.SequenceOf):
 
 NRST_ImReceivers.componentType = NRST_ImReceiver()
 
+
 class NRST_ImEvent(univ.Enumerated):
     pass
 
 
-NRST_ImEvent.namedValues = namedval.NamedValues(('im-undefined', 0), ('im-send', 1), ('im-receive',
-                                                                                      2))
+NRST_ImEvent.namedValues = namedval.NamedValues(
+    ('im-undefined', 0),
+    ('im-send', 1),
+    ('im-receive', 2)
+)
+
 
 class NRST_DataImRecordContent(univ.Sequence):
     pass
 
 
-NRST_DataImRecordContent.componentType = namedtype.NamedTypes(namedtype.NamedType('im-cdr-header', NRST_DataNetworkCdrHeader()), namedtype.NamedType('im-user-login', char.UTF8String().subtype(subtypeSpec=(constraint.ValueSizeConstraint(1, 128)))), namedtype.NamedType('im-user-password', char.UTF8String().subtype(subtypeSpec=(constraint.ValueSizeConstraint(1, 128)))), namedtype.NamedType('im-sender-screen-name', char.UTF8String().subtype(subtypeSpec=(constraint.ValueSizeConstraint(1, 256)))), namedtype.NamedType('im-sender-uin', char.UTF8String().subtype(subtypeSpec=(constraint.ValueSizeConstraint(1, 256)))), namedtype.NamedType('im-receivers', NRST_ImReceivers()), namedtype.NamedType('im-size', univ.Integer().subtype(subtypeSpec=(constraint.ValueRangeConstraint(0, 4294967295)))), namedtype.NamedType('im-term-cause', univ.Integer().subtype(subtypeSpec=(constraint.ValueRangeConstraint(0, 16384)))), namedtype.OptionalNamedType('im-protocol', NRST_IMProtocol().subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 0)))), namedtype.OptionalNamedType('im-abonent-id', char.UTF8String().subtype(subtypeSpec=(constraint.ValueSizeConstraint(0, 64))).subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 1)))), namedtype.OptionalNamedType('im-event', NRST_ImEvent().subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 5)))), namedtype.OptionalNamedType('im-message', char.UTF8String().subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 10)))), namedtype.OptionalNamedType('im-nat-info', univ.SequenceOf(componentType=(NRST_NetworkPeerInfo())).subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 11)))), namedtype.OptionalNamedType('im-location', NRST_Location().subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 12)))), namedtype.OptionalNamedType('im-data-content-id', NRST_DataContentID().subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 13)))))
+NRST_DataImRecordContent.componentType = namedtype.NamedTypes(
+    namedtype.NamedType('im-cdr-header', NRST_DataNetworkCdrHeader()),
+    namedtype.NamedType(
+        'im-user-login',
+        char.UTF8String().subtype(
+            subtypeSpec=(constraint.ValueSizeConstraint(1, 128))
+        )
+    ),
+    namedtype.NamedType(
+        'im-user-password',
+        char.UTF8String().subtype(
+            subtypeSpec=(constraint.ValueSizeConstraint(1, 128))
+        )
+    ),
+    namedtype.NamedType(
+        'im-sender-screen-name',
+        char.UTF8String().subtype(
+            subtypeSpec=(constraint.ValueSizeConstraint(1, 256))
+        )
+    ),
+    namedtype.NamedType(
+        'im-sender-uin',
+        char.UTF8String().subtype(
+            subtypeSpec=(constraint.ValueSizeConstraint(1, 256))
+        )
+    ),
+    namedtype.NamedType('im-receivers', NRST_ImReceivers()),
+    namedtype.NamedType(
+        'im-size',
+        univ.Integer().subtype(
+            subtypeSpec=(constraint.ValueRangeConstraint(0, 4294967295))
+        )
+    ),
+    namedtype.NamedType(
+        'im-term-cause',
+        univ.Integer().subtype(
+            subtypeSpec=(constraint.ValueRangeConstraint(0, 16384))
+        )
+    ),
+    namedtype.OptionalNamedType(
+        'im-protocol',
+        NRST_IMProtocol().subtype(
+            implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 0))
+        )
+    ),
+    namedtype.OptionalNamedType(
+        'im-abonent-id',
+        char.UTF8String().subtype(
+            subtypeSpec=(constraint.ValueSizeConstraint(0, 64))
+        ).subtype(
+            implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 1)))
+    ),
+    namedtype.OptionalNamedType(
+        'im-event',
+        NRST_ImEvent().subtype(
+            implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 5))
+        )
+    ),
+    namedtype.OptionalNamedType(
+        'im-message',
+        char.UTF8String().subtype(
+            implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 10))
+        )
+    ),
+    namedtype.OptionalNamedType(
+        'im-nat-info',
+        univ.SequenceOf(
+            componentType=(NRST_NetworkPeerInfo())
+        ).subtype(
+            implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 11))
+        )
+    ),
+    namedtype.OptionalNamedType(
+        'im-location',
+        NRST_Location().subtype(
+            implicitTag=(
+                tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 12)
+            )
+        )
+    ),
+    namedtype.OptionalNamedType(
+        'im-data-content-id',
+        NRST_DataContentID().subtype(
+            implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 13))
+        )
+    )
+)
+
 
 class NRST_DataImRecordData(univ.SequenceOf):
     pass
 
 
 NRST_DataImRecordData.componentType = NRST_DataImRecordContent()
+
 
 class NRST_DataInterruptRequest(NRST_TaskID):
     pass
@@ -1840,11 +2384,28 @@ class NRST_MessageID(univ.Integer):
 
 NRST_MessageID.subtypeSpec = constraint.ValueRangeConstraint(0, 4294967295)
 
+
 class NRST_DataInterruptResponse(univ.Sequence):
     pass
 
 
-NRST_DataInterruptResponse.componentType = namedtype.NamedTypes(namedtype.NamedType('request-id', NRST_MessageID()), namedtype.NamedType('successful', univ.Boolean()), namedtype.OptionalNamedType('data-blocks-available', univ.Integer().subtype(subtypeSpec=(constraint.ValueRangeConstraint(0, 999999999999)))), namedtype.OptionalNamedType('error-description', char.UTF8String().subtype(subtypeSpec=(constraint.ValueSizeConstraint(1, 256)))))
+NRST_DataInterruptResponse.componentType = namedtype.NamedTypes(
+    namedtype.NamedType('request-id', NRST_MessageID()),
+    namedtype.NamedType('successful', univ.Boolean()),
+    namedtype.OptionalNamedType(
+        'data-blocks-available',
+        univ.Integer().subtype(
+            subtypeSpec=(constraint.ValueRangeConstraint(0, 999999999999))
+        )
+    ),
+    namedtype.OptionalNamedType(
+        'error-description',
+        char.UTF8String().subtype(
+            subtypeSpec=(constraint.ValueSizeConstraint(1, 256))
+        )
+    )
+)
+
 
 class NRST_DataLoadRequest(NRST_TaskID):
     pass
@@ -1854,22 +2415,86 @@ class NRST_DataLoadResponse(univ.Sequence):
     pass
 
 
-NRST_DataLoadResponse.componentType = namedtype.NamedTypes(namedtype.NamedType('task-id', NRST_TaskID()), namedtype.NamedType('data-exists', univ.Boolean()), namedtype.OptionalNamedType('data-blocks-number', univ.Integer().subtype(subtypeSpec=(constraint.ValueRangeConstraint(0, 999999999999)))), namedtype.OptionalNamedType('error-description', char.UTF8String().subtype(subtypeSpec=(constraint.ValueSizeConstraint(1, 256)))))
+NRST_DataLoadResponse.componentType = namedtype.NamedTypes(
+    namedtype.NamedType('task-id', NRST_TaskID()),
+    namedtype.NamedType('data-exists', univ.Boolean()),
+    namedtype.OptionalNamedType(
+        'data-blocks-number',
+        univ.Integer().subtype(
+            subtypeSpec=(constraint.ValueRangeConstraint(0, 999999999999))
+        )
+    ),
+    namedtype.OptionalNamedType(
+        'error-description',
+        char.UTF8String().subtype(
+            subtypeSpec=(constraint.ValueSizeConstraint(1, 256))
+        )
+    )
+)
+
 
 class NRST_DataRawFlowsRecordContent(univ.Sequence):
     pass
 
 
-NRST_DataRawFlowsRecordContent.componentType = namedtype.NamedTypes(namedtype.NamedType('flow-cdr-header', NRST_DataNetworkCdrHeader()), namedtype.NamedType('flow-in-bytes-count', univ.Integer()), namedtype.NamedType('flow-out-bytes-count', univ.Integer()), namedtype.OptionalNamedType('flow-protocol', univ.Enumerated(namedValues=(namedval.NamedValues(('ip',
-                                                                                                                                                                                                                                                                                                                                                                  0), ('udp',
-                                                                                                                                                                                                                                                                                                                                                                       1), ('tcp',
-                                                                                                                                                                                                                                                                                                                                                                            2))))), namedtype.OptionalNamedType('flow-abonent-id', char.UTF8String().subtype(subtypeSpec=(constraint.ValueSizeConstraint(0, 64))).subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 0)))), namedtype.OptionalNamedType('flow-nat-info', univ.SequenceOf(componentType=(NRST_NetworkPeerInfo())).subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 10)))), namedtype.OptionalNamedType('flow-location', NRST_Location().subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 11)))), namedtype.OptionalNamedType('flow-data-content-id', NRST_DataContentID().subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 12)))), namedtype.OptionalNamedType('sni', char.UTF8String().subtype(subtypeSpec=(constraint.ValueSizeConstraint(0, 128))).subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 13)))))
+NRST_DataRawFlowsRecordContent.componentType = namedtype.NamedTypes(
+    namedtype.NamedType('flow-cdr-header', NRST_DataNetworkCdrHeader()),
+    namedtype.NamedType('flow-in-bytes-count', univ.Integer()),
+    namedtype.NamedType('flow-out-bytes-count', univ.Integer()),
+    namedtype.OptionalNamedType(
+        'flow-protocol',
+        univ.Enumerated(namedValues=(namedval.NamedValues(
+            ('ip', 0),
+            ('udp', 1),
+            ('tcp', 2)))
+        )
+    ),
+    namedtype.OptionalNamedType(
+        'flow-abonent-id',
+        char.UTF8String().subtype(
+            subtypeSpec=(constraint.ValueSizeConstraint(0, 64))).subtype(
+            implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 0))
+        )
+    ),
+    namedtype.OptionalNamedType(
+        'flow-nat-info',
+        univ.SequenceOf(
+            componentType=(NRST_NetworkPeerInfo())
+        ).subtype(
+            implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 10))
+        )
+    ),
+    namedtype.OptionalNamedType(
+        'flow-location',
+        NRST_Location().subtype(
+            implicitTag=(
+                tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 11)
+            )
+        )
+    ),
+    namedtype.OptionalNamedType(
+        'flow-data-content-id',
+        NRST_DataContentID().subtype(
+            implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 12))
+        )
+    ),
+    namedtype.OptionalNamedType(
+        'sni',
+        char.UTF8String(
+        ).subtype(subtypeSpec=(constraint.ValueSizeConstraint(0, 128))
+        ).subtype(implicitTag=(
+            tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 13))
+        )
+    )
+)
+
 
 class NRST_DataRawFlowsRecordData(univ.SequenceOf):
     pass
 
 
 NRST_DataRawFlowsRecordData.componentType = NRST_DataRawFlowsRecordContent()
+
 
 class NRST_DataReadyRequest(univ.Null):
     pass
@@ -1893,11 +2518,13 @@ class NRST_TaskResult(univ.Sequence):
 
 NRST_TaskResult.componentType = namedtype.NamedTypes(namedtype.NamedType('result', NRST_TaskResultStatus()), namedtype.OptionalNamedType('report-records-number', univ.Integer().subtype(subtypeSpec=(constraint.ValueRangeConstraint(0, 999999999999))).subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 0)))), namedtype.OptionalNamedType('report-limit-exeeded', univ.Boolean().subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 1)))), namedtype.OptionalNamedType('error-description', char.UTF8String().subtype(subtypeSpec=(constraint.ValueSizeConstraint(1, 256))).subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 2)))))
 
+
 class NRST_DataReadyTaskRecord(univ.Sequence):
     pass
 
 
 NRST_DataReadyTaskRecord.componentType = namedtype.NamedTypes(namedtype.NamedType('task-id', NRST_TaskID()), namedtype.NamedType('result', NRST_TaskResult()))
+
 
 class NRST_DataReadyResponse(univ.SequenceOf):
     pass
@@ -1921,17 +2548,25 @@ class NRST_RawDataType(univ.Enumerated):
     pass
 
 
-NRST_RawDataType.namedValues = namedval.NamedValues(('data-reports', 0), ('raw-cdr',
-                                                                          1), ('raw-ipdr',
-                                                                               2), ('raw-location',
-                                                                                    10), ('raw-passive',
-                                                                                          11))
+NRST_RawDataType.namedValues = namedval.NamedValues(
+    ('data-reports', 0),
+    ('raw-cdr', 1),
+    ('raw-ipdr', 2),
+    ('raw-location', 10),
+    ('raw-passive', 11)
+)
+
 
 class NRST_DataStartRequest(univ.Sequence):
     pass
 
 
-NRST_DataStartRequest.componentType = namedtype.NamedTypes(namedtype.NamedType('time-from', NRST_DateAndTime()), namedtype.NamedType('time-to', NRST_DateAndTime()), namedtype.NamedType('raw-type', NRST_RawDataType()))
+NRST_DataStartRequest.componentType = namedtype.NamedTypes(
+    namedtype.NamedType('time-from', NRST_DateAndTime()),
+    namedtype.NamedType('time-to', NRST_DateAndTime()),
+    namedtype.NamedType('raw-type', NRST_RawDataType())
+)
+
 
 class NRST_DataStartResponse(univ.Boolean):
     pass
@@ -1949,16 +2584,61 @@ class NRST_DataTermAccessRecordContent(univ.Sequence):
     pass
 
 
-NRST_DataTermAccessRecordContent.componentType = namedtype.NamedTypes(namedtype.NamedType('term-cdr-header', NRST_DataNetworkCdrHeader()), namedtype.NamedType('term-in-bytes-count', univ.Integer()), namedtype.NamedType('term-out-bytes-count', univ.Integer()), namedtype.OptionalNamedType('term-protocol', univ.Enumerated(namedValues=(namedval.NamedValues(('telnet',
-                                                                                                                                                                                                                                                                                                                                                                    0), ('ssh',
-                                                                                                                                                                                                                                                                                                                                                                         1), ('scp',
-                                                                                                                                                                                                                                                                                                                                                                              2))))), namedtype.OptionalNamedType('term-abonent-id', char.UTF8String().subtype(subtypeSpec=(constraint.ValueSizeConstraint(0, 64))).subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 0)))), namedtype.OptionalNamedType('term-nat-info', univ.SequenceOf(componentType=(NRST_NetworkPeerInfo())).subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 10)))), namedtype.OptionalNamedType('term-location', NRST_Location().subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 11)))), namedtype.OptionalNamedType('term-data-content-id', NRST_DataContentID().subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 12)))), namedtype.OptionalNamedType('sni', char.UTF8String().subtype(subtypeSpec=(constraint.ValueSizeConstraint(0, 128))).subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 13)))))
+NRST_DataTermAccessRecordContent.componentType = namedtype.NamedTypes(
+    namedtype.NamedType('term-cdr-header', NRST_DataNetworkCdrHeader()),
+    namedtype.NamedType('term-in-bytes-count', univ.Integer()),
+    namedtype.NamedType('term-out-bytes-count', univ.Integer()),
+    namedtype.OptionalNamedType(
+        'term-protocol',
+        univ.Enumerated(namedValues=(namedval.NamedValues(
+        ('telnet', 0), ('ssh', 1), ('scp', 2))))
+    ),
+    namedtype.OptionalNamedType(
+        'term-abonent-id',
+        char.UTF8String().subtype(
+        subtypeSpec=(constraint.ValueSizeConstraint(0, 64))
+    ).subtype(
+        implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 0)))
+    ),
+    namedtype.OptionalNamedType(
+        'term-nat-info',
+        univ.SequenceOf(
+            componentType=(NRST_NetworkPeerInfo())
+        ).subtype(
+            implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 10))
+        )
+    ),
+    namedtype.OptionalNamedType(
+        'term-location',
+        NRST_Location().subtype(
+            implicitTag=(
+                tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 11)
+            )
+        )
+    ),
+    namedtype.OptionalNamedType(
+        'term-data-content-id',
+        NRST_DataContentID().subtype(
+            implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 12))
+        )
+    ),
+    namedtype.OptionalNamedType(
+        'sni',
+        char.UTF8String().subtype(
+            subtypeSpec=(constraint.ValueSizeConstraint(0, 128))
+        ).subtype(
+            implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 13))
+        )
+    )
+)
+
 
 class NRST_DataTermAccessRecordData(univ.SequenceOf):
     pass
 
 
 NRST_DataTermAccessRecordData.componentType = NRST_DataTermAccessRecordContent()
+
 
 class NRST_DataTypesRequest(NRST_RawDataType):
     pass
@@ -2065,16 +2745,39 @@ class NRST_GatesRecord(univ.Sequence):
     pass
 
 
-NRST_GatesRecord.componentType = namedtype.NamedTypes(namedtype.NamedType('telco-id', NRST_TelcoID()), namedtype.NamedType('gate-id', univ.Integer().subtype(subtypeSpec=(constraint.ValueRangeConstraint(0, 4294967295)))), namedtype.NamedType('ip-list', NRST_IPList()), namedtype.NamedType('begin-time', NRST_DateAndTime()), namedtype.OptionalNamedType('end-time', NRST_DateAndTime()), namedtype.NamedType('description', char.UTF8String().subtype(subtypeSpec=(constraint.ValueSizeConstraint(1, 256)))), namedtype.NamedType('address', NRST_ReportedAddress()), namedtype.NamedType('gate-type', univ.Enumerated(namedValues=(namedval.NamedValues(('sgsn',
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 0), ('ggsn',
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      1), ('smsc',
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           2), ('gmsc',
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                3), ('hss',
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     4), ('pstn',
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          5), ('voip-gw',
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               6), ('aaa',
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    7), ('nat',
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         8))))))
+NRST_GatesRecord.componentType = namedtype.NamedTypes(
+    namedtype.NamedType('telco-id', NRST_TelcoID()),
+    namedtype.NamedType(
+        'gate-id',
+        univ.Integer().subtype(
+            subtypeSpec=(constraint.ValueRangeConstraint(0, 4294967295))
+        )
+    ),
+    namedtype.NamedType('ip-list', NRST_IPList()),
+    namedtype.NamedType('begin-time', NRST_DateAndTime()),
+    namedtype.OptionalNamedType('end-time', NRST_DateAndTime()),
+    namedtype.NamedType(
+        'description',
+        char.UTF8String().subtype(
+            subtypeSpec=(constraint.ValueSizeConstraint(1, 256))
+        )
+    ),
+    namedtype.NamedType('address', NRST_ReportedAddress()),
+    namedtype.NamedType(
+        'gate-type',
+        univ.Enumerated(namedValues=(namedval.NamedValues(
+            ('sgsn', 0),
+            ('ggsn', 1),
+            ('smsc', 2),
+            ('gmsc', 3),
+            ('hss', 4),
+            ('pstn', 5),
+            ('voip-gw', 6),
+            ('aaa', 7),
+            ('nat', 8)))
+        )
+    )
+)
 
 class NRST_GatesRecordsData(univ.SequenceOf):
     pass
