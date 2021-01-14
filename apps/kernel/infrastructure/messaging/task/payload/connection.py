@@ -198,11 +198,11 @@ class RequestedResource(base.ASN1ChoiceBase):
     nat_info = 'nat-info'
     location = 'location'
 
-    def __init__(self, component_name_, component_value_):
+    def __init__(self, component_name, component_value):
         super().__init__(
             asn1.NRST_RequestedResourceData(),
-            component_name_,
-            component_value_
+            component_name,
+            component_value
         )
 
     def copy_to(self, target_: asn1.NRST_RequestedResourceData):
@@ -361,11 +361,11 @@ class RequestedAddressTranslation(base.ASN1ChoiceBase):
     destination_ip = 'destination-ip'
     translation_type = 'translation-type'
 
-    def __init__(self, component_name_, component_value_):
+    def __init__(self, component_name, component_value):
         super().__init__(
             asn1.NRST_RequestedAddressTranslationsData(),
-            component_name_,
-            component_value_
+            component_name,
+            component_value
         )
 
     def copy_to(self, target_: asn1.NRST_RequestedAddressTranslationsData):

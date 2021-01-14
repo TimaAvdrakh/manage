@@ -1,6 +1,6 @@
 from apps.system.lib import exceptions
 from . import base
-from . import asn1
+from apps.system.lib import asn1
 from . import network
 from . import tools
 

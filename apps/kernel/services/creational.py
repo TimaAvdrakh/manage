@@ -16,7 +16,7 @@ class WorkerCreator(metaclass=singleton.Singleton):
         com_obj = models.CommunicationObject.objects.filter(state=True).all()
 
         for obj in com_obj:
-            w = worker.Worker(obj.ip_address, obj.port.split('.'))
+            w = worker.Worker(obj.ip_address, obj.port.split(','))
             p = mp.Process(target=w.run)
             self.workers[obj.id] = p
 
@@ -30,7 +30,8 @@ class WorkerCreator(metaclass=singleton.Singleton):
     def start_proc(self, pid: int):
         if pid not in self.workers.keys():
             obj = models.CommunicationObject.objects.filter(id=pid).first()
-            w = worker.Worker(obj.ip_address, obj.port.split('.'))
+            print('LLL: ', obj.port.split(','))
+            w = worker.Worker(obj.ip_address, obj.port.split(','))
             p = mp.Process(target=w.run)
             self.workers[obj.id] = p
             p.start()

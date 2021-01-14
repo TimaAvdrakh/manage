@@ -149,9 +149,9 @@ class Channel:
             if len(ready[1]) > 0:
                 rest_size -= self.sock.send(encoded_data[-rest_size:])
 
-    def send_request(self, request_):
-        self.not_responded_requests.update({request_.message_id: request_})
-        self.send_message(request_)
+    def send_request(self, request):
+        self.not_responded_requests.update({request.message_id: request})
+        self.send_message(request)
 
     def register_incoming_message(self, message_):
         request = self.not_responded_requests.pop(message_.message_id, None)
@@ -344,7 +344,6 @@ class Session:
         return [None, None, None, None, None]
 
     def __init__(self, host_, channel_ports_):
-
         if len(channel_ports_) != 5:
             raise exceptions.GeneralFault(
                 f'5 channel ports required, but {len(channel_ports_)} are provided'

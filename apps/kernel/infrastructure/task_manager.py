@@ -280,28 +280,31 @@ class TaskManager:
                 return reported_info
             time.sleep(1)
 
-        raise exceptions.GeneralFault('waiting for tasks completion timeout exceeded')
+        raise exceptions.GeneralFault(
+            'waiting for tasks completion timeout exceeded'
+        )
 
-    def load_tasks(self, tasks_=None, timeout_=None):
+    def load_tasks(self, tasks_=None, timeout=None):
         list_of_task_id = self.construct_workable_task_id_list(tasks_)
         if len(list_of_task_id) == 0:
             return []
         else:
+            print(f'W AFTER: {self.waiting_responses}')
             reported_info = []
             for task_id in list_of_task_id:
                 task_info = self.tasks.get(task_id, None)
                 reported_info.append(task_info)
                 self.waiting_responses += 1 if task_info is not None else 0
-
+            print(f'W BEFORE: {self.waiting_responses}')
             for task_info in reported_info:
                 if task_info is not None:
-                    self.session.channel(1).send_request(data_load.DataLoadRequest(task_info.task_id))
+                    self.session.channel(1).send_request(
+                        data_load.DataLoadRequest(task_info.task_id)
+                    )
 
-            self.wait_for_responses(
-                time.time() + (
-                    timeout_ if timeout_ is not None else self.session.channel(1).channel_parameters.request_response_timeout
-                )
-            )
+            if timeout is None:
+                timeout = self.session.channel(1).channel_parameters.request_response_timeout
+            self.wait_for_responses(time.time() + timeout)
             return reported_info
 
     def interrupt_tasks(self, tasks_=None, timeout_=None):
@@ -314,10 +317,14 @@ class TaskManager:
                 self.waiting_responses += 1
                 self.session.channel(1).send_request(data_interrupt.DataInterruptRequest(task_info.task_id))
 
-        self.wait_for_responses(time.time() + (timeout_ if timeout_ is not None else self.session.channel(1).channel_parameters.request_response_timeout))
+        if timeout_ is None:
+            timeout_ = self.session.channel(1).channel_parameters.request_response_timeout
+
+        self.wait_for_responses(time.time() + timeout_)
 
     def drop_tasks(self, tasks_=None, timeout_=None):
         list_of_task_id = self.construct_workable_task_id_list(tasks_)
+        print(f'ALL TASKS: {list_of_task_id}')
         if len(list_of_task_id) == 0:
             return
         for task_id in list_of_task_id:
@@ -326,25 +333,30 @@ class TaskManager:
                 self.waiting_responses += 1
                 self.session.channel(1).send_request(data_drop.DataDropRequest(task_info.task_id))
 
-        self.wait_for_responses(time.time() + (timeout_ if timeout_ is not None else self.session.channel(1).channel_parameters.request_response_timeout))
+        if timeout_ is None:
+            timeout_ = self.session.channel(1).channel_parameters.request_response_timeout
 
-    def wait_for_tasks_report(self, tasks_=None, timeout_=None):
-        list_of_task_id = self.construct_workable_task_id_list(tasks_)
+        self.wait_for_responses(time.time() + timeout_)
+
+    def wait_for_tasks_report(self, tasks=None, timeout=None):
+        list_of_task_id = self.construct_workable_task_id_list(tasks)
         if len(list_of_task_id) == 0:
             return []
-        finish_time = time.time() + (timeout_ if timeout_ is not None else 0)
+        finish_time = time.time() + (timeout if timeout is not None else 0)
         while time.time() < finish_time:
             for task_id in list_of_task_id:
                 report_blocks = self.reports.get(task_id, None)
-                if not report_blocks is None:
-                    if len(report_blocks) == 0:
-                        continue
-                return report_blocks.pop(0)
+                print(f'REPB: {report_blocks}')
+                if report_blocks is not None and len(report_blocks) > 0:
+                    return report_blocks.pop(0)
+                continue
 
             with self.cv_incoming_message:
                 self.cv_incoming_message.wait(1)
 
-        raise exceptions.GeneralFault('no task reports have been received in specified time')
+        raise exceptions.GeneralFault(
+            'no task reports have been received in specified time'
+        )
 
     def send_report_block_confirmation(self, channel_id_, message_id_, successful_=True, broken_record_=None, error_description_=None):
         self.session.channel(channel_id_).send_message(report.Acknowledgement(message_id_, successful_, broken_record_, error_description_))
@@ -375,7 +387,9 @@ class TaskManager:
                                     )
 
                     else:
-                        raise exceptions.GeneralFault('invalid task description class: "{0}"'.format(tasks_.__class__.__name__))
+                        raise exceptions.GeneralFault(
+                            f'invalid task description class: "{tasks_.__class__.__name__}"'
+                        )
         return workable_task_ids
 
     def wait_for_responses(self, finish_time_):
@@ -384,13 +398,21 @@ class TaskManager:
                 self.cv_incoming_message.wait(1)
 
         if self.waiting_responses > 0:
-            raise exceptions.GeneralFault('not all sent requests have been completed in specified time')
+            raise exceptions.GeneralFault(
+                'not all sent requests have been completed in specified time'
+            )
 
-    def handle_create_task_response(self, chnl_: sessions.Channel, reqs_: create_task.CreateTaskRequest, resp_: create_task.CreateTaskResponse):
+    def handle_create_task_response(self, chnl: sessions.Channel,
+                                    reqs_: create_task.CreateTaskRequest,
+                                    resp_: create_task.CreateTaskResponse):
         for task in self.task_creation_info:
             if task.request_id == reqs_.message_id:
                 if not resp_.successful:
-                    raise exceptions.GeneralFault('unable to create task: {0}, error - {1}'.format(str(reqs_), resp_.error_description if resp_.error_description is not None else 'unknown'))
+                    raise exceptions.GeneralFault(
+                        'unable to create task: {0}, error - {1}'.format(
+                            str(reqs_), resp_.error_description if resp_.error_description is not None else 'unknown'
+                        )
+                    )
                 task.task_id = resp_.task_id
                 self.tasks[task.task_id] = task
                 break
@@ -399,7 +421,9 @@ class TaskManager:
         with self.cv_incoming_message:
             self.cv_incoming_message.notify_all()
 
-    def handle_data_ready_response(self, chnl_: sessions.Channel, reqs_: data_ready.DataReadyRequest, resp_: data_ready.DataReadyResponse):
+    def handle_data_ready_response(self, chnl_: sessions.Channel,
+                                   reqs_: data_ready.DataReadyRequest,
+                                   resp_: data_ready.DataReadyResponse):
         for task_status in resp_.task_statuses:
             try:
                 task_info = self.tasks[task_status.task_id]
@@ -414,9 +438,15 @@ class TaskManager:
         with self.cv_incoming_message:
             self.cv_incoming_message.notify_all()
 
-    def handle_data_load_response(self, chnl_: sessions.Channel, reqs_: data_load.DataLoadRequest, resp_: data_load.DataLoadResponse):
+    def handle_data_load_response(self, chnl_: sessions.Channel,
+                                  reqs_: data_load.DataLoadRequest,
+                                  resp_: data_load.DataLoadResponse):
         if resp_.error_description is not None:
-            raise exceptions.GeneralFault('unable to start loading the task #{0}, error - {1}'.format(resp_.task_id, resp_.error_description))
+            raise exceptions.GeneralFault(
+                'unable to start loading the task #{0}, error - {1}'.format(
+                    resp_.task_id, resp_.error_description
+                )
+            )
         task_info = self.tasks.get(resp_.task_id, None)
         if task_info is not None:
             task_info.report_data_blocks = resp_.data_blocks_number
@@ -424,9 +454,15 @@ class TaskManager:
         with self.cv_incoming_message:
             self.cv_incoming_message.notify_all()
 
-    def handle_data_interrupt_response(self, chnl_: sessions.Channel, reqs_: data_interrupt.DataInterruptRequest, resp_: data_interrupt.DataInterruptResponse):
+    def handle_data_interrupt_response(self, chnl_: sessions.Channel,
+                                       reqs_: data_interrupt.DataInterruptRequest,
+                                       resp_: data_interrupt.DataInterruptResponse):
         if not resp_.successful:
-            raise exceptions.GeneralFault('unable to interrupt the task #{0}, error - {1}'.format(reqs_.task_id, resp_.error_description if resp_.error_description is not None else 'unknown'))
+            raise exceptions.GeneralFault(
+                'unable to interrupt the task #{0}, error - {1}'.format(
+                    reqs_.task_id, resp_.error_description if resp_.error_description is not None else 'unknown'
+                )
+            )
         self.waiting_responses -= 1
         with self.cv_incoming_message:
             self.cv_incoming_message.notify_all()

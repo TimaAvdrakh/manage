@@ -7,13 +7,13 @@ from apps.system.lib import asn1
 
 class DictionaryTask(base.ASN1Constructable):
 
-    def __init__(self, data_):
+    def __init__(self, data):
         self.id = asn1.sorm_request_dictionaries
 
-        if isinstance(data_, useful.ObjectDescriptor):
-            self.data = data_
+        if isinstance(data, useful.ObjectDescriptor):
+            self.data = data
         else:
-            self.data = useful.ObjectDescriptor(data_)
+            self.data = useful.ObjectDescriptor(data)
 
     def __dir__(self):
         return ['id', 'data']
