@@ -1348,7 +1348,10 @@ class NRST_RequestedConnectionMobileIdentifier(univ.Sequence):
     pass
 
 
-NRST_RequestedConnectionMobileIdentifier.componentType = namedtype.NamedTypes(namedtype.NamedType('id', useful.ObjectDescriptor()), namedtype.NamedType('data', univ.Any()))
+NRST_RequestedConnectionMobileIdentifier.componentType = namedtype.NamedTypes(
+    namedtype.NamedType('id', useful.ObjectDescriptor()),
+    namedtype.NamedType('data', univ.Any())
+)
 
 
 class NRST_PhoneAbonentType(univ.Enumerated):
@@ -1366,14 +1369,203 @@ class NRST_RecodedRequestedConnectionMobileIdentifier(univ.Choice):
     pass
 
 
-NRST_RecodedRequestedConnectionMobileIdentifier.componentType = namedtype.NamedTypes(namedtype.NamedType('gsm-identifier', NRST_RequestedGsmIdentifier().subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 0)))), namedtype.NamedType('cdma-identifier', NRST_RequestedCdmaIdentifier().subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 1)))))
+NRST_RecodedRequestedConnectionMobileIdentifier.componentType = namedtype.NamedTypes(
+    namedtype.NamedType(
+        'gsm-identifier',
+        NRST_RequestedGsmIdentifier().subtype(
+            implicitTag=(
+                tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 0)
+            )
+        )
+    ),
+    namedtype.NamedType(
+        'cdma-identifier',
+        NRST_RequestedCdmaIdentifier().subtype(
+            implicitTag=(
+                tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 1)
+            )
+        )
+    )
+)
 
 
 class NRST_RequestedConnectionMobileData(univ.Choice):
     pass
 
 
-NRST_RequestedConnectionMobileData.componentType = namedtype.NamedTypes(namedtype.NamedType('duration', univ.Integer().subtype(subtypeSpec=(constraint.ValueRangeConstraint(0, 86399))).subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 0)))), namedtype.NamedType('call-type-id', univ.Integer().subtype(subtypeSpec=(constraint.ValueRangeConstraint(0, 4294967295))).subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 1)))), namedtype.NamedType('supplement-service-id', univ.Integer().subtype(subtypeSpec=(constraint.ValueRangeConstraint(0, 4294967295))).subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 2)))), namedtype.NamedType('in-abonent-type', NRST_PhoneAbonentType().subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 3)))), namedtype.NamedType('out-abonent-type', NRST_PhoneAbonentType().subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 4)))), namedtype.NamedType('switch-id', char.UTF8String().subtype(subtypeSpec=(constraint.ValueSizeConstraint(1, 128))).subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 5)))), namedtype.NamedType('inbound-bunch', NRST_Bunch().subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 6)))), namedtype.NamedType('outbound-bunch', NRST_Bunch().subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 7)))), namedtype.NamedType('border-switch-id', char.UTF8String().subtype(subtypeSpec=(constraint.ValueSizeConstraint(1, 128))).subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 8)))), namedtype.NamedType('roaming-partner-id', univ.Integer().subtype(subtypeSpec=(constraint.ValueRangeConstraint(0, 4294967295))).subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 9)))), namedtype.NamedType('term-cause', univ.Integer().subtype(subtypeSpec=(constraint.ValueRangeConstraint(0, 16384))).subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 10)))), namedtype.NamedType('in-info', NRST_RequestedConnectionMobileIdentifier().subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 11)))), namedtype.NamedType('recoded-in-info', NRST_RecodedRequestedConnectionMobileIdentifier().subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 111)))), namedtype.NamedType('in-end-location', NRST_Location().subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 12)))), namedtype.NamedType('in-begin-location', NRST_Location().subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 13)))), namedtype.NamedType('dialed-digits', char.UTF8String().subtype(subtypeSpec=(constraint.ValueSizeConstraint(1, 128))).subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 14)))), namedtype.NamedType('out-info', NRST_RequestedConnectionMobileIdentifier().subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 15)))), namedtype.NamedType('recoded-out-info', NRST_RecodedRequestedConnectionMobileIdentifier().subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 115)))), namedtype.NamedType('out-begin-location', NRST_Location().subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 16)))), namedtype.NamedType('out-end-location', NRST_Location().subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 17)))), namedtype.NamedType('forwarding-identifier', char.UTF8String().subtype(subtypeSpec=(constraint.ValueSizeConstraint(2, 32))).subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 18)))), namedtype.NamedType('message', char.UTF8String().subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 40)))))
+NRST_RequestedConnectionMobileData.componentType = namedtype.NamedTypes(
+    namedtype.NamedType(
+        'duration', univ.Integer().subtype(
+            subtypeSpec=(constraint.ValueRangeConstraint(0, 86399))
+        ).subtype(
+            implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 0))
+        )
+    ),
+    namedtype.NamedType(
+        'call-type-id',
+        univ.Integer().subtype(
+            subtypeSpec=(constraint.ValueRangeConstraint(0, 4294967295))
+        ).subtype(
+            implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 1))
+        )
+    ),
+    namedtype.NamedType(
+        'supplement-service-id',
+        univ.Integer().subtype(
+            subtypeSpec=(constraint.ValueRangeConstraint(0, 4294967295))
+        ).subtype(
+            implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 2))
+        )
+    ),
+    namedtype.NamedType(
+        'in-abonent-type',
+        NRST_PhoneAbonentType().subtype(
+            implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 3))
+        )
+    ),
+    namedtype.NamedType(
+        'out-abonent-type',
+        NRST_PhoneAbonentType().subtype(
+            implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 4))
+        )
+    ),
+    namedtype.NamedType(
+        'switch-id',
+        char.UTF8String().subtype(
+            subtypeSpec=(constraint.ValueSizeConstraint(1, 128))
+        ).subtype(
+            implicitTag=(
+                tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 5)
+            )
+        )
+    ),
+    namedtype.NamedType(
+        'inbound-bunch',
+        NRST_Bunch().subtype(
+            implicitTag=(
+                tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 6)
+            )
+        )
+    ),
+    namedtype.NamedType(
+        'outbound-bunch',
+        NRST_Bunch().subtype(
+            implicitTag=(
+                tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 7)
+            )
+        )
+    ),
+    namedtype.NamedType(
+        'border-switch-id',
+        char.UTF8String().subtype(
+            subtypeSpec=(constraint.ValueSizeConstraint(1, 128))
+        ).subtype(
+            implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 8))
+        )
+    ),
+    namedtype.NamedType(
+        'roaming-partner-id',
+        univ.Integer().subtype(
+            subtypeSpec=(constraint.ValueRangeConstraint(0, 4294967295))
+        ).subtype(
+            implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 9))
+        )
+    ),
+    namedtype.NamedType(
+        'term-cause',
+        univ.Integer().subtype(
+            subtypeSpec=(constraint.ValueRangeConstraint(0, 16384))
+        ).subtype(
+            implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 10))
+        )
+    ),
+    namedtype.NamedType(
+        'in-info',
+        NRST_RequestedConnectionMobileIdentifier().subtype(
+            implicitTag=(
+                tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 11)
+            )
+        )
+    ),
+    namedtype.NamedType(
+        'recoded-in-info',
+        NRST_RecodedRequestedConnectionMobileIdentifier().subtype(
+            implicitTag=(
+                tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 111)
+            )
+        )
+    ),
+    namedtype.NamedType(
+        'in-end-location',
+        NRST_Location().subtype(
+            implicitTag=(
+                tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 12)
+            )
+        )
+    ),
+    namedtype.NamedType(
+        'in-begin-location',
+        NRST_Location().subtype(
+            implicitTag=(
+                tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 13)
+            )
+        )
+    ),
+    namedtype.NamedType(
+        'dialed-digits',
+        char.UTF8String().subtype(
+            subtypeSpec=(constraint.ValueSizeConstraint(1, 128))
+        ).subtype(
+            implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 14))
+        )
+    ),
+    namedtype.NamedType(
+        'out-info',
+        NRST_RequestedConnectionMobileIdentifier().subtype(
+            implicitTag=(
+                tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 15)
+            )
+        )
+    ),
+    namedtype.NamedType(
+        'recoded-out-info',
+        NRST_RecodedRequestedConnectionMobileIdentifier().subtype(
+            implicitTag=(
+                tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 115)
+            )
+        )
+    ),
+    namedtype.NamedType(
+        'out-begin-location',
+        NRST_Location().subtype(
+            implicitTag=(
+                tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 16)
+            )
+        )
+    ),
+    namedtype.NamedType(
+        'out-end-location',
+        NRST_Location().subtype(
+            implicitTag=(
+                tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 17)
+            )
+        )
+    ),
+    namedtype.NamedType(
+        'forwarding-identifier',
+        char.UTF8String().subtype(
+            subtypeSpec=(constraint.ValueSizeConstraint(2, 32))
+        ).subtype(
+            implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 18))
+        )
+    ),
+    namedtype.NamedType(
+        'message',
+        char.UTF8String().subtype(
+            implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 40))
+        )
+    )
+)
 
 
 class NRST_RequestedAddressTranslationsData(univ.Choice):
@@ -1445,35 +1637,355 @@ class NRST_RequestedFileTransferData(univ.Choice):
     pass
 
 
-NRST_RequestedFileTransferData.componentType = namedtype.NamedTypes(namedtype.NamedType('point-id', univ.Integer().subtype(subtypeSpec=(constraint.ValueRangeConstraint(0, 1000))).subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 0)))), namedtype.NamedType('client-info', NRST_NetworkPeerInfo().subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 1)))), namedtype.NamedType('server-info', NRST_NetworkPeerInfo().subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 2)))), namedtype.NamedType('server-name', char.UTF8String().subtype(subtypeSpec=(constraint.ValueSizeConstraint(1, 256))).subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 3)))), namedtype.NamedType('user-name', char.UTF8String().subtype(subtypeSpec=(constraint.ValueSizeConstraint(1, 128))).subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 4)))), namedtype.NamedType('user-password', char.UTF8String().subtype(subtypeSpec=(constraint.ValueSizeConstraint(1, 256))).subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 5)))), namedtype.NamedType('term-cause', univ.Integer().subtype(subtypeSpec=(constraint.ValueRangeConstraint(1, 16384))).subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 6)))), namedtype.NamedType('abonent-id', char.UTF8String().subtype(subtypeSpec=(constraint.ValueSizeConstraint(0, 64))).subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 7)))), namedtype.NamedType('nat-info', NRST_NetworkPeerInfo().subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 20)))), namedtype.NamedType('location', NRST_Location().subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 21)))))
+NRST_RequestedFileTransferData.componentType = namedtype.NamedTypes(
+    namedtype.NamedType(
+        'point-id',
+        univ.Integer().subtype(
+            subtypeSpec=(constraint.ValueRangeConstraint(0, 1000))
+        ).subtype(
+            implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 0))
+        )
+    ),
+    namedtype.NamedType(
+        'client-info',
+        NRST_NetworkPeerInfo().subtype(
+            implicitTag=(
+                tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 1)
+            )
+        )
+    ),
+    namedtype.NamedType(
+        'server-info',
+        NRST_NetworkPeerInfo().subtype(
+            implicitTag=(
+                tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 2)
+            )
+        )
+    ),
+    namedtype.NamedType(
+        'server-name',
+        char.UTF8String().subtype(
+            subtypeSpec=(constraint.ValueSizeConstraint(1, 256))
+        ).subtype(
+            implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 3))
+        )
+    ),
+    namedtype.NamedType(
+        'user-name',
+        char.UTF8String().subtype(
+            subtypeSpec=(constraint.ValueSizeConstraint(1, 128))
+        ).subtype(
+            implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 4))
+        )
+    ),
+    namedtype.NamedType(
+        'user-password',
+        char.UTF8String().subtype(
+            subtypeSpec=(constraint.ValueSizeConstraint(1, 256))
+        ).subtype(
+            implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 5))
+        )
+    ),
+    namedtype.NamedType(
+        'term-cause',
+        univ.Integer().subtype(
+            subtypeSpec=(constraint.ValueRangeConstraint(1, 16384))
+        ).subtype(
+            implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 6))
+        )
+    ),
+    namedtype.NamedType(
+        'abonent-id',
+        char.UTF8String().subtype(
+            subtypeSpec=(constraint.ValueSizeConstraint(0, 64))
+        ).subtype(
+            implicitTag=(
+                tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 7)
+            )
+        )
+    ),
+    namedtype.NamedType(
+        'nat-info',
+        NRST_NetworkPeerInfo().subtype(
+            implicitTag=(
+                tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 20)
+            )
+        )
+    ), namedtype.NamedType(
+        'location',
+        NRST_Location().subtype(
+            implicitTag=(
+                tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 21)
+            )
+        )
+    )
+)
 
 
 class NRST_RequestedConnectionPstnIdentifier(univ.Sequence):
     pass
 
 
-NRST_RequestedConnectionPstnIdentifier.componentType = namedtype.NamedTypes(namedtype.NamedType('id', useful.ObjectDescriptor()), namedtype.NamedType('data', NRST_RequestedPstnIdentifier()))
+NRST_RequestedConnectionPstnIdentifier.componentType = namedtype.NamedTypes(
+    namedtype.NamedType('id', useful.ObjectDescriptor()),
+    namedtype.NamedType('data', NRST_RequestedPstnIdentifier())
+)
 
 
 class NRST_RequestedConnectionPstnData(univ.Choice):
     pass
 
 
-NRST_RequestedConnectionPstnData.componentType = namedtype.NamedTypes(namedtype.NamedType('duration', univ.Integer().subtype(subtypeSpec=(constraint.ValueRangeConstraint(0, 86399))).subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 0)))), namedtype.NamedType('call-type-id', univ.Integer().subtype(subtypeSpec=(constraint.ValueRangeConstraint(0, 4294967295))).subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 1)))), namedtype.NamedType('in-abonent-type', NRST_PhoneAbonentType().subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 2)))), namedtype.NamedType('out-abonent-type', NRST_PhoneAbonentType().subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 3)))), namedtype.NamedType('switch-id', char.UTF8String().subtype(subtypeSpec=(constraint.ValueSizeConstraint(1, 128))).subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 4)))), namedtype.NamedType('inbound-bunch', univ.Integer().subtype(subtypeSpec=(constraint.ValueRangeConstraint(0, 4294967295))).subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 5)))), namedtype.NamedType('outbound-bunch', univ.Integer().subtype(subtypeSpec=(constraint.ValueRangeConstraint(0, 4294967295))).subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 6)))), namedtype.NamedType('border-switch-id', char.UTF8String().subtype(subtypeSpec=(constraint.ValueSizeConstraint(1, 128))).subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 7)))), namedtype.NamedType('term-cause', univ.Integer().subtype(subtypeSpec=(constraint.ValueRangeConstraint(0, 16384))).subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 8)))), namedtype.NamedType('supplement-service-id', univ.Integer().subtype(subtypeSpec=(constraint.ValueRangeConstraint(0, 4294967295))).subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 9)))), namedtype.NamedType('phone-card-number', char.NumericString().subtype(subtypeSpec=(constraint.ValueSizeConstraint(1, 20))).subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 10)))), namedtype.NamedType('in-info', NRST_RequestedConnectionPstnIdentifier().subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 11)))), namedtype.NamedType('out-info', NRST_RequestedConnectionPstnIdentifier().subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 12)))), namedtype.NamedType('forwarding-identifier', char.UTF8String().subtype(subtypeSpec=(constraint.ValueSizeConstraint(2, 32))).subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 13)))), namedtype.NamedType('message', char.UTF8String().subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 20)))))
+NRST_RequestedConnectionPstnData.componentType = namedtype.NamedTypes(
+    namedtype.NamedType(
+        'duration', univ.Integer().subtype(
+            subtypeSpec=(constraint.ValueRangeConstraint(0, 86399))
+        ).subtype(
+            implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 0))
+        )
+    ),
+    namedtype.NamedType(
+        'call-type-id',
+        univ.Integer().subtype(
+            subtypeSpec=(constraint.ValueRangeConstraint(0, 4294967295))
+        ).subtype(
+            implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 1))
+        )
+    ),
+    namedtype.NamedType(
+        'in-abonent-type',
+        NRST_PhoneAbonentType().subtype(
+            implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 2))
+        )
+    ),
+    namedtype.NamedType(
+        'out-abonent-type',
+        NRST_PhoneAbonentType().subtype(
+            implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 3))
+        )
+    ),
+    namedtype.NamedType(
+        'switch-id',
+        char.UTF8String().subtype(
+            subtypeSpec=(constraint.ValueSizeConstraint(1, 128))
+        ).subtype(
+            implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 4))
+        )
+    ),
+    namedtype.NamedType(
+        'inbound-bunch',
+        univ.Integer().subtype(
+            subtypeSpec=(constraint.ValueRangeConstraint(0, 4294967295))
+        ).subtype(
+            implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 5)))
+    ),
+    namedtype.NamedType(
+        'outbound-bunch',
+        univ.Integer().subtype(
+            subtypeSpec=(constraint.ValueRangeConstraint(0, 4294967295))
+        ).subtype(
+            implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 6))
+        )
+    ),
+    namedtype.NamedType(
+        'border-switch-id',
+        char.UTF8String().subtype(
+            subtypeSpec=(constraint.ValueSizeConstraint(1, 128))
+        ).subtype(
+            implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 7))
+        )
+    ),
+    namedtype.NamedType(
+        'term-cause',
+        univ.Integer().subtype(
+            subtypeSpec=(constraint.ValueRangeConstraint(0, 16384))
+        ).subtype(
+            implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 8))
+        )
+    ),
+    namedtype.NamedType(
+        'supplement-service-id',
+        univ.Integer().subtype(
+            subtypeSpec=(constraint.ValueRangeConstraint(0, 4294967295))
+        ).subtype(
+            implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 9))
+        )
+    ),
+    namedtype.NamedType(
+        'phone-card-number',
+        char.NumericString().subtype(
+            subtypeSpec=(constraint.ValueSizeConstraint(1, 20))
+        ).subtype(
+            implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 10))
+        )
+    ),
+    namedtype.NamedType(
+        'in-info',
+        NRST_RequestedConnectionPstnIdentifier().subtype(
+            implicitTag=(
+                tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 11)
+            )
+        )
+    ),
+    namedtype.NamedType(
+        'out-info',
+        NRST_RequestedConnectionPstnIdentifier().subtype(
+            implicitTag=(
+                tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 12)
+            )
+        )
+    ),
+    namedtype.NamedType(
+        'forwarding-identifier',
+        char.UTF8String().subtype(
+            subtypeSpec=(constraint.ValueSizeConstraint(2, 32))
+        ).subtype(
+            implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 13))
+        )
+    ),
+    namedtype.NamedType(
+        'message',
+        char.UTF8String().subtype(
+            implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 20))
+        )
+    )
+)
 
 
 class NRST_RequestedTermAccessData(univ.Choice):
     pass
 
 
-NRST_RequestedTermAccessData.componentType = namedtype.NamedTypes(namedtype.NamedType('point-id', univ.Integer().subtype(subtypeSpec=(constraint.ValueRangeConstraint(0, 1000))).subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 0)))), namedtype.NamedType('client-info', NRST_NetworkPeerInfo().subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 1)))), namedtype.NamedType('server-info', NRST_NetworkPeerInfo().subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 2)))), namedtype.NamedType('abonent-id', char.UTF8String().subtype(subtypeSpec=(constraint.ValueSizeConstraint(0, 64))).subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 3)))), namedtype.NamedType('nat-info', NRST_NetworkPeerInfo().subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 10)))), namedtype.NamedType('location', NRST_Location().subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 11)))), namedtype.NamedType('sni', char.UTF8String().subtype(subtypeSpec=(constraint.ValueSizeConstraint(0, 128))).subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 13)))))
+NRST_RequestedTermAccessData.componentType = namedtype.NamedTypes(
+    namedtype.NamedType(
+        'point-id',
+        univ.Integer().subtype(
+            subtypeSpec=(constraint.ValueRangeConstraint(0, 1000))
+        ).subtype(
+            implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 0))
+        )
+    ),
+    namedtype.NamedType(
+        'client-info',
+        NRST_NetworkPeerInfo().subtype(
+            implicitTag=(
+                tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 1)
+            )
+        )
+    ),
+    namedtype.NamedType(
+        'server-info',
+        NRST_NetworkPeerInfo().subtype(
+            implicitTag=(
+                tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 2)
+            )
+        )
+    ),
+    namedtype.NamedType(
+        'abonent-id',
+        char.UTF8String().subtype(
+            subtypeSpec=(constraint.ValueSizeConstraint(0, 64))
+        ).subtype(
+            implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 3))
+        )
+    ),
+    namedtype.NamedType(
+        'nat-info',
+        NRST_NetworkPeerInfo().subtype(
+            implicitTag=(
+                tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 10)
+            )
+        )
+    ),
+    namedtype.NamedType(
+        'location',
+        NRST_Location().subtype(
+            implicitTag=(
+                tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 11)
+            )
+        )
+    ),
+    namedtype.NamedType(
+        'sni',
+        char.UTF8String().subtype(
+            subtypeSpec=(constraint.ValueSizeConstraint(0, 128))
+        ).subtype(
+            implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 13))
+        )
+    )
+)
 
 
 class NRST_RequestedRawFlowsData(univ.Choice):
     pass
 
 
-NRST_RequestedRawFlowsData.componentType = namedtype.NamedTypes(namedtype.NamedType('point-id', univ.Integer().subtype(subtypeSpec=(constraint.ValueRangeConstraint(0, 1000))).subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 0)))), namedtype.NamedType('protocol-code', univ.Integer().subtype(subtypeSpec=(constraint.ValueRangeConstraint(0, 65535))).subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 1)))), namedtype.NamedType('client-info', NRST_NetworkPeerInfo().subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 2)))), namedtype.NamedType('server-info', NRST_NetworkPeerInfo().subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 3)))), namedtype.NamedType('abonent-id', char.UTF8String().subtype(subtypeSpec=(constraint.ValueSizeConstraint(0, 64))).subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 4)))), namedtype.NamedType('nat-info', NRST_NetworkPeerInfo().subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 10)))), namedtype.NamedType('location', NRST_Location().subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 11)))), namedtype.NamedType('sni', char.UTF8String().subtype(subtypeSpec=(constraint.ValueSizeConstraint(0, 128))).subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 13)))))
+NRST_RequestedRawFlowsData.componentType = namedtype.NamedTypes(
+    namedtype.NamedType(
+        'point-id',
+        univ.Integer().subtype(
+            subtypeSpec=(constraint.ValueRangeConstraint(0, 1000))
+        ).subtype(
+            implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 0)))
+    ),
+    namedtype.NamedType(
+        'protocol-code',
+        univ.Integer().subtype(
+            subtypeSpec=(constraint.ValueRangeConstraint(0, 65535))
+        ).subtype(
+            implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 1))
+        )
+    ),
+    namedtype.NamedType(
+        'client-info',
+        NRST_NetworkPeerInfo().subtype(
+            implicitTag=(
+                tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 2)
+            )
+        )
+    ),
+    namedtype.NamedType(
+        'server-info',
+        NRST_NetworkPeerInfo().subtype(
+            implicitTag=(
+                tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 3)
+            )
+        )
+    ),
+    namedtype.NamedType(
+        'abonent-id',
+        char.UTF8String().subtype(
+            subtypeSpec=(
+                constraint.ValueSizeConstraint(0, 64))
+        ).subtype(
+            implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 4))
+        )
+    ),
+    namedtype.NamedType(
+        'nat-info',
+        NRST_NetworkPeerInfo().subtype(
+            implicitTag=(
+                tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 10)
+            )
+        )
+    ),
+    namedtype.NamedType(
+        'location',
+        NRST_Location().subtype(
+            implicitTag=(
+                tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 11)
+            )
+        )
+    ),
+    namedtype.NamedType(
+        'sni',
+        char.UTF8String().subtype(
+            subtypeSpec=(constraint.ValueSizeConstraint(0, 128))
+        ).subtype(
+            implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 13))
+        )
+    )
+)
 
 
 class NRST_RequestedAAALoginData(univ.Choice):
@@ -4552,16 +5064,140 @@ class NRST_MobileRecordContent(univ.Sequence):
 NRST_MobileRecordContent.componentType = namedtype.NamedTypes(
     namedtype.NamedType('telco-id', NRST_TelcoID()),
     namedtype.NamedType('begin-connection-time', NRST_DateAndTime()),
-    namedtype.NamedType('duration', univ.Integer().subtype(subtypeSpec=(constraint.ValueRangeConstraint(0, 86399)))),
-    namedtype.NamedType('call-type-id', univ.Integer().subtype(subtypeSpec=(constraint.ValueRangeConstraint(0, 4294967295)))),
-    namedtype.NamedType('supplement-service-id', univ.Integer().subtype(subtypeSpec=(constraint.ValueRangeConstraint(0, 4294967295)))),
+    namedtype.NamedType(
+        'duration',
+        univ.Integer().subtype(
+            subtypeSpec=(constraint.ValueRangeConstraint(0, 86399))
+        )
+    ),
+    namedtype.NamedType(
+        'call-type-id',
+        univ.Integer().subtype(
+            subtypeSpec=(constraint.ValueRangeConstraint(0, 4294967295))
+        )
+    ),
+    namedtype.NamedType(
+        'supplement-service-id',
+        univ.Integer().subtype(
+            subtypeSpec=(constraint.ValueRangeConstraint(0, 4294967295))
+        )
+    ),
     namedtype.NamedType('in-abonent-type', NRST_PhoneAbonentType()),
     namedtype.NamedType('out-abonent-type', NRST_PhoneAbonentType()),
-    namedtype.NamedType('switch-id', char.UTF8String().subtype(subtypeSpec=(constraint.ValueSizeConstraint(1, 128)))),
-    namedtype.NamedType('term-cause', univ.Integer().subtype(subtypeSpec=(constraint.ValueRangeConstraint(0, 16384)))),
-    namedtype.OptionalNamedType('inbound-bunch', NRST_Bunch().subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 0)))),
-    namedtype.OptionalNamedType('outbound-bunch', NRST_Bunch().subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 1)))), namedtype.OptionalNamedType('in-info', NRST_ReportedIdentifier().subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 2)))), namedtype.OptionalNamedType('in-end-location', NRST_Location().subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 3)))), namedtype.OptionalNamedType('in-begin-location', NRST_Location().subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 4)))), namedtype.OptionalNamedType('out-info', NRST_ReportedIdentifier().subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 5)))), namedtype.OptionalNamedType('out-begin-location', NRST_Location().subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 6)))), namedtype.OptionalNamedType('out-end-location', NRST_Location().subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 7)))), namedtype.OptionalNamedType('forwarding-identifier', char.UTF8String().subtype(subtypeSpec=(constraint.ValueSizeConstraint(2, 32))).subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 8)))), namedtype.OptionalNamedType('roaming-partner-id', univ.Integer().subtype(subtypeSpec=(constraint.ValueRangeConstraint(0, 4294967295))).subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 9)))), namedtype.OptionalNamedType('border-switch-id', char.UTF8String().subtype(subtypeSpec=(constraint.ValueSizeConstraint(1, 128))).subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 10)))), namedtype.OptionalNamedType('message', char.UTF8String().subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 40)))), namedtype.OptionalNamedType('data-content-id', NRST_DataContentID().subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 41))))
+    namedtype.NamedType(
+        'switch-id',
+        char.UTF8String().subtype(
+            subtypeSpec=(constraint.ValueSizeConstraint(1, 128))
+        )
+    ),
+    namedtype.NamedType(
+        'term-cause',
+        univ.Integer().subtype(
+            subtypeSpec=(constraint.ValueRangeConstraint(0, 16384))
+        )
+    ),
+    namedtype.OptionalNamedType(
+        'inbound-bunch',
+        NRST_Bunch().subtype(
+            implicitTag=(
+                tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 0)
+            )
+        )
+    ),
+    namedtype.OptionalNamedType(
+        'outbound-bunch',
+        NRST_Bunch().subtype(
+            implicitTag=(
+                tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 1)
+            )
+        )
+    ),
+    namedtype.OptionalNamedType(
+        'in-info',
+        NRST_ReportedIdentifier().subtype(
+            implicitTag=(
+                tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 2)
+            )
+        )
+    ),
+    namedtype.OptionalNamedType(
+        'in-end-location',
+        NRST_Location().subtype(
+            implicitTag=(
+                tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 3)
+            )
+        )
+    ),
+    namedtype.OptionalNamedType(
+        'in-begin-location',
+        NRST_Location().subtype(
+            implicitTag=(
+                tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 4)
+            )
+        )
+    ),
+    namedtype.OptionalNamedType(
+        'out-info',
+        NRST_ReportedIdentifier().subtype(
+            implicitTag=(
+                tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 5)
+            )
+        )
+    ),
+    namedtype.OptionalNamedType(
+        'out-begin-location',
+        NRST_Location().subtype(
+            implicitTag=(
+                tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 6)
+            )
+        )
+    ),
+    namedtype.OptionalNamedType(
+        'out-end-location',
+        NRST_Location().subtype(
+            implicitTag=(
+                tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 7)
+            )
+        )
+    ),
+    namedtype.OptionalNamedType(
+        'forwarding-identifier',
+        char.UTF8String().subtype(
+            subtypeSpec=(constraint.ValueSizeConstraint(2, 32))
+        ).subtype(
+            implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 8))
+        )
+    ),
+    namedtype.OptionalNamedType(
+        'roaming-partner-id',
+        univ.Integer().subtype(
+            subtypeSpec=(constraint.ValueRangeConstraint(0, 4294967295))
+        ).subtype(
+            implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 9))
+        )
+    ),
+    namedtype.OptionalNamedType(
+        'border-switch-id',
+        char.UTF8String().subtype(
+            subtypeSpec=(constraint.ValueSizeConstraint(1, 128))
+        ).subtype(
+            implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 10))
+        )
+    ),
+    namedtype.OptionalNamedType(
+        'message',
+        char.UTF8String().subtype(
+            implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 40))
+        )
+    ),
+    namedtype.OptionalNamedType(
+        'data-content-id',
+        NRST_DataContentID().subtype(
+            implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 41))
+        )
+    )
 )
+
 
 class NRST_MobileRecordData(univ.SequenceOf):
     pass
@@ -4576,18 +5212,75 @@ class NRST_MobileSubscriberIdenityPlanRecord(univ.Sequence):
 
 NRST_MobileSubscriberIdenityPlanRecord.componentType = namedtype.NamedTypes(
     namedtype.NamedType('telco-id', NRST_TelcoID()),
-    namedtype.NamedType('mcc', char.NumericString().subtype(subtypeSpec=(constraint.ValueSizeConstraint(3, 3)))),
-    namedtype.NamedType('mnc', char.NumericString().subtype(subtypeSpec=(constraint.ValueSizeConstraint(3, 3)))),
-    namedtype.NamedType('area-code', char.NumericString().subtype(subtypeSpec=(constraint.ValueSizeConstraint(3, 10)))),
-    namedtype.NamedType('capacity-from', char.NumericString().subtype(subtypeSpec=(constraint.ValueSizeConstraint(0, 7)))),
-    namedtype.NamedType('capacity-to', char.NumericString().subtype(subtypeSpec=(constraint.ValueSizeConstraint(0, 7)))),
-    namedtype.NamedType('capacity-size', univ.Integer().subtype(subtypeSpec=(constraint.ValueRangeConstraint(1, 1000000)))),
-    namedtype.NamedType('description', char.UTF8String().subtype(subtypeSpec=(constraint.ValueSizeConstraint(2, 255)))),
-    namedtype.NamedType('region', char.UTF8String().subtype(subtypeSpec=(constraint.ValueSizeConstraint(1, 128)))),
-    namedtype.NamedType('city', char.UTF8String().subtype(subtypeSpec=(constraint.ValueSizeConstraint(1, 128)))),
+    namedtype.NamedType(
+        'mcc',
+        char.NumericString().subtype(
+            subtypeSpec=(constraint.ValueSizeConstraint(3, 3))
+        )
+    ),
+    namedtype.NamedType(
+        'mnc',
+        char.NumericString().subtype(
+            subtypeSpec=(constraint.ValueSizeConstraint(3, 3))
+        )
+    ),
+    namedtype.NamedType(
+        'area-code',
+        char.NumericString().subtype(
+            subtypeSpec=(constraint.ValueSizeConstraint(3, 10))
+        )
+    ),
+    namedtype.NamedType(
+        'capacity-from',
+        char.NumericString().subtype(
+            subtypeSpec=(constraint.ValueSizeConstraint(0, 7))
+        )
+    ),
+    namedtype.NamedType(
+        'capacity-to',
+        char.NumericString().subtype(
+            subtypeSpec=(constraint.ValueSizeConstraint(0, 7))
+        )
+    ),
+    namedtype.NamedType(
+        'capacity-size',
+        univ.Integer().subtype(
+            subtypeSpec=(constraint.ValueRangeConstraint(1, 1000000))
+        )
+    ),
+    namedtype.NamedType(
+        'description',
+        char.UTF8String().subtype(
+            subtypeSpec=(constraint.ValueSizeConstraint(2, 255))
+        )
+    ),
+    namedtype.NamedType(
+        'region',
+        char.UTF8String().subtype(
+            subtypeSpec=(constraint.ValueSizeConstraint(1, 128))
+        )
+    ),
+    namedtype.NamedType(
+        'city',
+        char.UTF8String().subtype(
+            subtypeSpec=(constraint.ValueSizeConstraint(1, 128))
+        )
+    ),
     namedtype.NamedType('range-activation', NRST_DateAndTime()),
-    namedtype.OptionalNamedType('range-deactivation', NRST_DateAndTime().subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 0)))),
-    namedtype.OptionalNamedType('range-status', char.UTF8String().subtype(subtypeSpec=(constraint.ValueSizeConstraint(2, 128))).subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 1))))
+    namedtype.OptionalNamedType(
+        'range-deactivation',
+        NRST_DateAndTime().subtype(
+            implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 0))
+        )
+    ),
+    namedtype.OptionalNamedType(
+        'range-status',
+        char.UTF8String().subtype(
+            subtypeSpec=(constraint.ValueSizeConstraint(2, 128))
+        ).subtype(
+            implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 1))
+        )
+    )
 )
 
 
@@ -5205,17 +5898,42 @@ class NRST_SpecialNumbersRecordsData(univ.SequenceOf):
 
 NRST_SpecialNumbersRecordsData.componentType = NRST_SpecialNumberRecord()
 
+
 class NRST_SubsPresenceData(univ.SequenceOf):
     pass
 
 
 NRST_SubsPresenceData.componentType = NRST_StandardInterval()
 
+
 class NRST_SupplementServicesRecord(univ.Sequence):
     pass
 
 
-NRST_SupplementServicesRecord.componentType = namedtype.NamedTypes(namedtype.NamedType('telco-id', NRST_TelcoID()), namedtype.NamedType('service-id', univ.Integer().subtype(subtypeSpec=(constraint.ValueRangeConstraint(0, 4294967295)))), namedtype.NamedType('mnemonic', char.UTF8String().subtype(subtypeSpec=(constraint.ValueSizeConstraint(1, 64)))), namedtype.NamedType('begin-time', NRST_DateAndTime()), namedtype.OptionalNamedType('end-time', NRST_DateAndTime()), namedtype.NamedType('description', char.UTF8String().subtype(subtypeSpec=(constraint.ValueSizeConstraint(1, 256)))))
+NRST_SupplementServicesRecord.componentType = namedtype.NamedTypes(
+    namedtype.NamedType('telco-id', NRST_TelcoID()),
+    namedtype.NamedType(
+        'service-id',
+        univ.Integer().subtype(
+            subtypeSpec=(constraint.ValueRangeConstraint(0, 4294967295))
+        )
+    ),
+    namedtype.NamedType(
+        'mnemonic',
+        char.UTF8String().subtype(
+            subtypeSpec=(constraint.ValueSizeConstraint(1, 64))
+        )
+    ),
+    namedtype.NamedType('begin-time', NRST_DateAndTime()),
+    namedtype.OptionalNamedType('end-time', NRST_DateAndTime()),
+    namedtype.NamedType(
+        'description',
+        char.UTF8String().subtype(
+            subtypeSpec=(constraint.ValueSizeConstraint(1, 256))
+        )
+    )
+)
+
 
 class NRST_SupplementServicesRecordsData(univ.SequenceOf):
     pass
@@ -5223,13 +5941,43 @@ class NRST_SupplementServicesRecordsData(univ.SequenceOf):
 
 NRST_SupplementServicesRecordsData.componentType = NRST_SupplementServicesRecord()
 
+
 class NRST_SwitchesRecord(univ.Sequence):
     pass
 
 
-NRST_SwitchesRecord.componentType = namedtype.NamedTypes(namedtype.NamedType('telco-id', NRST_TelcoID()), namedtype.NamedType('switch-id', char.UTF8String().subtype(subtypeSpec=(constraint.ValueSizeConstraint(1, 128)))), namedtype.NamedType('begin-time', NRST_DateAndTime()), namedtype.OptionalNamedType('end-time', NRST_DateAndTime()), namedtype.NamedType('description', char.UTF8String().subtype(subtypeSpec=(constraint.ValueSizeConstraint(1, 256)))), namedtype.NamedType('network-type', NRST_NetworkType()), namedtype.NamedType('address', NRST_ReportedAddress()), namedtype.OptionalNamedType('switch-sign', char.NumericString().subtype(subtypeSpec=(constraint.ValueSizeConstraint(1, 18)))), namedtype.NamedType('switch-type', univ.Enumerated(namedValues=(namedval.NamedValues(('internal',
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            0), ('border',
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 1))))))
+NRST_SwitchesRecord.componentType = namedtype.NamedTypes(
+    namedtype.NamedType('telco-id', NRST_TelcoID()),
+    namedtype.NamedType(
+        'switch-id',
+        char.UTF8String().subtype(
+            subtypeSpec=(constraint.ValueSizeConstraint(1, 128))
+        )
+    ),
+    namedtype.NamedType('begin-time', NRST_DateAndTime()),
+    namedtype.OptionalNamedType('end-time', NRST_DateAndTime()),
+    namedtype.NamedType(
+        'description',
+        char.UTF8String().subtype(
+            subtypeSpec=(constraint.ValueSizeConstraint(1, 256))
+        )
+    ),
+    namedtype.NamedType('network-type', NRST_NetworkType()),
+    namedtype.NamedType('address', NRST_ReportedAddress()),
+    namedtype.OptionalNamedType(
+        'switch-sign',
+        char.NumericString().subtype(
+            subtypeSpec=(constraint.ValueSizeConstraint(1, 18))
+        )
+    ),
+    namedtype.NamedType(
+        'switch-type',
+        univ.Enumerated(
+            namedValues=(namedval.NamedValues(('internal', 0), ('border', 1)))
+        )
+    )
+)
+
 
 class NRST_SwitchesRecordsData(univ.SequenceOf):
     pass
@@ -5237,17 +5985,133 @@ class NRST_SwitchesRecordsData(univ.SequenceOf):
 
 NRST_SwitchesRecordsData.componentType = NRST_SwitchesRecord()
 
+
 class NRST_TaskMessageData(univ.Choice):
     pass
 
 
-NRST_TaskMessageData.componentType = namedtype.NamedTypes(namedtype.NamedType('data-ready-request', NRST_DataReadyRequest().subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 0)))), namedtype.NamedType('data-ready-response', NRST_DataReadyResponse().subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 1)))), namedtype.NamedType('data-load-request', NRST_DataLoadRequest().subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 2)))), namedtype.NamedType('data-load-response', NRST_DataLoadResponse().subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 3)))), namedtype.NamedType('data-drop-request', NRST_DataDropRequest().subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 4)))), namedtype.NamedType('data-drop-response', NRST_DataDropResponse().subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 5)))), namedtype.NamedType('data-interrupt-request', NRST_DataInterruptRequest().subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 6)))), namedtype.NamedType('data-interrupt-response', NRST_DataInterruptResponse().subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 7)))), namedtype.NamedType('create-task-request', NRST_CreateTaskRequest().subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 8)))), namedtype.NamedType('create-task-response', NRST_CreateTaskResponse().subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 9)))), namedtype.NamedType('non-formalized-task-request', NRST_NonFormalizedTaskRequest().subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 10)))), namedtype.NamedType('non-formalized-task-response', NRST_NonFormalizedTaskResponse().subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 11)))))
+NRST_TaskMessageData.componentType = namedtype.NamedTypes(
+    namedtype.NamedType(
+        'data-ready-request',
+        NRST_DataReadyRequest().subtype(
+            implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 0))
+        )
+    ),
+    namedtype.NamedType(
+        'data-ready-response',
+        NRST_DataReadyResponse().subtype(
+            implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 1))
+        )
+    ),
+    namedtype.NamedType(
+        'data-load-request',
+        NRST_DataLoadRequest().subtype(
+            implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 2))
+        )
+    ),
+    namedtype.NamedType(
+        'data-load-response',
+        NRST_DataLoadResponse().subtype(
+            implicitTag=(
+                tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 3)
+            )
+        )
+    ),
+    namedtype.NamedType(
+        'data-drop-request',
+        NRST_DataDropRequest().subtype(
+            implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 4))
+        )
+    ),
+    namedtype.NamedType(
+        'data-drop-response',
+        NRST_DataDropResponse().subtype(
+            implicitTag=(
+                tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 5)
+            )
+        )
+    ),
+    namedtype.NamedType(
+        'data-interrupt-request',
+        NRST_DataInterruptRequest().subtype(
+            implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 6))
+        )
+    ),
+    namedtype.NamedType(
+        'data-interrupt-response',
+        NRST_DataInterruptResponse().subtype(
+            implicitTag=(
+                tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 7)
+            )
+        )
+    ),
+    namedtype.NamedType(
+        'create-task-request',
+        NRST_CreateTaskRequest().subtype(
+            implicitTag=(
+                tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 8)
+            )
+        )
+    ),
+    namedtype.NamedType(
+        'create-task-response',
+        NRST_CreateTaskResponse().subtype(
+            implicitTag=(
+                tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 9)
+            )
+        )
+    ),
+    namedtype.NamedType(
+        'non-formalized-task-request',
+        NRST_NonFormalizedTaskRequest().subtype(
+            implicitTag=(
+                tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 10)
+            )
+        )
+    ),
+    namedtype.NamedType(
+        'non-formalized-task-response',
+        NRST_NonFormalizedTaskResponse().subtype(
+            implicitTag=(
+                tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 11)
+            )
+        )
+    )
+)
+
 
 class NRST_TelcosRecord(univ.Sequence):
     pass
 
 
-NRST_TelcosRecord.componentType = namedtype.NamedTypes(namedtype.NamedType('telco-id', NRST_TelcoID()), namedtype.NamedType('begin-time', NRST_DateAndTime()), namedtype.OptionalNamedType('end-time', NRST_DateAndTime()), namedtype.NamedType('description', char.UTF8String().subtype(subtypeSpec=(constraint.ValueSizeConstraint(1, 256)))), namedtype.OptionalNamedType('mcc', char.NumericString().subtype(subtypeSpec=(constraint.ValueSizeConstraint(3, 3))).subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 0)))), namedtype.OptionalNamedType('mnc', char.NumericString().subtype(subtypeSpec=(constraint.ValueSizeConstraint(3, 3))).subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 1)))))
+NRST_TelcosRecord.componentType = namedtype.NamedTypes(
+    namedtype.NamedType('telco-id', NRST_TelcoID()),
+    namedtype.NamedType('begin-time', NRST_DateAndTime()),
+    namedtype.OptionalNamedType('end-time', NRST_DateAndTime()),
+    namedtype.NamedType(
+        'description',
+        char.UTF8String().subtype(
+            subtypeSpec=(constraint.ValueSizeConstraint(1, 256))
+        )
+    ),
+    namedtype.OptionalNamedType(
+        'mcc',
+        char.NumericString().subtype(
+            subtypeSpec=(constraint.ValueSizeConstraint(3, 3))
+        ).subtype(
+            implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 0))
+        )
+    ),
+    namedtype.OptionalNamedType(
+        'mnc',
+        char.NumericString().subtype(
+            subtypeSpec=(constraint.ValueSizeConstraint(3, 3))
+        ).subtype(
+            implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 1))
+        )
+    )
+)
+
 
 class NRST_TelcosRecordsData(univ.SequenceOf):
     pass
@@ -5255,11 +6119,29 @@ class NRST_TelcosRecordsData(univ.SequenceOf):
 
 NRST_TelcosRecordsData.componentType = NRST_TelcosRecord()
 
+
 class NRST_ValidateTelephoneCardRecord(univ.Sequence):
     pass
 
 
-NRST_ValidateTelephoneCardRecord.componentType = namedtype.NamedTypes(namedtype.NamedType('telco-id', NRST_TelcoID()), namedtype.NamedType('activator-device-id', NRST_ReportedIdentifier()), namedtype.NamedType('date-time-fillup', NRST_DateAndTime()), namedtype.NamedType('card-number', char.NumericString().subtype(subtypeSpec=(constraint.ValueSizeConstraint(2, 20)))), namedtype.NamedType('amount', char.UTF8String().subtype(subtypeSpec=(constraint.ValueSizeConstraint(1, 64)))))
+NRST_ValidateTelephoneCardRecord.componentType = namedtype.NamedTypes(
+    namedtype.NamedType('telco-id', NRST_TelcoID()),
+    namedtype.NamedType('activator-device-id', NRST_ReportedIdentifier()),
+    namedtype.NamedType('date-time-fillup', NRST_DateAndTime()),
+    namedtype.NamedType(
+        'card-number',
+        char.NumericString().subtype(
+            subtypeSpec=(constraint.ValueSizeConstraint(2, 20))
+        )
+    ),
+    namedtype.NamedType(
+        'amount',
+        char.UTF8String().subtype(
+            subtypeSpec=(constraint.ValueSizeConstraint(1, 64))
+        )
+    )
+)
+
 
 class NRST_TelephoneCardReportData(univ.SequenceOf):
     pass
@@ -5267,11 +6149,145 @@ class NRST_TelephoneCardReportData(univ.SequenceOf):
 
 NRST_TelephoneCardReportData.componentType = NRST_ValidateTelephoneCardRecord()
 
+
 class NRST_TelephoneNumberingPlanRecord(univ.Sequence):
     pass
 
 
-NRST_TelephoneNumberingPlanRecord.componentType = namedtype.NamedTypes(namedtype.NamedType('telco-id', NRST_TelcoID()), namedtype.NamedType('iso-3166-alpha-2', char.UTF8String().subtype(subtypeSpec=(constraint.ValueSizeConstraint(2, 2)))), namedtype.NamedType('iso-3166-alpha-3', char.UTF8String().subtype(subtypeSpec=(constraint.ValueSizeConstraint(3, 3)))), namedtype.NamedType('country-code', char.UTF8String().subtype(subtypeSpec=(constraint.ValueSizeConstraint(3, 3)))), namedtype.NamedType('national-significant-number', char.UTF8String().subtype(subtypeSpec=(constraint.ValueSizeConstraint(14, 14)))), namedtype.NamedType('area-code-length', univ.Integer().subtype(subtypeSpec=(constraint.ValueRangeConstraint(0, 6)))), namedtype.NamedType('min-subscr-nr-length', univ.Integer().subtype(subtypeSpec=(constraint.ValueRangeConstraint(1, 15)))), namedtype.NamedType('max-subscr-nr-length', univ.Integer().subtype(subtypeSpec=(constraint.ValueRangeConstraint(1, 15)))), namedtype.NamedType('utc-min', univ.Integer().subtype(subtypeSpec=(constraint.ValueRangeConstraint(-12, 12)))), namedtype.NamedType('utc-max', univ.Integer().subtype(subtypeSpec=(constraint.ValueRangeConstraint(-12, 12)))), namedtype.NamedType('destination', char.UTF8String().subtype(subtypeSpec=(constraint.ValueSizeConstraint(2, 255)))), namedtype.NamedType('operator-type-id', NRST_NetworkType()), namedtype.NamedType('capacity-from', char.NumericString().subtype(subtypeSpec=(constraint.ValueSizeConstraint(1, 15)))), namedtype.NamedType('capacity-to', char.NumericString().subtype(subtypeSpec=(constraint.ValueSizeConstraint(1, 15)))), namedtype.NamedType('capacity-size', univ.Integer().subtype(subtypeSpec=(constraint.ValueRangeConstraint(1, 1000000)))), namedtype.NamedType('location', char.UTF8String().subtype(subtypeSpec=(constraint.ValueSizeConstraint(0, 255)))), namedtype.NamedType('registrar', char.UTF8String().subtype(subtypeSpec=(constraint.ValueSizeConstraint(0, 255)))), namedtype.NamedType('range-activation', NRST_DateAndTime()), namedtype.NamedType('mobile-country-code', char.NumericString().subtype(subtypeSpec=(constraint.ValueSizeConstraint(3, 3)))), namedtype.NamedType('mobile-network-code', char.NumericString().subtype(subtypeSpec=(constraint.ValueSizeConstraint(3, 3)))), namedtype.OptionalNamedType('range-deactivation', NRST_DateAndTime().subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 0)))), namedtype.OptionalNamedType('range-status', char.UTF8String().subtype(subtypeSpec=(constraint.ValueSizeConstraint(2, 128))).subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 1)))), namedtype.OptionalNamedType('description', char.UTF8String().subtype(subtypeSpec=(constraint.ValueSizeConstraint(2, 255))).subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 2)))), namedtype.OptionalNamedType('operating-company-number', char.UTF8String().subtype(subtypeSpec=(constraint.ValueSizeConstraint(0, 4))).subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 3)))))
+NRST_TelephoneNumberingPlanRecord.componentType = namedtype.NamedTypes(
+    namedtype.NamedType('telco-id', NRST_TelcoID()),
+    namedtype.NamedType(
+        'iso-3166-alpha-2',
+        char.UTF8String().subtype(
+            subtypeSpec=(constraint.ValueSizeConstraint(2, 2))
+        )
+    ),
+    namedtype.NamedType(
+        'iso-3166-alpha-3',
+        char.UTF8String().subtype(
+            subtypeSpec=(constraint.ValueSizeConstraint(3, 3))
+        )
+    ),
+    namedtype.NamedType(
+        'country-code',
+        char.UTF8String().subtype(
+            subtypeSpec=(constraint.ValueSizeConstraint(3, 3))
+        )
+    ),
+    namedtype.NamedType(
+        'national-significant-number',
+        char.UTF8String().subtype(
+            subtypeSpec=(constraint.ValueSizeConstraint(14, 14))
+        )
+    ),
+    namedtype.NamedType(
+        'area-code-length',
+        univ.Integer().subtype(
+            subtypeSpec=(constraint.ValueRangeConstraint(0, 6))
+        )
+    ),
+    namedtype.NamedType(
+        'min-subscr-nr-length',
+        univ.Integer().subtype(
+            subtypeSpec=(constraint.ValueRangeConstraint(1, 15))
+        )
+    ),
+    namedtype.NamedType(
+        'max-subscr-nr-length',
+        univ.Integer().subtype(
+            subtypeSpec=(constraint.ValueRangeConstraint(1, 15))
+        )
+    ),
+    namedtype.NamedType(
+        'utc-min',
+        univ.Integer().subtype(
+            subtypeSpec=(constraint.ValueRangeConstraint(-12, 12))
+        )
+    ),
+    namedtype.NamedType(
+        'utc-max',
+        univ.Integer().subtype(
+            subtypeSpec=(constraint.ValueRangeConstraint(-12, 12))
+        )
+    ),
+    namedtype.NamedType(
+        'destination',
+        char.UTF8String().subtype(
+            subtypeSpec=(constraint.ValueSizeConstraint(2, 255))
+        )
+    ),
+    namedtype.NamedType('operator-type-id', NRST_NetworkType()),
+    namedtype.NamedType(
+        'capacity-from', char.NumericString().subtype(subtypeSpec=(constraint.ValueSizeConstraint(1, 15)))),
+    namedtype.NamedType(
+        'capacity-to',
+        char.NumericString().subtype(
+            subtypeSpec=(constraint.ValueSizeConstraint(1, 15))
+        )
+    ),
+    namedtype.NamedType(
+        'capacity-size',
+        univ.Integer().subtype(
+            subtypeSpec=(constraint.ValueRangeConstraint(1, 1000000))
+        )
+    ),
+    namedtype.NamedType(
+        'location',
+        char.UTF8String().subtype(
+            subtypeSpec=(constraint.ValueSizeConstraint(0, 255))
+        )
+    ),
+    namedtype.NamedType(
+        'registrar',
+        char.UTF8String().subtype(
+            subtypeSpec=(constraint.ValueSizeConstraint(0, 255))
+        )
+    ),
+    namedtype.NamedType('range-activation', NRST_DateAndTime()),
+    namedtype.NamedType(
+        'mobile-country-code',
+        char.NumericString().subtype(
+            subtypeSpec=(constraint.ValueSizeConstraint(3, 3))
+        )
+    ),
+    namedtype.NamedType(
+        'mobile-network-code',
+        char.NumericString().subtype(
+            subtypeSpec=(constraint.ValueSizeConstraint(3, 3))
+        )
+    ),
+    namedtype.OptionalNamedType(
+        'range-deactivation',
+        NRST_DateAndTime().subtype(
+            implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 0))
+        )
+    ),
+    namedtype.OptionalNamedType(
+        'range-status',
+        char.UTF8String().subtype(
+            subtypeSpec=(constraint.ValueSizeConstraint(2, 128))
+        ).subtype(
+            implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 1))
+        )
+    ),
+    namedtype.OptionalNamedType(
+        'description',
+        char.UTF8String().subtype(
+            subtypeSpec=(constraint.ValueSizeConstraint(2, 255))
+        ).subtype(
+            implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 2))
+        )
+    ),
+    namedtype.OptionalNamedType(
+        'operating-company-number',
+        char.UTF8String().subtype(
+            subtypeSpec=(constraint.ValueSizeConstraint(0, 4))
+        ).subtype(
+            implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 3))
+        )
+    )
+)
+
 
 class NRST_TelephoneNumberingPlanRecordsData(univ.SequenceOf):
     pass
@@ -5279,17 +6295,37 @@ class NRST_TelephoneNumberingPlanRecordsData(univ.SequenceOf):
 
 NRST_TelephoneNumberingPlanRecordsData.componentType = NRST_TelephoneNumberingPlanRecord()
 
+
 class NRST_TerminationCausesRecord(univ.Sequence):
     pass
 
 
-NRST_TerminationCausesRecord.componentType = namedtype.NamedTypes(namedtype.NamedType('telco-id', NRST_TelcoID()), namedtype.NamedType('termination-cause-id', univ.Integer().subtype(subtypeSpec=(constraint.ValueRangeConstraint(0, 16384)))), namedtype.NamedType('begin-time', NRST_DateAndTime()), namedtype.OptionalNamedType('end-time', NRST_DateAndTime()), namedtype.NamedType('description', char.UTF8String().subtype(subtypeSpec=(constraint.ValueSizeConstraint(1, 256)))), namedtype.NamedType('network-type', NRST_NetworkType()))
+NRST_TerminationCausesRecord.componentType = namedtype.NamedTypes(
+    namedtype.NamedType('telco-id', NRST_TelcoID()),
+    namedtype.NamedType(
+        'termination-cause-id',
+        univ.Integer().subtype(
+            subtypeSpec=(constraint.ValueRangeConstraint(0, 16384))
+        )
+    ),
+    namedtype.NamedType('begin-time', NRST_DateAndTime()),
+    namedtype.OptionalNamedType('end-time', NRST_DateAndTime()),
+    namedtype.NamedType(
+        'description',
+        char.UTF8String().subtype(
+            subtypeSpec=(constraint.ValueSizeConstraint(1, 256))
+        )
+    ),
+    namedtype.NamedType('network-type', NRST_NetworkType())
+)
+
 
 class NRST_TerminationCausesRecordsData(univ.SequenceOf):
     pass
 
 
 NRST_TerminationCausesRecordsData.componentType = NRST_TerminationCausesRecord()
+
 
 class NRST_TrapType(univ.Enumerated):
     pass
@@ -5331,14 +6367,62 @@ class NRST_TrapMessageData(univ.Choice):
     pass
 
 
-NRST_TrapMessageData.componentType = namedtype.NamedTypes(namedtype.NamedType('trap', NRST_Trap().subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 0)))), namedtype.NamedType('trap-ack', NRST_TrapAck().subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 1)))))
+NRST_TrapMessageData.componentType = namedtype.NamedTypes(
+    namedtype.NamedType(
+        'trap',
+        NRST_Trap().subtype(
+            implicitTag=(
+                tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 0)
+            )
+        )
+    ),
+    namedtype.NamedType(
+        'trap-ack',
+        NRST_TrapAck().subtype(
+            implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 1))
+        )
+    )
+)
 
 
 class NRST_UnformattedMessageData(univ.Choice):
     pass
 
 
-NRST_UnformattedMessageData.componentType = namedtype.NamedTypes(namedtype.NamedType('request', NRST_RawRequest().subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 0)))), namedtype.NamedType('response', NRST_RawResponse().subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 1)))), namedtype.NamedType('report', NRST_RawReport().subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 2)))), namedtype.NamedType('report-ack', NRST_RawAcknowledgement().subtype(implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 3)))))
+NRST_UnformattedMessageData.componentType = namedtype.NamedTypes(
+    namedtype.NamedType(
+        'request',
+        NRST_RawRequest().subtype(
+            implicitTag=(
+                tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 0)
+            )
+        )
+    ),
+    namedtype.NamedType(
+        'response',
+        NRST_RawResponse().subtype(
+            implicitTag=(
+                tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 1)
+            )
+        )
+    ),
+    namedtype.NamedType(
+        'report',
+        NRST_RawReport().subtype(
+            implicitTag=(
+                tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 2)
+            )
+        )
+    ),
+    namedtype.NamedType(
+        'report-ack',
+        NRST_RawAcknowledgement().subtype(
+            implicitTag=(
+                tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 3)
+            )
+        )
+    )
+)
 
 
 sorm_message_filter = NRST_OID('286')
