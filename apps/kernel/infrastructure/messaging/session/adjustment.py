@@ -9,7 +9,6 @@ from apps.kernel.infrastructure.messaging import (
 )
 
 
-
 class AdjustmentRequest(base.OutgoingMessage):
 
     def __init__(self, supports_):

@@ -324,14 +324,15 @@ class TaskManager:
 
     def drop_tasks(self, tasks_=None, timeout_=None):
         list_of_task_id = self.construct_workable_task_id_list(tasks_)
-        print(f'ALL TASKS: {list_of_task_id}')
         if len(list_of_task_id) == 0:
             return
         for task_id in list_of_task_id:
             task_info = self.tasks.get(task_id, None)
             if task_info is not None:
                 self.waiting_responses += 1
-                self.session.channel(1).send_request(data_drop.DataDropRequest(task_info.task_id))
+                self.session.channel(1).send_request(
+                    data_drop.DataDropRequest(task_info.task_id)
+                )
 
         if timeout_ is None:
             timeout_ = self.session.channel(1).channel_parameters.request_response_timeout
@@ -358,8 +359,16 @@ class TaskManager:
             'no task reports have been received in specified time'
         )
 
-    def send_report_block_confirmation(self, channel_id_, message_id_, successful_=True, broken_record_=None, error_description_=None):
-        self.session.channel(channel_id_).send_message(report.Acknowledgement(message_id_, successful_, broken_record_, error_description_))
+    def send_report_block_confirmation(self, channel_id_, message_id_,
+                                       successful_=True, broken_record_=None,
+                                       error_description_=None):
+        self.session.channel(
+            channel_id_
+        ).send_message(
+            report.Acknowledgement(
+                message_id_, successful_, broken_record_, error_description_
+            )
+        )
 
     def construct_workable_task_id_list(self, tasks_):
         workable_task_ids = []
@@ -467,7 +476,9 @@ class TaskManager:
         with self.cv_incoming_message:
             self.cv_incoming_message.notify_all()
 
-    def handle_data_drop_response(self, chnl_: sessions.Channel, reqs_: data_drop.DataDropRequest, resp_: data_drop.DataDropResponse):
+    def handle_data_drop_response(self, chnl_: sessions.Channel,
+                                  reqs_: data_drop.DataDropRequest,
+                                  resp_: data_drop.DataDropResponse):
         if not resp_.successful:
             raise exceptions.GeneralFault(
                 'unable to drop the task #{0}, error - {1}'.format(

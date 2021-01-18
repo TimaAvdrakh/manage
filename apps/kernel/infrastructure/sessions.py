@@ -314,14 +314,14 @@ class Channel:
         self.run_user_handler(request, response_)
         self.send_request(adjustment.AdjustmentRequest(response_.supports))
 
-    def handle_adjustment_response(self, response_):
-        request = self.register_incoming_message(response_)
-        self.run_user_handler(request, response_)
+    def handle_adjustment_response(self, response):
+        request = self.register_incoming_message(response)
+        self.run_user_handler(request, response)
         self.initialized = True
 
-    def handle_trap(self, message_):
-        self.send_message(trap.TrapAck(message_.message_id))
-        self.run_user_handler(None, message_)
+    def handle_trap(self, message):
+        self.send_message(trap.TrapAck(message.message_id))
+        self.run_user_handler(None, message)
 
     def handle_trap_ack(self, message_):
         request = self.register_incoming_message(message_)
