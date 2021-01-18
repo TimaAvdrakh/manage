@@ -21,7 +21,7 @@ class RequestedPstnIdentifier(base.ASN1Copyable):
         ]
 
     def copy_to(self, target_):
-        identifier = asn1.NRST_RequestedPstnIdentifier()
+        identifier = asn1.SkrRequestedPstnIdentifier()
         self.set_component(
             identifier, 'directory-number', self.directory_number
         )
@@ -40,7 +40,7 @@ class RequestedGsmIdentifier(base.ASN1ChoiceBase):
     imei = 'imei'
 
     def __init__(self, name_, value_):
-        super().__init__(asn1.NRST_RequestedGsmIdentifier(), name_, value_)
+        super().__init__(asn1.SkrRequestedGsmIdentifier(), name_, value_)
 
     def copy_to(self, target_):
         self.set_component(
@@ -62,7 +62,7 @@ class RequestedCdmaIdentifier(base.ASN1ChoiceBase):
 
     def __init__(self, name_, value_):
         super(RequestedCdmaIdentifier, self).__init__(
-            asn1.NRST_RequestedCdmaIdentifier(), name_, value_
+            asn1.SkrRequestedCdmaIdentifier(), name_, value_
         )
 
     def copy_to(self, target_):
@@ -81,7 +81,7 @@ class RequestedDataNetworkIdentifier(base.ASN1ChoiceBase):
 
     def __init__(self, name_, value_):
         super(RequestedDataNetworkIdentifier, self).__init__(
-            asn1.NRST_RequestedDataNetworkIdentifier(), name_, value_
+            asn1.SkrRequestedDataNetworkIdentifier(), name_, value_
         )
 
     def copy_to(self, target_):
@@ -100,7 +100,7 @@ class RequestedVoipIdentifier(base.ASN1ChoiceBase):
 
     def __init__(self, name_, value_):
         super(RequestedVoipIdentifier, self).__init__(
-            asn1.NRST_RequestedVoipIdentifier(), name_, value_
+            asn1.SkrRequestedVoipIdentifier(), name_, value_
         )
 
     def copy_to(self, target_):

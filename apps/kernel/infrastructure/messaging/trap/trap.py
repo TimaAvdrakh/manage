@@ -20,7 +20,7 @@ class Trap(base.OutgoingMessage):
         return fields
 
     def encode_data(self):
-        reqs = asn1.NRST_Trap(
+        reqs = asn1.SkrTrap(
             tagSet=(
                 tag.initTagSet(
                     tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 0)
@@ -58,7 +58,7 @@ class HeartbeatTrap(Trap):
 
     def __init__(self, trap_message, reference_message):
         super().__init__(
-            asn1.NRST_TrapType('heartbeat'),
+            asn1.SkrTrapType('heartbeat'),
             trap_message,
             reference_message
         )
@@ -68,7 +68,7 @@ class RestartSoftwareTrap(Trap):
 
     def __init__(self, trap_message, reference_message):
         super().__init__(
-            asn1.NRST_TrapType('restart-software'),
+            asn1.SkrTrapType('restart-software'),
             trap_message,
             reference_message
         )
@@ -78,7 +78,7 @@ class UnauthorizedAccessTrap(Trap):
 
     def __init__(self, trap_message, reference_message):
         super().__init__(
-            asn1.NRST_TrapType('unauthorized-access'),
+            asn1.SkrTrapType('unauthorized-access'),
             trap_message,
             reference_message
         )
@@ -88,7 +88,7 @@ class CriticalErrorTrap(Trap):
 
     def __init__(self, trap_message, reference_message):
         super().__init__(
-            asn1.NRST_TrapType('critical-error'),
+            asn1.SkrTrapType('critical-error'),
             trap_message,
             reference_message
         )
@@ -98,7 +98,7 @@ class MajorErrorTrap(Trap):
 
     def __init__(self, trap_message, reference_message):
         super().__init__(
-            asn1.NRST_TrapType('major-error'), trap_message, reference_message
+            asn1.SkrTrapType('major-error'), trap_message, reference_message
         )
 
 
@@ -106,7 +106,7 @@ class MinorErrorTrap(Trap):
 
     def __init__(self, trap_message, reference_message):
         super().__init__(
-            asn1.NRST_TrapType('minor-error'), trap_message, reference_message
+            asn1.SkrTrapType('minor-error'), trap_message, reference_message
         )
 
 

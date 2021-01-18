@@ -20,7 +20,7 @@ class DataInterruptRequest(base.OutgoingMessage):
         return fields
 
     def encode_data(self):
-        reqs = asn1.NRST_DataInterruptRequest(
+        reqs = asn1.SkrDataInterruptRequest(
             value=(self.task_id),
             tagSet=(
                 tag.initTagSet(

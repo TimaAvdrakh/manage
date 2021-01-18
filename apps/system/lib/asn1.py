@@ -9,21 +9,21 @@ from pyasn1.type import (
 )
 
 
-class NRST_AbonentInfo(univ.Sequence):
+class SkrAbonentInfo(univ.Sequence):
     pass
 
 
-NRST_AbonentInfo.componentType = namedtype.NamedTypes(
+SkrAbonentInfo.componentType = namedtype.NamedTypes(
     namedtype.NamedType('id', useful.ObjectDescriptor()),
     namedtype.NamedType('data', univ.Any())
 )
 
 
-class NRST_InternalUsersRecord(univ.Sequence):
+class SkrInternalUsersRecord(univ.Sequence):
     pass
 
 
-NRST_InternalUsersRecord.componentType = namedtype.NamedTypes(
+SkrInternalUsersRecord.componentType = namedtype.NamedTypes(
     namedtype.NamedType(
         'user-name',
         char.UTF8String().subtype(
@@ -39,18 +39,18 @@ NRST_InternalUsersRecord.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_InternalUsers(univ.SequenceOf):
+class SkrInternalUsers(univ.SequenceOf):
     pass
 
 
-NRST_InternalUsers.componentType = NRST_InternalUsersRecord()
+SkrInternalUsers.componentType = SkrInternalUsersRecord()
 
 
-class NRST_AbonentOrganization(univ.Sequence):
+class SkrAbonentOrganization(univ.Sequence):
     pass
 
 
-NRST_AbonentOrganization.componentType = namedtype.NamedTypes(
+SkrAbonentOrganization.componentType = namedtype.NamedTypes(
     namedtype.NamedType(
         'full-name',
         char.UTF8String().subtype(
@@ -81,7 +81,7 @@ NRST_AbonentOrganization.componentType = namedtype.NamedTypes(
     ),
     namedtype.OptionalNamedType(
         'internal-users',
-        NRST_InternalUsers().subtype(
+        SkrInternalUsers().subtype(
             implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 2))
         )
     ),
@@ -103,11 +103,11 @@ NRST_AbonentOrganization.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_IdentCardStructInfoReport(univ.Sequence):
+class SkrIdentCardStructInfoReport(univ.Sequence):
     pass
 
 
-NRST_IdentCardStructInfoReport.componentType = namedtype.NamedTypes(
+SkrIdentCardStructInfoReport.componentType = namedtype.NamedTypes(
     namedtype.NamedType(
         'ident-card-serial',
         char.UTF8String().subtype(
@@ -129,14 +129,14 @@ NRST_IdentCardStructInfoReport.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_IdentCardInfoReport(univ.Choice):
+class SkrIdentCardInfoReport(univ.Choice):
     pass
 
 
-NRST_IdentCardInfoReport.componentType = namedtype.NamedTypes(
+SkrIdentCardInfoReport.componentType = namedtype.NamedTypes(
     namedtype.NamedType(
         'struct-info',
-        NRST_IdentCardStructInfoReport().subtype(
+        SkrIdentCardStructInfoReport().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 0)
             )
@@ -153,14 +153,14 @@ NRST_IdentCardInfoReport.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_PassportInfoReport(univ.Sequence):
+class SkrPassportInfoReport(univ.Sequence):
     pass
 
 
-NRST_PassportInfoReport.componentType = namedtype.NamedTypes(
+SkrPassportInfoReport.componentType = namedtype.NamedTypes(
     namedtype.NamedType(
         'ident-card-info',
-        NRST_IdentCardInfoReport()
+        SkrIdentCardInfoReport()
     ),
     namedtype.NamedType(
         'doc-type-id',
@@ -171,11 +171,11 @@ NRST_PassportInfoReport.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_PersonStructNameInfoReport(univ.Sequence):
+class SkrPersonStructNameInfoReport(univ.Sequence):
     pass
 
 
-NRST_PersonStructNameInfoReport.componentType = namedtype.NamedTypes(
+SkrPersonStructNameInfoReport.componentType = namedtype.NamedTypes(
     namedtype.NamedType(
         'given-name',
         char.UTF8String().subtype(
@@ -197,14 +197,14 @@ NRST_PersonStructNameInfoReport.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_PersonNameInfoReport(univ.Choice):
+class SkrPersonNameInfoReport(univ.Choice):
     pass
 
 
-NRST_PersonNameInfoReport.componentType = namedtype.NamedTypes(
+SkrPersonNameInfoReport.componentType = namedtype.NamedTypes(
     namedtype.NamedType(
         'struct-name',
-        NRST_PersonStructNameInfoReport().subtype(
+        SkrPersonStructNameInfoReport().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 0)
             )
@@ -221,21 +221,21 @@ NRST_PersonNameInfoReport.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_AbonentPerson(univ.Sequence):
+class SkrAbonentPerson(univ.Sequence):
     pass
 
 
-NRST_AbonentPerson.componentType = namedtype.NamedTypes(
+SkrAbonentPerson.componentType = namedtype.NamedTypes(
     namedtype.NamedType(
         'name-info',
-        NRST_PersonNameInfoReport()
+        SkrPersonNameInfoReport()
     ),
     namedtype.OptionalNamedType(
         'birth-date', useful.GeneralizedTime()
     ),
     namedtype.NamedType(
         'passport-info',
-        NRST_PassportInfoReport()
+        SkrPassportInfoReport()
     ),
     namedtype.OptionalNamedType(
         'bank',
@@ -256,48 +256,48 @@ NRST_AbonentPerson.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_ReportedIdentifier(univ.Sequence):
+class SkrReportedIdentifier(univ.Sequence):
     pass
 
 
-NRST_ReportedIdentifier.componentType = namedtype.NamedTypes(
+SkrReportedIdentifier.componentType = namedtype.NamedTypes(
     namedtype.NamedType('id', useful.ObjectDescriptor()),
     namedtype.NamedType('data', univ.Any())
 )
 
 
-class NRST_TelcoID(univ.Integer):
+class SkrTelcoID(univ.Integer):
     pass
 
 
-NRST_TelcoID.subtypeSpec = constraint.ValueRangeConstraint(0, 65535)
+SkrTelcoID.subtypeSpec = constraint.ValueRangeConstraint(0, 65535)
 
 
-class NRST_DateAndTime(useful.UTCTime):
+class SkrDateAndTime(useful.UTCTime):
     pass
 
 
-class NRST_AbonentService(univ.Sequence):
+class SkrAbonentService(univ.Sequence):
     pass
 
 
-NRST_AbonentService.componentType = namedtype.NamedTypes(
-    namedtype.NamedType('telco-id', NRST_TelcoID()),
+SkrAbonentService.componentType = namedtype.NamedTypes(
+    namedtype.NamedType('telco-id', SkrTelcoID()),
     namedtype.NamedType(
         'service-id',
         univ.Integer().subtype(
             subtypeSpec=(constraint.ValueRangeConstraint(0, 4294967295))
         )
     ),
-    namedtype.OptionalNamedType('idents', NRST_ReportedIdentifier()),
+    namedtype.OptionalNamedType('idents', SkrReportedIdentifier()),
     namedtype.NamedType(
         'contract',
         char.UTF8String().subtype(
             subtypeSpec=(constraint.ValueSizeConstraint(1, 64))
         )
     ),
-    namedtype.NamedType('begin-time', NRST_DateAndTime()),
-    namedtype.NamedType('end-time', NRST_DateAndTime()),
+    namedtype.NamedType('begin-time', SkrDateAndTime()),
+    namedtype.NamedType('end-time', SkrDateAndTime()),
     namedtype.OptionalNamedType(
         'parameter',
         char.UTF8String().subtype(
@@ -307,18 +307,18 @@ NRST_AbonentService.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_ActiveServices(univ.SequenceOf):
+class SkrActiveServices(univ.SequenceOf):
     pass
 
 
-NRST_ActiveServices.componentType = NRST_AbonentService()
+SkrActiveServices.componentType = SkrAbonentService()
 
 
-class NRST_AddressStructInfoReport(univ.Sequence):
+class SkrAddressStructInfoReport(univ.Sequence):
     pass
 
 
-NRST_AddressStructInfoReport.componentType = namedtype.NamedTypes(
+SkrAddressStructInfoReport.componentType = namedtype.NamedTypes(
     namedtype.OptionalNamedType(
         'zip',
         char.UTF8String().subtype(
@@ -394,14 +394,14 @@ NRST_AddressStructInfoReport.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_AddressInfoReport(univ.Choice):
+class SkrAddressInfoReport(univ.Choice):
     pass
 
 
-NRST_AddressInfoReport.componentType = namedtype.NamedTypes(
+SkrAddressInfoReport.componentType = namedtype.NamedTypes(
     namedtype.NamedType(
         'struct-info',
-        NRST_AddressStructInfoReport().subtype(
+        SkrAddressStructInfoReport().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 1)
             )
@@ -418,11 +418,11 @@ NRST_AddressInfoReport.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_AddressType(univ.Enumerated):
+class SkrAddressType(univ.Enumerated):
     pass
 
 
-NRST_AddressType.namedValues = namedval.NamedValues(
+SkrAddressType.namedValues = namedval.NamedValues(
     ('registered', 0),
     ('postal', 1),
     ('invoice', 2),
@@ -431,38 +431,38 @@ NRST_AddressType.namedValues = namedval.NamedValues(
 )
 
 
-class NRST_ReportedAddress(univ.Sequence):
+class SkrReportedAddress(univ.Sequence):
     pass
 
 
-NRST_ReportedAddress.componentType = namedtype.NamedTypes(
-    namedtype.NamedType('title', NRST_AddressType()),
-    namedtype.NamedType('address-info', NRST_AddressInfoReport())
+SkrReportedAddress.componentType = namedtype.NamedTypes(
+    namedtype.NamedType('title', SkrAddressType()),
+    namedtype.NamedType('address-info', SkrAddressInfoReport())
 )
 
 
-class NRST_ReportedAddresses(univ.SequenceOf):
+class SkrReportedAddresses(univ.SequenceOf):
     pass
 
 
-NRST_ReportedAddresses.componentType = NRST_ReportedAddress()
+SkrReportedAddresses.componentType = SkrReportedAddress()
 
 
-class NRST_ActiveStatus(univ.Enumerated):
+class SkrActiveStatus(univ.Enumerated):
     pass
 
 
-NRST_ActiveStatus.namedValues = namedval.NamedValues(
+SkrActiveStatus.namedValues = namedval.NamedValues(
     ('active', 0),
     ('not-active', 1)
 )
 
 
-class NRST_LineData(univ.Sequence):
+class SkrLineData(univ.Sequence):
     pass
 
 
-NRST_LineData.componentType = namedtype.NamedTypes(
+SkrLineData.componentType = namedtype.NamedTypes(
     namedtype.OptionalNamedType(
         'object',
         char.UTF8String().subtype(
@@ -505,11 +505,11 @@ NRST_LineData.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_WirelessLocation(univ.Sequence):
+class SkrWirelessLocation(univ.Sequence):
     pass
 
 
-NRST_WirelessLocation.componentType = namedtype.NamedTypes(
+SkrWirelessLocation.componentType = namedtype.NamedTypes(
     namedtype.NamedType(
         'cell', char.UTF8String().subtype(
             subtypeSpec=(constraint.ValueSizeConstraint(1, 64))
@@ -524,11 +524,11 @@ NRST_WirelessLocation.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_GeoLocation(univ.Sequence):
+class SkrGeoLocation(univ.Sequence):
     pass
 
 
-NRST_GeoLocation.componentType = namedtype.NamedTypes(
+SkrGeoLocation.componentType = namedtype.NamedTypes(
     namedtype.NamedType('latitude-grade', univ.Real()),
     namedtype.NamedType('longitude-grade', univ.Real()),
     namedtype.NamedType(
@@ -542,11 +542,11 @@ NRST_GeoLocation.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_MobileLocation(univ.Sequence):
+class SkrMobileLocation(univ.Sequence):
     pass
 
 
-NRST_MobileLocation.componentType = namedtype.NamedTypes(
+SkrMobileLocation.componentType = namedtype.NamedTypes(
     namedtype.NamedType(
         'lac', univ.Integer().subtype(
             subtypeSpec=(constraint.ValueRangeConstraint(0, 65535))
@@ -569,13 +569,13 @@ NRST_MobileLocation.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_Location(univ.Choice):
+class SkrLocation(univ.Choice):
     pass
 
 
-NRST_Location.componentType = namedtype.NamedTypes(
+SkrLocation.componentType = namedtype.NamedTypes(
     namedtype.NamedType(
-        'mobile-location', NRST_MobileLocation().subtype(
+        'mobile-location', SkrMobileLocation().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 0)
             )
@@ -583,7 +583,7 @@ NRST_Location.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'wireless-location',
-        NRST_WirelessLocation().subtype(
+        SkrWirelessLocation().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 1)
             )
@@ -591,7 +591,7 @@ NRST_Location.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'geo-location',
-        NRST_GeoLocation().subtype(
+        SkrGeoLocation().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 2)
             )
@@ -600,11 +600,11 @@ NRST_Location.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_NetworkType(univ.Enumerated):
+class SkrNetworkType(univ.Enumerated):
     pass
 
 
-NRST_NetworkType.namedValues = namedval.NamedValues(
+SkrNetworkType.namedValues = namedval.NamedValues(
     ('not-specified', 0),
     ('mob-gsm', 1),
     ('mob-cdma', 2),
@@ -619,43 +619,43 @@ NRST_NetworkType.namedValues = namedval.NamedValues(
 )
 
 
-class NRST_Standard(NRST_NetworkType):
+class SkrStandard(SkrNetworkType):
     pass
 
 
-class NRST_AbonentsRecord(univ.Sequence):
+class SkrAbonentsRecord(univ.Sequence):
     pass
 
 
-NRST_AbonentsRecord.componentType = namedtype.NamedTypes(
-    namedtype.NamedType('telco-id', NRST_TelcoID()),
-    namedtype.NamedType('idents', NRST_ReportedIdentifier()),
-    namedtype.NamedType('contract-date', NRST_DateAndTime()),
+SkrAbonentsRecord.componentType = namedtype.NamedTypes(
+    namedtype.NamedType('telco-id', SkrTelcoID()),
+    namedtype.NamedType('idents', SkrReportedIdentifier()),
+    namedtype.NamedType('contract-date', SkrDateAndTime()),
     namedtype.NamedType(
         'contract',
         char.UTF8String().subtype(
             subtypeSpec=(constraint.ValueSizeConstraint(1, 64))
         )
     ),
-    namedtype.NamedType('actual-from', NRST_DateAndTime()),
-    namedtype.NamedType('actual-to', NRST_DateAndTime()),
-    namedtype.NamedType('abonent', NRST_AbonentInfo()),
-    namedtype.NamedType('status', NRST_ActiveStatus()),
+    namedtype.NamedType('actual-from', SkrDateAndTime()),
+    namedtype.NamedType('actual-to', SkrDateAndTime()),
+    namedtype.NamedType('abonent', SkrAbonentInfo()),
+    namedtype.NamedType('status', SkrActiveStatus()),
     namedtype.OptionalNamedType(
         'attach',
-        NRST_DateAndTime().subtype(
+        SkrDateAndTime().subtype(
             implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 0))
         )
     ),
     namedtype.OptionalNamedType(
         'detach',
-        NRST_DateAndTime().subtype(
+        SkrDateAndTime().subtype(
             implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 1))
         )
     ),
     namedtype.OptionalNamedType(
         'last-location',
-        NRST_Location().subtype(
+        SkrLocation().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 2)
             )
@@ -663,13 +663,13 @@ NRST_AbonentsRecord.componentType = namedtype.NamedTypes(
     ),
     namedtype.OptionalNamedType(
         'services',
-        NRST_ActiveServices().subtype(
+        SkrActiveServices().subtype(
             implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 3))
         )
     ),
     namedtype.OptionalNamedType(
         'line-data',
-        NRST_LineData().subtype(
+        SkrLineData().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 4)
             )
@@ -677,44 +677,44 @@ NRST_AbonentsRecord.componentType = namedtype.NamedTypes(
     ),
     namedtype.OptionalNamedType(
         'standard',
-        NRST_Standard().subtype(
+        SkrStandard().subtype(
             implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 5))
         )
     ),
     namedtype.OptionalNamedType(
         'addresses',
-        NRST_ReportedAddresses().subtype(
+        SkrReportedAddresses().subtype(
             implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 6))
         )
     )
 )
 
 
-class NRST_AbonentsReport(univ.Sequence):
+class SkrAbonentsReport(univ.Sequence):
     pass
 
 
-NRST_AbonentsReport.componentType = namedtype.NamedTypes(
+SkrAbonentsReport.componentType = namedtype.NamedTypes(
     namedtype.NamedType('id', useful.ObjectDescriptor()),
     namedtype.NamedType('data', univ.Any())
 )
 
 
-class NRST_RequestedIdentifier(univ.Sequence):
+class SkrRequestedIdentifier(univ.Sequence):
     pass
 
 
-NRST_RequestedIdentifier.componentType = namedtype.NamedTypes(
+SkrRequestedIdentifier.componentType = namedtype.NamedTypes(
     namedtype.NamedType('id', useful.ObjectDescriptor()),
     namedtype.NamedType('data', univ.Any())
 )
 
 
-class NRST_DataNetworkATM(univ.Sequence):
+class SkrDataNetworkATM(univ.Sequence):
     pass
 
 
-NRST_DataNetworkATM.componentType = namedtype.NamedTypes(
+SkrDataNetworkATM.componentType = namedtype.NamedTypes(
     namedtype.NamedType(
         'vpi',
         univ.OctetString().subtype(
@@ -730,11 +730,11 @@ NRST_DataNetworkATM.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_DataNetworkEquipment(univ.Choice):
+class SkrDataNetworkEquipment(univ.Choice):
     pass
 
 
-NRST_DataNetworkEquipment.componentType = namedtype.NamedTypes(
+SkrDataNetworkEquipment.componentType = namedtype.NamedTypes(
     namedtype.NamedType(
         'mac',
         univ.OctetString().subtype(
@@ -745,7 +745,7 @@ NRST_DataNetworkEquipment.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'atm',
-        NRST_DataNetworkATM().subtype(
+        SkrDataNetworkATM().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 1)
             )
@@ -754,48 +754,48 @@ NRST_DataNetworkEquipment.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_IPV4Address(univ.OctetString):
+class SkrIPV4Address(univ.OctetString):
     pass
 
 
-NRST_IPV4Address.subtypeSpec = constraint.ValueSizeConstraint(4, 4)
+SkrIPV4Address.subtypeSpec = constraint.ValueSizeConstraint(4, 4)
 
 
-class NRST_IPV6Address(univ.OctetString):
+class SkrIPV6Address(univ.OctetString):
     pass
 
 
-NRST_IPV6Address.subtypeSpec = constraint.ValueSizeConstraint(16, 16)
+SkrIPV6Address.subtypeSpec = constraint.ValueSizeConstraint(16, 16)
 
 
-class NRST_IPAddress(univ.Choice):
+class SkrIPAddress(univ.Choice):
     pass
 
 
-NRST_IPAddress.componentType = namedtype.NamedTypes(
+SkrIPAddress.componentType = namedtype.NamedTypes(
     namedtype.NamedType(
         'ipv4',
-        NRST_IPV4Address().subtype(
+        SkrIPV4Address().subtype(
             implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 0))
         )
     ),
     namedtype.NamedType(
         'ipv6',
-        NRST_IPV6Address().subtype(
+        SkrIPV6Address().subtype(
             implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 1))
         )
     )
 )
 
 
-class NRST_RequestedDataNetworkIdentifier(univ.Choice):
+class SkrRequestedDataNetworkIdentifier(univ.Choice):
     pass
 
 
-NRST_RequestedDataNetworkIdentifier.componentType = namedtype.NamedTypes(
+SkrRequestedDataNetworkIdentifier.componentType = namedtype.NamedTypes(
     namedtype.NamedType(
         'user-equipment',
-        NRST_DataNetworkEquipment().subtype(
+        SkrDataNetworkEquipment().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 0)
             )
@@ -811,7 +811,7 @@ NRST_RequestedDataNetworkIdentifier.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'ip-address',
-        NRST_IPAddress().subtype(
+        SkrIPAddress().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 2)
             )
@@ -836,18 +836,18 @@ NRST_RequestedDataNetworkIdentifier.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_RequestedPagerIdentifier(char.NumericString):
+class SkrRequestedPagerIdentifier(char.NumericString):
     pass
 
 
-NRST_RequestedPagerIdentifier.subtypeSpec = constraint.ValueSizeConstraint(2, 18)
+SkrRequestedPagerIdentifier.subtypeSpec = constraint.ValueSizeConstraint(2, 18)
 
 
-class NRST_RequestedPstnIdentifier(univ.Sequence):
+class SkrRequestedPstnIdentifier(univ.Sequence):
     pass
 
 
-NRST_RequestedPstnIdentifier.componentType = namedtype.NamedTypes(
+SkrRequestedPstnIdentifier.componentType = namedtype.NamedTypes(
     namedtype.NamedType(
         'directory-number',
         char.UTF8String().subtype(
@@ -863,11 +863,11 @@ NRST_RequestedPstnIdentifier.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_RequestedGsmIdentifier(univ.Choice):
+class SkrRequestedGsmIdentifier(univ.Choice):
     pass
 
 
-NRST_RequestedGsmIdentifier.componentType = namedtype.NamedTypes(
+SkrRequestedGsmIdentifier.componentType = namedtype.NamedTypes(
     namedtype.NamedType(
         'directory-number',
         char.UTF8String().subtype(
@@ -897,11 +897,11 @@ NRST_RequestedGsmIdentifier.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_RequestedCdmaIdentifier(univ.Choice):
+class SkrRequestedCdmaIdentifier(univ.Choice):
     pass
 
 
-NRST_RequestedCdmaIdentifier.componentType = namedtype.NamedTypes(
+SkrRequestedCdmaIdentifier.componentType = namedtype.NamedTypes(
     namedtype.NamedType(
         'directory-number',
         char.UTF8String().subtype(
@@ -939,14 +939,14 @@ NRST_RequestedCdmaIdentifier.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_RequestedVoipIdentifier(univ.Choice):
+class SkrRequestedVoipIdentifier(univ.Choice):
     pass
 
 
-NRST_RequestedVoipIdentifier.componentType = namedtype.NamedTypes(
+SkrRequestedVoipIdentifier.componentType = namedtype.NamedTypes(
     namedtype.NamedType(
         'ip-address',
-        NRST_IPAddress().subtype(
+        SkrIPAddress().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 0)
             )
@@ -971,20 +971,20 @@ NRST_RequestedVoipIdentifier.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_RecodedRequestedIdentifier(univ.Choice):
+class SkrRecodedRequestedIdentifier(univ.Choice):
     pass
 
 
-NRST_RecodedRequestedIdentifier.componentType = namedtype.NamedTypes(
+SkrRecodedRequestedIdentifier.componentType = namedtype.NamedTypes(
     namedtype.NamedType(
         'pager-identifier',
-        NRST_RequestedPagerIdentifier().subtype(
+        SkrRequestedPagerIdentifier().subtype(
             implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 0))
         )
     ),
     namedtype.NamedType(
         'pstn-identifier',
-        NRST_RequestedPstnIdentifier().subtype(
+        SkrRequestedPstnIdentifier().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 1)
             )
@@ -992,7 +992,7 @@ NRST_RecodedRequestedIdentifier.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'gsm-identifier',
-        NRST_RequestedGsmIdentifier().subtype(
+        SkrRequestedGsmIdentifier().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 2)
             )
@@ -1000,7 +1000,7 @@ NRST_RecodedRequestedIdentifier.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'cdma-identifier',
-        NRST_RequestedCdmaIdentifier().subtype(
+        SkrRequestedCdmaIdentifier().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 3)
             )
@@ -1008,7 +1008,7 @@ NRST_RecodedRequestedIdentifier.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'data-network-identifier',
-        NRST_RequestedDataNetworkIdentifier().subtype(
+        SkrRequestedDataNetworkIdentifier().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 4)
             )
@@ -1016,7 +1016,7 @@ NRST_RecodedRequestedIdentifier.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'voip-identifier',
-        NRST_RequestedVoipIdentifier().subtype(
+        SkrRequestedVoipIdentifier().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 5)
             )
@@ -1025,11 +1025,11 @@ NRST_RecodedRequestedIdentifier.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_ValidateServicesParameter(univ.Choice):
+class SkrValidateServicesParameter(univ.Choice):
     pass
 
 
-NRST_ValidateServicesParameter.componentType = namedtype.NamedTypes(
+SkrValidateServicesParameter.componentType = namedtype.NamedTypes(
     namedtype.NamedType(
         'contract',
         char.UTF8String().subtype(
@@ -1040,7 +1040,7 @@ NRST_ValidateServicesParameter.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'identifier',
-        NRST_RequestedIdentifier().subtype(
+        SkrRequestedIdentifier().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 1)
             )
@@ -1048,7 +1048,7 @@ NRST_ValidateServicesParameter.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'recoded-identifier',
-        NRST_RecodedRequestedIdentifier().subtype(
+        SkrRecodedRequestedIdentifier().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 101)
             )
@@ -1057,11 +1057,11 @@ NRST_ValidateServicesParameter.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_LogicalOperation(univ.Enumerated):
+class SkrLogicalOperation(univ.Enumerated):
     pass
 
 
-NRST_LogicalOperation.namedValues = namedval.NamedValues(
+SkrLogicalOperation.namedValues = namedval.NamedValues(
     ('operation-open-bracket', 0),
     ('operation-close-bracket', 1),
     ('operation-or', 2),
@@ -1070,14 +1070,14 @@ NRST_LogicalOperation.namedValues = namedval.NamedValues(
 )
 
 
-class NRST_ValidateServicesParameters(univ.Choice):
+class SkrValidateServicesParameters(univ.Choice):
     pass
 
 
-NRST_ValidateServicesParameters.componentType = namedtype.NamedTypes(
+SkrValidateServicesParameters.componentType = namedtype.NamedTypes(
     namedtype.NamedType(
         'separator',
-        NRST_LogicalOperation().subtype(
+        SkrLogicalOperation().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 0)
             )
@@ -1085,7 +1085,7 @@ NRST_ValidateServicesParameters.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'find-mask',
-        NRST_ValidateServicesParameter().subtype(
+        SkrValidateServicesParameter().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 1)
             )
@@ -1094,27 +1094,27 @@ NRST_ValidateServicesParameters.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_ValidateServicesTask(univ.SequenceOf):
+class SkrValidateServicesTask(univ.SequenceOf):
     pass
 
 
-NRST_ValidateServicesTask.componentType = NRST_ValidateServicesParameters()
+SkrValidateServicesTask.componentType = SkrValidateServicesParameters()
 
 
-class NRST_RequestedIdentifierParameters(univ.Choice):
+class SkrRequestedIdentifierParameters(univ.Choice):
     pass
 
 
-NRST_RequestedIdentifierParameters.componentType = namedtype.NamedTypes(
+SkrRequestedIdentifierParameters.componentType = namedtype.NamedTypes(
     namedtype.NamedType(
         'separator',
-        NRST_LogicalOperation().subtype(
+        SkrLogicalOperation().subtype(
             implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 0))
         )
     ),
     namedtype.NamedType(
         'find-mask',
-        NRST_RequestedIdentifier().subtype(
+        SkrRequestedIdentifier().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 1)
             )
@@ -1122,7 +1122,7 @@ NRST_RequestedIdentifierParameters.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'recoded-find-mask',
-        NRST_RecodedRequestedIdentifier().subtype(
+        SkrRecodedRequestedIdentifier().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 100)
             )
@@ -1131,22 +1131,22 @@ NRST_RequestedIdentifierParameters.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_RequestedIdentifiers(univ.SequenceOf):
+class SkrRequestedIdentifiers(univ.SequenceOf):
     pass
 
 
-NRST_RequestedIdentifiers.componentType = NRST_RequestedIdentifierParameters()
+SkrRequestedIdentifiers.componentType = SkrRequestedIdentifierParameters()
 
 
-class NRST_ValidateAbonentsTask(NRST_RequestedIdentifiers):
+class SkrValidateAbonentsTask(SkrRequestedIdentifiers):
     pass
 
 
-class NRST_RequestedPassport(univ.Sequence):
+class SkrRequestedPassport(univ.Sequence):
     pass
 
 
-NRST_RequestedPassport.componentType = namedtype.NamedTypes(
+SkrRequestedPassport.componentType = namedtype.NamedTypes(
     namedtype.OptionalNamedType(
         'doc-type-id',
         univ.Integer().subtype(
@@ -1174,11 +1174,11 @@ NRST_RequestedPassport.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_RequestedAddress(univ.Sequence):
+class SkrRequestedAddress(univ.Sequence):
     pass
 
 
-NRST_RequestedAddress.componentType = namedtype.NamedTypes(
+SkrRequestedAddress.componentType = namedtype.NamedTypes(
     namedtype.OptionalNamedType(
         'zip',
         char.UTF8String().subtype(
@@ -1254,11 +1254,11 @@ NRST_RequestedAddress.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_RequestedPerson(univ.Sequence):
+class SkrRequestedPerson(univ.Sequence):
     pass
 
 
-NRST_RequestedPerson.componentType = namedtype.NamedTypes(
+SkrRequestedPerson.componentType = namedtype.NamedTypes(
     namedtype.OptionalNamedType(
         'given-name',
         char.UTF8String().subtype(
@@ -1285,13 +1285,13 @@ NRST_RequestedPerson.componentType = namedtype.NamedTypes(
     ),
     namedtype.OptionalNamedType(
         'passport-info',
-        NRST_RequestedPassport().subtype(
+        SkrRequestedPassport().subtype(
             implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 3))
         )
     ),
     namedtype.OptionalNamedType(
         'address',
-        NRST_RequestedAddress().subtype(
+        SkrRequestedAddress().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 4)
             )
@@ -1315,11 +1315,11 @@ NRST_RequestedPerson.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_RequestedOrganization(univ.Sequence):
+class SkrRequestedOrganization(univ.Sequence):
     pass
 
 
-NRST_RequestedOrganization.componentType = namedtype.NamedTypes(
+SkrRequestedOrganization.componentType = namedtype.NamedTypes(
     namedtype.OptionalNamedType(
         'full-name',
         char.UTF8String().subtype(
@@ -1330,7 +1330,7 @@ NRST_RequestedOrganization.componentType = namedtype.NamedTypes(
     ),
     namedtype.OptionalNamedType(
         'address',
-        NRST_RequestedAddress().subtype(
+        SkrRequestedAddress().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 1)
             )
@@ -1365,14 +1365,14 @@ NRST_RequestedOrganization.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_RecodedRequestedAbonent(univ.Choice):
+class SkrRecodedRequestedAbonent(univ.Choice):
     pass
 
 
-NRST_RecodedRequestedAbonent.componentType = namedtype.NamedTypes(
+SkrRecodedRequestedAbonent.componentType = namedtype.NamedTypes(
     namedtype.NamedType(
         'person',
-        NRST_RequestedPerson().subtype(
+        SkrRequestedPerson().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 0)
             )
@@ -1380,7 +1380,7 @@ NRST_RecodedRequestedAbonent.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'organization',
-        NRST_RequestedOrganization().subtype(
+        SkrRequestedOrganization().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 1)
             )
@@ -1389,30 +1389,30 @@ NRST_RecodedRequestedAbonent.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_RequestedAbonent(univ.Sequence):
+class SkrRequestedAbonent(univ.Sequence):
     pass
 
 
-NRST_RequestedAbonent.componentType = namedtype.NamedTypes(
+SkrRequestedAbonent.componentType = namedtype.NamedTypes(
     namedtype.NamedType('id', useful.ObjectDescriptor()),
     namedtype.NamedType('data', univ.Any())
 )
 
 
-class NRST_RequestedAbonentsParameters(univ.Choice):
+class SkrRequestedAbonentsParameters(univ.Choice):
     pass
 
 
-NRST_RequestedAbonentsParameters.componentType = namedtype.NamedTypes(
+SkrRequestedAbonentsParameters.componentType = namedtype.NamedTypes(
     namedtype.NamedType(
         'separator',
-        NRST_LogicalOperation().subtype(
+        SkrLogicalOperation().subtype(
             implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 0))
         )
     ),
     namedtype.NamedType(
         'find-mask',
-        NRST_RequestedAbonent().subtype(
+        SkrRequestedAbonent().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 1)
             )
@@ -1420,7 +1420,7 @@ NRST_RequestedAbonentsParameters.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'recoded-find-mask',
-        NRST_RecodedRequestedAbonent().subtype(
+        SkrRecodedRequestedAbonent().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 100)
             )
@@ -1429,48 +1429,48 @@ NRST_RequestedAbonentsParameters.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_RequestedAbonents(univ.SequenceOf):
+class SkrRequestedAbonents(univ.SequenceOf):
     pass
 
 
-NRST_RequestedAbonents.componentType = NRST_RequestedAbonentsParameters()
+SkrRequestedAbonents.componentType = SkrRequestedAbonentsParameters()
 
 
-class NRST_ValidateIdentifiersTask(NRST_RequestedAbonents):
+class SkrValidateIdentifiersTask(SkrRequestedAbonents):
     pass
 
 
-class NRST_AbonentsTask(univ.Choice):
+class SkrAbonentsTask(univ.Choice):
     pass
 
 
-NRST_AbonentsTask.componentType = namedtype.NamedTypes(
+SkrAbonentsTask.componentType = namedtype.NamedTypes(
     namedtype.NamedType(
         'validate-abonents-task',
-        NRST_ValidateAbonentsTask().subtype(
+        SkrValidateAbonentsTask().subtype(
             implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 0))
         )
     ),
     namedtype.NamedType(
         'validate-identifiers',
-        NRST_ValidateIdentifiersTask().subtype(
+        SkrValidateIdentifiersTask().subtype(
             implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 1))
         )
     ),
     namedtype.NamedType(
         'validate-services',
-        NRST_ValidateServicesTask().subtype(
+        SkrValidateServicesTask().subtype(
             implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 2))
         )
     )
 )
 
 
-class NRST_Acknowledgement(univ.Sequence):
+class SkrAcknowledgement(univ.Sequence):
     pass
 
 
-NRST_Acknowledgement.componentType = namedtype.NamedTypes(
+SkrAcknowledgement.componentType = namedtype.NamedTypes(
     namedtype.NamedType('successful', univ.Boolean()),
     namedtype.OptionalNamedType('broken-record', univ.Integer()),
     namedtype.OptionalNamedType(
@@ -1482,11 +1482,11 @@ NRST_Acknowledgement.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_AdjustmentRequest(univ.Sequence):
+class SkrAdjustmentRequest(univ.Sequence):
     pass
 
 
-NRST_AdjustmentRequest.componentType = namedtype.NamedTypes(
+SkrAdjustmentRequest.componentType = namedtype.NamedTypes(
     namedtype.NamedType(
         'supports',
         univ.SequenceOf(componentType=(useful.ObjectDescriptor()))
@@ -1494,15 +1494,15 @@ NRST_AdjustmentRequest.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_AdjustmentResponse(univ.Null):
+class SkrAdjustmentResponse(univ.Null):
     pass
 
 
-class NRST_AttributeType(univ.Enumerated):
+class SkrAttributeType(univ.Enumerated):
     pass
 
 
-NRST_AttributeType.namedValues = namedval.NamedValues(
+SkrAttributeType.namedValues = namedval.NamedValues(
     ('date-time', 0),
     ('integer', 1),
     ('string', 2),
@@ -1513,20 +1513,20 @@ NRST_AttributeType.namedValues = namedval.NamedValues(
 )
 
 
-class NRST_ValidateBalanceFillupRecord(univ.Sequence):
+class SkrValidateBalanceFillupRecord(univ.Sequence):
     pass
 
 
-NRST_ValidateBalanceFillupRecord.componentType = namedtype.NamedTypes(
-    namedtype.NamedType('telco-id', NRST_TelcoID()),
+SkrValidateBalanceFillupRecord.componentType = namedtype.NamedTypes(
+    namedtype.NamedType('telco-id', SkrTelcoID()),
     namedtype.NamedType(
         'pay-type-id',
         univ.Integer().subtype(
             subtypeSpec=(constraint.ValueRangeConstraint(0, 4294967295))
         )
     ),
-    namedtype.NamedType('device-id', NRST_ReportedIdentifier()),
-    namedtype.NamedType('date-time-fillup', NRST_DateAndTime()),
+    namedtype.NamedType('device-id', SkrReportedIdentifier()),
+    namedtype.NamedType('date-time-fillup', SkrDateAndTime()),
     namedtype.NamedType(
         'amount',
         char.UTF8String().subtype(
@@ -1542,20 +1542,20 @@ NRST_ValidateBalanceFillupRecord.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_BalanceFillupReportData(univ.SequenceOf):
+class SkrBalanceFillupReportData(univ.SequenceOf):
     pass
 
 
-NRST_BalanceFillupReportData.componentType = NRST_ValidateBalanceFillupRecord()
+SkrBalanceFillupReportData.componentType = SkrValidateBalanceFillupRecord()
 
 
-class NRST_ValidateBankAccountTransferRecord(univ.Sequence):
+class SkrValidateBankAccountTransferRecord(univ.Sequence):
     pass
 
 
-NRST_ValidateBankAccountTransferRecord.componentType = namedtype.NamedTypes(
-    namedtype.NamedType('telco-id', NRST_TelcoID()),
-    namedtype.NamedType('donated-id', NRST_ReportedIdentifier()),
+SkrValidateBankAccountTransferRecord.componentType = namedtype.NamedTypes(
+    namedtype.NamedType('telco-id', SkrTelcoID()),
+    namedtype.NamedType('donated-id', SkrReportedIdentifier()),
     namedtype.NamedType(
         'bank-name',
         char.UTF8String().subtype(
@@ -1568,7 +1568,7 @@ NRST_ValidateBankAccountTransferRecord.componentType = namedtype.NamedTypes(
             subtypeSpec=(constraint.ValueSizeConstraint(1, 64))
         )
     ),
-    namedtype.NamedType('date-time-fillup', NRST_DateAndTime()),
+    namedtype.NamedType('date-time-fillup', SkrDateAndTime()),
     namedtype.NamedType(
         'amount',
         char.UTF8String().subtype(
@@ -1578,27 +1578,27 @@ NRST_ValidateBankAccountTransferRecord.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_BankAccountTransferReportData(univ.SequenceOf):
+class SkrBankAccountTransferReportData(univ.SequenceOf):
     pass
 
 
-NRST_BankAccountTransferReportData.componentType = NRST_ValidateBankAccountTransferRecord()
+SkrBankAccountTransferReportData.componentType = SkrValidateBankAccountTransferRecord()
 
 
-class NRST_ValidateBankCardTransferRecord(univ.Sequence):
+class SkrValidateBankCardTransferRecord(univ.Sequence):
     pass
 
 
-NRST_ValidateBankCardTransferRecord.componentType = namedtype.NamedTypes(
-    namedtype.NamedType('telco-id', NRST_TelcoID()),
-    namedtype.NamedType('donanted-id', NRST_ReportedIdentifier()),
+SkrValidateBankCardTransferRecord.componentType = namedtype.NamedTypes(
+    namedtype.NamedType('telco-id', SkrTelcoID()),
+    namedtype.NamedType('donanted-id', SkrReportedIdentifier()),
     namedtype.NamedType(
         'bank-card-id',
         char.NumericString().subtype(
             subtypeSpec=(constraint.ValueSizeConstraint(1, 12))
         )
     ),
-    namedtype.NamedType('date-time-fillup', NRST_DateAndTime()),
+    namedtype.NamedType('date-time-fillup', SkrDateAndTime()),
     namedtype.NamedType(
         'amount',
         char.UTF8String().subtype(
@@ -1608,21 +1608,21 @@ NRST_ValidateBankCardTransferRecord.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_BankCardTransferReportData(univ.SequenceOf):
+class SkrBankCardTransferReportData(univ.SequenceOf):
     pass
 
 
-NRST_BankCardTransferReportData.componentType = NRST_ValidateBankCardTransferRecord()
+SkrBankCardTransferReportData.componentType = SkrValidateBankCardTransferRecord()
 
 
-class NRST_ValidateBankDivisionTransferRecord(univ.Sequence):
+class SkrValidateBankDivisionTransferRecord(univ.Sequence):
     pass
 
 
-NRST_ValidateBankDivisionTransferRecord.componentType = namedtype.NamedTypes(
-    namedtype.NamedType('telco-id', NRST_TelcoID()),
-    namedtype.NamedType('donanted-id', NRST_ReportedIdentifier()),
-    namedtype.NamedType('date-time-fillup', NRST_DateAndTime()),
+SkrValidateBankDivisionTransferRecord.componentType = namedtype.NamedTypes(
+    namedtype.NamedType('telco-id', SkrTelcoID()),
+    namedtype.NamedType('donanted-id', SkrReportedIdentifier()),
+    namedtype.NamedType('date-time-fillup', SkrDateAndTime()),
     namedtype.NamedType(
         'person-received',
         char.UTF8String().subtype(
@@ -1641,7 +1641,7 @@ NRST_ValidateBankDivisionTransferRecord.componentType = namedtype.NamedTypes(
             subtypeSpec=(constraint.ValueSizeConstraint(1, 512))
         )
     ),
-    namedtype.NamedType('bank-division-address', NRST_ReportedAddress()),
+    namedtype.NamedType('bank-division-address', SkrReportedAddress()),
     namedtype.NamedType(
         'amount',
         char.UTF8String().subtype(
@@ -1651,21 +1651,21 @@ NRST_ValidateBankDivisionTransferRecord.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_BankDivisionTransferReportData(univ.SequenceOf):
+class SkrBankDivisionTransferReportData(univ.SequenceOf):
     pass
 
 
-NRST_BankDivisionTransferReportData.componentType = NRST_ValidateBankDivisionTransferRecord()
+SkrBankDivisionTransferReportData.componentType = SkrValidateBankDivisionTransferRecord()
 
 
-class NRST_BankTransactionRecord(univ.Sequence):
+class SkrBankTransactionRecord(univ.Sequence):
     pass
 
 
-NRST_BankTransactionRecord.componentType = namedtype.NamedTypes(
-    namedtype.NamedType('telco-id', NRST_TelcoID()),
-    namedtype.NamedType('device-id', NRST_ReportedIdentifier()),
-    namedtype.NamedType('date-time-fillup', NRST_DateAndTime()),
+SkrBankTransactionRecord.componentType = namedtype.NamedTypes(
+    namedtype.NamedType('telco-id', SkrTelcoID()),
+    namedtype.NamedType('device-id', SkrReportedIdentifier()),
+    namedtype.NamedType('date-time-fillup', SkrDateAndTime()),
     namedtype.NamedType(
         'bank-account',
         char.UTF8String().subtype(
@@ -1678,7 +1678,7 @@ NRST_BankTransactionRecord.componentType = namedtype.NamedTypes(
             subtypeSpec=(constraint.ValueSizeConstraint(1, 512))
         )
     ),
-    namedtype.NamedType('bank-address', NRST_ReportedAddress()),
+    namedtype.NamedType('bank-address', SkrReportedAddress()),
     namedtype.NamedType(
         'amount',
         char.UTF8String().subtype(
@@ -1688,18 +1688,18 @@ NRST_BankTransactionRecord.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_BankTransactionReportData(univ.SequenceOf):
+class SkrBankTransactionReportData(univ.SequenceOf):
     pass
 
 
-NRST_BankTransactionReportData.componentType = NRST_BankTransactionRecord()
+SkrBankTransactionReportData.componentType = SkrBankTransactionRecord()
 
 
-class NRST_BroadbandWirelessParameters(univ.Sequence):
+class SkrBroadbandWirelessParameters(univ.Sequence):
     pass
 
 
-NRST_BroadbandWirelessParameters.componentType = namedtype.NamedTypes(
+SkrBroadbandWirelessParameters.componentType = namedtype.NamedTypes(
     namedtype.NamedType(
         'azimuth',
         univ.Integer().subtype(
@@ -1777,15 +1777,15 @@ NRST_BroadbandWirelessParameters.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_WirelessAntenna(NRST_BroadbandWirelessParameters):
+class SkrWirelessAntenna(SkrBroadbandWirelessParameters):
     pass
 
 
-class NRST_BsCellType(univ.Enumerated):
+class SkrBsCellType(univ.Enumerated):
     pass
 
 
-NRST_BsCellType.namedValues = namedval.NamedValues(
+SkrBsCellType.namedValues = namedval.NamedValues(
     ('macro', 0),
     ('micro', 1),
     ('pico', 2),
@@ -1793,29 +1793,29 @@ NRST_BsCellType.namedValues = namedval.NamedValues(
 )
 
 
-class NRST_BsSetting(univ.Enumerated):
+class SkrBsSetting(univ.Enumerated):
     pass
 
 
-NRST_BsSetting.namedValues = namedval.NamedValues(
+SkrBsSetting.namedValues = namedval.NamedValues(
     ('indoor', 0), ('outdoor', 1), ('underground', 2)
 )
 
 
-class NRST_BsGeneration(univ.Enumerated):
+class SkrBsGeneration(univ.Enumerated):
     pass
 
 
-NRST_BsGeneration.namedValues = namedval.NamedValues(
+SkrBsGeneration.namedValues = namedval.NamedValues(
     ('g2', 0), ('g3', 1), ('g4', 2), ('g5', 3)
 )
 
 
-class NRST_GsmAntenna(univ.Sequence):
+class SkrGsmAntenna(univ.Sequence):
     pass
 
 
-NRST_GsmAntenna.componentType = namedtype.NamedTypes(
+SkrGsmAntenna.componentType = namedtype.NamedTypes(
     namedtype.NamedType(
         'azimut',
         univ.Integer().subtype(
@@ -1876,7 +1876,7 @@ NRST_GsmAntenna.componentType = namedtype.NamedTypes(
     ),
     namedtype.OptionalNamedType(
         'setting',
-        NRST_BsSetting().subtype(
+        SkrBsSetting().subtype(
             implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 5))
         )
     ),
@@ -1890,7 +1890,7 @@ NRST_GsmAntenna.componentType = namedtype.NamedTypes(
     ),
     namedtype.OptionalNamedType(
         'generation',
-        NRST_BsGeneration().subtype(
+        SkrBsGeneration().subtype(
             implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 7))
         )
     ),
@@ -1912,7 +1912,7 @@ NRST_GsmAntenna.componentType = namedtype.NamedTypes(
     ),
     namedtype.OptionalNamedType(
         'cell-type',
-        NRST_BsCellType().subtype(
+        SkrBsCellType().subtype(
             implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 10))
         )
     ),
@@ -1943,18 +1943,18 @@ NRST_GsmAntenna.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_CdmaAntenna(NRST_BroadbandWirelessParameters):
+class SkrCdmaAntenna(SkrBroadbandWirelessParameters):
     pass
 
 
-class NRST_BasicStationAntenna(univ.Choice):
+class SkrBasicStationAntenna(univ.Choice):
     pass
 
 
-NRST_BasicStationAntenna.componentType = namedtype.NamedTypes(
+SkrBasicStationAntenna.componentType = namedtype.NamedTypes(
     namedtype.NamedType(
         'gsm-antenna',
-        NRST_GsmAntenna().subtype(
+        SkrGsmAntenna().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 0)
             )
@@ -1963,7 +1963,7 @@ NRST_BasicStationAntenna.componentType = namedtype.NamedTypes(
     namedtype.NamedType(
         'cdma-antenna',
         univ.SequenceOf(
-            componentType=(NRST_CdmaAntenna())
+            componentType=(SkrCdmaAntenna())
         ).subtype(
             implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 1))
         )
@@ -1971,7 +1971,7 @@ NRST_BasicStationAntenna.componentType = namedtype.NamedTypes(
     namedtype.NamedType(
         'wireless-antenna',
         univ.SequenceOf(
-            componentType=(NRST_WirelessAntenna())
+            componentType=(SkrWirelessAntenna())
         ).subtype(
             implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 2))
         )
@@ -1979,42 +1979,42 @@ NRST_BasicStationAntenna.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_IPPort(univ.OctetString):
+class SkrIPPort(univ.OctetString):
     pass
 
 
-NRST_IPPort.subtypeSpec = constraint.ValueSizeConstraint(2, 2)
+SkrIPPort.subtypeSpec = constraint.ValueSizeConstraint(2, 2)
 
 
-class NRST_NetworkPeerInfo(univ.Sequence):
+class SkrNetworkPeerInfo(univ.Sequence):
     pass
 
 
-NRST_NetworkPeerInfo.componentType = namedtype.NamedTypes(
-    namedtype.NamedType('ip-address', NRST_IPAddress()),
-    namedtype.OptionalNamedType('ip-port', NRST_IPPort())
+SkrNetworkPeerInfo.componentType = namedtype.NamedTypes(
+    namedtype.NamedType('ip-address', SkrIPAddress()),
+    namedtype.OptionalNamedType('ip-port', SkrIPPort())
 )
 
 
-class NRST_IPList(univ.SequenceOf):
+class SkrIPList(univ.SequenceOf):
     pass
 
 
-NRST_IPList.componentType = NRST_NetworkPeerInfo()
+SkrIPList.componentType = SkrNetworkPeerInfo()
 
 
-class NRST_WirelessIdentifiers(univ.Sequence):
+class SkrWirelessIdentifiers(univ.Sequence):
     pass
 
 
-NRST_WirelessIdentifiers.componentType = namedtype.NamedTypes(
+SkrWirelessIdentifiers.componentType = namedtype.NamedTypes(
     namedtype.NamedType(
         'cell',
         char.UTF8String().subtype(
             subtypeSpec=(constraint.ValueSizeConstraint(1, 64))
         )
     ),
-    namedtype.OptionalNamedType('ip-list', NRST_IPList()),
+    namedtype.OptionalNamedType('ip-list', SkrIPList()),
     namedtype.OptionalNamedType(
         'mac',
         univ.OctetString().subtype(
@@ -2024,11 +2024,11 @@ NRST_WirelessIdentifiers.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_TelephoneIdentifiers(univ.Sequence):
+class SkrTelephoneIdentifiers(univ.Sequence):
     pass
 
 
-NRST_TelephoneIdentifiers.componentType = namedtype.NamedTypes(
+SkrTelephoneIdentifiers.componentType = namedtype.NamedTypes(
     namedtype.NamedType(
         'lac',
         univ.Integer().subtype(
@@ -2050,14 +2050,14 @@ NRST_TelephoneIdentifiers.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_BasicStationIdentifiers(univ.Choice):
+class SkrBasicStationIdentifiers(univ.Choice):
     pass
 
 
-NRST_BasicStationIdentifiers.componentType = namedtype.NamedTypes(
+SkrBasicStationIdentifiers.componentType = namedtype.NamedTypes(
     namedtype.NamedType(
         'telepone',
-        NRST_TelephoneIdentifiers().subtype(
+        SkrTelephoneIdentifiers().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 0)
             )
@@ -2066,7 +2066,7 @@ NRST_BasicStationIdentifiers.componentType = namedtype.NamedTypes(
     namedtype.NamedType(
         'wireless',
         univ.SequenceOf(
-            componentType=(NRST_WirelessIdentifiers())
+            componentType=(SkrWirelessIdentifiers())
         ).subtype(
             implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 1))
         )
@@ -2074,11 +2074,11 @@ NRST_BasicStationIdentifiers.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_BasicStationType(univ.Enumerated):
+class SkrBasicStationType(univ.Enumerated):
     pass
 
 
-NRST_BasicStationType.namedValues = namedval.NamedValues(
+SkrBasicStationType.namedValues = namedval.NamedValues(
     ('gsm', 0),
     ('cdma', 1),
     ('umts', 2),
@@ -2087,26 +2087,26 @@ NRST_BasicStationType.namedValues = namedval.NamedValues(
 )
 
 
-class NRST_BasicStationSectorRecord(univ.Sequence):
+class SkrBasicStationSectorRecord(univ.Sequence):
     pass
 
 
-NRST_BasicStationSectorRecord.componentType = namedtype.NamedTypes(
-    namedtype.NamedType('telco-id', NRST_TelcoID()),
-    namedtype.NamedType('begin-time', NRST_DateAndTime()),
-    namedtype.NamedType('end-time', NRST_DateAndTime()),
+SkrBasicStationSectorRecord.componentType = namedtype.NamedTypes(
+    namedtype.NamedType('telco-id', SkrTelcoID()),
+    namedtype.NamedType('begin-time', SkrDateAndTime()),
+    namedtype.NamedType('end-time', SkrDateAndTime()),
     namedtype.NamedType(
         'address',
         char.UTF8String().subtype(
             subtypeSpec=(constraint.ValueSizeConstraint(1, 256))
         )
     ),
-    namedtype.NamedType('sector-identifiers', NRST_BasicStationIdentifiers()),
-    namedtype.NamedType('antenna-configuration', NRST_BasicStationAntenna()),
-    namedtype.NamedType('station-type', NRST_BasicStationType()),
+    namedtype.NamedType('sector-identifiers', SkrBasicStationIdentifiers()),
+    namedtype.NamedType('antenna-configuration', SkrBasicStationAntenna()),
+    namedtype.NamedType('station-type', SkrBasicStationType()),
     namedtype.OptionalNamedType(
         'structured-address',
-        NRST_ReportedAddress().subtype(
+        SkrReportedAddress().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 0)
             )
@@ -2114,7 +2114,7 @@ NRST_BasicStationSectorRecord.componentType = namedtype.NamedTypes(
     ),
     namedtype.OptionalNamedType(
         'location',
-        NRST_GeoLocation().subtype(
+        SkrGeoLocation().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 1)
             )
@@ -2123,18 +2123,18 @@ NRST_BasicStationSectorRecord.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_BasicStationsSectorRecordsData(univ.SequenceOf):
+class SkrBasicStationsSectorRecordsData(univ.SequenceOf):
     pass
 
 
-NRST_BasicStationsSectorRecordsData.componentType = NRST_BasicStationSectorRecord()
+SkrBasicStationsSectorRecordsData.componentType = SkrBasicStationSectorRecord()
 
 
-class NRST_Bunch(univ.Choice):
+class SkrBunch(univ.Choice):
     pass
 
 
-NRST_Bunch.componentType = namedtype.NamedTypes(
+SkrBunch.componentType = namedtype.NamedTypes(
     namedtype.NamedType(
         'gsm',
         univ.Integer().subtype(
@@ -2145,7 +2145,7 @@ NRST_Bunch.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'cdma-umts',
-        NRST_DataNetworkEquipment().subtype(
+        SkrDataNetworkEquipment().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 1)
             )
@@ -2154,29 +2154,29 @@ NRST_Bunch.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_BunchMapPoint(univ.Sequence):
+class SkrBunchMapPoint(univ.Sequence):
     pass
 
 
-NRST_BunchMapPoint.componentType = namedtype.NamedTypes(
-    namedtype.NamedType('telco-id', NRST_TelcoID()),
+SkrBunchMapPoint.componentType = namedtype.NamedTypes(
+    namedtype.NamedType('telco-id', SkrTelcoID()),
     namedtype.NamedType(
         'switch-id',
         char.UTF8String().subtype(
             subtypeSpec=(constraint.ValueSizeConstraint(1, 128))
         )
     ),
-    namedtype.NamedType('bunch-id', NRST_Bunch())
+    namedtype.NamedType('bunch-id', SkrBunch())
 )
 
 
-class NRST_BunchRecord(univ.Sequence):
+class SkrBunchRecord(univ.Sequence):
     pass
 
 
-NRST_BunchRecord.componentType = namedtype.NamedTypes(
-    namedtype.NamedType('telco-id', NRST_TelcoID()),
-    namedtype.NamedType('bunch-id', NRST_Bunch()),
+SkrBunchRecord.componentType = namedtype.NamedTypes(
+    namedtype.NamedType('telco-id', SkrTelcoID()),
+    namedtype.NamedType('bunch-id', SkrBunch()),
     namedtype.NamedType(
         'switch-id',
         char.UTF8String().subtype(
@@ -2193,8 +2193,8 @@ NRST_BunchRecord.componentType = namedtype.NamedTypes(
             )
         )
     ),
-    namedtype.NamedType('begin-time', NRST_DateAndTime()),
-    namedtype.OptionalNamedType('end-time', NRST_DateAndTime()),
+    namedtype.NamedType('begin-time', SkrDateAndTime()),
+    namedtype.OptionalNamedType('end-time', SkrDateAndTime()),
     namedtype.NamedType(
         'description',
         char.UTF8String().subtype(
@@ -2204,46 +2204,46 @@ NRST_BunchRecord.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_BunchesMapRecord(univ.Sequence):
+class SkrBunchesMapRecord(univ.Sequence):
     pass
 
 
-NRST_BunchesMapRecord.componentType = namedtype.NamedTypes(
-    namedtype.NamedType('a-bunch', NRST_BunchMapPoint()),
-    namedtype.NamedType('b-bunch', NRST_BunchMapPoint()),
-    namedtype.NamedType('begin-time', NRST_DateAndTime()),
-    namedtype.OptionalNamedType('end-time', NRST_DateAndTime())
+SkrBunchesMapRecord.componentType = namedtype.NamedTypes(
+    namedtype.NamedType('a-bunch', SkrBunchMapPoint()),
+    namedtype.NamedType('b-bunch', SkrBunchMapPoint()),
+    namedtype.NamedType('begin-time', SkrDateAndTime()),
+    namedtype.OptionalNamedType('end-time', SkrDateAndTime())
 )
 
 
-class NRST_BunchesMapRecordsData(univ.SequenceOf):
+class SkrBunchesMapRecordsData(univ.SequenceOf):
     pass
 
 
-NRST_BunchesMapRecordsData.componentType = NRST_BunchesMapRecord()
+SkrBunchesMapRecordsData.componentType = SkrBunchesMapRecord()
 
 
-class NRST_BunchesRecordsData(univ.SequenceOf):
+class SkrBunchesRecordsData(univ.SequenceOf):
     pass
 
 
-NRST_BunchesRecordsData.componentType = NRST_BunchRecord()
+SkrBunchesRecordsData.componentType = SkrBunchRecord()
 
 
-class NRST_CallsTypesRecord(univ.Sequence):
+class SkrCallsTypesRecord(univ.Sequence):
     pass
 
 
-NRST_CallsTypesRecord.componentType = namedtype.NamedTypes(
-    namedtype.NamedType('telco-id', NRST_TelcoID()),
+SkrCallsTypesRecord.componentType = namedtype.NamedTypes(
+    namedtype.NamedType('telco-id', SkrTelcoID()),
     namedtype.NamedType(
         'call-type-id',
         univ.Integer().subtype(
             subtypeSpec=(constraint.ValueRangeConstraint(0, 4294967295))
         )
     ),
-    namedtype.NamedType('begin-time', NRST_DateAndTime()),
-    namedtype.OptionalNamedType('end-time', NRST_DateAndTime()),
+    namedtype.NamedType('begin-time', SkrDateAndTime()),
+    namedtype.OptionalNamedType('end-time', SkrDateAndTime()),
     namedtype.NamedType(
         'description',
         char.UTF8String().subtype(
@@ -2253,73 +2253,73 @@ NRST_CallsTypesRecord.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_CallTypesRecordsData(univ.SequenceOf):
+class SkrCallTypesRecordsData(univ.SequenceOf):
     pass
 
 
-NRST_CallTypesRecordsData.componentType = NRST_CallsTypesRecord()
+SkrCallTypesRecordsData.componentType = SkrCallsTypesRecord()
 
 
-class NRST_CallsRecords(univ.Sequence):
+class SkrCallsRecords(univ.Sequence):
     pass
 
 
-NRST_CallsRecords.componentType = namedtype.NamedTypes(
+SkrCallsRecords.componentType = namedtype.NamedTypes(
     namedtype.NamedType('id', useful.ObjectDescriptor()),
     namedtype.NamedType('data', univ.Any())
 )
 
 
-class NRST_ModuleId(univ.OctetString):
+class SkrModuleId(univ.OctetString):
     pass
 
 
-NRST_ModuleId.subtypeSpec = constraint.ValueSizeConstraint(8, 8)
+SkrModuleId.subtypeSpec = constraint.ValueSizeConstraint(8, 8)
 
 
-class NRST_RequestedHardwareModules(univ.SequenceOf):
+class SkrRequestedHardwareModules(univ.SequenceOf):
     pass
 
 
-NRST_RequestedHardwareModules.componentType = NRST_ModuleId()
+SkrRequestedHardwareModules.componentType = SkrModuleId()
 
 
-class NRST_RequestedSoftwareModules(univ.SequenceOf):
+class SkrRequestedSoftwareModules(univ.SequenceOf):
     pass
 
 
-NRST_RequestedSoftwareModules.componentType = NRST_ModuleId()
+SkrRequestedSoftwareModules.componentType = SkrModuleId()
 
 
-class NRST_RequestedModulesList(univ.Choice):
+class SkrRequestedModulesList(univ.Choice):
     pass
 
 
-NRST_RequestedModulesList.componentType = namedtype.NamedTypes(
+SkrRequestedModulesList.componentType = namedtype.NamedTypes(
     namedtype.NamedType(
         'hw-modules',
-        NRST_RequestedHardwareModules().subtype(
+        SkrRequestedHardwareModules().subtype(
             implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 0))
         )
     ),
     namedtype.NamedType(
         'sw-modules',
-        NRST_RequestedSoftwareModules().subtype(
+        SkrRequestedSoftwareModules().subtype(
             implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 1))
         )
     )
 )
 
 
-class NRST_CheckModuleRequest(NRST_RequestedModulesList):
+class SkrCheckModuleRequest(SkrRequestedModulesList):
     pass
 
 
-class NRST_ParameterValue(univ.Choice):
+class SkrParameterValue(univ.Choice):
     pass
 
 
-NRST_ParameterValue.componentType = namedtype.NamedTypes(
+SkrParameterValue.componentType = namedtype.NamedTypes(
     namedtype.NamedType(
         'string',
         char.UTF8String().subtype(
@@ -2345,11 +2345,11 @@ NRST_ParameterValue.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_ModuleParameter(univ.Sequence):
+class SkrModuleParameter(univ.Sequence):
     pass
 
 
-NRST_ModuleParameter.componentType = namedtype.NamedTypes(
+SkrModuleParameter.componentType = namedtype.NamedTypes(
     namedtype.NamedType(
         'parameter-name',
         char.UTF8String().subtype(
@@ -2357,29 +2357,29 @@ NRST_ModuleParameter.componentType = namedtype.NamedTypes(
         )
     ),
     namedtype.NamedType('read-only', univ.Boolean()),
-    namedtype.NamedType('parameter-value', NRST_ParameterValue())
+    namedtype.NamedType('parameter-value', SkrParameterValue())
 )
 
 
-class NRST_ModuleParameters(univ.SequenceOf):
+class SkrModuleParameters(univ.SequenceOf):
     pass
 
 
-NRST_ModuleParameters.componentType = NRST_ModuleParameter()
+SkrModuleParameters.componentType = SkrModuleParameter()
 
 
-class NRST_SubmodulesList(univ.SequenceOf):
+class SkrSubmodulesList(univ.SequenceOf):
     pass
 
 
-class NRST_SormSoftwareModule(univ.Sequence):
+class SkrSormSoftwareModule(univ.Sequence):
     pass
 
 
-NRST_SubmodulesList.componentType = NRST_SormSoftwareModule()
-NRST_SormSoftwareModule.componentType = namedtype.NamedTypes(
-    namedtype.NamedType('module-id', NRST_ModuleId()),
-    namedtype.NamedType('hardware-module-id', NRST_ModuleId()),
+SkrSubmodulesList.componentType = SkrSormSoftwareModule()
+SkrSormSoftwareModule.componentType = namedtype.NamedTypes(
+    namedtype.NamedType('module-id', SkrModuleId()),
+    namedtype.NamedType('hardware-module-id', SkrModuleId()),
     namedtype.NamedType(
         'block-name',
         univ.Integer().subtype(
@@ -2398,46 +2398,46 @@ NRST_SormSoftwareModule.componentType = namedtype.NamedTypes(
             subtypeSpec=(constraint.ValueRangeConstraint(1, 512))
         )
     ),
-    namedtype.NamedType('module-parameters', NRST_ModuleParameters()),
-    namedtype.OptionalNamedType('sub-modules-list', NRST_SubmodulesList())
+    namedtype.NamedType('module-parameters', SkrModuleParameters()),
+    namedtype.OptionalNamedType('sub-modules-list', SkrSubmodulesList())
 )
 
 
-class NRST_SormSoftwareModules(univ.SequenceOf):
+class SkrSormSoftwareModules(univ.SequenceOf):
     pass
 
 
-NRST_SormSoftwareModules.componentType = NRST_SormSoftwareModule()
+SkrSormSoftwareModules.componentType = SkrSormSoftwareModule()
 
 
-class NRST_HwParameterGroup(univ.Sequence):
+class SkrHwParameterGroup(univ.Sequence):
     pass
 
 
-NRST_HwParameterGroup.componentType = namedtype.NamedTypes(
+SkrHwParameterGroup.componentType = namedtype.NamedTypes(
     namedtype.NamedType(
         'group-name',
         char.UTF8String().subtype(
             subtypeSpec=(constraint.ValueSizeConstraint(1, 512))
         )
     ),
-    namedtype.NamedType('module-parameters', NRST_ModuleParameters())
+    namedtype.NamedType('module-parameters', SkrModuleParameters())
 )
 
 
-class NRST_HwParameterGroups(univ.SequenceOf):
+class SkrHwParameterGroups(univ.SequenceOf):
     pass
 
 
-NRST_HwParameterGroups.componentType = NRST_HwParameterGroup()
+SkrHwParameterGroups.componentType = SkrHwParameterGroup()
 
 
-class NRST_SormHardwareModule(univ.Sequence):
+class SkrSormHardwareModule(univ.Sequence):
     pass
 
 
-NRST_SormHardwareModule.componentType = namedtype.NamedTypes(
-    namedtype.NamedType('module-id', NRST_ModuleId()),
+SkrSormHardwareModule.componentType = namedtype.NamedTypes(
+    namedtype.NamedType('module-id', SkrModuleId()),
     namedtype.NamedType(
         'block-name',
         univ.Integer().subtype(
@@ -2450,45 +2450,45 @@ NRST_SormHardwareModule.componentType = namedtype.NamedTypes(
             subtypeSpec=(constraint.ValueSizeConstraint(1, 512))
         )
     ),
-    namedtype.NamedType('module-parameters', NRST_HwParameterGroups())
+    namedtype.NamedType('module-parameters', SkrHwParameterGroups())
 )
 
 
-class NRST_SormHardwareModules(univ.SequenceOf):
+class SkrSormHardwareModules(univ.SequenceOf):
     pass
 
 
-NRST_SormHardwareModules.componentType = NRST_SormHardwareModule()
+SkrSormHardwareModules.componentType = SkrSormHardwareModule()
 
 
-class NRST_CheckModuleResponse(univ.Choice):
+class SkrCheckModuleResponse(univ.Choice):
     pass
 
 
-NRST_CheckModuleResponse.componentType = namedtype.NamedTypes(
+SkrCheckModuleResponse.componentType = namedtype.NamedTypes(
     namedtype.NamedType(
         'hw-modules',
-        NRST_SormHardwareModules().subtype(
+        SkrSormHardwareModules().subtype(
             implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 0))
         )
     ),
     namedtype.NamedType(
         'sw-modules',
-        NRST_SormSoftwareModules().subtype(
+        SkrSormSoftwareModules().subtype(
             implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 1))
         )
     )
 )
 
 
-class NRST_ConfiguratedModule(univ.Choice):
+class SkrConfiguratedModule(univ.Choice):
     pass
 
 
-NRST_ConfiguratedModule.componentType = namedtype.NamedTypes(
+SkrConfiguratedModule.componentType = namedtype.NamedTypes(
     namedtype.NamedType(
         'sw-module',
-        NRST_SormSoftwareModule().subtype(
+        SkrSormSoftwareModule().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 0)
             )
@@ -2496,7 +2496,7 @@ NRST_ConfiguratedModule.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'hw-module',
-        NRST_SormHardwareModule().subtype(
+        SkrSormHardwareModule().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 1)
             )
@@ -2505,11 +2505,11 @@ NRST_ConfiguratedModule.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_ConnectRequest(univ.Sequence):
+class SkrConnectRequest(univ.Sequence):
     pass
 
 
-NRST_ConnectRequest.componentType = namedtype.NamedTypes(
+SkrConnectRequest.componentType = namedtype.NamedTypes(
     namedtype.NamedType(
         'session-timeout',
         univ.Integer().subtype(
@@ -2555,11 +2555,11 @@ NRST_ConnectRequest.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_ConnectResponse(univ.Sequence):
+class SkrConnectResponse(univ.Sequence):
     pass
 
 
-NRST_ConnectResponse.componentType = namedtype.NamedTypes(
+SkrConnectResponse.componentType = namedtype.NamedTypes(
     namedtype.NamedType(
         'confirmed-data-packet-window-size',
         univ.Integer().subtype(
@@ -2591,20 +2591,20 @@ NRST_ConnectResponse.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_FindRange(univ.Sequence):
+class SkrFindRange(univ.Sequence):
     pass
 
 
-NRST_FindRange.componentType = namedtype.NamedTypes(
+SkrFindRange.componentType = namedtype.NamedTypes(
     namedtype.OptionalNamedType(
         'begin-find',
-        NRST_DateAndTime().subtype(
+        SkrDateAndTime().subtype(
             implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 0))
         )
     ),
     namedtype.OptionalNamedType(
         'end-find',
-        NRST_DateAndTime().subtype(
+        SkrDateAndTime().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 1)
             )
@@ -2613,24 +2613,24 @@ NRST_FindRange.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_StandardInterval(univ.Sequence):
+class SkrStandardInterval(univ.Sequence):
     pass
 
 
-NRST_StandardInterval.componentType = namedtype.NamedTypes(
-    namedtype.NamedType('telco-id', NRST_TelcoID()),
-    namedtype.NamedType('standard', NRST_NetworkType()),
-    namedtype.NamedType('range', NRST_FindRange()),
+SkrStandardInterval.componentType = namedtype.NamedTypes(
+    namedtype.NamedType('telco-id', SkrTelcoID()),
+    namedtype.NamedType('standard', SkrNetworkType()),
+    namedtype.NamedType('range', SkrFindRange()),
     namedtype.OptionalNamedType('count', univ.Integer())
 )
 
 
-class NRST_ConnectionsPresenseRecord(univ.Sequence):
+class SkrConnectionsPresenseRecord(univ.Sequence):
     pass
 
 
-NRST_ConnectionsPresenseRecord.componentType = namedtype.NamedTypes(
-    namedtype.NamedType('standard-interval', NRST_StandardInterval()),
+SkrConnectionsPresenseRecord.componentType = namedtype.NamedTypes(
+    namedtype.NamedType('standard-interval', SkrStandardInterval()),
     namedtype.NamedType(
         'data-type',
         univ.Enumerated(namedValues=(namedval.NamedValues(
@@ -2651,32 +2651,32 @@ NRST_ConnectionsPresenseRecord.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_ConnectionsPresenceData(univ.SequenceOf):
+class SkrConnectionsPresenceData(univ.SequenceOf):
     pass
 
 
-NRST_ConnectionsPresenceData.componentType = NRST_ConnectionsPresenseRecord()
+SkrConnectionsPresenceData.componentType = SkrConnectionsPresenseRecord()
 
 
-class NRST_ConnectionsReport(NRST_CallsRecords):
+class SkrConnectionsReport(SkrCallsRecords):
     pass
 
 
-class NRST_RequestedConnection(univ.Sequence):
+class SkrRequestedConnection(univ.Sequence):
     pass
 
 
-NRST_RequestedConnection.componentType = namedtype.NamedTypes(
+SkrRequestedConnection.componentType = namedtype.NamedTypes(
     namedtype.NamedType('id', useful.ObjectDescriptor()),
     namedtype.NamedType('data', univ.Any())
 )
 
 
-class NRST_VoipProtocol(univ.Enumerated):
+class SkrVoipProtocol(univ.Enumerated):
     pass
 
 
-NRST_VoipProtocol.namedValues = namedval.NamedValues(
+SkrVoipProtocol.namedValues = namedval.NamedValues(
     ('sip', 0),
     ('h323', 1),
     ('iax', 2),
@@ -2684,11 +2684,11 @@ NRST_VoipProtocol.namedValues = namedval.NamedValues(
 )
 
 
-class NRST_DataVoipNumber(univ.Sequence):
+class SkrDataVoipNumber(univ.Sequence):
     pass
 
 
-NRST_DataVoipNumber.componentType = namedtype.NamedTypes(
+SkrDataVoipNumber.componentType = namedtype.NamedTypes(
     namedtype.NamedType(
         'original-number',
         char.UTF8String().subtype(
@@ -2714,11 +2714,11 @@ NRST_DataVoipNumber.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_RequestedVoipData(univ.Choice):
+class SkrRequestedVoipData(univ.Choice):
     pass
 
 
-NRST_RequestedVoipData.componentType = namedtype.NamedTypes(
+SkrRequestedVoipData.componentType = namedtype.NamedTypes(
     namedtype.NamedType(
         'point-id',
         univ.Integer().subtype(
@@ -2729,7 +2729,7 @@ NRST_RequestedVoipData.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'client-info',
-        NRST_NetworkPeerInfo().subtype(
+        SkrNetworkPeerInfo().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 1)
             )
@@ -2737,7 +2737,7 @@ NRST_RequestedVoipData.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'server-info',
-        NRST_NetworkPeerInfo().subtype(
+        SkrNetworkPeerInfo().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 2)
             )
@@ -2769,14 +2769,14 @@ NRST_RequestedVoipData.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'voip-calling-number',
-        NRST_DataVoipNumber().subtype(
+        SkrDataVoipNumber().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 6))
         )
     ),
     namedtype.NamedType(
         'voip-called-number',
-        NRST_DataVoipNumber().subtype(
+        SkrDataVoipNumber().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 7)
             )
@@ -2784,7 +2784,7 @@ NRST_RequestedVoipData.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'inbound-bunch',
-        NRST_Bunch().subtype(
+        SkrBunch().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 8)
             )
@@ -2792,7 +2792,7 @@ NRST_RequestedVoipData.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'outbound-bunch',
-        NRST_Bunch().subtype(
+        SkrBunch().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 9)
             )
@@ -2808,7 +2808,7 @@ NRST_RequestedVoipData.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'protocol',
-        NRST_VoipProtocol().subtype(
+        SkrVoipProtocol().subtype(
             implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 11))
         )
     ),
@@ -2830,7 +2830,7 @@ NRST_RequestedVoipData.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'nat-info',
-        NRST_NetworkPeerInfo().subtype(
+        SkrNetworkPeerInfo().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 20)
             )
@@ -2838,7 +2838,7 @@ NRST_RequestedVoipData.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'location',
-        NRST_Location().subtype(
+        SkrLocation().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 21)
             )
@@ -2847,35 +2847,35 @@ NRST_RequestedVoipData.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_RequestedConnectionMobileIdentifier(univ.Sequence):
+class SkrRequestedConnectionMobileIdentifier(univ.Sequence):
     pass
 
 
-NRST_RequestedConnectionMobileIdentifier.componentType = namedtype.NamedTypes(
+SkrRequestedConnectionMobileIdentifier.componentType = namedtype.NamedTypes(
     namedtype.NamedType('id', useful.ObjectDescriptor()),
     namedtype.NamedType('data', univ.Any())
 )
 
 
-class NRST_PhoneAbonentType(univ.Enumerated):
+class SkrPhoneAbonentType(univ.Enumerated):
     pass
 
 
-NRST_PhoneAbonentType.namedValues = namedval.NamedValues(
+SkrPhoneAbonentType.namedValues = namedval.NamedValues(
     ('local', 0),
     ('network', 1),
     ('roamer', 2),
     ('undefined', 3))
 
 
-class NRST_RecodedRequestedConnectionMobileIdentifier(univ.Choice):
+class SkrRecodedRequestedConnectionMobileIdentifier(univ.Choice):
     pass
 
 
-NRST_RecodedRequestedConnectionMobileIdentifier.componentType = namedtype.NamedTypes(
+SkrRecodedRequestedConnectionMobileIdentifier.componentType = namedtype.NamedTypes(
     namedtype.NamedType(
         'gsm-identifier',
-        NRST_RequestedGsmIdentifier().subtype(
+        SkrRequestedGsmIdentifier().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 0)
             )
@@ -2883,7 +2883,7 @@ NRST_RecodedRequestedConnectionMobileIdentifier.componentType = namedtype.NamedT
     ),
     namedtype.NamedType(
         'cdma-identifier',
-        NRST_RequestedCdmaIdentifier().subtype(
+        SkrRequestedCdmaIdentifier().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 1)
             )
@@ -2892,11 +2892,11 @@ NRST_RecodedRequestedConnectionMobileIdentifier.componentType = namedtype.NamedT
 )
 
 
-class NRST_RequestedConnectionMobileData(univ.Choice):
+class SkrRequestedConnectionMobileData(univ.Choice):
     pass
 
 
-NRST_RequestedConnectionMobileData.componentType = namedtype.NamedTypes(
+SkrRequestedConnectionMobileData.componentType = namedtype.NamedTypes(
     namedtype.NamedType(
         'duration', univ.Integer().subtype(
             subtypeSpec=(constraint.ValueRangeConstraint(0, 86399))
@@ -2922,13 +2922,13 @@ NRST_RequestedConnectionMobileData.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'in-abonent-type',
-        NRST_PhoneAbonentType().subtype(
+        SkrPhoneAbonentType().subtype(
             implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 3))
         )
     ),
     namedtype.NamedType(
         'out-abonent-type',
-        NRST_PhoneAbonentType().subtype(
+        SkrPhoneAbonentType().subtype(
             implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 4))
         )
     ),
@@ -2944,7 +2944,7 @@ NRST_RequestedConnectionMobileData.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'inbound-bunch',
-        NRST_Bunch().subtype(
+        SkrBunch().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 6)
             )
@@ -2952,7 +2952,7 @@ NRST_RequestedConnectionMobileData.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'outbound-bunch',
-        NRST_Bunch().subtype(
+        SkrBunch().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 7)
             )
@@ -2984,7 +2984,7 @@ NRST_RequestedConnectionMobileData.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'in-info',
-        NRST_RequestedConnectionMobileIdentifier().subtype(
+        SkrRequestedConnectionMobileIdentifier().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 11)
             )
@@ -2992,7 +2992,7 @@ NRST_RequestedConnectionMobileData.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'recoded-in-info',
-        NRST_RecodedRequestedConnectionMobileIdentifier().subtype(
+        SkrRecodedRequestedConnectionMobileIdentifier().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 111)
             )
@@ -3000,7 +3000,7 @@ NRST_RequestedConnectionMobileData.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'in-end-location',
-        NRST_Location().subtype(
+        SkrLocation().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 12)
             )
@@ -3008,7 +3008,7 @@ NRST_RequestedConnectionMobileData.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'in-begin-location',
-        NRST_Location().subtype(
+        SkrLocation().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 13)
             )
@@ -3024,7 +3024,7 @@ NRST_RequestedConnectionMobileData.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'out-info',
-        NRST_RequestedConnectionMobileIdentifier().subtype(
+        SkrRequestedConnectionMobileIdentifier().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 15)
             )
@@ -3032,7 +3032,7 @@ NRST_RequestedConnectionMobileData.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'recoded-out-info',
-        NRST_RecodedRequestedConnectionMobileIdentifier().subtype(
+        SkrRecodedRequestedConnectionMobileIdentifier().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 115)
             )
@@ -3040,7 +3040,7 @@ NRST_RequestedConnectionMobileData.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'out-begin-location',
-        NRST_Location().subtype(
+        SkrLocation().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 16)
             )
@@ -3048,7 +3048,7 @@ NRST_RequestedConnectionMobileData.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'out-end-location',
-        NRST_Location().subtype(
+        SkrLocation().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 17)
             )
@@ -3071,11 +3071,11 @@ NRST_RequestedConnectionMobileData.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_RequestedAddressTranslationsData(univ.Choice):
+class SkrRequestedAddressTranslationsData(univ.Choice):
     pass
 
 
-NRST_RequestedAddressTranslationsData.componentType = namedtype.NamedTypes(
+SkrRequestedAddressTranslationsData.componentType = namedtype.NamedTypes(
     namedtype.NamedType(
         'point-id',
         univ.Integer().subtype(
@@ -3097,7 +3097,7 @@ NRST_RequestedAddressTranslationsData.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'private-ip',
-        NRST_NetworkPeerInfo().subtype(
+        SkrNetworkPeerInfo().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 3)
             )
@@ -3105,7 +3105,7 @@ NRST_RequestedAddressTranslationsData.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'public-ip',
-        NRST_NetworkPeerInfo().subtype(
+        SkrNetworkPeerInfo().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 4)
             )
@@ -3113,7 +3113,7 @@ NRST_RequestedAddressTranslationsData.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'destination-ip',
-        NRST_NetworkPeerInfo().subtype(
+        SkrNetworkPeerInfo().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 5)
             )
@@ -3136,11 +3136,11 @@ NRST_RequestedAddressTranslationsData.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_RequestedFileTransferData(univ.Choice):
+class SkrRequestedFileTransferData(univ.Choice):
     pass
 
 
-NRST_RequestedFileTransferData.componentType = namedtype.NamedTypes(
+SkrRequestedFileTransferData.componentType = namedtype.NamedTypes(
     namedtype.NamedType(
         'point-id',
         univ.Integer().subtype(
@@ -3151,7 +3151,7 @@ NRST_RequestedFileTransferData.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'client-info',
-        NRST_NetworkPeerInfo().subtype(
+        SkrNetworkPeerInfo().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 1)
             )
@@ -3159,7 +3159,7 @@ NRST_RequestedFileTransferData.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'server-info',
-        NRST_NetworkPeerInfo().subtype(
+        SkrNetworkPeerInfo().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 2)
             )
@@ -3209,14 +3209,14 @@ NRST_RequestedFileTransferData.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'nat-info',
-        NRST_NetworkPeerInfo().subtype(
+        SkrNetworkPeerInfo().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 20)
             )
         )
     ), namedtype.NamedType(
         'location',
-        NRST_Location().subtype(
+        SkrLocation().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 21)
             )
@@ -3225,21 +3225,21 @@ NRST_RequestedFileTransferData.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_RequestedConnectionPstnIdentifier(univ.Sequence):
+class SkrRequestedConnectionPstnIdentifier(univ.Sequence):
     pass
 
 
-NRST_RequestedConnectionPstnIdentifier.componentType = namedtype.NamedTypes(
+SkrRequestedConnectionPstnIdentifier.componentType = namedtype.NamedTypes(
     namedtype.NamedType('id', useful.ObjectDescriptor()),
-    namedtype.NamedType('data', NRST_RequestedPstnIdentifier())
+    namedtype.NamedType('data', SkrRequestedPstnIdentifier())
 )
 
 
-class NRST_RequestedConnectionPstnData(univ.Choice):
+class SkrRequestedConnectionPstnData(univ.Choice):
     pass
 
 
-NRST_RequestedConnectionPstnData.componentType = namedtype.NamedTypes(
+SkrRequestedConnectionPstnData.componentType = namedtype.NamedTypes(
     namedtype.NamedType(
         'duration', univ.Integer().subtype(
             subtypeSpec=(constraint.ValueRangeConstraint(0, 86399))
@@ -3257,13 +3257,13 @@ NRST_RequestedConnectionPstnData.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'in-abonent-type',
-        NRST_PhoneAbonentType().subtype(
+        SkrPhoneAbonentType().subtype(
             implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 2))
         )
     ),
     namedtype.NamedType(
         'out-abonent-type',
-        NRST_PhoneAbonentType().subtype(
+        SkrPhoneAbonentType().subtype(
             implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 3))
         )
     ),
@@ -3324,7 +3324,7 @@ NRST_RequestedConnectionPstnData.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'in-info',
-        NRST_RequestedConnectionPstnIdentifier().subtype(
+        SkrRequestedConnectionPstnIdentifier().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 11)
             )
@@ -3332,7 +3332,7 @@ NRST_RequestedConnectionPstnData.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'out-info',
-        NRST_RequestedConnectionPstnIdentifier().subtype(
+        SkrRequestedConnectionPstnIdentifier().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 12)
             )
@@ -3355,11 +3355,11 @@ NRST_RequestedConnectionPstnData.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_RequestedTermAccessData(univ.Choice):
+class SkrRequestedTermAccessData(univ.Choice):
     pass
 
 
-NRST_RequestedTermAccessData.componentType = namedtype.NamedTypes(
+SkrRequestedTermAccessData.componentType = namedtype.NamedTypes(
     namedtype.NamedType(
         'point-id',
         univ.Integer().subtype(
@@ -3370,7 +3370,7 @@ NRST_RequestedTermAccessData.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'client-info',
-        NRST_NetworkPeerInfo().subtype(
+        SkrNetworkPeerInfo().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 1)
             )
@@ -3378,7 +3378,7 @@ NRST_RequestedTermAccessData.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'server-info',
-        NRST_NetworkPeerInfo().subtype(
+        SkrNetworkPeerInfo().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 2)
             )
@@ -3394,7 +3394,7 @@ NRST_RequestedTermAccessData.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'nat-info',
-        NRST_NetworkPeerInfo().subtype(
+        SkrNetworkPeerInfo().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 10)
             )
@@ -3402,7 +3402,7 @@ NRST_RequestedTermAccessData.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'location',
-        NRST_Location().subtype(
+        SkrLocation().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 11)
             )
@@ -3419,11 +3419,11 @@ NRST_RequestedTermAccessData.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_RequestedRawFlowsData(univ.Choice):
+class SkrRequestedRawFlowsData(univ.Choice):
     pass
 
 
-NRST_RequestedRawFlowsData.componentType = namedtype.NamedTypes(
+SkrRequestedRawFlowsData.componentType = namedtype.NamedTypes(
     namedtype.NamedType(
         'point-id',
         univ.Integer().subtype(
@@ -3441,7 +3441,7 @@ NRST_RequestedRawFlowsData.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'client-info',
-        NRST_NetworkPeerInfo().subtype(
+        SkrNetworkPeerInfo().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 2)
             )
@@ -3449,7 +3449,7 @@ NRST_RequestedRawFlowsData.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'server-info',
-        NRST_NetworkPeerInfo().subtype(
+        SkrNetworkPeerInfo().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 3)
             )
@@ -3466,7 +3466,7 @@ NRST_RequestedRawFlowsData.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'nat-info',
-        NRST_NetworkPeerInfo().subtype(
+        SkrNetworkPeerInfo().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 10)
             )
@@ -3474,7 +3474,7 @@ NRST_RequestedRawFlowsData.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'location',
-        NRST_Location().subtype(
+        SkrLocation().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 11)
             )
@@ -3491,11 +3491,11 @@ NRST_RequestedRawFlowsData.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_RequestedAAALoginData(univ.Choice):
+class SkrRequestedAAALoginData(univ.Choice):
     pass
 
 
-NRST_RequestedAAALoginData.componentType = namedtype.NamedTypes(
+SkrRequestedAAALoginData.componentType = namedtype.NamedTypes(
     namedtype.NamedType(
         'point-id',
         univ.Integer().subtype(
@@ -3518,7 +3518,7 @@ NRST_RequestedAAALoginData.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'user-equipment',
-        NRST_DataNetworkEquipment().subtype(
+        SkrDataNetworkEquipment().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 2)
             )
@@ -3526,7 +3526,7 @@ NRST_RequestedAAALoginData.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'allocated-ip',
-        NRST_IPAddress().subtype(
+        SkrIPAddress().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 3)
             )
@@ -3573,7 +3573,7 @@ NRST_RequestedAAALoginData.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'nas',
-        NRST_NetworkPeerInfo().subtype(
+        SkrNetworkPeerInfo().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 9)
             )
@@ -3589,7 +3589,7 @@ NRST_RequestedAAALoginData.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'sgsn-ip',
-        NRST_IPAddress().subtype(
+        SkrIPAddress().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 11)
             )
@@ -3597,7 +3597,7 @@ NRST_RequestedAAALoginData.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'ggsn-ip',
-        NRST_IPAddress().subtype(
+        SkrIPAddress().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 12)
             )
@@ -3615,7 +3615,7 @@ NRST_RequestedAAALoginData.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'location-start',
-        NRST_Location().subtype(
+        SkrLocation().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 14)
             )
@@ -3623,7 +3623,7 @@ NRST_RequestedAAALoginData.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'location-end',
-        NRST_Location().subtype(
+        SkrLocation().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 15)
             )
@@ -3684,11 +3684,11 @@ NRST_RequestedAAALoginData.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_RequestedEmailData(univ.Choice):
+class SkrRequestedEmailData(univ.Choice):
     pass
 
 
-NRST_RequestedEmailData.componentType = namedtype.NamedTypes(
+SkrRequestedEmailData.componentType = namedtype.NamedTypes(
     namedtype.NamedType(
         'point-id',
         univ.Integer().subtype(
@@ -3699,7 +3699,7 @@ NRST_RequestedEmailData.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'client-info',
-        NRST_NetworkPeerInfo().subtype(
+        SkrNetworkPeerInfo().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 1)
             )
@@ -3707,7 +3707,7 @@ NRST_RequestedEmailData.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'server-info',
-        NRST_NetworkPeerInfo().subtype(
+        SkrNetworkPeerInfo().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 2)
             )
@@ -3778,7 +3778,7 @@ NRST_RequestedEmailData.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'nat-info',
-        NRST_NetworkPeerInfo().subtype(
+        SkrNetworkPeerInfo().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 21)
             )
@@ -3786,7 +3786,7 @@ NRST_RequestedEmailData.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'location',
-        NRST_Location().subtype(
+        SkrLocation().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 22)
             )
@@ -3795,11 +3795,11 @@ NRST_RequestedEmailData.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_RequestedConnectionEntranceData(univ.Choice):
+class SkrRequestedConnectionEntranceData(univ.Choice):
     pass
 
 
-NRST_RequestedConnectionEntranceData.componentType = namedtype.NamedTypes(
+SkrRequestedConnectionEntranceData.componentType = namedtype.NamedTypes(
     namedtype.NamedType(
         'directory-number',
         char.UTF8String().subtype(
@@ -3818,7 +3818,7 @@ NRST_RequestedConnectionEntranceData.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'ip-address',
-        NRST_IPAddress().subtype(
+        SkrIPAddress().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 2)
             )
@@ -3835,11 +3835,11 @@ NRST_RequestedConnectionEntranceData.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_HttpMethod(univ.Enumerated):
+class SkrHttpMethod(univ.Enumerated):
     pass
 
 
-NRST_HttpMethod.namedValues = namedval.NamedValues(
+SkrHttpMethod.namedValues = namedval.NamedValues(
     ('get', 0),
     ('post', 1),
     ('put', 2),
@@ -3847,11 +3847,11 @@ NRST_HttpMethod.namedValues = namedval.NamedValues(
 )
 
 
-class NRST_RequestedResourceData(univ.Choice):
+class SkrRequestedResourceData(univ.Choice):
     pass
 
 
-NRST_RequestedResourceData.componentType = namedtype.NamedTypes(
+SkrRequestedResourceData.componentType = namedtype.NamedTypes(
     namedtype.NamedType(
         'point-id',
         univ.Integer().subtype(
@@ -3862,7 +3862,7 @@ NRST_RequestedResourceData.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'client-info',
-        NRST_NetworkPeerInfo().subtype(
+        SkrNetworkPeerInfo().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 1)
             )
@@ -3870,7 +3870,7 @@ NRST_RequestedResourceData.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'server-info',
-        NRST_NetworkPeerInfo().subtype(
+        SkrNetworkPeerInfo().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 2)
             )
@@ -3894,7 +3894,7 @@ NRST_RequestedResourceData.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'http-method',
-        NRST_HttpMethod().subtype(
+        SkrHttpMethod().subtype(
             implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 5))
         )
     ),
@@ -3908,7 +3908,7 @@ NRST_RequestedResourceData.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'nat-info',
-        NRST_NetworkPeerInfo().subtype(
+        SkrNetworkPeerInfo().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 10)
             )
@@ -3916,7 +3916,7 @@ NRST_RequestedResourceData.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'location',
-        NRST_Location().subtype(
+        SkrLocation().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 11)
             )
@@ -3925,11 +3925,11 @@ NRST_RequestedResourceData.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_IMProtocol(univ.Enumerated):
+class SkrIMProtocol(univ.Enumerated):
     pass
 
 
-NRST_IMProtocol.namedValues = namedval.NamedValues(
+SkrIMProtocol.namedValues = namedval.NamedValues(
     ('icq', 0),
     ('aol', 1),
     ('msn', 2),
@@ -3953,11 +3953,11 @@ NRST_IMProtocol.namedValues = namedval.NamedValues(
 )
 
 
-class NRST_RequestedImData(univ.Choice):
+class SkrRequestedImData(univ.Choice):
     pass
 
 
-NRST_RequestedImData.componentType = namedtype.NamedTypes(
+SkrRequestedImData.componentType = namedtype.NamedTypes(
     namedtype.NamedType(
         'point-id',
         univ.Integer().subtype(
@@ -3968,7 +3968,7 @@ NRST_RequestedImData.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'client-info',
-        NRST_NetworkPeerInfo().subtype(
+        SkrNetworkPeerInfo().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 1)
             )
@@ -3976,7 +3976,7 @@ NRST_RequestedImData.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'server-info',
-        NRST_NetworkPeerInfo().subtype(
+        SkrNetworkPeerInfo().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 2)
             )
@@ -4029,7 +4029,7 @@ NRST_RequestedImData.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'protocol',
-        NRST_IMProtocol().subtype(
+        SkrIMProtocol().subtype(
             implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 9)))
     ),
     namedtype.NamedType(
@@ -4056,7 +4056,7 @@ NRST_RequestedImData.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'nat-info',
-        NRST_NetworkPeerInfo().subtype(
+        SkrNetworkPeerInfo().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 21)
             )
@@ -4064,7 +4064,7 @@ NRST_RequestedImData.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'location',
-        NRST_Location().subtype(
+        SkrLocation().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 22)
             )
@@ -4073,20 +4073,20 @@ NRST_RequestedImData.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_RecodedRequestedConnection(univ.Choice):
+class SkrRecodedRequestedConnection(univ.Choice):
     pass
 
 
-NRST_RecodedRequestedConnection.componentType = namedtype.NamedTypes(
+SkrRecodedRequestedConnection.componentType = namedtype.NamedTypes(
     namedtype.NamedType(
         'pager-identifier',
-        NRST_RequestedPagerIdentifier().subtype(
+        SkrRequestedPagerIdentifier().subtype(
             implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 0))
         )
     ),
     namedtype.NamedType(
         'pstn',
-        NRST_RequestedConnectionPstnData().subtype(
+        SkrRequestedConnectionPstnData().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 1)
             )
@@ -4094,7 +4094,7 @@ NRST_RecodedRequestedConnection.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'mobile',
-        NRST_RequestedConnectionMobileData().subtype(
+        SkrRequestedConnectionMobileData().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 2)
             )
@@ -4102,14 +4102,14 @@ NRST_RecodedRequestedConnection.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'entrance',
-        NRST_RequestedConnectionEntranceData().subtype(
+        SkrRequestedConnectionEntranceData().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 3)
             )
         )
     ), namedtype.NamedType(
         'aaa-login',
-        NRST_RequestedAAALoginData().subtype(
+        SkrRequestedAAALoginData().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 4)
             )
@@ -4117,7 +4117,7 @@ NRST_RecodedRequestedConnection.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'resource',
-        NRST_RequestedResourceData().subtype(
+        SkrRequestedResourceData().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 5)
             )
@@ -4125,7 +4125,7 @@ NRST_RecodedRequestedConnection.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'email',
-        NRST_RequestedEmailData().subtype(
+        SkrRequestedEmailData().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 6)
             )
@@ -4133,7 +4133,7 @@ NRST_RecodedRequestedConnection.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'im',
-        NRST_RequestedImData().subtype(
+        SkrRequestedImData().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 7)
             )
@@ -4141,7 +4141,7 @@ NRST_RecodedRequestedConnection.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'voip',
-        NRST_RequestedVoipData().subtype(
+        SkrRequestedVoipData().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 8)
             )
@@ -4149,7 +4149,7 @@ NRST_RecodedRequestedConnection.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'file-transfer',
-        NRST_RequestedFileTransferData().subtype(
+        SkrRequestedFileTransferData().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 9)
             )
@@ -4157,7 +4157,7 @@ NRST_RecodedRequestedConnection.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'term-access',
-        NRST_RequestedTermAccessData().subtype(
+        SkrRequestedTermAccessData().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 10)
             )
@@ -4165,7 +4165,7 @@ NRST_RecodedRequestedConnection.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'raw-flows',
-        NRST_RequestedRawFlowsData().subtype(
+        SkrRequestedRawFlowsData().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 11)
             )
@@ -4173,7 +4173,7 @@ NRST_RecodedRequestedConnection.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'address-translations',
-        NRST_RequestedAddressTranslationsData().subtype(
+        SkrRequestedAddressTranslationsData().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 12)
             )
@@ -4182,20 +4182,20 @@ NRST_RecodedRequestedConnection.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_RequestedConnectionParameter(univ.Choice):
+class SkrRequestedConnectionParameter(univ.Choice):
     pass
 
 
-NRST_RequestedConnectionParameter.componentType = namedtype.NamedTypes(
+SkrRequestedConnectionParameter.componentType = namedtype.NamedTypes(
     namedtype.NamedType(
         'separator',
-        NRST_LogicalOperation().subtype(
+        SkrLogicalOperation().subtype(
             implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 0))
         )
     ),
     namedtype.NamedType(
         'find-mask',
-        NRST_RequestedConnection().subtype(
+        SkrRequestedConnection().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 1)
             )
@@ -4203,7 +4203,7 @@ NRST_RequestedConnectionParameter.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'recoded-find-mask',
-        NRST_RecodedRequestedConnection().subtype(
+        SkrRecodedRequestedConnection().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 101)
             )
@@ -4212,133 +4212,133 @@ NRST_RequestedConnectionParameter.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_RequestedConnectionIdentifiers(univ.SequenceOf):
+class SkrRequestedConnectionIdentifiers(univ.SequenceOf):
     pass
 
 
-NRST_RequestedConnectionIdentifiers.componentType = NRST_RequestedConnectionParameter()
+SkrRequestedConnectionIdentifiers.componentType = SkrRequestedConnectionParameter()
 
 
-class NRST_ValidateEntranceTask(NRST_RequestedConnectionIdentifiers):
+class SkrValidateEntranceTask(SkrRequestedConnectionIdentifiers):
     pass
 
 
-class NRST_ValidateDataTask(NRST_RequestedConnectionIdentifiers):
+class SkrValidateDataTask(SkrRequestedConnectionIdentifiers):
     pass
 
 
-class NRST_ValidateConnectionsTask(NRST_RequestedConnectionIdentifiers):
+class SkrValidateConnectionsTask(SkrRequestedConnectionIdentifiers):
     pass
 
 
-class NRST_ConnectionsTask(univ.Choice):
+class SkrConnectionsTask(univ.Choice):
     pass
 
 
-NRST_ConnectionsTask.componentType = namedtype.NamedTypes(
+SkrConnectionsTask.componentType = namedtype.NamedTypes(
     namedtype.NamedType(
         'validate-connections',
-        NRST_ValidateConnectionsTask().subtype(
+        SkrValidateConnectionsTask().subtype(
             implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 0))
         )
     ),
     namedtype.NamedType(
         'validate-data',
-        NRST_ValidateDataTask().subtype(
+        SkrValidateDataTask().subtype(
             implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 1))
         )
     ),
     namedtype.NamedType(
         'validate-entrance',
-        NRST_ValidateEntranceTask().subtype(
+        SkrValidateEntranceTask().subtype(
             implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 2))
         )
     )
 )
 
 
-class NRST_ControlCommandType(univ.Enumerated):
+class SkrControlCommandType(univ.Enumerated):
     pass
 
 
-NRST_ControlCommandType.namedValues = namedval.NamedValues(
+SkrControlCommandType.namedValues = namedval.NamedValues(
     ('start', 0),
     ('stop', 1)
 )
 
 
-class NRST_PortRange(univ.Sequence):
+class SkrPortRange(univ.Sequence):
     pass
 
 
-NRST_PortRange.componentType = namedtype.NamedTypes(
+SkrPortRange.componentType = namedtype.NamedTypes(
     namedtype.NamedType(
         'port-from',
-        NRST_IPPort().subtype(
+        SkrIPPort().subtype(
             implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 0))
         )
     ),
     namedtype.NamedType(
         'port-to',
-        NRST_IPPort().subtype(
+        SkrIPPort().subtype(
             implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 1))
         )
     )
 )
 
 
-class NRST_IPV6Mask(univ.OctetString):
+class SkrIPV6Mask(univ.OctetString):
     pass
 
 
-NRST_IPV6Mask.subtypeSpec = constraint.ValueSizeConstraint(16, 16)
+SkrIPV6Mask.subtypeSpec = constraint.ValueSizeConstraint(16, 16)
 
 
-class NRST_IPV4Mask(univ.OctetString):
+class SkrIPV4Mask(univ.OctetString):
     pass
 
 
-NRST_IPV4Mask.subtypeSpec = constraint.ValueSizeConstraint(4, 4)
+SkrIPV4Mask.subtypeSpec = constraint.ValueSizeConstraint(4, 4)
 
 
-class NRST_IPMask(univ.Choice):
+class SkrIPMask(univ.Choice):
     pass
 
 
-NRST_IPMask.componentType = namedtype.NamedTypes(
+SkrIPMask.componentType = namedtype.NamedTypes(
     namedtype.NamedType(
         'ipv4-mask',
-        NRST_IPV4Mask().subtype(
+        SkrIPV4Mask().subtype(
             implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 0))
         )
     ),
     namedtype.NamedType(
         'ipv6-mask',
-        NRST_IPV6Mask().subtype(
+        SkrIPV6Mask().subtype(
             implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 1))
         )
     )
 )
 
 
-class NRST_IPFilterMask(univ.Sequence):
+class SkrIPFilterMask(univ.Sequence):
     pass
 
 
-NRST_IPFilterMask.componentType = namedtype.NamedTypes(
-    namedtype.NamedType('mask', NRST_IPMask()),
+SkrIPFilterMask.componentType = namedtype.NamedTypes(
+    namedtype.NamedType('mask', SkrIPMask()),
     namedtype.NamedType('mask-length', univ.Integer())
 )
 
 
-class NRST_FilterSingleCriteria(univ.Choice):
+class SkrFilterSingleCriteria(univ.Choice):
     pass
 
 
-NRST_FilterSingleCriteria.componentType = namedtype.NamedTypes(
+SkrFilterSingleCriteria.componentType = namedtype.NamedTypes(
     namedtype.NamedType(
         'ip-address',
-        NRST_IPAddress().subtype(
+        SkrIPAddress().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 0)
             )
@@ -4346,13 +4346,13 @@ NRST_FilterSingleCriteria.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'ip-port',
-        NRST_IPPort().subtype(
+        SkrIPPort().subtype(
             implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 1))
         )
     ),
     namedtype.NamedType(
         'port-range',
-        NRST_PortRange().subtype(
+        SkrPortRange().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 2)
             )
@@ -4421,7 +4421,7 @@ NRST_FilterSingleCriteria.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'ip-mask',
-        NRST_IPFilterMask().subtype(
+        SkrIPFilterMask().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 12)
             )
@@ -4430,14 +4430,14 @@ NRST_FilterSingleCriteria.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_FilterPairCriteria(univ.Sequence):
+class SkrFilterPairCriteria(univ.Sequence):
     pass
 
 
-NRST_FilterPairCriteria.componentType = namedtype.NamedTypes(
+SkrFilterPairCriteria.componentType = namedtype.NamedTypes(
     namedtype.NamedType(
         'criteria-a',
-        NRST_FilterSingleCriteria().subtype(
+        SkrFilterSingleCriteria().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 0)
             )
@@ -4445,7 +4445,7 @@ NRST_FilterPairCriteria.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'criteria-b',
-        NRST_FilterSingleCriteria().subtype(
+        SkrFilterSingleCriteria().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 1)
             )
@@ -4454,14 +4454,14 @@ NRST_FilterPairCriteria.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_FilterParameter(univ.Choice):
+class SkrFilterParameter(univ.Choice):
     pass
 
 
-NRST_FilterParameter.componentType = namedtype.NamedTypes(
+SkrFilterParameter.componentType = namedtype.NamedTypes(
     namedtype.NamedType(
         'single-criteria',
-        NRST_FilterSingleCriteria().subtype(
+        SkrFilterSingleCriteria().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 0)
             )
@@ -4469,7 +4469,7 @@ NRST_FilterParameter.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'pair-criteria',
-        NRST_FilterPairCriteria().subtype(
+        SkrFilterPairCriteria().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 1)
             )
@@ -4478,36 +4478,36 @@ NRST_FilterParameter.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_FilterParameters(univ.SequenceOf):
+class SkrFilterParameters(univ.SequenceOf):
     pass
 
 
-NRST_FilterParameters.componentType = NRST_FilterParameter()
+SkrFilterParameters.componentType = SkrFilterParameter()
 
 
-class NRST_FilterID(univ.Integer):
+class SkrFilterID(univ.Integer):
     pass
 
 
-class NRST_CreateFilterRequest(univ.Sequence):
+class SkrCreateFilterRequest(univ.Sequence):
     pass
 
 
-NRST_CreateFilterRequest.componentType = namedtype.NamedTypes(
-    namedtype.NamedType('filter-id', NRST_FilterID()),
-    namedtype.NamedType('filter-parameters', NRST_FilterParameters()),
+SkrCreateFilterRequest.componentType = namedtype.NamedTypes(
+    namedtype.NamedType('filter-id', SkrFilterID()),
+    namedtype.NamedType('filter-parameters', SkrFilterParameters()),
     namedtype.DefaultedNamedType(
         'allow-only-mode', univ.Boolean().subtype(value=1)
     )
 )
 
 
-class NRST_CreateFilterResponse(univ.Sequence):
+class SkrCreateFilterResponse(univ.Sequence):
     pass
 
 
-NRST_CreateFilterResponse.componentType = namedtype.NamedTypes(
-    namedtype.NamedType('filter-id', NRST_FilterID()),
+SkrCreateFilterResponse.componentType = namedtype.NamedTypes(
+    namedtype.NamedType('filter-id', SkrFilterID()),
     namedtype.NamedType('successful', univ.Boolean()),
     namedtype.OptionalNamedType(
         'error-description',
@@ -4518,42 +4518,42 @@ NRST_CreateFilterResponse.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_TelcoList(univ.SequenceOf):
+class SkrTelcoList(univ.SequenceOf):
     pass
 
 
-NRST_TelcoList.componentType = NRST_TelcoID()
+SkrTelcoList.componentType = SkrTelcoID()
 
 
-class NRST_DataContentID(char.UTF8String):
+class SkrDataContentID(char.UTF8String):
     pass
 
 
-NRST_DataContentID.subtypeSpec = constraint.ValueSizeConstraint(1, 512)
+SkrDataContentID.subtypeSpec = constraint.ValueSizeConstraint(1, 512)
 
 
-class NRST_DataContentTask(NRST_DataContentID):
+class SkrDataContentTask(SkrDataContentID):
     pass
 
 
-class NRST_PaymentsTask(univ.Sequence):
+class SkrPaymentsTask(univ.Sequence):
     pass
 
 
-NRST_PaymentsTask.componentType = namedtype.NamedTypes(
+SkrPaymentsTask.componentType = namedtype.NamedTypes(
     namedtype.NamedType('id', useful.ObjectDescriptor()),
     namedtype.NamedType('data', univ.Any())
 )
 
 
-class NRST_RequestedServiceCenterPaysParameters(univ.Choice):
+class SkrRequestedServiceCenterPaysParameters(univ.Choice):
     pass
 
 
-NRST_RequestedServiceCenterPaysParameters.componentType = namedtype.NamedTypes(
+SkrRequestedServiceCenterPaysParameters.componentType = namedtype.NamedTypes(
     namedtype.NamedType(
         'separator',
-        NRST_LogicalOperation().subtype(
+        SkrLogicalOperation().subtype(
             implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 0))
         )
     ),
@@ -4567,7 +4567,7 @@ NRST_RequestedServiceCenterPaysParameters.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'center-address',
-        NRST_RequestedAddress().subtype(
+        SkrRequestedAddress().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 2)
             )
@@ -4576,27 +4576,27 @@ NRST_RequestedServiceCenterPaysParameters.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_RequestedServiceCenterPays(univ.SequenceOf):
+class SkrRequestedServiceCenterPays(univ.SequenceOf):
     pass
 
 
-NRST_RequestedServiceCenterPays.componentType = NRST_RequestedServiceCenterPaysParameters()
+SkrRequestedServiceCenterPays.componentType = SkrRequestedServiceCenterPaysParameters()
 
 
-class NRST_RequestedTransferParameters(univ.Choice):
+class SkrRequestedTransferParameters(univ.Choice):
     pass
 
 
-NRST_RequestedTransferParameters.componentType = namedtype.NamedTypes(
+SkrRequestedTransferParameters.componentType = namedtype.NamedTypes(
     namedtype.NamedType(
         'separator',
-        NRST_LogicalOperation().subtype(
+        SkrLogicalOperation().subtype(
             implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 0))
         )
     ),
     namedtype.NamedType(
         'source-identifier',
-        NRST_RequestedIdentifier().subtype(
+        SkrRequestedIdentifier().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 1)
             )
@@ -4604,7 +4604,7 @@ NRST_RequestedTransferParameters.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'recoded-source-identifier',
-        NRST_RecodedRequestedIdentifier().subtype(
+        SkrRecodedRequestedIdentifier().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 101)
             )
@@ -4613,21 +4613,21 @@ NRST_RequestedTransferParameters.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_RequestedBankDivisionTransferPays(univ.SequenceOf):
+class SkrRequestedBankDivisionTransferPays(univ.SequenceOf):
     pass
 
 
-NRST_RequestedBankDivisionTransferPays.componentType = NRST_RequestedTransferParameters()
+SkrRequestedBankDivisionTransferPays.componentType = SkrRequestedTransferParameters()
 
 
-class NRST_RequestedBankTransactionPaysParameters(univ.Choice):
+class SkrRequestedBankTransactionPaysParameters(univ.Choice):
     pass
 
 
-NRST_RequestedBankTransactionPaysParameters.componentType = namedtype.NamedTypes(
+SkrRequestedBankTransactionPaysParameters.componentType = namedtype.NamedTypes(
     namedtype.NamedType(
         'separator',
-        NRST_LogicalOperation().subtype(
+        SkrLogicalOperation().subtype(
             implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 0))
         )
     ),
@@ -4649,21 +4649,21 @@ NRST_RequestedBankTransactionPaysParameters.componentType = namedtype.NamedTypes
 )
 
 
-class NRST_RequestedBankTransactionPays(univ.SequenceOf):
+class SkrRequestedBankTransactionPays(univ.SequenceOf):
     pass
 
 
-NRST_RequestedBankTransactionPays.componentType = NRST_RequestedBankTransactionPaysParameters()
+SkrRequestedBankTransactionPays.componentType = SkrRequestedBankTransactionPaysParameters()
 
 
-class NRST_RequestedExpressPaysParameters(univ.Choice):
+class SkrRequestedExpressPaysParameters(univ.Choice):
     pass
 
 
-NRST_RequestedExpressPaysParameters.componentType = namedtype.NamedTypes(
+SkrRequestedExpressPaysParameters.componentType = namedtype.NamedTypes(
     namedtype.NamedType(
         'separator',
-        NRST_LogicalOperation().subtype(
+        SkrLogicalOperation().subtype(
             implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 0))
         )
     ),
@@ -4678,21 +4678,21 @@ NRST_RequestedExpressPaysParameters.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_RequestedExpressPays(univ.SequenceOf):
+class SkrRequestedExpressPays(univ.SequenceOf):
     pass
 
 
-NRST_RequestedExpressPays.componentType = NRST_RequestedExpressPaysParameters()
+SkrRequestedExpressPays.componentType = SkrRequestedExpressPaysParameters()
 
 
-class NRST_RequestedCrossAccountPaysParameters(univ.Choice):
+class SkrRequestedCrossAccountPaysParameters(univ.Choice):
     pass
 
 
-NRST_RequestedCrossAccountPaysParameters.componentType = namedtype.NamedTypes(
+SkrRequestedCrossAccountPaysParameters.componentType = namedtype.NamedTypes(
     namedtype.NamedType(
         'separator',
-        NRST_LogicalOperation().subtype(
+        SkrLogicalOperation().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 0)
             )
@@ -4700,7 +4700,7 @@ NRST_RequestedCrossAccountPaysParameters.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'source-identifier',
-        NRST_RequestedIdentifier().subtype(
+        SkrRequestedIdentifier().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 1)
             )
@@ -4708,7 +4708,7 @@ NRST_RequestedCrossAccountPaysParameters.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'dest-identifier',
-        NRST_RequestedIdentifier().subtype(
+        SkrRequestedIdentifier().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 2)
             )
@@ -4716,7 +4716,7 @@ NRST_RequestedCrossAccountPaysParameters.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'recoded-source-identifier',
-        NRST_RecodedRequestedIdentifier().subtype(
+        SkrRecodedRequestedIdentifier().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 101)
             )
@@ -4724,7 +4724,7 @@ NRST_RequestedCrossAccountPaysParameters.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'recoded-dest-identifier',
-        NRST_RecodedRequestedIdentifier().subtype(
+        SkrRecodedRequestedIdentifier().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 102)
             )
@@ -4733,28 +4733,28 @@ NRST_RequestedCrossAccountPaysParameters.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_RequestedCrossAccountPays(univ.SequenceOf):
+class SkrRequestedCrossAccountPays(univ.SequenceOf):
     pass
 
 
-NRST_RequestedCrossAccountPays.componentType = NRST_RequestedCrossAccountPaysParameters()
+SkrRequestedCrossAccountPays.componentType = SkrRequestedCrossAccountPaysParameters()
 
 
-class NRST_RequestedBankAccountTransferPays(univ.SequenceOf):
+class SkrRequestedBankAccountTransferPays(univ.SequenceOf):
     pass
 
 
-NRST_RequestedBankAccountTransferPays.componentType = NRST_RequestedTransferParameters()
+SkrRequestedBankAccountTransferPays.componentType = SkrRequestedTransferParameters()
 
 
-class NRST_RequestedTerminalPaysParameters(univ.Choice):
+class SkrRequestedTerminalPaysParameters(univ.Choice):
     pass
 
 
-NRST_RequestedTerminalPaysParameters.componentType = namedtype.NamedTypes(
+SkrRequestedTerminalPaysParameters.componentType = namedtype.NamedTypes(
     namedtype.NamedType(
         'separator',
-        NRST_LogicalOperation().subtype(
+        SkrLogicalOperation().subtype(
             implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 0))
         )
     ),
@@ -4776,7 +4776,7 @@ NRST_RequestedTerminalPaysParameters.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'terminal-address',
-        NRST_RequestedAddress().subtype(
+        SkrRequestedAddress().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 3)
             )
@@ -4785,27 +4785,27 @@ NRST_RequestedTerminalPaysParameters.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_RequestedTerminalPays(univ.SequenceOf):
+class SkrRequestedTerminalPays(univ.SequenceOf):
     pass
 
 
-NRST_RequestedTerminalPays.componentType = NRST_RequestedTerminalPaysParameters()
+SkrRequestedTerminalPays.componentType = SkrRequestedTerminalPaysParameters()
 
 
-class NRST_RequestedBalanceFillupsParameters(univ.Choice):
+class SkrRequestedBalanceFillupsParameters(univ.Choice):
     pass
 
 
-NRST_RequestedBalanceFillupsParameters.componentType = namedtype.NamedTypes(
+SkrRequestedBalanceFillupsParameters.componentType = namedtype.NamedTypes(
     namedtype.NamedType(
         'separator',
-        NRST_LogicalOperation().subtype(
+        SkrLogicalOperation().subtype(
             implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 0))
         )
     ),
     namedtype.NamedType(
         'identifier',
-        NRST_RequestedIdentifier().subtype(
+        SkrRequestedIdentifier().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 1)
             )
@@ -4813,7 +4813,7 @@ NRST_RequestedBalanceFillupsParameters.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'recoded-identifier',
-        NRST_RecodedRequestedIdentifier().subtype(
+        SkrRecodedRequestedIdentifier().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 101)
             )
@@ -4822,21 +4822,21 @@ NRST_RequestedBalanceFillupsParameters.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_RequestedBalanceFillups(univ.SequenceOf):
+class SkrRequestedBalanceFillups(univ.SequenceOf):
     pass
 
 
-NRST_RequestedBalanceFillups.componentType = NRST_RequestedBalanceFillupsParameters()
+SkrRequestedBalanceFillups.componentType = SkrRequestedBalanceFillupsParameters()
 
 
-class NRST_RequestedTelephoneCardPaysParameters(univ.Choice):
+class SkrRequestedTelephoneCardPaysParameters(univ.Choice):
     pass
 
 
-NRST_RequestedTelephoneCardPaysParameters.componentType = namedtype.NamedTypes(
+SkrRequestedTelephoneCardPaysParameters.componentType = namedtype.NamedTypes(
     namedtype.NamedType(
         'separator',
-        NRST_LogicalOperation().subtype(
+        SkrLogicalOperation().subtype(
             implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 0))
         )
     ),
@@ -4851,103 +4851,103 @@ NRST_RequestedTelephoneCardPaysParameters.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_RequestedTelephoneCardPays(univ.SequenceOf):
+class SkrRequestedTelephoneCardPays(univ.SequenceOf):
     pass
 
 
-NRST_RequestedTelephoneCardPays.componentType = NRST_RequestedTelephoneCardPaysParameters()
+SkrRequestedTelephoneCardPays.componentType = SkrRequestedTelephoneCardPaysParameters()
 
 
-class NRST_RequestedBankCardTransferPays(univ.SequenceOf):
+class SkrRequestedBankCardTransferPays(univ.SequenceOf):
     pass
 
 
-NRST_RequestedBankCardTransferPays.componentType = NRST_RequestedTransferParameters()
+SkrRequestedBankCardTransferPays.componentType = SkrRequestedTransferParameters()
 
 
-class NRST_RecodedPaymentsTask(univ.Choice):
+class SkrRecodedPaymentsTask(univ.Choice):
     pass
 
 
-NRST_RecodedPaymentsTask.componentType = namedtype.NamedTypes(
+SkrRecodedPaymentsTask.componentType = namedtype.NamedTypes(
     namedtype.NamedType(
         'bank-transaction',
-        NRST_RequestedBankTransactionPays().subtype(
+        SkrRequestedBankTransactionPays().subtype(
             implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 0))
         )
     ),
     namedtype.NamedType(
         'express-card',
-        NRST_RequestedExpressPays().subtype(
+        SkrRequestedExpressPays().subtype(
             implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 1))
         )
     ),
     namedtype.NamedType(
         'public-terminal',
-        NRST_RequestedTerminalPays().subtype(
+        SkrRequestedTerminalPays().subtype(
             implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 2))
         )
     ),
     namedtype.NamedType(
         'service-center',
-        NRST_RequestedServiceCenterPays().subtype(
+        SkrRequestedServiceCenterPays().subtype(
             implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 3))
         )
     ),
     namedtype.NamedType(
         'cross-account',
-        NRST_RequestedCrossAccountPays().subtype(
+        SkrRequestedCrossAccountPays().subtype(
             implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 4))
         )
     ),
     namedtype.NamedType(
         'telephone-card',
-        NRST_RequestedTelephoneCardPays().subtype(
+        SkrRequestedTelephoneCardPays().subtype(
             implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 5))
         )
     ),
     namedtype.NamedType(
         'balance-fill-up',
-        NRST_RequestedBalanceFillups().subtype(
+        SkrRequestedBalanceFillups().subtype(
             implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 6))
         )
     ),
     namedtype.NamedType(
         'bank-division-transfer',
-        NRST_RequestedBankDivisionTransferPays().subtype(
+        SkrRequestedBankDivisionTransferPays().subtype(
             implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 7))
         )
     ),
     namedtype.NamedType(
         'bank-card-transfer',
-        NRST_RequestedBankCardTransferPays().subtype(
+        SkrRequestedBankCardTransferPays().subtype(
             implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 8))
         )
     ),
     namedtype.NamedType(
         'bank-account-transfer',
-        NRST_RequestedBankAccountTransferPays().subtype(
+        SkrRequestedBankAccountTransferPays().subtype(
             implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 9))
         )
     )
 )
 
 
-class NRST_DictionaryTask(univ.Sequence):
+class SkrDictionaryTask(univ.Sequence):
     pass
 
 
-NRST_DictionaryTask.componentType = namedtype.NamedTypes(
+SkrDictionaryTask.componentType = namedtype.NamedTypes(
     namedtype.NamedType('id', useful.ObjectDescriptor()),
     namedtype.NamedType('data', useful.ObjectDescriptor())
 )
 
 
-class NRST_PresenseInfoData(univ.Enumerated):
+class SkrPresenseInfoData(univ.Enumerated):
     pass
 
 
-NRST_PresenseInfoData.namedValues = namedval.NamedValues(
+SkrPresenseInfoData.namedValues = namedval.NamedValues(
     ('subscribers', 0),
     ('connections', 1),
     ('payments', 2),
@@ -4956,21 +4956,21 @@ NRST_PresenseInfoData.namedValues = namedval.NamedValues(
 )
 
 
-class NRST_PresenseTask(univ.Sequence):
+class SkrPresenseTask(univ.Sequence):
     pass
 
 
-NRST_PresenseTask.componentType = namedtype.NamedTypes(
+SkrPresenseTask.componentType = namedtype.NamedTypes(
     namedtype.NamedType('id', useful.ObjectDescriptor()),
-    namedtype.NamedType('data', NRST_PresenseInfoData())
+    namedtype.NamedType('data', SkrPresenseInfoData())
 )
 
 
-class NRST_RequestedLocationIdentifier(univ.Choice):
+class SkrRequestedLocationIdentifier(univ.Choice):
     pass
 
 
-NRST_RequestedLocationIdentifier.componentType = namedtype.NamedTypes(
+SkrRequestedLocationIdentifier.componentType = namedtype.NamedTypes(
     namedtype.NamedType(
         'directory-number',
         char.UTF8String().subtype(
@@ -4989,7 +4989,7 @@ NRST_RequestedLocationIdentifier.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'ip-address',
-        NRST_IPAddress().subtype(
+        SkrIPAddress().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 2)
             )
@@ -5006,23 +5006,23 @@ NRST_RequestedLocationIdentifier.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_LocationTask(NRST_RequestedLocationIdentifier):
+class SkrLocationTask(SkrRequestedLocationIdentifier):
     pass
 
 
-class NRST_CreateTaskRequest(univ.Sequence):
+class SkrCreateTaskRequest(univ.Sequence):
     pass
 
 
-NRST_CreateTaskRequest.componentType = namedtype.NamedTypes(
+SkrCreateTaskRequest.componentType = namedtype.NamedTypes(
     namedtype.OptionalNamedType(
-        'telcos', NRST_TelcoList().subtype(
+        'telcos', SkrTelcoList().subtype(
             implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 0))
         )
     ),
     namedtype.OptionalNamedType(
         'range',
-        NRST_FindRange().subtype(
+        SkrFindRange().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 1)
             )
@@ -5043,7 +5043,7 @@ NRST_CreateTaskRequest.componentType = namedtype.NamedTypes(
                 namedtype.NamedTypes(
                     namedtype.NamedType(
                         'dictionary',
-                        NRST_DictionaryTask().subtype(
+                        SkrDictionaryTask().subtype(
                             implicitTag=(
                                 tag.Tag(
                                     tag.tagClassContext,
@@ -5055,7 +5055,7 @@ NRST_CreateTaskRequest.componentType = namedtype.NamedTypes(
                     ),
                     namedtype.NamedType(
                         'abonents',
-                        NRST_AbonentsTask().subtype(
+                        SkrAbonentsTask().subtype(
                             implicitTag=(
                                 tag.Tag(
                                     tag.tagClassContext,
@@ -5067,7 +5067,7 @@ NRST_CreateTaskRequest.componentType = namedtype.NamedTypes(
                     ),
                     namedtype.NamedType(
                         'connections',
-                        NRST_ConnectionsTask().subtype(
+                        SkrConnectionsTask().subtype(
                             implicitTag=(
                                 tag.Tag(
                                     tag.tagClassContext,
@@ -5078,7 +5078,7 @@ NRST_CreateTaskRequest.componentType = namedtype.NamedTypes(
                     ),
                     namedtype.NamedType(
                         'location',
-                        NRST_LocationTask().subtype(
+                        SkrLocationTask().subtype(
                             implicitTag=(
                                 tag.Tag(
                                     tag.tagClassContext,
@@ -5090,7 +5090,7 @@ NRST_CreateTaskRequest.componentType = namedtype.NamedTypes(
                     ),
                     namedtype.NamedType(
                         'payments',
-                        NRST_PaymentsTask().subtype(
+                        SkrPaymentsTask().subtype(
                             implicitTag=(
                                 tag.Tag(
                                     tag.tagClassContext,
@@ -5102,7 +5102,7 @@ NRST_CreateTaskRequest.componentType = namedtype.NamedTypes(
                     ),
                     namedtype.NamedType(
                         'presense',
-                        NRST_PresenseTask().subtype(
+                        SkrPresenseTask().subtype(
                             implicitTag=(
                                 tag.Tag(
                                     tag.tagClassContext,
@@ -5114,7 +5114,7 @@ NRST_CreateTaskRequest.componentType = namedtype.NamedTypes(
                     ),
                     namedtype.NamedType(
                         'data-content',
-                        NRST_DataContentTask().subtype(
+                        SkrDataContentTask().subtype(
                             implicitTag=(
                                 tag.Tag(
                                     tag.tagClassContext,
@@ -5126,7 +5126,7 @@ NRST_CreateTaskRequest.componentType = namedtype.NamedTypes(
                     ),
                     namedtype.NamedType(
                         'recoded-payments',
-                        NRST_RecodedPaymentsTask().subtype(
+                        SkrRecodedPaymentsTask().subtype(
                             implicitTag=(
                                 tag.Tag(
                                     tag.tagClassContext,
@@ -5147,19 +5147,19 @@ NRST_CreateTaskRequest.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_TaskID(univ.Integer):
+class SkrTaskID(univ.Integer):
     pass
 
 
-NRST_TaskID.subtypeSpec = constraint.ValueRangeConstraint(0, 4294967295)
+SkrTaskID.subtypeSpec = constraint.ValueRangeConstraint(0, 4294967295)
 
 
-class NRST_CreateTaskResponse(univ.Sequence):
+class SkrCreateTaskResponse(univ.Sequence):
     pass
 
 
-NRST_CreateTaskResponse.componentType = namedtype.NamedTypes(
-    namedtype.OptionalNamedType('task-id', NRST_TaskID()),
+SkrCreateTaskResponse.componentType = namedtype.NamedTypes(
+    namedtype.OptionalNamedType('task-id', SkrTaskID()),
     namedtype.NamedType('successful', univ.Boolean()),
     namedtype.OptionalNamedType(
         'error-description',
@@ -5170,15 +5170,15 @@ NRST_CreateTaskResponse.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_CrossAccountRecord(univ.Sequence):
+class SkrCrossAccountRecord(univ.Sequence):
     pass
 
 
-NRST_CrossAccountRecord.componentType = namedtype.NamedTypes(
-    namedtype.NamedType('telco-id', NRST_TelcoID()),
-    namedtype.NamedType('device-id', NRST_ReportedIdentifier()),
-    namedtype.NamedType('date-time-fillup', NRST_DateAndTime()),
-    namedtype.NamedType('donanted-id', NRST_ReportedIdentifier()),
+SkrCrossAccountRecord.componentType = namedtype.NamedTypes(
+    namedtype.NamedType('telco-id', SkrTelcoID()),
+    namedtype.NamedType('device-id', SkrReportedIdentifier()),
+    namedtype.NamedType('date-time-fillup', SkrDateAndTime()),
+    namedtype.NamedType('donanted-id', SkrReportedIdentifier()),
     namedtype.NamedType(
         'amount',
         char.UTF8String().subtype(
@@ -5188,26 +5188,26 @@ NRST_CrossAccountRecord.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_CrossAccountReportData(univ.SequenceOf):
+class SkrCrossAccountReportData(univ.SequenceOf):
     pass
 
 
-NRST_CrossAccountReportData.componentType = NRST_CrossAccountRecord()
+SkrCrossAccountReportData.componentType = SkrCrossAccountRecord()
 
 
-class NRST_DataAAARecordContent(univ.Sequence):
+class SkrDataAAARecordContent(univ.Sequence):
     pass
 
 
-NRST_DataAAARecordContent.componentType = namedtype.NamedTypes(
-    namedtype.NamedType('telco-id', NRST_TelcoID()),
+SkrDataAAARecordContent.componentType = namedtype.NamedTypes(
+    namedtype.NamedType('telco-id', SkrTelcoID()),
     namedtype.NamedType(
         'point-id',
         univ.Integer().subtype(
             subtypeSpec=(constraint.ValueRangeConstraint(0, 1000))
         )
     ),
-    namedtype.NamedType('aaa-connection-time', NRST_DateAndTime()),
+    namedtype.NamedType('aaa-connection-time', SkrDateAndTime()),
     namedtype.NamedType(
         'aaa-login-type',
         univ.Enumerated(namedValues=(namedval.NamedValues(
@@ -5221,7 +5221,7 @@ NRST_DataAAARecordContent.componentType = namedtype.NamedTypes(
             subtypeSpec=(constraint.ValueSizeConstraint(1, 64))
         )
     ),
-    namedtype.NamedType('aaa-allocated-ip', NRST_IPAddress()),
+    namedtype.NamedType('aaa-allocated-ip', SkrIPAddress()),
     namedtype.NamedType(
         'aaa-user-name', char.UTF8String().subtype(
             subtypeSpec=(constraint.ValueSizeConstraint(1, 128))
@@ -5245,7 +5245,7 @@ NRST_DataAAARecordContent.componentType = namedtype.NamedTypes(
             subtypeSpec=(constraint.ValueSizeConstraint(2, 32))
         )
     ),
-    namedtype.NamedType('aaa-nas', NRST_NetworkPeerInfo()),
+    namedtype.NamedType('aaa-nas', SkrNetworkPeerInfo()),
     namedtype.NamedType('aaa-in-bytes-count', univ.Integer()),
     namedtype.NamedType('aaa-out-bytes-count', univ.Integer()),
     namedtype.OptionalNamedType(
@@ -5257,7 +5257,7 @@ NRST_DataAAARecordContent.componentType = namedtype.NamedTypes(
     ),
     namedtype.OptionalNamedType(
         'aaa-user-equipment',
-        NRST_DataNetworkEquipment().subtype(
+        SkrDataNetworkEquipment().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 1)
             )
@@ -5272,7 +5272,7 @@ NRST_DataAAARecordContent.componentType = namedtype.NamedTypes(
     ),
     namedtype.OptionalNamedType(
         'aaa-sgsn-ip',
-        NRST_IPAddress().subtype(
+        SkrIPAddress().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 3)
             )
@@ -5280,7 +5280,7 @@ NRST_DataAAARecordContent.componentType = namedtype.NamedTypes(
     ),
     namedtype.OptionalNamedType(
         'aaa-ggsn-ip',
-        NRST_IPAddress().subtype(
+        SkrIPAddress().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 4)
             )
@@ -5295,7 +5295,7 @@ NRST_DataAAARecordContent.componentType = namedtype.NamedTypes(
     ),
     namedtype.OptionalNamedType(
         'aaa-location-start',
-        NRST_Location().subtype(
+        SkrLocation().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 6)
             )
@@ -5303,7 +5303,7 @@ NRST_DataAAARecordContent.componentType = namedtype.NamedTypes(
     ),
     namedtype.OptionalNamedType(
         'aaa-location-end',
-        NRST_Location().subtype(
+        SkrLocation().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 7)
             )
@@ -5361,7 +5361,7 @@ NRST_DataAAARecordContent.componentType = namedtype.NamedTypes(
     ),
     namedtype.OptionalNamedType(
         'aaa-allocated-ip-mask',
-        NRST_IPMask().subtype(
+        SkrIPMask().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 15)
             )
@@ -5370,26 +5370,26 @@ NRST_DataAAARecordContent.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_DataAAARecordData(univ.SequenceOf):
+class SkrDataAAARecordData(univ.SequenceOf):
     pass
 
 
-NRST_DataAAARecordData.componentType = NRST_DataAAARecordContent()
+SkrDataAAARecordData.componentType = SkrDataAAARecordContent()
 
 
-class NRST_DataAddressTranslationRecordContent(univ.Sequence):
+class SkrDataAddressTranslationRecordContent(univ.Sequence):
     pass
 
 
-NRST_DataAddressTranslationRecordContent.componentType = namedtype.NamedTypes(
-    namedtype.NamedType('telco-id', NRST_TelcoID()),
+SkrDataAddressTranslationRecordContent.componentType = namedtype.NamedTypes(
+    namedtype.NamedType('telco-id', SkrTelcoID()),
     namedtype.NamedType(
         'point-id',
         univ.Integer().subtype(
             subtypeSpec=(constraint.ValueRangeConstraint(0, 1000))
         )
     ),
-    namedtype.NamedType('translation-time', NRST_DateAndTime()),
+    namedtype.NamedType('translation-time', SkrDateAndTime()),
     namedtype.NamedType(
         'record-type',
         univ.Enumerated(
@@ -5398,9 +5398,9 @@ NRST_DataAddressTranslationRecordContent.componentType = namedtype.NamedTypes(
             )
         )
     ),
-    namedtype.NamedType('private-ip', NRST_NetworkPeerInfo()),
-    namedtype.NamedType('public-ip', NRST_NetworkPeerInfo()),
-    namedtype.NamedType('destination-ip', NRST_NetworkPeerInfo()),
+    namedtype.NamedType('private-ip', SkrNetworkPeerInfo()),
+    namedtype.NamedType('public-ip', SkrNetworkPeerInfo()),
+    namedtype.NamedType('destination-ip', SkrNetworkPeerInfo()),
     namedtype.NamedType(
         'translation-type',
         univ.Enumerated(
@@ -5418,43 +5418,43 @@ NRST_DataAddressTranslationRecordContent.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_DataAddressTranslationRecordData(univ.SequenceOf):
+class SkrDataAddressTranslationRecordData(univ.SequenceOf):
     pass
 
 
-NRST_DataAddressTranslationRecordData.componentType = NRST_DataAddressTranslationRecordContent()
+SkrDataAddressTranslationRecordData.componentType = SkrDataAddressTranslationRecordContent()
 
 
-class NRST_DataContentRawDirection(univ.Enumerated):
+class SkrDataContentRawDirection(univ.Enumerated):
     pass
 
 
-NRST_DataContentRawDirection.namedValues = namedval.NamedValues(
+SkrDataContentRawDirection.namedValues = namedval.NamedValues(
     ('client-server', 0),
     ('server-client', 1)
 )
 
 
-class NRST_DataContentReport(univ.Sequence):
+class SkrDataContentReport(univ.Sequence):
     pass
 
 
-NRST_DataContentReport.componentType = namedtype.NamedTypes(
+SkrDataContentReport.componentType = namedtype.NamedTypes(
     namedtype.NamedType('id', useful.ObjectDescriptor()),
     namedtype.NamedType('data', univ.Any())
 )
 
 
-class NRST_DataDropRequest(NRST_TaskID):
+class SkrDataDropRequest(SkrTaskID):
     pass
 
 
-class NRST_DataDropResponse(univ.Sequence):
+class SkrDataDropResponse(univ.Sequence):
     pass
 
 
-NRST_DataDropResponse.componentType = namedtype.NamedTypes(
-    namedtype.NamedType('task-id', NRST_TaskID()),
+SkrDataDropResponse.componentType = namedtype.NamedTypes(
+    namedtype.NamedType('task-id', SkrTaskID()),
     namedtype.NamedType('successful', univ.Boolean()),
     namedtype.OptionalNamedType(
         'error-description',
@@ -5465,11 +5465,11 @@ NRST_DataDropResponse.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_EmailEvent(univ.Enumerated):
+class SkrEmailEvent(univ.Enumerated):
     pass
 
 
-NRST_EmailEvent.namedValues = namedval.NamedValues(
+SkrEmailEvent.namedValues = namedval.NamedValues(
     ('email-send', 1),
     ('email-receive', 2),
     ('email-download', 3),
@@ -5481,41 +5481,41 @@ NRST_EmailEvent.namedValues = namedval.NamedValues(
 )
 
 
-class NRST_IP_AAAResult(univ.Enumerated):
+class SkrIP_AAAResult(univ.Enumerated):
     pass
 
 
-NRST_IP_AAAResult.namedValues = namedval.NamedValues(
+SkrIP_AAAResult.namedValues = namedval.NamedValues(
     ('aaaUnknown', 1),
     ('aaaFailed', 2),
     ('aaaSucceeded', 3)
 )
 
 
-class NRST_IP_AAAInformation(univ.Sequence):
+class SkrIP_AAAInformation(univ.Sequence):
     pass
 
 
-NRST_IP_AAAInformation.componentType = namedtype.NamedTypes(
+SkrIP_AAAInformation.componentType = namedtype.NamedTypes(
     namedtype.NamedType(
         'username',
         char.UTF8String().subtype(
             subtypeSpec=(constraint.ValueSizeConstraint(0, 64))
         )
     ),
-    namedtype.OptionalNamedType('aaaResult', NRST_IP_AAAResult()))
+    namedtype.OptionalNamedType('aaaResult', SkrIP_AAAResult()))
 
 
-class NRST_DataNetworkCdrHeaderData(univ.Sequence):
+class SkrDataNetworkCdrHeaderData(univ.Sequence):
     pass
 
 
-NRST_DataNetworkCdrHeaderData.componentType = namedtype.NamedTypes(
-    namedtype.NamedType('telco-id', NRST_TelcoID()),
-    namedtype.NamedType('begin-connection-time', NRST_DateAndTime()),
-    namedtype.NamedType('end-connection-time', NRST_DateAndTime()),
-    namedtype.NamedType('client-info', NRST_NetworkPeerInfo()),
-    namedtype.NamedType('server-info', NRST_NetworkPeerInfo()),
+SkrDataNetworkCdrHeaderData.componentType = namedtype.NamedTypes(
+    namedtype.NamedType('telco-id', SkrTelcoID()),
+    namedtype.NamedType('begin-connection-time', SkrDateAndTime()),
+    namedtype.NamedType('end-connection-time', SkrDateAndTime()),
+    namedtype.NamedType('client-info', SkrNetworkPeerInfo()),
+    namedtype.NamedType('server-info', SkrNetworkPeerInfo()),
     namedtype.NamedType(
         'protocol-code',
         univ.Integer().subtype(
@@ -5531,24 +5531,24 @@ NRST_DataNetworkCdrHeaderData.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_DataNetworkCdrHeader(univ.Sequence):
+class SkrDataNetworkCdrHeader(univ.Sequence):
     pass
 
 
-NRST_DataNetworkCdrHeader.componentType = namedtype.NamedTypes(
+SkrDataNetworkCdrHeader.componentType = namedtype.NamedTypes(
     namedtype.NamedType('id', useful.ObjectDescriptor()),
-    namedtype.NamedType('data', NRST_DataNetworkCdrHeaderData())
+    namedtype.NamedType('data', SkrDataNetworkCdrHeaderData())
 )
 
 
-class NRST_DataEmailRecordContentAAA(univ.Sequence):
+class SkrDataEmailRecordContentAAA(univ.Sequence):
     pass
 
 
-NRST_DataEmailRecordContentAAA.componentType = namedtype.NamedTypes(
-    namedtype.NamedType('mail-cdr-header', NRST_DataNetworkCdrHeader()),
-    namedtype.NamedType('mail-event', NRST_EmailEvent()),
-    namedtype.NamedType('mail-aaa-info', NRST_IP_AAAInformation()),
+SkrDataEmailRecordContentAAA.componentType = namedtype.NamedTypes(
+    namedtype.NamedType('mail-cdr-header', SkrDataNetworkCdrHeader()),
+    namedtype.NamedType('mail-event', SkrEmailEvent()),
+    namedtype.NamedType('mail-aaa-info', SkrIP_AAAInformation()),
     namedtype.OptionalNamedType(
         'mail-message',
         char.UTF8String().subtype(
@@ -5558,14 +5558,14 @@ NRST_DataEmailRecordContentAAA.componentType = namedtype.NamedTypes(
     namedtype.OptionalNamedType(
         'mail-nat-info',
         univ.SequenceOf(
-            componentType=(NRST_NetworkPeerInfo())
+            componentType=(SkrNetworkPeerInfo())
         ).subtype(
             implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 11))
         )
     ),
     namedtype.OptionalNamedType(
         'mail-location',
-        NRST_Location().subtype(
+        SkrLocation().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 12)
             )
@@ -5573,18 +5573,18 @@ NRST_DataEmailRecordContentAAA.componentType = namedtype.NamedTypes(
     ),
     namedtype.OptionalNamedType(
         'mail-data-content-id',
-        NRST_DataContentID().subtype(
+        SkrDataContentID().subtype(
             implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 13))
         )
     )
 )
 
 
-class NRST_EmailServers(univ.Sequence):
+class SkrEmailServers(univ.Sequence):
     pass
 
 
-NRST_EmailServers.componentType = namedtype.NamedTypes(
+SkrEmailServers.componentType = namedtype.NamedTypes(
     namedtype.NamedType(
         'data',
         univ.SequenceOf(
@@ -5596,11 +5596,11 @@ NRST_EmailServers.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_EmailReceivers(univ.Sequence):
+class SkrEmailReceivers(univ.Sequence):
     pass
 
 
-NRST_EmailReceivers.componentType = namedtype.NamedTypes(
+SkrEmailReceivers.componentType = namedtype.NamedTypes(
     namedtype.NamedType(
         'data',
         univ.SequenceOf(
@@ -5611,24 +5611,24 @@ NRST_EmailReceivers.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_DataEmailRecordContentIPDR(univ.Sequence):
+class SkrDataEmailRecordContentIPDR(univ.Sequence):
     pass
 
 
-NRST_DataEmailRecordContentIPDR.componentType = namedtype.NamedTypes(
+SkrDataEmailRecordContentIPDR.componentType = namedtype.NamedTypes(
     namedtype.NamedType(
         'mail-cdr-header',
-        NRST_DataNetworkCdrHeader()
+        SkrDataNetworkCdrHeader()
     ),
-    namedtype.NamedType('mail-event', NRST_EmailEvent()),
+    namedtype.NamedType('mail-event', SkrEmailEvent()),
     namedtype.NamedType(
         'mail-sender',
         char.UTF8String().subtype(
             subtypeSpec=(constraint.ValueSizeConstraint(1, 512))
         )
     ),
-    namedtype.NamedType('mail-receiver', NRST_EmailReceivers()),
-    namedtype.NamedType('mail-cc', NRST_EmailReceivers()),
+    namedtype.NamedType('mail-receiver', SkrEmailReceivers()),
+    namedtype.NamedType('mail-cc', SkrEmailReceivers()),
     namedtype.NamedType(
         'mail-subject',
         char.UTF8String().subtype(
@@ -5647,7 +5647,7 @@ NRST_DataEmailRecordContentIPDR.componentType = namedtype.NamedTypes(
             subtypeSpec=(constraint.ValueRangeConstraint(0, 1))
         )
     ),
-    namedtype.NamedType('mail-servers', NRST_EmailServers()),
+    namedtype.NamedType('mail-servers', SkrEmailServers()),
     namedtype.NamedType(
         'mail-term-cause',
         univ.Integer().subtype(
@@ -5685,14 +5685,14 @@ NRST_DataEmailRecordContentIPDR.componentType = namedtype.NamedTypes(
     namedtype.OptionalNamedType(
         'mail-nat-info',
         univ.SequenceOf(
-            componentType=(NRST_NetworkPeerInfo())
+            componentType=(SkrNetworkPeerInfo())
         ).subtype(
             implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 11))
         )
     ),
     namedtype.OptionalNamedType(
         'mail-location',
-        NRST_Location().subtype(
+        SkrLocation().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 12)
             )
@@ -5700,21 +5700,21 @@ NRST_DataEmailRecordContentIPDR.componentType = namedtype.NamedTypes(
     ),
     namedtype.OptionalNamedType(
         'mail-data-content-id',
-        NRST_DataContentID().subtype(
+        SkrDataContentID().subtype(
             implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 13))
         )
     )
 )
 
 
-class NRST_DataEmailRecordContent(univ.Choice):
+class SkrDataEmailRecordContent(univ.Choice):
     pass
 
 
-NRST_DataEmailRecordContent.componentType = namedtype.NamedTypes(
+SkrDataEmailRecordContent.componentType = namedtype.NamedTypes(
     namedtype.NamedType(
         'mail-aaa',
-        NRST_DataEmailRecordContentAAA().subtype(
+        SkrDataEmailRecordContentAAA().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 0)
             )
@@ -5722,7 +5722,7 @@ NRST_DataEmailRecordContent.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'mail-ipdr',
-        NRST_DataEmailRecordContentIPDR().subtype(
+        SkrDataEmailRecordContentIPDR().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 1)
             )
@@ -5731,21 +5731,21 @@ NRST_DataEmailRecordContent.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_DataEmailRecordData(univ.SequenceOf):
+class SkrDataEmailRecordData(univ.SequenceOf):
     pass
 
 
-NRST_DataEmailRecordData.componentType = NRST_DataEmailRecordContent()
+SkrDataEmailRecordData.componentType = SkrDataEmailRecordContent()
 
 
-class NRST_DataFileTransferRecordContent(univ.Sequence):
+class SkrDataFileTransferRecordContent(univ.Sequence):
     pass
 
 
-NRST_DataFileTransferRecordContent.componentType = namedtype.NamedTypes(
+SkrDataFileTransferRecordContent.componentType = namedtype.NamedTypes(
     namedtype.NamedType(
         'file-cdr-header',
-        NRST_DataNetworkCdrHeader()
+        SkrDataNetworkCdrHeader()
     ),
     namedtype.NamedType(
         'file-server-name',
@@ -5789,14 +5789,14 @@ NRST_DataFileTransferRecordContent.componentType = namedtype.NamedTypes(
     namedtype.OptionalNamedType(
         'file-nat-info',
         univ.SequenceOf(
-            componentType=(NRST_NetworkPeerInfo())
+            componentType=(SkrNetworkPeerInfo())
         ).subtype(
             implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 10))
         )
     ),
     namedtype.OptionalNamedType(
         'file-location',
-        NRST_Location().subtype(
+        SkrLocation().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 11)
             )
@@ -5804,25 +5804,25 @@ NRST_DataFileTransferRecordContent.componentType = namedtype.NamedTypes(
     ),
     namedtype.OptionalNamedType(
         'file-data-content-id',
-        NRST_DataContentID().subtype(
+        SkrDataContentID().subtype(
             implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 12))
         )
     )
 )
 
 
-class NRST_DataFileTransferRecordData(univ.SequenceOf):
+class SkrDataFileTransferRecordData(univ.SequenceOf):
     pass
 
 
-NRST_DataFileTransferRecordData.componentType = NRST_DataFileTransferRecordContent()
+SkrDataFileTransferRecordData.componentType = SkrDataFileTransferRecordContent()
 
 
-class NRST_ImReceiver(univ.Sequence):
+class SkrImReceiver(univ.Sequence):
     pass
 
 
-NRST_ImReceiver.componentType = namedtype.NamedTypes(
+SkrImReceiver.componentType = namedtype.NamedTypes(
     namedtype.NamedType(
         'im-receiver-screen-name',
         char.UTF8String().subtype(
@@ -5838,30 +5838,30 @@ NRST_ImReceiver.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_ImReceivers(univ.SequenceOf):
+class SkrImReceivers(univ.SequenceOf):
     pass
 
 
-NRST_ImReceivers.componentType = NRST_ImReceiver()
+SkrImReceivers.componentType = SkrImReceiver()
 
 
-class NRST_ImEvent(univ.Enumerated):
+class SkrImEvent(univ.Enumerated):
     pass
 
 
-NRST_ImEvent.namedValues = namedval.NamedValues(
+SkrImEvent.namedValues = namedval.NamedValues(
     ('im-undefined', 0),
     ('im-send', 1),
     ('im-receive', 2)
 )
 
 
-class NRST_DataImRecordContent(univ.Sequence):
+class SkrDataImRecordContent(univ.Sequence):
     pass
 
 
-NRST_DataImRecordContent.componentType = namedtype.NamedTypes(
-    namedtype.NamedType('im-cdr-header', NRST_DataNetworkCdrHeader()),
+SkrDataImRecordContent.componentType = namedtype.NamedTypes(
+    namedtype.NamedType('im-cdr-header', SkrDataNetworkCdrHeader()),
     namedtype.NamedType(
         'im-user-login',
         char.UTF8String().subtype(
@@ -5886,7 +5886,7 @@ NRST_DataImRecordContent.componentType = namedtype.NamedTypes(
             subtypeSpec=(constraint.ValueSizeConstraint(1, 256))
         )
     ),
-    namedtype.NamedType('im-receivers', NRST_ImReceivers()),
+    namedtype.NamedType('im-receivers', SkrImReceivers()),
     namedtype.NamedType(
         'im-size',
         univ.Integer().subtype(
@@ -5901,7 +5901,7 @@ NRST_DataImRecordContent.componentType = namedtype.NamedTypes(
     ),
     namedtype.OptionalNamedType(
         'im-protocol',
-        NRST_IMProtocol().subtype(
+        SkrIMProtocol().subtype(
             implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 0))
         )
     ),
@@ -5914,7 +5914,7 @@ NRST_DataImRecordContent.componentType = namedtype.NamedTypes(
     ),
     namedtype.OptionalNamedType(
         'im-event',
-        NRST_ImEvent().subtype(
+        SkrImEvent().subtype(
             implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 5))
         )
     ),
@@ -5927,14 +5927,14 @@ NRST_DataImRecordContent.componentType = namedtype.NamedTypes(
     namedtype.OptionalNamedType(
         'im-nat-info',
         univ.SequenceOf(
-            componentType=(NRST_NetworkPeerInfo())
+            componentType=(SkrNetworkPeerInfo())
         ).subtype(
             implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 11))
         )
     ),
     namedtype.OptionalNamedType(
         'im-location',
-        NRST_Location().subtype(
+        SkrLocation().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 12)
             )
@@ -5942,37 +5942,37 @@ NRST_DataImRecordContent.componentType = namedtype.NamedTypes(
     ),
     namedtype.OptionalNamedType(
         'im-data-content-id',
-        NRST_DataContentID().subtype(
+        SkrDataContentID().subtype(
             implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 13))
         )
     )
 )
 
 
-class NRST_DataImRecordData(univ.SequenceOf):
+class SkrDataImRecordData(univ.SequenceOf):
     pass
 
 
-NRST_DataImRecordData.componentType = NRST_DataImRecordContent()
+SkrDataImRecordData.componentType = SkrDataImRecordContent()
 
 
-class NRST_DataInterruptRequest(NRST_TaskID):
+class SkrDataInterruptRequest(SkrTaskID):
     pass
 
 
-class NRST_MessageID(univ.Integer):
+class SkrMessageID(univ.Integer):
     pass
 
 
-NRST_MessageID.subtypeSpec = constraint.ValueRangeConstraint(0, 4294967295)
+SkrMessageID.subtypeSpec = constraint.ValueRangeConstraint(0, 4294967295)
 
 
-class NRST_DataInterruptResponse(univ.Sequence):
+class SkrDataInterruptResponse(univ.Sequence):
     pass
 
 
-NRST_DataInterruptResponse.componentType = namedtype.NamedTypes(
-    namedtype.NamedType('request-id', NRST_MessageID()),
+SkrDataInterruptResponse.componentType = namedtype.NamedTypes(
+    namedtype.NamedType('request-id', SkrMessageID()),
     namedtype.NamedType('successful', univ.Boolean()),
     namedtype.OptionalNamedType(
         'data-blocks-available',
@@ -5989,16 +5989,16 @@ NRST_DataInterruptResponse.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_DataLoadRequest(NRST_TaskID):
+class SkrDataLoadRequest(SkrTaskID):
     pass
 
 
-class NRST_DataLoadResponse(univ.Sequence):
+class SkrDataLoadResponse(univ.Sequence):
     pass
 
 
-NRST_DataLoadResponse.componentType = namedtype.NamedTypes(
-    namedtype.NamedType('task-id', NRST_TaskID()),
+SkrDataLoadResponse.componentType = namedtype.NamedTypes(
+    namedtype.NamedType('task-id', SkrTaskID()),
     namedtype.NamedType('data-exists', univ.Boolean()),
     namedtype.OptionalNamedType(
         'data-blocks-number',
@@ -6015,12 +6015,12 @@ NRST_DataLoadResponse.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_DataRawFlowsRecordContent(univ.Sequence):
+class SkrDataRawFlowsRecordContent(univ.Sequence):
     pass
 
 
-NRST_DataRawFlowsRecordContent.componentType = namedtype.NamedTypes(
-    namedtype.NamedType('flow-cdr-header', NRST_DataNetworkCdrHeader()),
+SkrDataRawFlowsRecordContent.componentType = namedtype.NamedTypes(
+    namedtype.NamedType('flow-cdr-header', SkrDataNetworkCdrHeader()),
     namedtype.NamedType('flow-in-bytes-count', univ.Integer()),
     namedtype.NamedType('flow-out-bytes-count', univ.Integer()),
     namedtype.OptionalNamedType(
@@ -6041,14 +6041,14 @@ NRST_DataRawFlowsRecordContent.componentType = namedtype.NamedTypes(
     namedtype.OptionalNamedType(
         'flow-nat-info',
         univ.SequenceOf(
-            componentType=(NRST_NetworkPeerInfo())
+            componentType=(SkrNetworkPeerInfo())
         ).subtype(
             implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 10))
         )
     ),
     namedtype.OptionalNamedType(
         'flow-location',
-        NRST_Location().subtype(
+        SkrLocation().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 11)
             )
@@ -6056,7 +6056,7 @@ NRST_DataRawFlowsRecordContent.componentType = namedtype.NamedTypes(
     ),
     namedtype.OptionalNamedType(
         'flow-data-content-id',
-        NRST_DataContentID().subtype(
+        SkrDataContentID().subtype(
             implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 12))
         )
     ),
@@ -6071,22 +6071,22 @@ NRST_DataRawFlowsRecordContent.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_DataRawFlowsRecordData(univ.SequenceOf):
+class SkrDataRawFlowsRecordData(univ.SequenceOf):
     pass
 
 
-NRST_DataRawFlowsRecordData.componentType = NRST_DataRawFlowsRecordContent()
+SkrDataRawFlowsRecordData.componentType = SkrDataRawFlowsRecordContent()
 
 
-class NRST_DataReadyRequest(univ.Null):
+class SkrDataReadyRequest(univ.Null):
     pass
 
 
-class NRST_TaskResultStatus(univ.Enumerated):
+class SkrTaskResultStatus(univ.Enumerated):
     pass
 
 
-NRST_TaskResultStatus.namedValues = namedval.NamedValues(
+SkrTaskResultStatus.namedValues = namedval.NamedValues(
     ('data-not-ready', 0),
     ('data-ready', 1),
     ('data-not-found', 2),
@@ -6094,12 +6094,12 @@ NRST_TaskResultStatus.namedValues = namedval.NamedValues(
 )
 
 
-class NRST_TaskResult(univ.Sequence):
+class SkrTaskResult(univ.Sequence):
     pass
 
 
-NRST_TaskResult.componentType = namedtype.NamedTypes(
-    namedtype.NamedType('result', NRST_TaskResultStatus()),
+SkrTaskResult.componentType = namedtype.NamedTypes(
+    namedtype.NamedType('result', SkrTaskResultStatus()),
     namedtype.OptionalNamedType(
         'report-records-number',
         univ.Integer().subtype(
@@ -6125,29 +6125,29 @@ NRST_TaskResult.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_DataReadyTaskRecord(univ.Sequence):
+class SkrDataReadyTaskRecord(univ.Sequence):
     pass
 
 
-NRST_DataReadyTaskRecord.componentType = namedtype.NamedTypes(
-    namedtype.NamedType('task-id', NRST_TaskID()),
-    namedtype.NamedType('result', NRST_TaskResult())
+SkrDataReadyTaskRecord.componentType = namedtype.NamedTypes(
+    namedtype.NamedType('task-id', SkrTaskID()),
+    namedtype.NamedType('result', SkrTaskResult())
 )
 
 
-class NRST_DataReadyResponse(univ.SequenceOf):
+class SkrDataReadyResponse(univ.SequenceOf):
     pass
 
 
-NRST_DataReadyResponse.componentType = NRST_DataReadyTaskRecord()
+SkrDataReadyResponse.componentType = SkrDataReadyTaskRecord()
 
 
-class NRST_DataResourceRecordContent(univ.Sequence):
+class SkrDataResourceRecordContent(univ.Sequence):
     pass
 
 
-NRST_DataResourceRecordContent.componentType = namedtype.NamedTypes(
-    namedtype.NamedType('res-cdr-header', NRST_DataNetworkCdrHeader()),
+SkrDataResourceRecordContent.componentType = namedtype.NamedTypes(
+    namedtype.NamedType('res-cdr-header', SkrDataNetworkCdrHeader()),
     namedtype.NamedType(
         'res-url',
         char.UTF8String().subtype(
@@ -6163,7 +6163,7 @@ NRST_DataResourceRecordContent.componentType = namedtype.NamedTypes(
     ),
     namedtype.OptionalNamedType(
         'res-aaa-info',
-        NRST_IP_AAAInformation().subtype(
+        SkrIP_AAAInformation().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 0)
             )
@@ -6171,7 +6171,7 @@ NRST_DataResourceRecordContent.componentType = namedtype.NamedTypes(
     ),
     namedtype.OptionalNamedType(
         'res-http-method',
-        NRST_HttpMethod().subtype(
+        SkrHttpMethod().subtype(
             implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 1))
         )
     ),
@@ -6186,14 +6186,14 @@ NRST_DataResourceRecordContent.componentType = namedtype.NamedTypes(
     namedtype.OptionalNamedType(
         'res-nat-info',
         univ.SequenceOf(
-            componentType=(NRST_NetworkPeerInfo())
+            componentType=(SkrNetworkPeerInfo())
         ).subtype(
             implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 10))
         )
     ),
     namedtype.OptionalNamedType(
         'res-location',
-        NRST_Location().subtype(
+        SkrLocation().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 11)
             )
@@ -6201,25 +6201,25 @@ NRST_DataResourceRecordContent.componentType = namedtype.NamedTypes(
     ),
     namedtype.OptionalNamedType(
         'res-data-content-id',
-        NRST_DataContentID().subtype(
+        SkrDataContentID().subtype(
             implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 12))
         )
     )
 )
 
 
-class NRST_DataResourceRecordData(univ.SequenceOf):
+class SkrDataResourceRecordData(univ.SequenceOf):
     pass
 
 
-NRST_DataResourceRecordData.componentType = NRST_DataResourceRecordContent()
+SkrDataResourceRecordData.componentType = SkrDataResourceRecordContent()
 
 
-class NRST_RawDataType(univ.Enumerated):
+class SkrRawDataType(univ.Enumerated):
     pass
 
 
-NRST_RawDataType.namedValues = namedval.NamedValues(
+SkrRawDataType.namedValues = namedval.NamedValues(
     ('data-reports', 0),
     ('raw-cdr', 1),
     ('raw-ipdr', 2),
@@ -6228,35 +6228,35 @@ NRST_RawDataType.namedValues = namedval.NamedValues(
 )
 
 
-class NRST_DataStartRequest(univ.Sequence):
+class SkrDataStartRequest(univ.Sequence):
     pass
 
 
-NRST_DataStartRequest.componentType = namedtype.NamedTypes(
-    namedtype.NamedType('time-from', NRST_DateAndTime()),
-    namedtype.NamedType('time-to', NRST_DateAndTime()),
-    namedtype.NamedType('raw-type', NRST_RawDataType())
+SkrDataStartRequest.componentType = namedtype.NamedTypes(
+    namedtype.NamedType('time-from', SkrDateAndTime()),
+    namedtype.NamedType('time-to', SkrDateAndTime()),
+    namedtype.NamedType('raw-type', SkrRawDataType())
 )
 
 
-class NRST_DataStartResponse(univ.Boolean):
+class SkrDataStartResponse(univ.Boolean):
     pass
 
 
-class NRST_DataStopRequest(univ.Null):
+class SkrDataStopRequest(univ.Null):
     pass
 
 
-class NRST_DataStopResponse(univ.Boolean):
+class SkrDataStopResponse(univ.Boolean):
     pass
 
 
-class NRST_DataTermAccessRecordContent(univ.Sequence):
+class SkrDataTermAccessRecordContent(univ.Sequence):
     pass
 
 
-NRST_DataTermAccessRecordContent.componentType = namedtype.NamedTypes(
-    namedtype.NamedType('term-cdr-header', NRST_DataNetworkCdrHeader()),
+SkrDataTermAccessRecordContent.componentType = namedtype.NamedTypes(
+    namedtype.NamedType('term-cdr-header', SkrDataNetworkCdrHeader()),
     namedtype.NamedType('term-in-bytes-count', univ.Integer()),
     namedtype.NamedType('term-out-bytes-count', univ.Integer()),
     namedtype.OptionalNamedType(
@@ -6278,14 +6278,14 @@ NRST_DataTermAccessRecordContent.componentType = namedtype.NamedTypes(
     namedtype.OptionalNamedType(
         'term-nat-info',
         univ.SequenceOf(
-            componentType=(NRST_NetworkPeerInfo())
+            componentType=(SkrNetworkPeerInfo())
         ).subtype(
             implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 10))
         )
     ),
     namedtype.OptionalNamedType(
         'term-location',
-        NRST_Location().subtype(
+        SkrLocation().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 11)
             )
@@ -6293,7 +6293,7 @@ NRST_DataTermAccessRecordContent.componentType = namedtype.NamedTypes(
     ),
     namedtype.OptionalNamedType(
         'term-data-content-id',
-        NRST_DataContentID().subtype(
+        SkrDataContentID().subtype(
             implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 12))
         )
     ),
@@ -6308,46 +6308,46 @@ NRST_DataTermAccessRecordContent.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_DataTermAccessRecordData(univ.SequenceOf):
+class SkrDataTermAccessRecordData(univ.SequenceOf):
     pass
 
 
-NRST_DataTermAccessRecordData.componentType = NRST_DataTermAccessRecordContent()
+SkrDataTermAccessRecordData.componentType = SkrDataTermAccessRecordContent()
 
 
-class NRST_DataTypesRequest(NRST_RawDataType):
+class SkrDataTypesRequest(SkrRawDataType):
     pass
 
 
-class NRST_DataTypesResponse(univ.Sequence):
+class SkrDataTypesResponse(univ.Sequence):
     pass
 
 
-NRST_DataTypesResponse.componentType = namedtype.NamedTypes(
+SkrDataTypesResponse.componentType = namedtype.NamedTypes(
     namedtype.NamedType('successful', univ.Boolean()),
-    namedtype.NamedType('selected-type', NRST_RawDataType()),
-    namedtype.NamedType('time-from', NRST_DateAndTime()),
-    namedtype.NamedType('time-to', NRST_DateAndTime())
+    namedtype.NamedType('selected-type', SkrRawDataType()),
+    namedtype.NamedType('time-from', SkrDateAndTime()),
+    namedtype.NamedType('time-to', SkrDateAndTime())
 )
 
 
-class NRST_VoIPEvent(univ.Enumerated):
+class SkrVoIPEvent(univ.Enumerated):
     pass
 
 
-NRST_VoIPEvent.namedValues = namedval.NamedValues(
+SkrVoIPEvent.namedValues = namedval.NamedValues(
     ('outgoing', 0),
     ('incoming', 1),
     ('unknown', 2)
 )
 
 
-class NRST_DataVoipRecordContent(univ.Sequence):
+class SkrDataVoipRecordContent(univ.Sequence):
     pass
 
 
-NRST_DataVoipRecordContent.componentType = namedtype.NamedTypes(
-    namedtype.NamedType('voip-cdr-header', NRST_DataNetworkCdrHeader()),
+SkrDataVoipRecordContent.componentType = namedtype.NamedTypes(
+    namedtype.NamedType('voip-cdr-header', SkrDataNetworkCdrHeader()),
     namedtype.NamedType(
         'voip-session-id',
         char.UTF8String().subtype(
@@ -6378,8 +6378,8 @@ NRST_DataVoipRecordContent.componentType = namedtype.NamedTypes(
             subtypeSpec=(constraint.ValueRangeConstraint(0, 4294967295))
         )
     ),
-    namedtype.NamedType('voip-calling-number', NRST_DataVoipNumber()),
-    namedtype.NamedType('voip-called-number', NRST_DataVoipNumber()),
+    namedtype.NamedType('voip-calling-number', SkrDataVoipNumber()),
+    namedtype.NamedType('voip-called-number', SkrDataVoipNumber()),
     namedtype.NamedType('voip-in-bytes-count', univ.Integer()),
     namedtype.NamedType('voip-out-bytes-count', univ.Integer()),
     namedtype.NamedType('voip-fax', univ.Boolean()),
@@ -6391,7 +6391,7 @@ NRST_DataVoipRecordContent.componentType = namedtype.NamedTypes(
     ),
     namedtype.OptionalNamedType(
         'inbound-bunch',
-        NRST_Bunch().subtype(
+        SkrBunch().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 0)
             )
@@ -6399,7 +6399,7 @@ NRST_DataVoipRecordContent.componentType = namedtype.NamedTypes(
     ),
     namedtype.OptionalNamedType(
         'outbound-bunch',
-        NRST_Bunch().subtype(
+        SkrBunch().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 1)
             )
@@ -6408,14 +6408,14 @@ NRST_DataVoipRecordContent.componentType = namedtype.NamedTypes(
     namedtype.OptionalNamedType(
         'voip-gateways',
         univ.SequenceOf(
-            componentType=(NRST_IPAddress())
+            componentType=(SkrIPAddress())
         ).subtype(
             implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 2))
         )
     ),
     namedtype.OptionalNamedType(
         'voip-protocol',
-        NRST_VoipProtocol().subtype(
+        SkrVoipProtocol().subtype(
             implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 3))
         )
     ),
@@ -6438,14 +6438,14 @@ NRST_DataVoipRecordContent.componentType = namedtype.NamedTypes(
     namedtype.OptionalNamedType(
         'voip-nat-info',
         univ.SequenceOf(
-            componentType=(NRST_NetworkPeerInfo())
+            componentType=(SkrNetworkPeerInfo())
         ).subtype(
             implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 10))
         )
     ),
     namedtype.OptionalNamedType(
         'voip-location',
-        NRST_Location().subtype(
+        SkrLocation().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 11)
             )
@@ -6453,32 +6453,32 @@ NRST_DataVoipRecordContent.componentType = namedtype.NamedTypes(
     ),
     namedtype.OptionalNamedType(
         'voip-event',
-        NRST_VoIPEvent().subtype(
+        SkrVoIPEvent().subtype(
             implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 12))
         )
     ),
     namedtype.OptionalNamedType(
         'voip-data-content-id',
-        NRST_DataContentID().subtype(
+        SkrDataContentID().subtype(
             implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 13))
         )
     )
 )
 
 
-class NRST_DataVoipRecordData(univ.SequenceOf):
+class SkrDataVoipRecordData(univ.SequenceOf):
     pass
 
 
-NRST_DataVoipRecordData.componentType = NRST_DataVoipRecordContent()
+SkrDataVoipRecordData.componentType = SkrDataVoipRecordContent()
 
 
-class NRST_DictionaryInfo(univ.Sequence):
+class SkrDictionaryInfo(univ.Sequence):
     pass
 
 
-NRST_DictionaryInfo.componentType = namedtype.NamedTypes(
-    namedtype.NamedType('telco-id', NRST_TelcoID()),
+SkrDictionaryInfo.componentType = namedtype.NamedTypes(
+    namedtype.NamedType('telco-id', SkrTelcoID()),
     namedtype.NamedType('dict', useful.ObjectDescriptor()),
     namedtype.NamedType(
         'count',
@@ -6486,49 +6486,49 @@ NRST_DictionaryInfo.componentType = namedtype.NamedTypes(
             subtypeSpec=(constraint.ValueRangeConstraint(1, 4294967295))
         )
     ),
-    namedtype.NamedType('change-dates', NRST_FindRange())
+    namedtype.NamedType('change-dates', SkrFindRange())
 )
 
 
-class NRST_DictionariesPresenceData(univ.SequenceOf):
+class SkrDictionariesPresenceData(univ.SequenceOf):
     pass
 
 
-NRST_DictionariesPresenceData.componentType = NRST_DictionaryInfo()
+SkrDictionariesPresenceData.componentType = SkrDictionaryInfo()
 
 
-class NRST_DictionaryReport(univ.Sequence):
+class SkrDictionaryReport(univ.Sequence):
     pass
 
 
-NRST_DictionaryReport.componentType = namedtype.NamedTypes(
+SkrDictionaryReport.componentType = namedtype.NamedTypes(
     namedtype.NamedType('id', useful.ObjectDescriptor()),
     namedtype.NamedType('data', univ.Any())
 )
 
 
-class NRST_DisconnectRequest(univ.Null):
+class SkrDisconnectRequest(univ.Null):
     pass
 
 
-class NRST_DisconnectResponse(univ.Null):
+class SkrDisconnectResponse(univ.Null):
     pass
 
 
-class NRST_DocTypesRecord(univ.Sequence):
+class SkrDocTypesRecord(univ.Sequence):
     pass
 
 
-NRST_DocTypesRecord.componentType = namedtype.NamedTypes(
-    namedtype.NamedType('telco-id', NRST_TelcoID()),
+SkrDocTypesRecord.componentType = namedtype.NamedTypes(
+    namedtype.NamedType('telco-id', SkrTelcoID()),
     namedtype.NamedType(
         'doc-type-id',
         univ.Integer().subtype(
             subtypeSpec=(constraint.ValueRangeConstraint(0, 65535))
         )
     ),
-    namedtype.NamedType('begin-time', NRST_DateAndTime()),
-    namedtype.OptionalNamedType('end-time', NRST_DateAndTime()),
+    namedtype.NamedType('begin-time', SkrDateAndTime()),
+    namedtype.OptionalNamedType('end-time', SkrDateAndTime()),
     namedtype.NamedType(
         'description',
         char.UTF8String().subtype(
@@ -6538,23 +6538,23 @@ NRST_DocTypesRecord.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_DocTypesRecordsData(univ.SequenceOf):
+class SkrDocTypesRecordsData(univ.SequenceOf):
     pass
 
 
-NRST_DocTypesRecordsData.componentType = NRST_DocTypesRecord()
+SkrDocTypesRecordsData.componentType = SkrDocTypesRecord()
 
 
-class NRST_DropFilterRequest(NRST_FilterID):
+class SkrDropFilterRequest(SkrFilterID):
     pass
 
 
-class NRST_DropFilterResponse(univ.Sequence):
+class SkrDropFilterResponse(univ.Sequence):
     pass
 
 
-NRST_DropFilterResponse.componentType = namedtype.NamedTypes(
-    namedtype.NamedType('filter-id', NRST_FilterID()),
+SkrDropFilterResponse.componentType = namedtype.NamedTypes(
+    namedtype.NamedType('filter-id', SkrFilterID()),
     namedtype.NamedType('successful', univ.Boolean()),
     namedtype.OptionalNamedType(
         'error-description',
@@ -6565,21 +6565,21 @@ NRST_DropFilterResponse.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_EntityId(univ.Integer):
+class SkrEntityId(univ.Integer):
     pass
 
 
-NRST_EntityId.subtypeSpec = constraint.ValueRangeConstraint(0, 4294967296)
+SkrEntityId.subtypeSpec = constraint.ValueRangeConstraint(0, 4294967296)
 
 
-class NRST_ExpressPaysRecord(univ.Sequence):
+class SkrExpressPaysRecord(univ.Sequence):
     pass
 
 
-NRST_ExpressPaysRecord.componentType = namedtype.NamedTypes(
-    namedtype.NamedType('telco-id', NRST_TelcoID()),
-    namedtype.NamedType('device-id', NRST_ReportedIdentifier()),
-    namedtype.NamedType('date-time-fillup', NRST_DateAndTime()),
+SkrExpressPaysRecord.componentType = namedtype.NamedTypes(
+    namedtype.NamedType('telco-id', SkrTelcoID()),
+    namedtype.NamedType('device-id', SkrReportedIdentifier()),
+    namedtype.NamedType('date-time-fillup', SkrDateAndTime()),
     namedtype.NamedType(
         'card-number',
         char.UTF8String().subtype(
@@ -6595,21 +6595,21 @@ NRST_ExpressPaysRecord.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_ExpressCardReportData(univ.SequenceOf):
+class SkrExpressCardReportData(univ.SequenceOf):
     pass
 
 
-NRST_ExpressCardReportData.componentType = NRST_ExpressPaysRecord()
+SkrExpressCardReportData.componentType = SkrExpressPaysRecord()
 
 
-class NRST_FilterMessageData(univ.Choice):
+class SkrFilterMessageData(univ.Choice):
     pass
 
 
-NRST_FilterMessageData.componentType = namedtype.NamedTypes(
+SkrFilterMessageData.componentType = namedtype.NamedTypes(
     namedtype.NamedType(
         'create-filter-request',
-        NRST_CreateFilterRequest().subtype(
+        SkrCreateFilterRequest().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 0)
             )
@@ -6617,7 +6617,7 @@ NRST_FilterMessageData.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'create-filter-response',
-        NRST_CreateFilterResponse().subtype(
+        SkrCreateFilterResponse().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 1)
             )
@@ -6625,13 +6625,13 @@ NRST_FilterMessageData.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'drop-filter-request',
-        NRST_DropFilterRequest().subtype(
+        SkrDropFilterRequest().subtype(
             implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 2))
         )
     ),
     namedtype.NamedType(
         'drop-filter-response',
-        NRST_DropFilterResponse().subtype(
+        SkrDropFilterResponse().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 3)
             )
@@ -6640,28 +6640,28 @@ NRST_FilterMessageData.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_GatesRecord(univ.Sequence):
+class SkrGatesRecord(univ.Sequence):
     pass
 
 
-NRST_GatesRecord.componentType = namedtype.NamedTypes(
-    namedtype.NamedType('telco-id', NRST_TelcoID()),
+SkrGatesRecord.componentType = namedtype.NamedTypes(
+    namedtype.NamedType('telco-id', SkrTelcoID()),
     namedtype.NamedType(
         'gate-id',
         univ.Integer().subtype(
             subtypeSpec=(constraint.ValueRangeConstraint(0, 4294967295))
         )
     ),
-    namedtype.NamedType('ip-list', NRST_IPList()),
-    namedtype.NamedType('begin-time', NRST_DateAndTime()),
-    namedtype.OptionalNamedType('end-time', NRST_DateAndTime()),
+    namedtype.NamedType('ip-list', SkrIPList()),
+    namedtype.NamedType('begin-time', SkrDateAndTime()),
+    namedtype.OptionalNamedType('end-time', SkrDateAndTime()),
     namedtype.NamedType(
         'description',
         char.UTF8String().subtype(
             subtypeSpec=(constraint.ValueSizeConstraint(1, 256))
         )
     ),
-    namedtype.NamedType('address', NRST_ReportedAddress()),
+    namedtype.NamedType('address', SkrReportedAddress()),
     namedtype.NamedType(
         'gate-type',
         univ.Enumerated(namedValues=(namedval.NamedValues(
@@ -6679,23 +6679,23 @@ NRST_GatesRecord.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_GatesRecordsData(univ.SequenceOf):
+class SkrGatesRecordsData(univ.SequenceOf):
     pass
 
 
-NRST_GatesRecordsData.componentType = NRST_GatesRecord()
+SkrGatesRecordsData.componentType = SkrGatesRecord()
 
 
-class NRST_GetEntities(univ.Null):
+class SkrGetEntities(univ.Null):
     pass
 
 
-class NRST_NonFormalizedEntity(univ.Sequence):
+class SkrNonFormalizedEntity(univ.Sequence):
     pass
 
 
-NRST_NonFormalizedEntity.componentType = namedtype.NamedTypes(
-    namedtype.NamedType('entity-id', NRST_EntityId()),
+SkrNonFormalizedEntity.componentType = namedtype.NamedTypes(
+    namedtype.NamedType('entity-id', SkrEntityId()),
     namedtype.NamedType(
         'entity-name',
         char.UTF8String().subtype(
@@ -6705,84 +6705,84 @@ NRST_NonFormalizedEntity.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_GetEntitiesResponse(univ.SequenceOf):
+class SkrGetEntitiesResponse(univ.SequenceOf):
     pass
 
 
-NRST_GetEntitiesResponse.componentType = NRST_NonFormalizedEntity()
+SkrGetEntitiesResponse.componentType = SkrNonFormalizedEntity()
 
 
-class NRST_NonFormalizedEntityAttribute(univ.Sequence):
+class SkrNonFormalizedEntityAttribute(univ.Sequence):
     pass
 
 
-NRST_NonFormalizedEntityAttribute.componentType = namedtype.NamedTypes(
+SkrNonFormalizedEntityAttribute.componentType = namedtype.NamedTypes(
     namedtype.NamedType(
         'attribute-name',
         char.UTF8String().subtype(
             subtypeSpec=(constraint.ValueSizeConstraint(1, 256))
         )
     ),
-    namedtype.NamedType('attribute-type', NRST_AttributeType())
+    namedtype.NamedType('attribute-type', SkrAttributeType())
 )
 
 
-class NRST_GetEntityAttributesResponse(univ.Sequence):
+class SkrGetEntityAttributesResponse(univ.Sequence):
     pass
 
 
-NRST_GetEntityAttributesResponse.componentType = namedtype.NamedTypes(
-    namedtype.NamedType('entity-id', NRST_EntityId()),
+SkrGetEntityAttributesResponse.componentType = namedtype.NamedTypes(
+    namedtype.NamedType('entity-id', SkrEntityId()),
     namedtype.NamedType(
         'entity-attributes',
-        univ.SequenceOf(componentType=(NRST_NonFormalizedEntityAttribute()))
+        univ.SequenceOf(componentType=(SkrNonFormalizedEntityAttribute()))
     )
 )
 
 
-class NRST_GetEntityAtttibutes(NRST_EntityId):
+class SkrGetEntityAtttibutes(SkrEntityId):
     pass
 
 
-class NRST_GetModuleConfigRequest(univ.Choice):
+class SkrGetModuleConfigRequest(univ.Choice):
     pass
 
 
-NRST_GetModuleConfigRequest.componentType = namedtype.NamedTypes(
+SkrGetModuleConfigRequest.componentType = namedtype.NamedTypes(
     namedtype.NamedType(
         'hw-modules-list',
-        NRST_RequestedHardwareModules().subtype(
+        SkrRequestedHardwareModules().subtype(
             implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 0))
         )
     ),
     namedtype.NamedType(
         'sw-modules-list',
-        NRST_RequestedSoftwareModules().subtype(
+        SkrRequestedSoftwareModules().subtype(
             implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 1))
         )
     )
 )
 
 
-class NRST_GetModuleConfigResponse(univ.Sequence):
+class SkrGetModuleConfigResponse(univ.Sequence):
     pass
 
 
-NRST_GetModuleConfigResponse.componentType = namedtype.NamedTypes(
-    namedtype.NamedType('hw-modules', NRST_SormHardwareModules()),
-    namedtype.NamedType('sw-modules', NRST_SormSoftwareModules())
+SkrGetModuleConfigResponse.componentType = namedtype.NamedTypes(
+    namedtype.NamedType('hw-modules', SkrSormHardwareModules()),
+    namedtype.NamedType('sw-modules', SkrSormSoftwareModules())
 )
 
 
-class NRST_GetModuleTypesRequest(univ.Null):
+class SkrGetModuleTypesRequest(univ.Null):
     pass
 
 
-class NRST_ModuleType(univ.Sequence):
+class SkrModuleType(univ.Sequence):
     pass
 
 
-NRST_ModuleType.componentType = namedtype.NamedTypes(
+SkrModuleType.componentType = namedtype.NamedTypes(
     namedtype.NamedType(
         'module-type',
         univ.Integer().subtype(
@@ -6798,33 +6798,33 @@ NRST_ModuleType.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_GetModuleTypesResponse(univ.SequenceOf):
+class SkrGetModuleTypesResponse(univ.SequenceOf):
     pass
 
 
-NRST_GetModuleTypesResponse.componentType = NRST_ModuleType()
+SkrGetModuleTypesResponse.componentType = SkrModuleType()
 
 
-class NRST_GetStructureRequest(univ.Null):
+class SkrGetStructureRequest(univ.Null):
     pass
 
 
-class NRST_GetStructureResponse(univ.Sequence):
+class SkrGetStructureResponse(univ.Sequence):
     pass
 
 
-NRST_GetStructureResponse.componentType = namedtype.NamedTypes(
-    namedtype.NamedType('sw-modules', NRST_SormHardwareModules()),
-    namedtype.NamedType('hw-modules', NRST_SormSoftwareModules())
+SkrGetStructureResponse.componentType = namedtype.NamedTypes(
+    namedtype.NamedType('sw-modules', SkrSormHardwareModules()),
+    namedtype.NamedType('hw-modules', SkrSormSoftwareModules())
 )
 
 
-class NRST_IpDataPointRecord(univ.Sequence):
+class SkrIpDataPointRecord(univ.Sequence):
     pass
 
 
-NRST_IpDataPointRecord.componentType = namedtype.NamedTypes(
-    namedtype.NamedType('telco-id', NRST_TelcoID()),
+SkrIpDataPointRecord.componentType = namedtype.NamedTypes(
+    namedtype.NamedType('telco-id', SkrTelcoID()),
     namedtype.NamedType(
         'point-id',
         univ.Integer().subtype(
@@ -6837,93 +6837,93 @@ NRST_IpDataPointRecord.componentType = namedtype.NamedTypes(
             subtypeSpec=(constraint.ValueSizeConstraint(1, 256))
         )
     ),
-    namedtype.NamedType('begin-time', NRST_DateAndTime()),
-    namedtype.OptionalNamedType('end-time', NRST_DateAndTime())
+    namedtype.NamedType('begin-time', SkrDateAndTime()),
+    namedtype.OptionalNamedType('end-time', SkrDateAndTime())
 )
 
 
-class NRST_IpDataPointsRecordsData(univ.SequenceOf):
+class SkrIpDataPointsRecordsData(univ.SequenceOf):
     pass
 
 
-NRST_IpDataPointsRecordsData.componentType = NRST_IpDataPointRecord()
+SkrIpDataPointsRecordsData.componentType = SkrIpDataPointRecord()
 
 
-class NRST_IpNumberingPlanRecord(univ.Sequence):
+class SkrIpNumberingPlanRecord(univ.Sequence):
     pass
 
 
-NRST_IpNumberingPlanRecord.componentType = namedtype.NamedTypes(
-    namedtype.NamedType('telco-id', NRST_TelcoID()),
+SkrIpNumberingPlanRecord.componentType = namedtype.NamedTypes(
+    namedtype.NamedType('telco-id', SkrTelcoID()),
     namedtype.NamedType(
         'description',
         char.UTF8String().subtype(
             subtypeSpec=(constraint.ValueSizeConstraint(1, 256))
         )
     ),
-    namedtype.NamedType('network-address', NRST_IPAddress()),
-    namedtype.NamedType('network-mask', NRST_IPMask()),
-    namedtype.NamedType('begin-time', NRST_DateAndTime()),
-    namedtype.OptionalNamedType('end-time', NRST_DateAndTime()))
+    namedtype.NamedType('network-address', SkrIPAddress()),
+    namedtype.NamedType('network-mask', SkrIPMask()),
+    namedtype.NamedType('begin-time', SkrDateAndTime()),
+    namedtype.OptionalNamedType('end-time', SkrDateAndTime()))
 
 
-class NRST_IpNumberingPlanRecordsData(univ.SequenceOf):
+class SkrIpNumberingPlanRecordsData(univ.SequenceOf):
     pass
 
 
-NRST_IpNumberingPlanRecordsData.componentType = NRST_IpNumberingPlanRecord()
+SkrIpNumberingPlanRecordsData.componentType = SkrIpNumberingPlanRecord()
 
 
-class NRST_LocationPresenceData(univ.SequenceOf):
+class SkrLocationPresenceData(univ.SequenceOf):
     pass
 
 
-NRST_LocationPresenceData.componentType = NRST_StandardInterval()
+SkrLocationPresenceData.componentType = SkrStandardInterval()
 
 
-class NRST_ValidateLocationRecord(univ.Sequence):
+class SkrValidateLocationRecord(univ.Sequence):
     pass
 
 
-NRST_ValidateLocationRecord.componentType = namedtype.NamedTypes(
-    namedtype.NamedType('telco-id', NRST_TelcoID()),
-    namedtype.NamedType('connection-time', NRST_DateAndTime()),
-    namedtype.NamedType('ident', NRST_ReportedIdentifier()),
-    namedtype.NamedType('connection-location', NRST_Location())
+SkrValidateLocationRecord.componentType = namedtype.NamedTypes(
+    namedtype.NamedType('telco-id', SkrTelcoID()),
+    namedtype.NamedType('connection-time', SkrDateAndTime()),
+    namedtype.NamedType('ident', SkrReportedIdentifier()),
+    namedtype.NamedType('connection-location', SkrLocation())
 )
 
 
-class NRST_LocationReport(univ.SequenceOf):
+class SkrLocationReport(univ.SequenceOf):
     pass
 
 
-NRST_LocationReport.componentType = NRST_ValidateLocationRecord()
+SkrLocationReport.componentType = SkrValidateLocationRecord()
 
 
-class NRST_SetModuleConfigRequest(univ.Sequence):
+class SkrSetModuleConfigRequest(univ.Sequence):
     pass
 
 
-NRST_SetModuleConfigRequest.componentType = namedtype.NamedTypes(
-    namedtype.NamedType('module-id', NRST_ModuleId()),
-    namedtype.NamedType('module-config', NRST_ConfiguratedModule())
+SkrSetModuleConfigRequest.componentType = namedtype.NamedTypes(
+    namedtype.NamedType('module-id', SkrModuleId()),
+    namedtype.NamedType('module-config', SkrConfiguratedModule())
 )
 
 
-class NRST_ManagementRequest(univ.Choice):
+class SkrManagementRequest(univ.Choice):
     pass
 
 
-NRST_ManagementRequest.componentType = namedtype.NamedTypes(
+SkrManagementRequest.componentType = namedtype.NamedTypes(
     namedtype.NamedType(
         'get-structure',
-        NRST_GetStructureRequest().subtype(
+        SkrGetStructureRequest().subtype(
             implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 0))
         )
     ),
     namedtype.NamedType(
         'get-module-config',
-        NRST_GetModuleConfigRequest().subtype(
+        SkrGetModuleConfigRequest().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 1)
             )
@@ -6931,7 +6931,7 @@ NRST_ManagementRequest.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'set-module-config',
-        NRST_SetModuleConfigRequest().subtype(
+        SkrSetModuleConfigRequest().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 2)
             )
@@ -6939,7 +6939,7 @@ NRST_ManagementRequest.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'check-module',
-        NRST_CheckModuleRequest().subtype(
+        SkrCheckModuleRequest().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 3)
             )
@@ -6947,25 +6947,25 @@ NRST_ManagementRequest.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'get-module-types',
-        NRST_GetModuleTypesRequest().subtype(
+        SkrGetModuleTypesRequest().subtype(
             implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 4))
         )
     )
 )
 
 
-class NRST_SetModuleConfigResponse(NRST_ConfiguratedModule):
+class SkrSetModuleConfigResponse(SkrConfiguratedModule):
     pass
 
 
-class NRST_ManagementResponse(univ.Choice):
+class SkrManagementResponse(univ.Choice):
     pass
 
 
-NRST_ManagementResponse.componentType = namedtype.NamedTypes(
+SkrManagementResponse.componentType = namedtype.NamedTypes(
     namedtype.NamedType(
         'get-structure',
-        NRST_GetStructureResponse().subtype(
+        SkrGetStructureResponse().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 0)
             )
@@ -6973,7 +6973,7 @@ NRST_ManagementResponse.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'get-module-config',
-        NRST_GetModuleConfigResponse().subtype(
+        SkrGetModuleConfigResponse().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 1)
             )
@@ -6981,7 +6981,7 @@ NRST_ManagementResponse.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'set-module-config',
-        NRST_SetModuleConfigResponse().subtype(
+        SkrSetModuleConfigResponse().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 2)
             )
@@ -6989,7 +6989,7 @@ NRST_ManagementResponse.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'check-module',
-        NRST_CheckModuleResponse().subtype(
+        SkrCheckModuleResponse().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 3)
             )
@@ -6997,38 +6997,38 @@ NRST_ManagementResponse.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'get-module-types',
-        NRST_GetModuleTypesResponse().subtype(
+        SkrGetModuleTypesResponse().subtype(
             implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 4))
         )
     )
 )
 
 
-class NRST_ManagementMessageData(univ.Choice):
+class SkrManagementMessageData(univ.Choice):
     pass
 
 
-NRST_ManagementMessageData.componentType = namedtype.NamedTypes(
+SkrManagementMessageData.componentType = namedtype.NamedTypes(
     namedtype.NamedType(
         'request',
-        NRST_ManagementRequest().subtype(
+        SkrManagementRequest().subtype(
             implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 0))
         )
     ),
     namedtype.NamedType(
         'response',
-        NRST_ManagementResponse().subtype(
+        SkrManagementResponse().subtype(
             implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 1))
         )
     )
 )
 
 
-class NRST_MathOperation(univ.Enumerated):
+class SkrMathOperation(univ.Enumerated):
     pass
 
 
-NRST_MathOperation.namedValues = namedval.NamedValues(
+SkrMathOperation.namedValues = namedval.NamedValues(
     ('equal', 0),
     ('less', 1),
     ('greater', 2),
@@ -7038,22 +7038,22 @@ NRST_MathOperation.namedValues = namedval.NamedValues(
 )
 
 
-class NRST_Version(char.PrintableString):
+class SkrVersion(char.PrintableString):
     pass
 
 
-vers = NRST_Version('3.0.0')
+vers = SkrVersion('3.0.0')
 
 
-class NRST_Message(univ.Sequence):
+class SkrMessage(univ.Sequence):
     pass
 
 
-NRST_Message.componentType = namedtype.NamedTypes(namedtype.DefaultedNamedType(
+SkrMessage.componentType = namedtype.NamedTypes(namedtype.DefaultedNamedType(
     'version',
-    NRST_Version().subtype(value=vers)),
-    namedtype.NamedType('message-id', NRST_MessageID()),
-    namedtype.NamedType('message-time', NRST_DateAndTime()),
+    SkrVersion().subtype(value=vers)),
+    namedtype.NamedType('message-id', SkrMessageID()),
+    namedtype.NamedType('message-time', SkrDateAndTime()),
     namedtype.OptionalNamedType(
         'operator-name',
         char.PrintableString().subtype(
@@ -7065,13 +7065,13 @@ NRST_Message.componentType = namedtype.NamedTypes(namedtype.DefaultedNamedType(
 )
 
 
-class NRST_MobileRecordContent(univ.Sequence):
+class SkrMobileRecordContent(univ.Sequence):
     pass
 
 
-NRST_MobileRecordContent.componentType = namedtype.NamedTypes(
-    namedtype.NamedType('telco-id', NRST_TelcoID()),
-    namedtype.NamedType('begin-connection-time', NRST_DateAndTime()),
+SkrMobileRecordContent.componentType = namedtype.NamedTypes(
+    namedtype.NamedType('telco-id', SkrTelcoID()),
+    namedtype.NamedType('begin-connection-time', SkrDateAndTime()),
     namedtype.NamedType(
         'duration',
         univ.Integer().subtype(
@@ -7090,8 +7090,8 @@ NRST_MobileRecordContent.componentType = namedtype.NamedTypes(
             subtypeSpec=(constraint.ValueRangeConstraint(0, 4294967295))
         )
     ),
-    namedtype.NamedType('in-abonent-type', NRST_PhoneAbonentType()),
-    namedtype.NamedType('out-abonent-type', NRST_PhoneAbonentType()),
+    namedtype.NamedType('in-abonent-type', SkrPhoneAbonentType()),
+    namedtype.NamedType('out-abonent-type', SkrPhoneAbonentType()),
     namedtype.NamedType(
         'switch-id',
         char.UTF8String().subtype(
@@ -7106,7 +7106,7 @@ NRST_MobileRecordContent.componentType = namedtype.NamedTypes(
     ),
     namedtype.OptionalNamedType(
         'inbound-bunch',
-        NRST_Bunch().subtype(
+        SkrBunch().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 0)
             )
@@ -7114,7 +7114,7 @@ NRST_MobileRecordContent.componentType = namedtype.NamedTypes(
     ),
     namedtype.OptionalNamedType(
         'outbound-bunch',
-        NRST_Bunch().subtype(
+        SkrBunch().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 1)
             )
@@ -7122,7 +7122,7 @@ NRST_MobileRecordContent.componentType = namedtype.NamedTypes(
     ),
     namedtype.OptionalNamedType(
         'in-info',
-        NRST_ReportedIdentifier().subtype(
+        SkrReportedIdentifier().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 2)
             )
@@ -7130,7 +7130,7 @@ NRST_MobileRecordContent.componentType = namedtype.NamedTypes(
     ),
     namedtype.OptionalNamedType(
         'in-end-location',
-        NRST_Location().subtype(
+        SkrLocation().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 3)
             )
@@ -7138,7 +7138,7 @@ NRST_MobileRecordContent.componentType = namedtype.NamedTypes(
     ),
     namedtype.OptionalNamedType(
         'in-begin-location',
-        NRST_Location().subtype(
+        SkrLocation().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 4)
             )
@@ -7146,7 +7146,7 @@ NRST_MobileRecordContent.componentType = namedtype.NamedTypes(
     ),
     namedtype.OptionalNamedType(
         'out-info',
-        NRST_ReportedIdentifier().subtype(
+        SkrReportedIdentifier().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 5)
             )
@@ -7154,7 +7154,7 @@ NRST_MobileRecordContent.componentType = namedtype.NamedTypes(
     ),
     namedtype.OptionalNamedType(
         'out-begin-location',
-        NRST_Location().subtype(
+        SkrLocation().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 6)
             )
@@ -7162,7 +7162,7 @@ NRST_MobileRecordContent.componentType = namedtype.NamedTypes(
     ),
     namedtype.OptionalNamedType(
         'out-end-location',
-        NRST_Location().subtype(
+        SkrLocation().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 7)
             )
@@ -7200,26 +7200,26 @@ NRST_MobileRecordContent.componentType = namedtype.NamedTypes(
     ),
     namedtype.OptionalNamedType(
         'data-content-id',
-        NRST_DataContentID().subtype(
+        SkrDataContentID().subtype(
             implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 41))
         )
     )
 )
 
 
-class NRST_MobileRecordData(univ.SequenceOf):
+class SkrMobileRecordData(univ.SequenceOf):
     pass
 
 
-NRST_MobileRecordData.componentType = NRST_MobileRecordContent()
+SkrMobileRecordData.componentType = SkrMobileRecordContent()
 
 
-class NRST_MobileSubscriberIdenityPlanRecord(univ.Sequence):
+class SkrMobileSubscriberIdenityPlanRecord(univ.Sequence):
     pass
 
 
-NRST_MobileSubscriberIdenityPlanRecord.componentType = namedtype.NamedTypes(
-    namedtype.NamedType('telco-id', NRST_TelcoID()),
+SkrMobileSubscriberIdenityPlanRecord.componentType = namedtype.NamedTypes(
+    namedtype.NamedType('telco-id', SkrTelcoID()),
     namedtype.NamedType(
         'mcc',
         char.NumericString().subtype(
@@ -7274,10 +7274,10 @@ NRST_MobileSubscriberIdenityPlanRecord.componentType = namedtype.NamedTypes(
             subtypeSpec=(constraint.ValueSizeConstraint(1, 128))
         )
     ),
-    namedtype.NamedType('range-activation', NRST_DateAndTime()),
+    namedtype.NamedType('range-activation', SkrDateAndTime()),
     namedtype.OptionalNamedType(
         'range-deactivation',
-        NRST_DateAndTime().subtype(
+        SkrDateAndTime().subtype(
             implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 0))
         )
     ),
@@ -7292,21 +7292,21 @@ NRST_MobileSubscriberIdenityPlanRecord.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_MobileSubscriberIdenityPlanRecordsData(univ.SequenceOf):
+class SkrMobileSubscriberIdenityPlanRecordsData(univ.SequenceOf):
     pass
 
 
-NRST_MobileSubscriberIdenityPlanRecordsData.componentType = NRST_MobileSubscriberIdenityPlanRecord()
+SkrMobileSubscriberIdenityPlanRecordsData.componentType = SkrMobileSubscriberIdenityPlanRecord()
 
 
-class NRST_NonFormalizedEntityAttributeData(univ.Choice):
+class SkrNonFormalizedEntityAttributeData(univ.Choice):
     pass
 
 
-NRST_NonFormalizedEntityAttributeData.componentType = namedtype.NamedTypes(
+SkrNonFormalizedEntityAttributeData.componentType = namedtype.NamedTypes(
     namedtype.NamedType(
         'datetime',
-        NRST_DateAndTime().subtype(
+        SkrDateAndTime().subtype(
             implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 0))
         )
     ),
@@ -7336,7 +7336,7 @@ NRST_NonFormalizedEntityAttributeData.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'location',
-        NRST_Location().subtype(
+        SkrLocation().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 5)
             )
@@ -7352,33 +7352,33 @@ NRST_NonFormalizedEntityAttributeData.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_NonFormalizedEntityCondition(univ.Sequence):
+class SkrNonFormalizedEntityCondition(univ.Sequence):
     pass
 
 
-NRST_NonFormalizedEntityCondition.componentType = namedtype.NamedTypes(
-    namedtype.NamedType('attribute', NRST_NonFormalizedEntityAttribute()),
-    namedtype.NamedType('operation', NRST_MathOperation()),
+SkrNonFormalizedEntityCondition.componentType = namedtype.NamedTypes(
+    namedtype.NamedType('attribute', SkrNonFormalizedEntityAttribute()),
+    namedtype.NamedType('operation', SkrMathOperation()),
     namedtype.NamedType(
         'attribute-value',
-        NRST_NonFormalizedEntityAttributeData()
+        SkrNonFormalizedEntityAttributeData()
     )
 )
 
 
-class NRST_NonFormalizedParameter(univ.Choice):
+class SkrNonFormalizedParameter(univ.Choice):
     pass
 
 
-NRST_NonFormalizedParameter.componentType = namedtype.NamedTypes(
+SkrNonFormalizedParameter.componentType = namedtype.NamedTypes(
     namedtype.NamedType(
         'separator',
-        NRST_LogicalOperation().subtype(
+        SkrLogicalOperation().subtype(
             implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 0)))
     ),
     namedtype.NamedType(
         'find-mask',
-        NRST_NonFormalizedEntityCondition().subtype(
+        SkrNonFormalizedEntityCondition().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 1))
         )
@@ -7386,70 +7386,70 @@ NRST_NonFormalizedParameter.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_NonFormalizedParameters(univ.SequenceOf):
+class SkrNonFormalizedParameters(univ.SequenceOf):
     pass
 
 
-NRST_NonFormalizedParameters.componentType = NRST_NonFormalizedParameter()
+SkrNonFormalizedParameters.componentType = SkrNonFormalizedParameter()
 
 
-class NRST_NonFormalizedPresenseInfo(univ.SequenceOf):
+class SkrNonFormalizedPresenseInfo(univ.SequenceOf):
     pass
 
 
-NRST_NonFormalizedPresenseInfo.componentType = NRST_StandardInterval()
+SkrNonFormalizedPresenseInfo.componentType = SkrStandardInterval()
 
 
-class NRST_NonFormalizedPresenseTask(NRST_EntityId):
+class SkrNonFormalizedPresenseTask(SkrEntityId):
     pass
 
 
-class NRST_NonFormalizedPresenseTaskResponse(NRST_CreateTaskResponse):
+class SkrNonFormalizedPresenseTaskResponse(SkrCreateTaskResponse):
     pass
 
 
-class NRST_NonFormalizedRecord(univ.SequenceOf):
+class SkrNonFormalizedRecord(univ.SequenceOf):
     pass
 
 
-NRST_NonFormalizedRecord.componentType = NRST_NonFormalizedEntityAttributeData()
+SkrNonFormalizedRecord.componentType = SkrNonFormalizedEntityAttributeData()
 
 
-class NRST_NonFormalizedRecords(univ.SequenceOf):
+class SkrNonFormalizedRecords(univ.SequenceOf):
     pass
 
 
-NRST_NonFormalizedRecords.componentType = NRST_NonFormalizedRecord()
+SkrNonFormalizedRecords.componentType = SkrNonFormalizedRecord()
 
 
-class NRST_NonFormalizedReport(univ.Choice):
+class SkrNonFormalizedReport(univ.Choice):
     pass
 
 
-NRST_NonFormalizedReport.componentType = namedtype.NamedTypes(
+SkrNonFormalizedReport.componentType = namedtype.NamedTypes(
     namedtype.NamedType(
         'nonformalized-report',
-        NRST_NonFormalizedRecords().subtype(
+        SkrNonFormalizedRecords().subtype(
             implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 0))
         )
     ),
     namedtype.NamedType(
         'nonformalized-presense',
-        NRST_NonFormalizedPresenseInfo().subtype(
+        SkrNonFormalizedPresenseInfo().subtype(
             implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 1))
         )
     )
 )
 
 
-class NRST_ValidateNonFormalizedTask(univ.Sequence):
+class SkrValidateNonFormalizedTask(univ.Sequence):
     pass
 
 
-NRST_ValidateNonFormalizedTask.componentType = namedtype.NamedTypes(
-    namedtype.NamedType('entity-id', NRST_EntityId()),
-    namedtype.NamedType('parameters', NRST_NonFormalizedParameters()),
-    namedtype.OptionalNamedType('range', NRST_FindRange()),
+SkrValidateNonFormalizedTask.componentType = namedtype.NamedTypes(
+    namedtype.NamedType('entity-id', SkrEntityId()),
+    namedtype.NamedType('parameters', SkrNonFormalizedParameters()),
+    namedtype.OptionalNamedType('range', SkrFindRange()),
     namedtype.OptionalNamedType(
         'report-limit', univ.Integer().subtype(
             subtypeSpec=(constraint.ValueRangeConstraint(1, 10000000))
@@ -7458,26 +7458,26 @@ NRST_ValidateNonFormalizedTask.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_NonFormalizedTaskRequest(univ.Choice):
+class SkrNonFormalizedTaskRequest(univ.Choice):
     pass
 
 
-NRST_NonFormalizedTaskRequest.componentType = namedtype.NamedTypes(
+SkrNonFormalizedTaskRequest.componentType = namedtype.NamedTypes(
     namedtype.NamedType(
         'get-entities',
-        NRST_GetEntities().subtype(
+        SkrGetEntities().subtype(
             implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 0))
         )
     ),
     namedtype.NamedType(
         'get-attributes',
-        NRST_GetEntityAtttibutes().subtype(
+        SkrGetEntityAtttibutes().subtype(
             implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 1))
         )
     ),
     namedtype.NamedType(
         'validate-task',
-        NRST_ValidateNonFormalizedTask().subtype(
+        SkrValidateNonFormalizedTask().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 2)
             )
@@ -7485,37 +7485,37 @@ NRST_NonFormalizedTaskRequest.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'validate-presense',
-        NRST_NonFormalizedPresenseTask().subtype(
+        SkrNonFormalizedPresenseTask().subtype(
             implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 3))
         )
     )
 )
 
 
-class NRST_ValidateNonFormalizedTaskResponse(NRST_CreateTaskResponse):
+class SkrValidateNonFormalizedTaskResponse(SkrCreateTaskResponse):
     pass
 
 
-class NRST_NonFormalizedTaskResponse(univ.Choice):
+class SkrNonFormalizedTaskResponse(univ.Choice):
     pass
 
 
-NRST_NonFormalizedTaskResponse.componentType = namedtype.NamedTypes(
+SkrNonFormalizedTaskResponse.componentType = namedtype.NamedTypes(
     namedtype.NamedType(
         'entities',
-        NRST_GetEntitiesResponse().subtype(
+        SkrGetEntitiesResponse().subtype(
             implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 0))
         )
     ),
     namedtype.NamedType(
         'entity-attributes',
-        NRST_GetEntityAttributesResponse().subtype(
+        SkrGetEntityAttributesResponse().subtype(
             implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 1))
         )
     ),
     namedtype.NamedType(
         'validate-task',
-        NRST_ValidateNonFormalizedTaskResponse().subtype(
+        SkrValidateNonFormalizedTaskResponse().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 2)
             )
@@ -7523,7 +7523,7 @@ NRST_NonFormalizedTaskResponse.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'validate-presense',
-        NRST_NonFormalizedPresenseTaskResponse().subtype(
+        SkrNonFormalizedPresenseTaskResponse().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 3)
             )
@@ -7532,24 +7532,24 @@ NRST_NonFormalizedTaskResponse.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_OID(useful.ObjectDescriptor):
+class SkrOID(useful.ObjectDescriptor):
     pass
 
 
-class NRST_PagerRecordContent(univ.Sequence):
+class SkrPagerRecordContent(univ.Sequence):
     pass
 
 
-NRST_PagerRecordContent.componentType = namedtype.NamedTypes(
-    namedtype.NamedType('telco-id', NRST_TelcoID()),
+SkrPagerRecordContent.componentType = namedtype.NamedTypes(
+    namedtype.NamedType('telco-id', SkrTelcoID()),
     namedtype.NamedType(
         'call-type-id',
         univ.Integer().subtype(
             subtypeSpec=(constraint.ValueRangeConstraint(0, 4294967295))
         )
     ),
-    namedtype.NamedType('connection-time', NRST_DateAndTime()),
-    namedtype.NamedType('info', NRST_ReportedIdentifier()),
+    namedtype.NamedType('connection-time', SkrDateAndTime()),
+    namedtype.NamedType('info', SkrReportedIdentifier()),
     namedtype.NamedType(
         'in-bytes-count',
         univ.Integer().subtype(
@@ -7565,27 +7565,27 @@ NRST_PagerRecordContent.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_PagerRecordData(univ.SequenceOf):
+class SkrPagerRecordData(univ.SequenceOf):
     pass
 
 
-NRST_PagerRecordData.componentType = NRST_PagerRecordContent()
+SkrPagerRecordData.componentType = SkrPagerRecordContent()
 
 
-class NRST_PayTypesRecord(univ.Sequence):
+class SkrPayTypesRecord(univ.Sequence):
     pass
 
 
-NRST_PayTypesRecord.componentType = namedtype.NamedTypes(
-    namedtype.NamedType('telco-id', NRST_TelcoID()),
+SkrPayTypesRecord.componentType = namedtype.NamedTypes(
+    namedtype.NamedType('telco-id', SkrTelcoID()),
     namedtype.NamedType(
         'pay-type-id',
         univ.Integer().subtype(
             subtypeSpec=(constraint.ValueRangeConstraint(0, 4294967295))
         )
     ),
-    namedtype.NamedType('begin-time', NRST_DateAndTime()),
-    namedtype.OptionalNamedType('end-time', NRST_DateAndTime()),
+    namedtype.NamedType('begin-time', SkrDateAndTime()),
+    namedtype.OptionalNamedType('end-time', SkrDateAndTime()),
     namedtype.NamedType(
         'description',
         char.UTF8String().subtype(
@@ -7595,47 +7595,47 @@ NRST_PayTypesRecord.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_PayTypesRecordsData(univ.SequenceOf):
+class SkrPayTypesRecordsData(univ.SequenceOf):
     pass
 
 
-NRST_PayTypesRecordsData.componentType = NRST_PayTypesRecord()
+SkrPayTypesRecordsData.componentType = SkrPayTypesRecord()
 
 
-class NRST_PaymentsPresenseData(univ.SequenceOf):
+class SkrPaymentsPresenseData(univ.SequenceOf):
     pass
 
 
-NRST_PaymentsPresenseData.componentType = NRST_StandardInterval()
+SkrPaymentsPresenseData.componentType = SkrStandardInterval()
 
 
-class NRST_PaymentsReport(univ.Sequence):
+class SkrPaymentsReport(univ.Sequence):
     pass
 
 
-NRST_PaymentsReport.componentType = namedtype.NamedTypes(
+SkrPaymentsReport.componentType = namedtype.NamedTypes(
     namedtype.NamedType('id', useful.ObjectDescriptor()),
     namedtype.NamedType('data', univ.Any())
 )
 
 
-class NRST_PresenseReport(univ.Sequence):
+class SkrPresenseReport(univ.Sequence):
     pass
 
 
-NRST_PresenseReport.componentType = namedtype.NamedTypes(
+SkrPresenseReport.componentType = namedtype.NamedTypes(
     namedtype.NamedType('id', useful.ObjectDescriptor()),
     namedtype.NamedType('data', univ.Any())
 )
 
 
-class NRST_PstnRecordContent(univ.Sequence):
+class SkrPstnRecordContent(univ.Sequence):
     pass
 
 
-NRST_PstnRecordContent.componentType = namedtype.NamedTypes(
-    namedtype.NamedType('telco-id', NRST_TelcoID()),
-    namedtype.NamedType('begin-connection-time', NRST_DateAndTime()),
+SkrPstnRecordContent.componentType = namedtype.NamedTypes(
+    namedtype.NamedType('telco-id', SkrTelcoID()),
+    namedtype.NamedType('begin-connection-time', SkrDateAndTime()),
     namedtype.NamedType(
         'duration',
         univ.Integer().subtype(
@@ -7654,8 +7654,8 @@ NRST_PstnRecordContent.componentType = namedtype.NamedTypes(
             subtypeSpec=(constraint.ValueRangeConstraint(0, 4294967295))
         )
     ),
-    namedtype.NamedType('in-abonent-type', NRST_PhoneAbonentType()),
-    namedtype.NamedType('out-abonent-type', NRST_PhoneAbonentType()),
+    namedtype.NamedType('in-abonent-type', SkrPhoneAbonentType()),
+    namedtype.NamedType('out-abonent-type', SkrPhoneAbonentType()),
     namedtype.NamedType(
         'switch-id',
         char.UTF8String().subtype(
@@ -7690,7 +7690,7 @@ NRST_PstnRecordContent.componentType = namedtype.NamedTypes(
     ),
     namedtype.OptionalNamedType(
         'in-info',
-        NRST_ReportedIdentifier().subtype(
+        SkrReportedIdentifier().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 1)
             )
@@ -7706,7 +7706,7 @@ NRST_PstnRecordContent.componentType = namedtype.NamedTypes(
     ),
     namedtype.OptionalNamedType(
         'out-info',
-        NRST_ReportedIdentifier().subtype(
+        SkrReportedIdentifier().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 3)
             )
@@ -7752,28 +7752,28 @@ NRST_PstnRecordContent.componentType = namedtype.NamedTypes(
     ),
     namedtype.OptionalNamedType(
         'data-content-id',
-        NRST_DataContentID().subtype(
+        SkrDataContentID().subtype(
             implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 13))
         )
     )
 )
 
 
-class NRST_PstnRecordData(univ.SequenceOf):
+class SkrPstnRecordData(univ.SequenceOf):
     pass
 
 
-NRST_PstnRecordData.componentType = NRST_PstnRecordContent()
+SkrPstnRecordData.componentType = SkrPstnRecordContent()
 
 
-class NRST_PublicTerminalRecord(univ.Sequence):
+class SkrPublicTerminalRecord(univ.Sequence):
     pass
 
 
-NRST_PublicTerminalRecord.componentType = namedtype.NamedTypes(
-    namedtype.NamedType('telco-id', NRST_TelcoID()),
-    namedtype.NamedType('device-id', NRST_ReportedIdentifier()),
-    namedtype.NamedType('date-time-fillup', NRST_DateAndTime()),
+SkrPublicTerminalRecord.componentType = namedtype.NamedTypes(
+    namedtype.NamedType('telco-id', SkrTelcoID()),
+    namedtype.NamedType('device-id', SkrReportedIdentifier()),
+    namedtype.NamedType('date-time-fillup', SkrDateAndTime()),
     namedtype.NamedType(
         'terminal-id',
         char.UTF8String().subtype(
@@ -7786,50 +7786,50 @@ NRST_PublicTerminalRecord.componentType = namedtype.NamedTypes(
             subtypeSpec=(constraint.ValueSizeConstraint(2, 20))
         )
     ),
-    namedtype.NamedType('terminal-address', NRST_ReportedAddress()),
+    namedtype.NamedType('terminal-address', SkrReportedAddress()),
     namedtype.NamedType(
         'amount',
         char.UTF8String().subtype(
             subtypeSpec=(constraint.ValueSizeConstraint(1, 64))
         )
     ),
-    namedtype.OptionalNamedType('location', NRST_Location())
+    namedtype.OptionalNamedType('location', SkrLocation())
 )
 
 
-class NRST_PublicTerminalReportData(univ.SequenceOf):
+class SkrPublicTerminalReportData(univ.SequenceOf):
     pass
 
 
-NRST_PublicTerminalReportData.componentType = NRST_PublicTerminalRecord()
+SkrPublicTerminalReportData.componentType = SkrPublicTerminalRecord()
 
 
-class NRST_RawAcknowledgement(NRST_Acknowledgement):
+class SkrRawAcknowledgement(SkrAcknowledgement):
     pass
 
 
-class NRST_RawBytes(univ.OctetString):
+class SkrRawBytes(univ.OctetString):
     pass
 
 
-NRST_RawBytes.subtypeSpec = constraint.ValueSizeConstraint(1, 4096)
+SkrRawBytes.subtypeSpec = constraint.ValueSizeConstraint(1, 4096)
 
 
-class NRST_RawBytesBlock(univ.SequenceOf):
+class SkrRawBytesBlock(univ.SequenceOf):
     pass
 
 
-NRST_RawBytesBlock.componentType = NRST_RawBytes()
+SkrRawBytesBlock.componentType = SkrRawBytes()
 
 
-class NRST_RawDataBlock(univ.Choice):
+class SkrRawDataBlock(univ.Choice):
     pass
 
 
-NRST_RawDataBlock.componentType = namedtype.NamedTypes(
+SkrRawDataBlock.componentType = namedtype.NamedTypes(
     namedtype.NamedType(
         'reports',
-        NRST_CallsRecords().subtype(
+        SkrCallsRecords().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 0)
             )
@@ -7837,18 +7837,18 @@ NRST_RawDataBlock.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'raw-cdr',
-        NRST_RawBytesBlock().subtype(
+        SkrRawBytesBlock().subtype(
             implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 1))
         )
     )
 )
 
 
-class NRST_RawRecordContent(univ.Sequence):
+class SkrRawRecordContent(univ.Sequence):
     pass
 
 
-NRST_RawRecordContent.componentType = namedtype.NamedTypes(
+SkrRawRecordContent.componentType = namedtype.NamedTypes(
     namedtype.NamedType('successful', univ.Boolean()),
     namedtype.OptionalNamedType(
         'data',
@@ -7876,7 +7876,7 @@ NRST_RawRecordContent.componentType = namedtype.NamedTypes(
     ),
     namedtype.OptionalNamedType(
         'direction',
-        NRST_DataContentRawDirection().subtype(
+        SkrDataContentRawDirection().subtype(
             implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 3))
         )
     ),
@@ -7889,12 +7889,12 @@ NRST_RawRecordContent.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_RawReport(univ.Sequence):
+class SkrRawReport(univ.Sequence):
     pass
 
 
-NRST_RawReport.componentType = namedtype.NamedTypes(
-    namedtype.NamedType('request-id', NRST_MessageID()),
+SkrRawReport.componentType = namedtype.NamedTypes(
+    namedtype.NamedType('request-id', SkrMessageID()),
     namedtype.NamedType(
         'stream-id',
         char.UTF8String().subtype(
@@ -7913,24 +7913,24 @@ NRST_RawReport.componentType = namedtype.NamedTypes(
             subtypeSpec=(constraint.ValueRangeConstraint(1, 1000000000000))
         )
     ),
-    namedtype.NamedType('report-block', NRST_RawDataBlock())
+    namedtype.NamedType('report-block', SkrRawDataBlock())
 )
 
 
-class NRST_RawRequestTask(univ.Choice):
+class SkrRawRequestTask(univ.Choice):
     pass
 
 
-NRST_RawRequestTask.componentType = namedtype.NamedTypes(
+SkrRawRequestTask.componentType = namedtype.NamedTypes(
     namedtype.NamedType(
         'data-types-request',
-        NRST_DataTypesRequest().subtype(
+        SkrDataTypesRequest().subtype(
             implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 0))
         )
     ),
     namedtype.NamedType(
         'data-start-request',
-        NRST_DataStartRequest().subtype(
+        SkrDataStartRequest().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 1)
             )
@@ -7938,31 +7938,31 @@ NRST_RawRequestTask.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'data-stop-request',
-        NRST_DataStopRequest().subtype(
+        SkrDataStopRequest().subtype(
             implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 2))
         )
     )
 )
 
 
-class NRST_RawRequest(univ.Sequence):
+class SkrRawRequest(univ.Sequence):
     pass
 
 
-NRST_RawRequest.componentType = namedtype.NamedTypes(
-    namedtype.NamedType('telcos', NRST_TelcoList()),
-    namedtype.NamedType('raw-task', NRST_RawRequestTask())
+SkrRawRequest.componentType = namedtype.NamedTypes(
+    namedtype.NamedType('telcos', SkrTelcoList()),
+    namedtype.NamedType('raw-task', SkrRawRequestTask())
 )
 
 
-class NRST_RawResponse(univ.Choice):
+class SkrRawResponse(univ.Choice):
     pass
 
 
-NRST_RawResponse.componentType = namedtype.NamedTypes(
+SkrRawResponse.componentType = namedtype.NamedTypes(
     namedtype.NamedType(
         'data-types-response',
-        NRST_DataTypesResponse().subtype(
+        SkrDataTypesResponse().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 0)
             )
@@ -7970,27 +7970,27 @@ NRST_RawResponse.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'data-start-response',
-        NRST_DataStartResponse().subtype(
+        SkrDataStartResponse().subtype(
             implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 1))
         )
     ),
     namedtype.NamedType(
         'data-stop-response',
-        NRST_DataStopResponse().subtype(
+        SkrDataStopResponse().subtype(
             implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 2))
         )
     )
 )
 
 
-class NRST_RecodedAbonentInfo(univ.Choice):
+class SkrRecodedAbonentInfo(univ.Choice):
     pass
 
 
-NRST_RecodedAbonentInfo.componentType = namedtype.NamedTypes(
+SkrRecodedAbonentInfo.componentType = namedtype.NamedTypes(
     namedtype.NamedType(
         'person',
-        NRST_AbonentPerson().subtype(
+        SkrAbonentPerson().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 0)
             )
@@ -7998,7 +7998,7 @@ NRST_RecodedAbonentInfo.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'organization',
-        NRST_AbonentOrganization().subtype(
+        SkrAbonentOrganization().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 1))
         )
@@ -8006,21 +8006,21 @@ NRST_RecodedAbonentInfo.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_ReportedPagerIdentifier(char.NumericString):
+class SkrReportedPagerIdentifier(char.NumericString):
     pass
 
 
-NRST_ReportedPagerIdentifier.subtypeSpec = constraint.ValueSizeConstraint(2, 18)
+SkrReportedPagerIdentifier.subtypeSpec = constraint.ValueSizeConstraint(2, 18)
 
 
-class NRST_ReportedDataNetworkIdentifier(univ.Sequence):
+class SkrReportedDataNetworkIdentifier(univ.Sequence):
     pass
 
 
-NRST_ReportedDataNetworkIdentifier.componentType = namedtype.NamedTypes(
+SkrReportedDataNetworkIdentifier.componentType = namedtype.NamedTypes(
     namedtype.OptionalNamedType(
         'user-equipment',
-        NRST_DataNetworkEquipment().subtype(
+        SkrDataNetworkEquipment().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 0)
             )
@@ -8036,7 +8036,7 @@ NRST_ReportedDataNetworkIdentifier.componentType = namedtype.NamedTypes(
     ),
     namedtype.OptionalNamedType(
         'ip-address',
-        NRST_IPAddress().subtype(
+        SkrIPAddress().subtype(
             implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 2))
         )
     ),
@@ -8082,7 +8082,7 @@ NRST_ReportedDataNetworkIdentifier.componentType = namedtype.NamedTypes(
     ),
     namedtype.OptionalNamedType(
         'ip-mask',
-        NRST_IPMask().subtype(
+        SkrIPMask().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 8)
             )
@@ -8091,11 +8091,11 @@ NRST_ReportedDataNetworkIdentifier.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_ReportedCdmaIdentifier(univ.Sequence):
+class SkrReportedCdmaIdentifier(univ.Sequence):
     pass
 
 
-NRST_ReportedCdmaIdentifier.componentType = namedtype.NamedTypes(
+SkrReportedCdmaIdentifier.componentType = namedtype.NamedTypes(
     namedtype.NamedType(
         'directory-number',
         char.UTF8String().subtype(
@@ -8135,11 +8135,11 @@ NRST_ReportedCdmaIdentifier.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_ReportedGsmIdentifier(univ.Sequence):
+class SkrReportedGsmIdentifier(univ.Sequence):
     pass
 
 
-NRST_ReportedGsmIdentifier.componentType = namedtype.NamedTypes(
+SkrReportedGsmIdentifier.componentType = namedtype.NamedTypes(
     namedtype.NamedType(
         'directory-number',
         char.UTF8String().subtype(
@@ -8171,11 +8171,11 @@ NRST_ReportedGsmIdentifier.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_ReportedPstnIdentifier(univ.Sequence):
+class SkrReportedPstnIdentifier(univ.Sequence):
     pass
 
 
-NRST_ReportedPstnIdentifier.componentType = namedtype.NamedTypes(
+SkrReportedPstnIdentifier.componentType = namedtype.NamedTypes(
     namedtype.NamedType(
         'directory-number',
         char.UTF8String().subtype(
@@ -8191,14 +8191,14 @@ NRST_ReportedPstnIdentifier.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_ReportedVoipIdentifier(univ.Sequence):
+class SkrReportedVoipIdentifier(univ.Sequence):
     pass
 
 
-NRST_ReportedVoipIdentifier.componentType = namedtype.NamedTypes(
+SkrReportedVoipIdentifier.componentType = namedtype.NamedTypes(
     namedtype.OptionalNamedType(
         'ip-address',
-        NRST_IPAddress().subtype(
+        SkrIPAddress().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 0)
             )
@@ -8223,20 +8223,20 @@ NRST_ReportedVoipIdentifier.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_RecodedReportedIdentifier(univ.Choice):
+class SkrRecodedReportedIdentifier(univ.Choice):
     pass
 
 
-NRST_RecodedReportedIdentifier.componentType = namedtype.NamedTypes(
+SkrRecodedReportedIdentifier.componentType = namedtype.NamedTypes(
     namedtype.NamedType(
         'pager-identifier',
-        NRST_ReportedPagerIdentifier().subtype(
+        SkrReportedPagerIdentifier().subtype(
             implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 0))
         )
     ),
     namedtype.NamedType(
         'pstn-identifier',
-        NRST_ReportedPstnIdentifier().subtype(
+        SkrReportedPstnIdentifier().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 1)
             )
@@ -8244,7 +8244,7 @@ NRST_RecodedReportedIdentifier.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'gsm-identifier',
-        NRST_ReportedGsmIdentifier().subtype(
+        SkrReportedGsmIdentifier().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 2)
             )
@@ -8252,7 +8252,7 @@ NRST_RecodedReportedIdentifier.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'cdma-identifier',
-        NRST_ReportedCdmaIdentifier().subtype(
+        SkrReportedCdmaIdentifier().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 3)
             )
@@ -8260,7 +8260,7 @@ NRST_RecodedReportedIdentifier.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'data-network-identifier',
-        NRST_ReportedDataNetworkIdentifier().subtype(
+        SkrReportedDataNetworkIdentifier().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 4)
             )
@@ -8268,7 +8268,7 @@ NRST_RecodedReportedIdentifier.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'voip-identifier',
-        NRST_ReportedVoipIdentifier().subtype(
+        SkrReportedVoipIdentifier().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 5)
             )
@@ -8277,27 +8277,27 @@ NRST_RecodedReportedIdentifier.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_RecodedAbonentService(univ.Sequence):
+class SkrRecodedAbonentService(univ.Sequence):
     pass
 
 
-NRST_RecodedAbonentService.componentType = namedtype.NamedTypes(
-    namedtype.NamedType('telco-id', NRST_TelcoID()),
+SkrRecodedAbonentService.componentType = namedtype.NamedTypes(
+    namedtype.NamedType('telco-id', SkrTelcoID()),
     namedtype.NamedType(
         'service-id',
         univ.Integer().subtype(
             subtypeSpec=(constraint.ValueRangeConstraint(0, 4294967295))
         )
     ),
-    namedtype.OptionalNamedType('idents', NRST_RecodedReportedIdentifier()),
+    namedtype.OptionalNamedType('idents', SkrRecodedReportedIdentifier()),
     namedtype.NamedType(
         'contract',
         char.UTF8String().subtype(
             subtypeSpec=(constraint.ValueSizeConstraint(1, 64))
         )
     ),
-    namedtype.NamedType('begin-time', NRST_DateAndTime()),
-    namedtype.NamedType('end-time', NRST_DateAndTime()),
+    namedtype.NamedType('begin-time', SkrDateAndTime()),
+    namedtype.NamedType('end-time', SkrDateAndTime()),
     namedtype.OptionalNamedType(
         'parameter',
         char.UTF8String().subtype(
@@ -8307,46 +8307,46 @@ NRST_RecodedAbonentService.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_RecodedActiveServices(univ.SequenceOf):
+class SkrRecodedActiveServices(univ.SequenceOf):
     pass
 
 
-NRST_RecodedActiveServices.componentType = NRST_RecodedAbonentService()
+SkrRecodedActiveServices.componentType = SkrRecodedAbonentService()
 
 
-class NRST_RecodedAbonentsRecord(univ.Sequence):
+class SkrRecodedAbonentsRecord(univ.Sequence):
     pass
 
 
-NRST_RecodedAbonentsRecord.componentType = namedtype.NamedTypes(
-    namedtype.NamedType('telco-id', NRST_TelcoID()),
-    namedtype.NamedType('idents', NRST_RecodedReportedIdentifier()),
-    namedtype.NamedType('contract-date', NRST_DateAndTime()),
+SkrRecodedAbonentsRecord.componentType = namedtype.NamedTypes(
+    namedtype.NamedType('telco-id', SkrTelcoID()),
+    namedtype.NamedType('idents', SkrRecodedReportedIdentifier()),
+    namedtype.NamedType('contract-date', SkrDateAndTime()),
     namedtype.NamedType(
         'contract',
         char.UTF8String().subtype(
             subtypeSpec=(constraint.ValueSizeConstraint(1, 64))
         )
     ),
-    namedtype.NamedType('actual-from', NRST_DateAndTime()),
-    namedtype.NamedType('actual-to', NRST_DateAndTime()),
-    namedtype.NamedType('abonent', NRST_RecodedAbonentInfo()),
-    namedtype.NamedType('status', NRST_ActiveStatus()),
+    namedtype.NamedType('actual-from', SkrDateAndTime()),
+    namedtype.NamedType('actual-to', SkrDateAndTime()),
+    namedtype.NamedType('abonent', SkrRecodedAbonentInfo()),
+    namedtype.NamedType('status', SkrActiveStatus()),
     namedtype.OptionalNamedType(
         'attach',
-        NRST_DateAndTime().subtype(
+        SkrDateAndTime().subtype(
             implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 0))
         )
     ),
     namedtype.OptionalNamedType(
         'detach',
-        NRST_DateAndTime().subtype(
+        SkrDateAndTime().subtype(
             implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 1))
         )
     ),
     namedtype.OptionalNamedType(
         'last-location',
-        NRST_Location().subtype(
+        SkrLocation().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 2)
             )
@@ -8354,13 +8354,13 @@ NRST_RecodedAbonentsRecord.componentType = namedtype.NamedTypes(
     ),
     namedtype.OptionalNamedType(
         'services',
-        NRST_RecodedActiveServices().subtype(
+        SkrRecodedActiveServices().subtype(
             implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 3))
         )
     ),
     namedtype.OptionalNamedType(
         'line-data',
-        NRST_LineData().subtype(
+        SkrLineData().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 4)
             )
@@ -8368,27 +8368,27 @@ NRST_RecodedAbonentsRecord.componentType = namedtype.NamedTypes(
     ),
     namedtype.OptionalNamedType(
         'standard',
-        NRST_Standard().subtype(
+        SkrStandard().subtype(
             implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 5))
         )
     ),
     namedtype.OptionalNamedType(
         'addresses',
-        NRST_ReportedAddresses().subtype(
+        SkrReportedAddresses().subtype(
             implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 6))
         )
     )
 )
 
 
-class NRST_RecodedBankTransactionRecord(univ.Sequence):
+class SkrRecodedBankTransactionRecord(univ.Sequence):
     pass
 
 
-NRST_RecodedBankTransactionRecord.componentType = namedtype.NamedTypes(
-    namedtype.NamedType('telco-id', NRST_TelcoID()),
-    namedtype.NamedType('device-id', NRST_RecodedReportedIdentifier()),
-    namedtype.NamedType('date-time-fillup', NRST_DateAndTime()),
+SkrRecodedBankTransactionRecord.componentType = namedtype.NamedTypes(
+    namedtype.NamedType('telco-id', SkrTelcoID()),
+    namedtype.NamedType('device-id', SkrRecodedReportedIdentifier()),
+    namedtype.NamedType('date-time-fillup', SkrDateAndTime()),
     namedtype.NamedType(
         'bank-account',
         char.UTF8String().subtype(
@@ -8401,7 +8401,7 @@ NRST_RecodedBankTransactionRecord.componentType = namedtype.NamedTypes(
             subtypeSpec=(constraint.ValueSizeConstraint(1, 512))
         )
     ),
-    namedtype.NamedType('bank-address', NRST_ReportedAddress()),
+    namedtype.NamedType('bank-address', SkrReportedAddress()),
     namedtype.NamedType(
         'amount',
         char.UTF8String().subtype(
@@ -8411,15 +8411,15 @@ NRST_RecodedBankTransactionRecord.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_RecodedCrossAccountRecord(univ.Sequence):
+class SkrRecodedCrossAccountRecord(univ.Sequence):
     pass
 
 
-NRST_RecodedCrossAccountRecord.componentType = namedtype.NamedTypes(
-    namedtype.NamedType('telco-id', NRST_TelcoID()),
-    namedtype.NamedType('device-id', NRST_RecodedReportedIdentifier()),
-    namedtype.NamedType('date-time-fillup', NRST_DateAndTime()),
-    namedtype.NamedType('donanted-id', NRST_RecodedReportedIdentifier()),
+SkrRecodedCrossAccountRecord.componentType = namedtype.NamedTypes(
+    namedtype.NamedType('telco-id', SkrTelcoID()),
+    namedtype.NamedType('device-id', SkrRecodedReportedIdentifier()),
+    namedtype.NamedType('date-time-fillup', SkrDateAndTime()),
+    namedtype.NamedType('donanted-id', SkrRecodedReportedIdentifier()),
     namedtype.NamedType(
         'amount',
         char.UTF8String().subtype(
@@ -8429,14 +8429,14 @@ NRST_RecodedCrossAccountRecord.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_RecodedExpressPaysRecord(univ.Sequence):
+class SkrRecodedExpressPaysRecord(univ.Sequence):
     pass
 
 
-NRST_RecodedExpressPaysRecord.componentType = namedtype.NamedTypes(
-    namedtype.NamedType('telco-id', NRST_TelcoID()),
-    namedtype.NamedType('device-id', NRST_RecodedReportedIdentifier()),
-    namedtype.NamedType('date-time-fillup', NRST_DateAndTime()),
+SkrRecodedExpressPaysRecord.componentType = namedtype.NamedTypes(
+    namedtype.NamedType('telco-id', SkrTelcoID()),
+    namedtype.NamedType('device-id', SkrRecodedReportedIdentifier()),
+    namedtype.NamedType('date-time-fillup', SkrDateAndTime()),
     namedtype.NamedType(
         'card-number',
         char.UTF8String().subtype(
@@ -8452,13 +8452,13 @@ NRST_RecodedExpressPaysRecord.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_RecodedMobileRecordContent(univ.Sequence):
+class SkrRecodedMobileRecordContent(univ.Sequence):
     pass
 
 
-NRST_RecodedMobileRecordContent.componentType = namedtype.NamedTypes(
-    namedtype.NamedType('telco-id', NRST_TelcoID()),
-    namedtype.NamedType('begin-connection-time', NRST_DateAndTime()),
+SkrRecodedMobileRecordContent.componentType = namedtype.NamedTypes(
+    namedtype.NamedType('telco-id', SkrTelcoID()),
+    namedtype.NamedType('begin-connection-time', SkrDateAndTime()),
     namedtype.NamedType(
         'duration',
         univ.Integer().subtype(
@@ -8477,8 +8477,8 @@ NRST_RecodedMobileRecordContent.componentType = namedtype.NamedTypes(
             subtypeSpec=(constraint.ValueRangeConstraint(0, 4294967295))
         )
     ),
-    namedtype.NamedType('in-abonent-type', NRST_PhoneAbonentType()),
-    namedtype.NamedType('out-abonent-type', NRST_PhoneAbonentType()),
+    namedtype.NamedType('in-abonent-type', SkrPhoneAbonentType()),
+    namedtype.NamedType('out-abonent-type', SkrPhoneAbonentType()),
     namedtype.NamedType(
         'switch-id',
         char.UTF8String().subtype(
@@ -8493,7 +8493,7 @@ NRST_RecodedMobileRecordContent.componentType = namedtype.NamedTypes(
     ),
     namedtype.OptionalNamedType(
         'inbound-bunch',
-        NRST_Bunch().subtype(
+        SkrBunch().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 0)
             )
@@ -8501,13 +8501,13 @@ NRST_RecodedMobileRecordContent.componentType = namedtype.NamedTypes(
     ),
     namedtype.OptionalNamedType(
         'outbound-bunch',
-        NRST_Bunch().subtype(
+        SkrBunch().subtype(
             implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 1))
         )
     ),
     namedtype.OptionalNamedType(
         'in-info',
-        NRST_RecodedReportedIdentifier().subtype(
+        SkrRecodedReportedIdentifier().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 2)
             )
@@ -8515,7 +8515,7 @@ NRST_RecodedMobileRecordContent.componentType = namedtype.NamedTypes(
     ),
     namedtype.OptionalNamedType(
         'in-end-location',
-        NRST_Location().subtype(
+        SkrLocation().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 3)
             )
@@ -8523,7 +8523,7 @@ NRST_RecodedMobileRecordContent.componentType = namedtype.NamedTypes(
     ),
     namedtype.OptionalNamedType(
         'in-begin-location',
-        NRST_Location().subtype(
+        SkrLocation().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 4)
             )
@@ -8531,7 +8531,7 @@ NRST_RecodedMobileRecordContent.componentType = namedtype.NamedTypes(
     ),
     namedtype.OptionalNamedType(
         'out-info',
-        NRST_RecodedReportedIdentifier().subtype(
+        SkrRecodedReportedIdentifier().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 5)
             )
@@ -8539,7 +8539,7 @@ NRST_RecodedMobileRecordContent.componentType = namedtype.NamedTypes(
     ),
     namedtype.OptionalNamedType(
         'out-begin-location',
-        NRST_Location().subtype(
+        SkrLocation().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 6)
             )
@@ -8547,7 +8547,7 @@ NRST_RecodedMobileRecordContent.componentType = namedtype.NamedTypes(
     ),
     namedtype.OptionalNamedType(
         'out-end-location',
-        NRST_Location().subtype(
+        SkrLocation().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 7)
             )
@@ -8585,27 +8585,27 @@ NRST_RecodedMobileRecordContent.componentType = namedtype.NamedTypes(
     ),
     namedtype.OptionalNamedType(
         'data-content-id',
-        NRST_DataContentID().subtype(
+        SkrDataContentID().subtype(
             implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 41))
         )
     )
 )
 
 
-class NRST_RecodedPagerRecordContent(univ.Sequence):
+class SkrRecodedPagerRecordContent(univ.Sequence):
     pass
 
 
-NRST_RecodedPagerRecordContent.componentType = namedtype.NamedTypes(
-    namedtype.NamedType('telco-id', NRST_TelcoID()),
+SkrRecodedPagerRecordContent.componentType = namedtype.NamedTypes(
+    namedtype.NamedType('telco-id', SkrTelcoID()),
     namedtype.NamedType(
         'call-type-id',
         univ.Integer().subtype(
             subtypeSpec=(constraint.ValueRangeConstraint(0, 4294967295))
         )
     ),
-    namedtype.NamedType('connection-time', NRST_DateAndTime()),
-    namedtype.NamedType('info', NRST_RecodedReportedIdentifier()),
+    namedtype.NamedType('connection-time', SkrDateAndTime()),
+    namedtype.NamedType('info', SkrRecodedReportedIdentifier()),
     namedtype.NamedType(
         'in-bytes-count',
         univ.Integer().subtype(
@@ -8621,13 +8621,13 @@ NRST_RecodedPagerRecordContent.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_RecodedPstnRecordContent(univ.Sequence):
+class SkrRecodedPstnRecordContent(univ.Sequence):
     pass
 
 
-NRST_RecodedPstnRecordContent.componentType = namedtype.NamedTypes(
-    namedtype.NamedType('telco-id', NRST_TelcoID()),
-    namedtype.NamedType('begin-connection-time', NRST_DateAndTime()),
+SkrRecodedPstnRecordContent.componentType = namedtype.NamedTypes(
+    namedtype.NamedType('telco-id', SkrTelcoID()),
+    namedtype.NamedType('begin-connection-time', SkrDateAndTime()),
     namedtype.NamedType(
         'duration',
         univ.Integer().subtype(
@@ -8646,8 +8646,8 @@ NRST_RecodedPstnRecordContent.componentType = namedtype.NamedTypes(
             subtypeSpec=(constraint.ValueRangeConstraint(0, 4294967295))
         )
     ),
-    namedtype.NamedType('in-abonent-type', NRST_PhoneAbonentType()),
-    namedtype.NamedType('out-abonent-type', NRST_PhoneAbonentType()),
+    namedtype.NamedType('in-abonent-type', SkrPhoneAbonentType()),
+    namedtype.NamedType('out-abonent-type', SkrPhoneAbonentType()),
     namedtype.NamedType(
         'switch-id',
         char.UTF8String().subtype(
@@ -8682,7 +8682,7 @@ NRST_RecodedPstnRecordContent.componentType = namedtype.NamedTypes(
     ),
     namedtype.OptionalNamedType(
         'in-info',
-        NRST_RecodedReportedIdentifier().subtype(
+        SkrRecodedReportedIdentifier().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 1)
             )
@@ -8698,7 +8698,7 @@ NRST_RecodedPstnRecordContent.componentType = namedtype.NamedTypes(
     ),
     namedtype.OptionalNamedType(
         'out-info',
-        NRST_RecodedReportedIdentifier().subtype(
+        SkrRecodedReportedIdentifier().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 3)
             )
@@ -8744,21 +8744,21 @@ NRST_RecodedPstnRecordContent.componentType = namedtype.NamedTypes(
     ),
     namedtype.OptionalNamedType(
         'data-content-id',
-        NRST_DataContentID().subtype(
+        SkrDataContentID().subtype(
             implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 13))
         )
     )
 )
 
 
-class NRST_RecodedPublicTerminalRecord(univ.Sequence):
+class SkrRecodedPublicTerminalRecord(univ.Sequence):
     pass
 
 
-NRST_RecodedPublicTerminalRecord.componentType = namedtype.NamedTypes(
-    namedtype.NamedType('telco-id', NRST_TelcoID()),
-    namedtype.NamedType('device-id', NRST_RecodedReportedIdentifier()),
-    namedtype.NamedType('date-time-fillup', NRST_DateAndTime()),
+SkrRecodedPublicTerminalRecord.componentType = namedtype.NamedTypes(
+    namedtype.NamedType('telco-id', SkrTelcoID()),
+    namedtype.NamedType('device-id', SkrRecodedReportedIdentifier()),
+    namedtype.NamedType('date-time-fillup', SkrDateAndTime()),
     namedtype.NamedType(
         'terminal-id',
         char.UTF8String().subtype(
@@ -8771,46 +8771,46 @@ NRST_RecodedPublicTerminalRecord.componentType = namedtype.NamedTypes(
             subtypeSpec=(constraint.ValueSizeConstraint(2, 20))
         )
     ),
-    namedtype.NamedType('terminal-address', NRST_ReportedAddress()),
+    namedtype.NamedType('terminal-address', SkrReportedAddress()),
     namedtype.NamedType(
         'amount',
         char.UTF8String().subtype(
             subtypeSpec=(constraint.ValueSizeConstraint(1, 64))
         )
     ),
-    namedtype.OptionalNamedType('location', NRST_Location())
+    namedtype.OptionalNamedType('location', SkrLocation())
 )
 
 
-class NRST_RecodedReportAbonentData(univ.SequenceOf):
+class SkrRecodedReportAbonentData(univ.SequenceOf):
     pass
 
 
-NRST_RecodedReportAbonentData.componentType = NRST_RecodedAbonentsRecord()
+SkrRecodedReportAbonentData.componentType = SkrRecodedAbonentsRecord()
 
 
-class NRST_RecodedReportServiceData(univ.SequenceOf):
+class SkrRecodedReportServiceData(univ.SequenceOf):
     pass
 
 
-NRST_RecodedReportServiceData.componentType = NRST_RecodedAbonentService()
+SkrRecodedReportServiceData.componentType = SkrRecodedAbonentService()
 
 
-class NRST_RecodedServiceCenterRecord(univ.Sequence):
+class SkrRecodedServiceCenterRecord(univ.Sequence):
     pass
 
 
-NRST_RecodedServiceCenterRecord.componentType = namedtype.NamedTypes(
-    namedtype.NamedType('telco-id', NRST_TelcoID()),
-    namedtype.NamedType('device-id', NRST_RecodedReportedIdentifier()),
-    namedtype.NamedType('date-time-fillup', NRST_DateAndTime()),
+SkrRecodedServiceCenterRecord.componentType = namedtype.NamedTypes(
+    namedtype.NamedType('telco-id', SkrTelcoID()),
+    namedtype.NamedType('device-id', SkrRecodedReportedIdentifier()),
+    namedtype.NamedType('date-time-fillup', SkrDateAndTime()),
     namedtype.NamedType(
         'center-id',
         char.UTF8String().subtype(
             subtypeSpec=(constraint.ValueSizeConstraint(1, 64))
         )
     ),
-    namedtype.NamedType('center-address', NRST_ReportedAddress()),
+    namedtype.NamedType('center-address', SkrReportedAddress()),
     namedtype.NamedType(
         'amount',
         char.UTF8String().subtype(
@@ -8820,20 +8820,20 @@ NRST_RecodedServiceCenterRecord.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_RecodedValidateBalanceFillupRecord(univ.Sequence):
+class SkrRecodedValidateBalanceFillupRecord(univ.Sequence):
     pass
 
 
-NRST_RecodedValidateBalanceFillupRecord.componentType = namedtype.NamedTypes(
-    namedtype.NamedType('telco-id', NRST_TelcoID()),
+SkrRecodedValidateBalanceFillupRecord.componentType = namedtype.NamedTypes(
+    namedtype.NamedType('telco-id', SkrTelcoID()),
     namedtype.NamedType(
         'pay-type-id',
         univ.Integer().subtype(
             subtypeSpec=(constraint.ValueRangeConstraint(0, 4294967295))
         )
     ),
-    namedtype.NamedType('device-id', NRST_RecodedReportedIdentifier()),
-    namedtype.NamedType('date-time-fillup', NRST_DateAndTime()),
+    namedtype.NamedType('device-id', SkrRecodedReportedIdentifier()),
+    namedtype.NamedType('date-time-fillup', SkrDateAndTime()),
     namedtype.NamedType(
         'amount',
         char.UTF8String().subtype(
@@ -8849,13 +8849,13 @@ NRST_RecodedValidateBalanceFillupRecord.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_RecodedValidateBankAccountTransferRecord(univ.Sequence):
+class SkrRecodedValidateBankAccountTransferRecord(univ.Sequence):
     pass
 
 
-NRST_RecodedValidateBankAccountTransferRecord.componentType = namedtype.NamedTypes(
-    namedtype.NamedType('telco-id', NRST_TelcoID()),
-    namedtype.NamedType('donated-id', NRST_RecodedReportedIdentifier()),
+SkrRecodedValidateBankAccountTransferRecord.componentType = namedtype.NamedTypes(
+    namedtype.NamedType('telco-id', SkrTelcoID()),
+    namedtype.NamedType('donated-id', SkrRecodedReportedIdentifier()),
     namedtype.NamedType(
         'bank-name',
         char.UTF8String().subtype(
@@ -8870,7 +8870,7 @@ NRST_RecodedValidateBankAccountTransferRecord.componentType = namedtype.NamedTyp
     ),
     namedtype.NamedType(
         'date-time-fillup',
-        NRST_DateAndTime()),
+        SkrDateAndTime()),
     namedtype.NamedType(
         'amount',
         char.UTF8String().subtype(
@@ -8880,20 +8880,20 @@ NRST_RecodedValidateBankAccountTransferRecord.componentType = namedtype.NamedTyp
 )
 
 
-class NRST_RecodedValidateBankCardTransferRecord(univ.Sequence):
+class SkrRecodedValidateBankCardTransferRecord(univ.Sequence):
     pass
 
 
-NRST_RecodedValidateBankCardTransferRecord.componentType = namedtype.NamedTypes(
-    namedtype.NamedType('telco-id', NRST_TelcoID()),
-    namedtype.NamedType('donanted-id', NRST_RecodedReportedIdentifier()),
+SkrRecodedValidateBankCardTransferRecord.componentType = namedtype.NamedTypes(
+    namedtype.NamedType('telco-id', SkrTelcoID()),
+    namedtype.NamedType('donanted-id', SkrRecodedReportedIdentifier()),
     namedtype.NamedType(
         'bank-card-id',
         char.NumericString().subtype(
             subtypeSpec=(constraint.ValueSizeConstraint(1, 12))
         )
     ),
-    namedtype.NamedType('date-time-fillup', NRST_DateAndTime()),
+    namedtype.NamedType('date-time-fillup', SkrDateAndTime()),
     namedtype.NamedType(
         'amount',
         char.UTF8String().subtype(
@@ -8903,14 +8903,14 @@ NRST_RecodedValidateBankCardTransferRecord.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_RecodedValidateBankDivisionTransferRecord(univ.Sequence):
+class SkrRecodedValidateBankDivisionTransferRecord(univ.Sequence):
     pass
 
 
-NRST_RecodedValidateBankDivisionTransferRecord.componentType = namedtype.NamedTypes(
-    namedtype.NamedType('telco-id', NRST_TelcoID()),
-    namedtype.NamedType('donanted-id', NRST_RecodedReportedIdentifier()),
-    namedtype.NamedType('date-time-fillup', NRST_DateAndTime()),
+SkrRecodedValidateBankDivisionTransferRecord.componentType = namedtype.NamedTypes(
+    namedtype.NamedType('telco-id', SkrTelcoID()),
+    namedtype.NamedType('donanted-id', SkrRecodedReportedIdentifier()),
+    namedtype.NamedType('date-time-fillup', SkrDateAndTime()),
     namedtype.NamedType(
         'person-received',
         char.UTF8String().subtype(
@@ -8929,7 +8929,7 @@ NRST_RecodedValidateBankDivisionTransferRecord.componentType = namedtype.NamedTy
             subtypeSpec=(constraint.ValueSizeConstraint(1, 512))
         )
     ),
-    namedtype.NamedType('bank-division-address', NRST_ReportedAddress()),
+    namedtype.NamedType('bank-division-address', SkrReportedAddress()),
     namedtype.NamedType(
         'amount',
         char.UTF8String().subtype(
@@ -8939,26 +8939,26 @@ NRST_RecodedValidateBankDivisionTransferRecord.componentType = namedtype.NamedTy
 )
 
 
-class NRST_RecodedValidateLocationRecord(univ.Sequence):
+class SkrRecodedValidateLocationRecord(univ.Sequence):
     pass
 
 
-NRST_RecodedValidateLocationRecord.componentType = namedtype.NamedTypes(
-    namedtype.NamedType('telco-id', NRST_TelcoID()),
-    namedtype.NamedType('connection-time', NRST_DateAndTime()),
-    namedtype.NamedType('ident', NRST_RecodedReportedIdentifier()),
-    namedtype.NamedType('connection-location', NRST_Location())
+SkrRecodedValidateLocationRecord.componentType = namedtype.NamedTypes(
+    namedtype.NamedType('telco-id', SkrTelcoID()),
+    namedtype.NamedType('connection-time', SkrDateAndTime()),
+    namedtype.NamedType('ident', SkrRecodedReportedIdentifier()),
+    namedtype.NamedType('connection-location', SkrLocation())
 )
 
 
-class NRST_RecodedValidateTelephoneCardRecord(univ.Sequence):
+class SkrRecodedValidateTelephoneCardRecord(univ.Sequence):
     pass
 
 
-NRST_RecodedValidateTelephoneCardRecord.componentType = namedtype.NamedTypes(
-    namedtype.NamedType('telco-id', NRST_TelcoID()),
-    namedtype.NamedType('activator-device-id', NRST_RecodedReportedIdentifier()),
-    namedtype.NamedType('date-time-fillup', NRST_DateAndTime()),
+SkrRecodedValidateTelephoneCardRecord.componentType = namedtype.NamedTypes(
+    namedtype.NamedType('telco-id', SkrTelcoID()),
+    namedtype.NamedType('activator-device-id', SkrRecodedReportedIdentifier()),
+    namedtype.NamedType('date-time-fillup', SkrDateAndTime()),
     namedtype.NamedType(
         'card-number',
         char.NumericString().subtype(
@@ -8974,14 +8974,14 @@ NRST_RecodedValidateTelephoneCardRecord.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_ReportDataBlock(univ.Choice):
+class SkrReportDataBlock(univ.Choice):
     pass
 
 
-NRST_ReportDataBlock.componentType = namedtype.NamedTypes(
+SkrReportDataBlock.componentType = namedtype.NamedTypes(
     namedtype.NamedType(
         'dictionary',
-        NRST_DictionaryReport().subtype(
+        SkrDictionaryReport().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 0)
             )
@@ -8989,7 +8989,7 @@ NRST_ReportDataBlock.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'abonents',
-        NRST_AbonentsReport().subtype(
+        SkrAbonentsReport().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 1)
             )
@@ -8997,7 +8997,7 @@ NRST_ReportDataBlock.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'connections',
-        NRST_ConnectionsReport().subtype(
+        SkrConnectionsReport().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 2)
             )
@@ -9005,13 +9005,13 @@ NRST_ReportDataBlock.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'locations',
-        NRST_LocationReport().subtype(
+        SkrLocationReport().subtype(
             implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 3))
         )
     ),
     namedtype.NamedType(
         'payments',
-        NRST_PaymentsReport().subtype(
+        SkrPaymentsReport().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 4)
             )
@@ -9019,7 +9019,7 @@ NRST_ReportDataBlock.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'presense',
-        NRST_PresenseReport().subtype(
+        SkrPresenseReport().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 6)
             )
@@ -9027,7 +9027,7 @@ NRST_ReportDataBlock.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'nonFormalized',
-        NRST_NonFormalizedReport().subtype(
+        SkrNonFormalizedReport().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 7)
             )
@@ -9035,7 +9035,7 @@ NRST_ReportDataBlock.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'data-content',
-        NRST_DataContentReport().subtype(
+        SkrDataContentReport().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 10)
             )
@@ -9044,41 +9044,41 @@ NRST_ReportDataBlock.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_Report(univ.Sequence):
+class SkrReport(univ.Sequence):
     pass
 
 
-NRST_Report.componentType = namedtype.NamedTypes(
-    namedtype.NamedType('request-id', NRST_MessageID()),
-    namedtype.NamedType('task-id', NRST_TaskID()),
+SkrReport.componentType = namedtype.NamedTypes(
+    namedtype.NamedType('request-id', SkrMessageID()),
+    namedtype.NamedType('task-id', SkrTaskID()),
     namedtype.NamedType('total-blocks-number', univ.Integer()),
     namedtype.NamedType('block-number', univ.Integer()),
-    namedtype.NamedType('report-block', NRST_ReportDataBlock())
+    namedtype.NamedType('report-block', SkrReportDataBlock())
 )
 
 
-class NRST_ReportAbonentData(univ.SequenceOf):
+class SkrReportAbonentData(univ.SequenceOf):
     pass
 
 
-NRST_ReportAbonentData.componentType = NRST_AbonentsRecord()
+SkrReportAbonentData.componentType = SkrAbonentsRecord()
 
 
-class NRST_ReportDataContentRawData(univ.SequenceOf):
+class SkrReportDataContentRawData(univ.SequenceOf):
     pass
 
 
-NRST_ReportDataContentRawData.componentType = NRST_RawRecordContent()
+SkrReportDataContentRawData.componentType = SkrRawRecordContent()
 
 
-class NRST_ReportMessageData(univ.Choice):
+class SkrReportMessageData(univ.Choice):
     pass
 
 
-NRST_ReportMessageData.componentType = namedtype.NamedTypes(
+SkrReportMessageData.componentType = namedtype.NamedTypes(
     namedtype.NamedType(
         'report',
-        NRST_Report().subtype(
+        SkrReport().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 0)
             )
@@ -9086,7 +9086,7 @@ NRST_ReportMessageData.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'ack',
-        NRST_Acknowledgement().subtype(
+        SkrAcknowledgement().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 1)
             )
@@ -9095,19 +9095,19 @@ NRST_ReportMessageData.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_ReportServiceData(univ.SequenceOf):
+class SkrReportServiceData(univ.SequenceOf):
     pass
 
 
-NRST_ReportServiceData.componentType = NRST_AbonentService()
+SkrReportServiceData.componentType = SkrAbonentService()
 
 
-class NRST_RoamingPartnerRecord(univ.Sequence):
+class SkrRoamingPartnerRecord(univ.Sequence):
     pass
 
 
-NRST_RoamingPartnerRecord.componentType = namedtype.NamedTypes(
-    namedtype.NamedType('telco-id', NRST_TelcoID()),
+SkrRoamingPartnerRecord.componentType = namedtype.NamedTypes(
+    namedtype.NamedType('telco-id', SkrTelcoID()),
     namedtype.NamedType(
         'roaming-id',
         univ.Integer().subtype(
@@ -9116,8 +9116,8 @@ NRST_RoamingPartnerRecord.componentType = namedtype.NamedTypes(
             )
         )
     ),
-    namedtype.NamedType('begin-time', NRST_DateAndTime()),
-    namedtype.OptionalNamedType('end-time', NRST_DateAndTime()),
+    namedtype.NamedType('begin-time', SkrDateAndTime()),
+    namedtype.OptionalNamedType('end-time', SkrDateAndTime()),
     namedtype.NamedType(
         'description',
         char.UTF8String().subtype(
@@ -9127,28 +9127,28 @@ NRST_RoamingPartnerRecord.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_RoamingPartnersRecordsData(univ.SequenceOf):
+class SkrRoamingPartnersRecordsData(univ.SequenceOf):
     pass
 
 
-NRST_RoamingPartnersRecordsData.componentType = NRST_RoamingPartnerRecord()
+SkrRoamingPartnersRecordsData.componentType = SkrRoamingPartnerRecord()
 
 
-class NRST_ServiceCenterRecord(univ.Sequence):
+class SkrServiceCenterRecord(univ.Sequence):
     pass
 
 
-NRST_ServiceCenterRecord.componentType = namedtype.NamedTypes(
-    namedtype.NamedType('telco-id', NRST_TelcoID()),
-    namedtype.NamedType('device-id', NRST_ReportedIdentifier()),
-    namedtype.NamedType('date-time-fillup', NRST_DateAndTime()),
+SkrServiceCenterRecord.componentType = namedtype.NamedTypes(
+    namedtype.NamedType('telco-id', SkrTelcoID()),
+    namedtype.NamedType('device-id', SkrReportedIdentifier()),
+    namedtype.NamedType('date-time-fillup', SkrDateAndTime()),
     namedtype.NamedType(
         'center-id',
         char.UTF8String().subtype(
             subtypeSpec=(constraint.ValueSizeConstraint(1, 64))
         )
     ),
-    namedtype.NamedType('center-address', NRST_ReportedAddress()),
+    namedtype.NamedType('center-address', SkrReportedAddress()),
     namedtype.NamedType(
         'amount',
         char.UTF8String().subtype(
@@ -9158,21 +9158,21 @@ NRST_ServiceCenterRecord.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_ServiceCenterReport(univ.SequenceOf):
+class SkrServiceCenterReport(univ.SequenceOf):
     pass
 
 
-NRST_ServiceCenterReport.componentType = NRST_ServiceCenterRecord()
+SkrServiceCenterReport.componentType = SkrServiceCenterRecord()
 
 
-class NRST_SessionMessageData(univ.Choice):
+class SkrSessionMessageData(univ.Choice):
     pass
 
 
-NRST_SessionMessageData.componentType = namedtype.NamedTypes(
+SkrSessionMessageData.componentType = namedtype.NamedTypes(
     namedtype.NamedType(
         'connect',
-        NRST_ConnectRequest().subtype(
+        SkrConnectRequest().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 0)
             )
@@ -9180,7 +9180,7 @@ NRST_SessionMessageData.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'connect-response',
-        NRST_ConnectResponse().subtype(
+        SkrConnectResponse().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 1)
             )
@@ -9188,7 +9188,7 @@ NRST_SessionMessageData.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'adjustment',
-        NRST_AdjustmentRequest().subtype(
+        SkrAdjustmentRequest().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 2)
             )
@@ -9196,30 +9196,30 @@ NRST_SessionMessageData.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'adjustment-response',
-        NRST_AdjustmentResponse().subtype(
+        SkrAdjustmentResponse().subtype(
             implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 3))
         )
     ),
     namedtype.NamedType(
         'disconnect',
-        NRST_DisconnectRequest().subtype(
+        SkrDisconnectRequest().subtype(
             implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 4))
         )
     ),
     namedtype.NamedType(
         'disconnect-response',
-        NRST_DisconnectResponse().subtype(
+        SkrDisconnectResponse().subtype(
             implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 5))
         )
     )
 )
 
 
-class NRST_SignalPointCodesRecord(univ.Sequence):
+class SkrSignalPointCodesRecord(univ.Sequence):
     pass
 
 
-NRST_SignalPointCodesRecord.componentType = namedtype.NamedTypes(
+SkrSignalPointCodesRecord.componentType = namedtype.NamedTypes(
     namedtype.NamedType(
         'ss7-point-code',
         char.UTF8String().subtype(
@@ -9234,11 +9234,11 @@ NRST_SignalPointCodesRecord.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'begin-time',
-        NRST_DateAndTime()
+        SkrDateAndTime()
     ),
     namedtype.OptionalNamedType(
         'end-time',
-        NRST_DateAndTime()
+        SkrDateAndTime()
     ),
     namedtype.NamedType(
         'description',
@@ -9249,20 +9249,20 @@ NRST_SignalPointCodesRecord.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_SignalPointCodesRecordsData(univ.SequenceOf):
+class SkrSignalPointCodesRecordsData(univ.SequenceOf):
     pass
 
 
-NRST_SignalPointCodesRecordsData.componentType = NRST_SignalPointCodesRecord()
+SkrSignalPointCodesRecordsData.componentType = SkrSignalPointCodesRecord()
 
 
-class NRST_SpecialNumberRecord(univ.Sequence):
+class SkrSpecialNumberRecord(univ.Sequence):
     pass
 
 
-NRST_SpecialNumberRecord.componentType = namedtype.NamedTypes(
+SkrSpecialNumberRecord.componentType = namedtype.NamedTypes(
     namedtype.NamedType(
-        'telco-id', NRST_TelcoID()
+        'telco-id', SkrTelcoID()
     ),
     namedtype.NamedType(
         'directory-number',
@@ -9277,37 +9277,37 @@ NRST_SpecialNumberRecord.componentType = namedtype.NamedTypes(
         )
     ),
     namedtype.NamedType(
-        'begin-time', NRST_DateAndTime()
+        'begin-time', SkrDateAndTime()
     ),
     namedtype.OptionalNamedType(
-        'end-time', NRST_DateAndTime()
+        'end-time', SkrDateAndTime()
     ),
     namedtype.OptionalNamedType(
-        'network-address', NRST_IPAddress()
+        'network-address', SkrIPAddress()
     )
 )
 
 
-class NRST_SpecialNumbersRecordsData(univ.SequenceOf):
+class SkrSpecialNumbersRecordsData(univ.SequenceOf):
     pass
 
 
-NRST_SpecialNumbersRecordsData.componentType = NRST_SpecialNumberRecord()
+SkrSpecialNumbersRecordsData.componentType = SkrSpecialNumberRecord()
 
 
-class NRST_SubsPresenceData(univ.SequenceOf):
+class SkrSubsPresenceData(univ.SequenceOf):
     pass
 
 
-NRST_SubsPresenceData.componentType = NRST_StandardInterval()
+SkrSubsPresenceData.componentType = SkrStandardInterval()
 
 
-class NRST_SupplementServicesRecord(univ.Sequence):
+class SkrSupplementServicesRecord(univ.Sequence):
     pass
 
 
-NRST_SupplementServicesRecord.componentType = namedtype.NamedTypes(
-    namedtype.NamedType('telco-id', NRST_TelcoID()),
+SkrSupplementServicesRecord.componentType = namedtype.NamedTypes(
+    namedtype.NamedType('telco-id', SkrTelcoID()),
     namedtype.NamedType(
         'service-id',
         univ.Integer().subtype(
@@ -9320,8 +9320,8 @@ NRST_SupplementServicesRecord.componentType = namedtype.NamedTypes(
             subtypeSpec=(constraint.ValueSizeConstraint(1, 64))
         )
     ),
-    namedtype.NamedType('begin-time', NRST_DateAndTime()),
-    namedtype.OptionalNamedType('end-time', NRST_DateAndTime()),
+    namedtype.NamedType('begin-time', SkrDateAndTime()),
+    namedtype.OptionalNamedType('end-time', SkrDateAndTime()),
     namedtype.NamedType(
         'description',
         char.UTF8String().subtype(
@@ -9331,35 +9331,35 @@ NRST_SupplementServicesRecord.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_SupplementServicesRecordsData(univ.SequenceOf):
+class SkrSupplementServicesRecordsData(univ.SequenceOf):
     pass
 
 
-NRST_SupplementServicesRecordsData.componentType = NRST_SupplementServicesRecord()
+SkrSupplementServicesRecordsData.componentType = SkrSupplementServicesRecord()
 
 
-class NRST_SwitchesRecord(univ.Sequence):
+class SkrSwitchesRecord(univ.Sequence):
     pass
 
 
-NRST_SwitchesRecord.componentType = namedtype.NamedTypes(
-    namedtype.NamedType('telco-id', NRST_TelcoID()),
+SkrSwitchesRecord.componentType = namedtype.NamedTypes(
+    namedtype.NamedType('telco-id', SkrTelcoID()),
     namedtype.NamedType(
         'switch-id',
         char.UTF8String().subtype(
             subtypeSpec=(constraint.ValueSizeConstraint(1, 128))
         )
     ),
-    namedtype.NamedType('begin-time', NRST_DateAndTime()),
-    namedtype.OptionalNamedType('end-time', NRST_DateAndTime()),
+    namedtype.NamedType('begin-time', SkrDateAndTime()),
+    namedtype.OptionalNamedType('end-time', SkrDateAndTime()),
     namedtype.NamedType(
         'description',
         char.UTF8String().subtype(
             subtypeSpec=(constraint.ValueSizeConstraint(1, 256))
         )
     ),
-    namedtype.NamedType('network-type', NRST_NetworkType()),
-    namedtype.NamedType('address', NRST_ReportedAddress()),
+    namedtype.NamedType('network-type', SkrNetworkType()),
+    namedtype.NamedType('address', SkrReportedAddress()),
     namedtype.OptionalNamedType(
         'switch-sign',
         char.NumericString().subtype(
@@ -9375,39 +9375,39 @@ NRST_SwitchesRecord.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_SwitchesRecordsData(univ.SequenceOf):
+class SkrSwitchesRecordsData(univ.SequenceOf):
     pass
 
 
-NRST_SwitchesRecordsData.componentType = NRST_SwitchesRecord()
+SkrSwitchesRecordsData.componentType = SkrSwitchesRecord()
 
 
-class NRST_TaskMessageData(univ.Choice):
+class SkrTaskMessageData(univ.Choice):
     pass
 
 
-NRST_TaskMessageData.componentType = namedtype.NamedTypes(
+SkrTaskMessageData.componentType = namedtype.NamedTypes(
     namedtype.NamedType(
         'data-ready-request',
-        NRST_DataReadyRequest().subtype(
+        SkrDataReadyRequest().subtype(
             implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 0))
         )
     ),
     namedtype.NamedType(
         'data-ready-response',
-        NRST_DataReadyResponse().subtype(
+        SkrDataReadyResponse().subtype(
             implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 1))
         )
     ),
     namedtype.NamedType(
         'data-load-request',
-        NRST_DataLoadRequest().subtype(
+        SkrDataLoadRequest().subtype(
             implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 2))
         )
     ),
     namedtype.NamedType(
         'data-load-response',
-        NRST_DataLoadResponse().subtype(
+        SkrDataLoadResponse().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 3)
             )
@@ -9415,13 +9415,13 @@ NRST_TaskMessageData.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'data-drop-request',
-        NRST_DataDropRequest().subtype(
+        SkrDataDropRequest().subtype(
             implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 4))
         )
     ),
     namedtype.NamedType(
         'data-drop-response',
-        NRST_DataDropResponse().subtype(
+        SkrDataDropResponse().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 5)
             )
@@ -9429,13 +9429,13 @@ NRST_TaskMessageData.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'data-interrupt-request',
-        NRST_DataInterruptRequest().subtype(
+        SkrDataInterruptRequest().subtype(
             implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 6))
         )
     ),
     namedtype.NamedType(
         'data-interrupt-response',
-        NRST_DataInterruptResponse().subtype(
+        SkrDataInterruptResponse().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 7)
             )
@@ -9443,7 +9443,7 @@ NRST_TaskMessageData.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'create-task-request',
-        NRST_CreateTaskRequest().subtype(
+        SkrCreateTaskRequest().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 8)
             )
@@ -9451,7 +9451,7 @@ NRST_TaskMessageData.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'create-task-response',
-        NRST_CreateTaskResponse().subtype(
+        SkrCreateTaskResponse().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 9)
             )
@@ -9459,7 +9459,7 @@ NRST_TaskMessageData.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'non-formalized-task-request',
-        NRST_NonFormalizedTaskRequest().subtype(
+        SkrNonFormalizedTaskRequest().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 10)
             )
@@ -9467,7 +9467,7 @@ NRST_TaskMessageData.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'non-formalized-task-response',
-        NRST_NonFormalizedTaskResponse().subtype(
+        SkrNonFormalizedTaskResponse().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 11)
             )
@@ -9476,14 +9476,14 @@ NRST_TaskMessageData.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_TelcosRecord(univ.Sequence):
+class SkrTelcosRecord(univ.Sequence):
     pass
 
 
-NRST_TelcosRecord.componentType = namedtype.NamedTypes(
-    namedtype.NamedType('telco-id', NRST_TelcoID()),
-    namedtype.NamedType('begin-time', NRST_DateAndTime()),
-    namedtype.OptionalNamedType('end-time', NRST_DateAndTime()),
+SkrTelcosRecord.componentType = namedtype.NamedTypes(
+    namedtype.NamedType('telco-id', SkrTelcoID()),
+    namedtype.NamedType('begin-time', SkrDateAndTime()),
+    namedtype.OptionalNamedType('end-time', SkrDateAndTime()),
     namedtype.NamedType(
         'description',
         char.UTF8String().subtype(
@@ -9509,21 +9509,21 @@ NRST_TelcosRecord.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_TelcosRecordsData(univ.SequenceOf):
+class SkrTelcosRecordsData(univ.SequenceOf):
     pass
 
 
-NRST_TelcosRecordsData.componentType = NRST_TelcosRecord()
+SkrTelcosRecordsData.componentType = SkrTelcosRecord()
 
 
-class NRST_ValidateTelephoneCardRecord(univ.Sequence):
+class SkrValidateTelephoneCardRecord(univ.Sequence):
     pass
 
 
-NRST_ValidateTelephoneCardRecord.componentType = namedtype.NamedTypes(
-    namedtype.NamedType('telco-id', NRST_TelcoID()),
-    namedtype.NamedType('activator-device-id', NRST_ReportedIdentifier()),
-    namedtype.NamedType('date-time-fillup', NRST_DateAndTime()),
+SkrValidateTelephoneCardRecord.componentType = namedtype.NamedTypes(
+    namedtype.NamedType('telco-id', SkrTelcoID()),
+    namedtype.NamedType('activator-device-id', SkrReportedIdentifier()),
+    namedtype.NamedType('date-time-fillup', SkrDateAndTime()),
     namedtype.NamedType(
         'card-number',
         char.NumericString().subtype(
@@ -9539,19 +9539,19 @@ NRST_ValidateTelephoneCardRecord.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_TelephoneCardReportData(univ.SequenceOf):
+class SkrTelephoneCardReportData(univ.SequenceOf):
     pass
 
 
-NRST_TelephoneCardReportData.componentType = NRST_ValidateTelephoneCardRecord()
+SkrTelephoneCardReportData.componentType = SkrValidateTelephoneCardRecord()
 
 
-class NRST_TelephoneNumberingPlanRecord(univ.Sequence):
+class SkrTelephoneNumberingPlanRecord(univ.Sequence):
     pass
 
 
-NRST_TelephoneNumberingPlanRecord.componentType = namedtype.NamedTypes(
-    namedtype.NamedType('telco-id', NRST_TelcoID()),
+SkrTelephoneNumberingPlanRecord.componentType = namedtype.NamedTypes(
+    namedtype.NamedType('telco-id', SkrTelcoID()),
     namedtype.NamedType(
         'iso-3166-alpha-2',
         char.UTF8String().subtype(
@@ -9612,7 +9612,7 @@ NRST_TelephoneNumberingPlanRecord.componentType = namedtype.NamedTypes(
             subtypeSpec=(constraint.ValueSizeConstraint(2, 255))
         )
     ),
-    namedtype.NamedType('operator-type-id', NRST_NetworkType()),
+    namedtype.NamedType('operator-type-id', SkrNetworkType()),
     namedtype.NamedType(
         'capacity-from', char.NumericString().subtype(subtypeSpec=(constraint.ValueSizeConstraint(1, 15)))),
     namedtype.NamedType(
@@ -9639,7 +9639,7 @@ NRST_TelephoneNumberingPlanRecord.componentType = namedtype.NamedTypes(
             subtypeSpec=(constraint.ValueSizeConstraint(0, 255))
         )
     ),
-    namedtype.NamedType('range-activation', NRST_DateAndTime()),
+    namedtype.NamedType('range-activation', SkrDateAndTime()),
     namedtype.NamedType(
         'mobile-country-code',
         char.NumericString().subtype(
@@ -9654,7 +9654,7 @@ NRST_TelephoneNumberingPlanRecord.componentType = namedtype.NamedTypes(
     ),
     namedtype.OptionalNamedType(
         'range-deactivation',
-        NRST_DateAndTime().subtype(
+        SkrDateAndTime().subtype(
             implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 0))
         )
     ),
@@ -9685,49 +9685,49 @@ NRST_TelephoneNumberingPlanRecord.componentType = namedtype.NamedTypes(
 )
 
 
-class NRST_TelephoneNumberingPlanRecordsData(univ.SequenceOf):
+class SkrTelephoneNumberingPlanRecordsData(univ.SequenceOf):
     pass
 
 
-NRST_TelephoneNumberingPlanRecordsData.componentType = NRST_TelephoneNumberingPlanRecord()
+SkrTelephoneNumberingPlanRecordsData.componentType = SkrTelephoneNumberingPlanRecord()
 
 
-class NRST_TerminationCausesRecord(univ.Sequence):
+class SkrTerminationCausesRecord(univ.Sequence):
     pass
 
 
-NRST_TerminationCausesRecord.componentType = namedtype.NamedTypes(
-    namedtype.NamedType('telco-id', NRST_TelcoID()),
+SkrTerminationCausesRecord.componentType = namedtype.NamedTypes(
+    namedtype.NamedType('telco-id', SkrTelcoID()),
     namedtype.NamedType(
         'termination-cause-id',
         univ.Integer().subtype(
             subtypeSpec=(constraint.ValueRangeConstraint(0, 16384))
         )
     ),
-    namedtype.NamedType('begin-time', NRST_DateAndTime()),
-    namedtype.OptionalNamedType('end-time', NRST_DateAndTime()),
+    namedtype.NamedType('begin-time', SkrDateAndTime()),
+    namedtype.OptionalNamedType('end-time', SkrDateAndTime()),
     namedtype.NamedType(
         'description',
         char.UTF8String().subtype(
             subtypeSpec=(constraint.ValueSizeConstraint(1, 256))
         )
     ),
-    namedtype.NamedType('network-type', NRST_NetworkType())
+    namedtype.NamedType('network-type', SkrNetworkType())
 )
 
 
-class NRST_TerminationCausesRecordsData(univ.SequenceOf):
+class SkrTerminationCausesRecordsData(univ.SequenceOf):
     pass
 
 
-NRST_TerminationCausesRecordsData.componentType = NRST_TerminationCausesRecord()
+SkrTerminationCausesRecordsData.componentType = SkrTerminationCausesRecord()
 
 
-class NRST_TrapType(univ.Enumerated):
+class SkrTrapType(univ.Enumerated):
     pass
 
 
-NRST_TrapType.namedValues = namedval.NamedValues(
+SkrTrapType.namedValues = namedval.NamedValues(
     ('heartbeat', 0),
     ('restart-software', 1),
     ('unauthorized-access', 2),
@@ -9737,13 +9737,13 @@ NRST_TrapType.namedValues = namedval.NamedValues(
 )
 
 
-class NRST_Trap(univ.Sequence):
+class SkrTrap(univ.Sequence):
     pass
 
 
-NRST_Trap.componentType = namedtype.NamedTypes(
+SkrTrap.componentType = namedtype.NamedTypes(
     namedtype.NamedType(
-        'trap-type', NRST_TrapType()
+        'trap-type', SkrTrapType()
     ),
     namedtype.OptionalNamedType(
         'trap-message',
@@ -9751,22 +9751,22 @@ NRST_Trap.componentType = namedtype.NamedTypes(
             subtypeSpec=(constraint.ValueSizeConstraint(1, 256))
         )
     ),
-    namedtype.OptionalNamedType('reference-message', NRST_MessageID())
+    namedtype.OptionalNamedType('reference-message', SkrMessageID())
 )
 
 
-class NRST_TrapAck(univ.Null):
+class SkrTrapAck(univ.Null):
     pass
 
 
-class NRST_TrapMessageData(univ.Choice):
+class SkrTrapMessageData(univ.Choice):
     pass
 
 
-NRST_TrapMessageData.componentType = namedtype.NamedTypes(
+SkrTrapMessageData.componentType = namedtype.NamedTypes(
     namedtype.NamedType(
         'trap',
-        NRST_Trap().subtype(
+        SkrTrap().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 0)
             )
@@ -9774,21 +9774,21 @@ NRST_TrapMessageData.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'trap-ack',
-        NRST_TrapAck().subtype(
+        SkrTrapAck().subtype(
             implicitTag=(tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 1))
         )
     )
 )
 
 
-class NRST_UnformattedMessageData(univ.Choice):
+class SkrUnformattedMessageData(univ.Choice):
     pass
 
 
-NRST_UnformattedMessageData.componentType = namedtype.NamedTypes(
+SkrUnformattedMessageData.componentType = namedtype.NamedTypes(
     namedtype.NamedType(
         'request',
-        NRST_RawRequest().subtype(
+        SkrRawRequest().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 0)
             )
@@ -9796,7 +9796,7 @@ NRST_UnformattedMessageData.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'response',
-        NRST_RawResponse().subtype(
+        SkrRawResponse().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 1)
             )
@@ -9804,7 +9804,7 @@ NRST_UnformattedMessageData.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'report',
-        NRST_RawReport().subtype(
+        SkrRawReport().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 2)
             )
@@ -9812,7 +9812,7 @@ NRST_UnformattedMessageData.componentType = namedtype.NamedTypes(
     ),
     namedtype.NamedType(
         'report-ack',
-        NRST_RawAcknowledgement().subtype(
+        SkrRawAcknowledgement().subtype(
             implicitTag=(
                 tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 3)
             )
@@ -9821,104 +9821,104 @@ NRST_UnformattedMessageData.componentType = namedtype.NamedTypes(
 )
 
 
-sorm_message_filter = NRST_OID('286')
-sorm_message_management = NRST_OID('284')
-sorm_message_report = NRST_OID('283')
-sorm_message_session = NRST_OID('280')
-sorm_message_task = NRST_OID('282')
-sorm_message_trap = NRST_OID('281')
-sorm_message_unformatted = NRST_OID('285')
-sorm_report_abonent_abonent = NRST_OID('40')
-sorm_report_abonent_organization = NRST_OID('43')
-sorm_report_abonent_person = NRST_OID('42')
-sorm_report_abonent_service = NRST_OID('41')
-sorm_report_connection_aaa_login = NRST_OID('24')
-sorm_report_connection_address_translations = NRST_OID('32')
-sorm_report_connection_email = NRST_OID('26')
-sorm_report_connection_file_transfer = NRST_OID('29')
-sorm_report_connection_im = NRST_OID('27')
-sorm_report_connection_ipdr_header = NRST_OID('23')
-sorm_report_connection_mobile = NRST_OID('22')
-sorm_report_connection_pager = NRST_OID('20')
-sorm_report_connection_pstn = NRST_OID('21')
-sorm_report_connection_raw_flows = NRST_OID('31')
-sorm_report_connection_resource = NRST_OID('25')
-sorm_report_connection_term_access = NRST_OID('30')
-sorm_report_connection_voip = NRST_OID('28')
-sorm_report_data_content_raw = NRST_OID('50')
-sorm_report_dictionary_basic_stations = NRST_OID('101')
-sorm_report_dictionary_bunches = NRST_OID('100')
-sorm_report_dictionary_bunches_map = NRST_OID('115')
-sorm_report_dictionary_call_types = NRST_OID('105')
-sorm_report_dictionary_doc_types = NRST_OID('111')
-sorm_report_dictionary_gates = NRST_OID('104')
-sorm_report_dictionary_ip_data_points = NRST_OID('113')
-sorm_report_dictionary_ip_numbering_plan = NRST_OID('109')
-sorm_report_dictionary_mobile_subscriber_identity_plan = NRST_OID('116')
-sorm_report_dictionary_pay_types = NRST_OID('107')
-sorm_report_dictionary_phone_numbering_plan = NRST_OID('110')
-sorm_report_dictionary_roaming_partners = NRST_OID('102')
-sorm_report_dictionary_signal_point_codes = NRST_OID('132')
-sorm_report_dictionary_special_numbers = NRST_OID('114')
-sorm_report_dictionary_supplement_services = NRST_OID('106')
-sorm_report_dictionary_switches = NRST_OID('103')
-sorm_report_dictionary_telcos = NRST_OID('112')
-sorm_report_dictionary_termination_causes = NRST_OID('108')
-sorm_report_identifier_cdma = NRST_OID('4')
-sorm_report_identifier_data_network = NRST_OID('5')
-sorm_report_identifier_gsm = NRST_OID('3')
-sorm_report_identifier_pager = NRST_OID('1')
-sorm_report_identifier_pstn = NRST_OID('2')
-sorm_report_identifier_voip = NRST_OID('6')
-sorm_report_location_geo = NRST_OID('62')
-sorm_report_location_mobile = NRST_OID('60')
-sorm_report_location_wireless = NRST_OID('61')
-sorm_report_payment_balance_fillups = NRST_OID('86')
-sorm_report_payment_bank_account_transfer = NRST_OID('89')
-sorm_report_payment_bank_card_transfer = NRST_OID('88')
-sorm_report_payment_bank_division_transfer = NRST_OID('87')
-sorm_report_payment_bank_transaction = NRST_OID('80')
-sorm_report_payment_cross_account = NRST_OID('84')
-sorm_report_payment_express_pays = NRST_OID('81')
-sorm_report_payment_service_center = NRST_OID('83')
-sorm_report_payment_telephone_card = NRST_OID('85')
-sorm_report_payment_terminal_pays = NRST_OID('82')
-sorm_report_presense_abonents = NRST_OID('120')
-sorm_report_presense_connections = NRST_OID('121')
-sorm_report_presense_dictionaries = NRST_OID('123')
-sorm_report_presense_locations = NRST_OID('124')
-sorm_report_presense_payments = NRST_OID('122')
-sorm_request_abonent_organization = NRST_OID('181')
-sorm_request_abonent_person = NRST_OID('180')
-sorm_request_connection_aaa_login = NRST_OID('164')
-sorm_request_connection_address_translations = NRST_OID('173')
-sorm_request_connection_email = NRST_OID('166')
-sorm_request_connection_entrance = NRST_OID('172')
-sorm_request_connection_file_transfer = NRST_OID('169')
-sorm_request_connection_im = NRST_OID('167')
-sorm_request_connection_mobile = NRST_OID('162')
-sorm_request_connection_pager = NRST_OID('160')
-sorm_request_connection_pstn = NRST_OID('161')
-sorm_request_connection_raw_flows = NRST_OID('171')
-sorm_request_connection_resource = NRST_OID('165')
-sorm_request_connection_term_access = NRST_OID('170')
-sorm_request_connection_voip = NRST_OID('168')
-sorm_request_dictionaries = NRST_OID('240')
-sorm_request_identifier_cdma = NRST_OID('143')
-sorm_request_identifier_data_network = NRST_OID('144')
-sorm_request_identifier_gsm = NRST_OID('142')
-sorm_request_identifier_pager = NRST_OID('140')
-sorm_request_identifier_pstn = NRST_OID('141')
-sorm_request_identifier_voip = NRST_OID('145')
-sorm_request_location = NRST_OID('200')
-sorm_request_payment_balance_fillups = NRST_OID('226')
-sorm_request_payment_bank_account_transfer = NRST_OID('229')
-sorm_request_payment_bank_card_transfer = NRST_OID('228')
-sorm_request_payment_bank_division_transfer = NRST_OID('227')
-sorm_request_payment_bank_transaction = NRST_OID('220')
-sorm_request_payment_cross_account = NRST_OID('224')
-sorm_request_payment_express_pays = NRST_OID('221')
-sorm_request_payment_service_center = NRST_OID('223')
-sorm_request_payment_telephone_card = NRST_OID('225')
-sorm_request_payment_terminal_pays = NRST_OID('222')
-sorm_request_presense = NRST_OID('260')
+sorm_message_filter = SkrOID('286')
+sorm_message_management = SkrOID('284')
+sorm_message_report = SkrOID('283')
+sorm_message_session = SkrOID('280')
+sorm_message_task = SkrOID('282')
+sorm_message_trap = SkrOID('281')
+sorm_message_unformatted = SkrOID('285')
+sorm_report_abonent_abonent = SkrOID('40')
+sorm_report_abonent_organization = SkrOID('43')
+sorm_report_abonent_person = SkrOID('42')
+sorm_report_abonent_service = SkrOID('41')
+sorm_report_connection_aaa_login = SkrOID('24')
+sorm_report_connection_address_translations = SkrOID('32')
+sorm_report_connection_email = SkrOID('26')
+sorm_report_connection_file_transfer = SkrOID('29')
+sorm_report_connection_im = SkrOID('27')
+sorm_report_connection_ipdr_header = SkrOID('23')
+sorm_report_connection_mobile = SkrOID('22')
+sorm_report_connection_pager = SkrOID('20')
+sorm_report_connection_pstn = SkrOID('21')
+sorm_report_connection_raw_flows = SkrOID('31')
+sorm_report_connection_resource = SkrOID('25')
+sorm_report_connection_term_access = SkrOID('30')
+sorm_report_connection_voip = SkrOID('28')
+sorm_report_data_content_raw = SkrOID('50')
+sorm_report_dictionary_basic_stations = SkrOID('101')
+sorm_report_dictionary_bunches = SkrOID('100')
+sorm_report_dictionary_bunches_map = SkrOID('115')
+sorm_report_dictionary_call_types = SkrOID('105')
+sorm_report_dictionary_doc_types = SkrOID('111')
+sorm_report_dictionary_gates = SkrOID('104')
+sorm_report_dictionary_ip_data_points = SkrOID('113')
+sorm_report_dictionary_ip_numbering_plan = SkrOID('109')
+sorm_report_dictionary_mobile_subscriber_identity_plan = SkrOID('116')
+sorm_report_dictionary_pay_types = SkrOID('107')
+sorm_report_dictionary_phone_numbering_plan = SkrOID('110')
+sorm_report_dictionary_roaming_partners = SkrOID('102')
+sorm_report_dictionary_signal_point_codes = SkrOID('132')
+sorm_report_dictionary_special_numbers = SkrOID('114')
+sorm_report_dictionary_supplement_services = SkrOID('106')
+sorm_report_dictionary_switches = SkrOID('103')
+sorm_report_dictionary_telcos = SkrOID('112')
+sorm_report_dictionary_termination_causes = SkrOID('108')
+sorm_report_identifier_cdma = SkrOID('4')
+sorm_report_identifier_data_network = SkrOID('5')
+sorm_report_identifier_gsm = SkrOID('3')
+sorm_report_identifier_pager = SkrOID('1')
+sorm_report_identifier_pstn = SkrOID('2')
+sorm_report_identifier_voip = SkrOID('6')
+sorm_report_location_geo = SkrOID('62')
+sorm_report_location_mobile = SkrOID('60')
+sorm_report_location_wireless = SkrOID('61')
+sorm_report_payment_balance_fillups = SkrOID('86')
+sorm_report_payment_bank_account_transfer = SkrOID('89')
+sorm_report_payment_bank_card_transfer = SkrOID('88')
+sorm_report_payment_bank_division_transfer = SkrOID('87')
+sorm_report_payment_bank_transaction = SkrOID('80')
+sorm_report_payment_cross_account = SkrOID('84')
+sorm_report_payment_express_pays = SkrOID('81')
+sorm_report_payment_service_center = SkrOID('83')
+sorm_report_payment_telephone_card = SkrOID('85')
+sorm_report_payment_terminal_pays = SkrOID('82')
+sorm_report_presense_abonents = SkrOID('120')
+sorm_report_presense_connections = SkrOID('121')
+sorm_report_presense_dictionaries = SkrOID('123')
+sorm_report_presense_locations = SkrOID('124')
+sorm_report_presense_payments = SkrOID('122')
+sorm_request_abonent_organization = SkrOID('181')
+sorm_request_abonent_person = SkrOID('180')
+sorm_request_connection_aaa_login = SkrOID('164')
+sorm_request_connection_address_translations = SkrOID('173')
+sorm_request_connection_email = SkrOID('166')
+sorm_request_connection_entrance = SkrOID('172')
+sorm_request_connection_file_transfer = SkrOID('169')
+sorm_request_connection_im = SkrOID('167')
+sorm_request_connection_mobile = SkrOID('162')
+sorm_request_connection_pager = SkrOID('160')
+sorm_request_connection_pstn = SkrOID('161')
+sorm_request_connection_raw_flows = SkrOID('171')
+sorm_request_connection_resource = SkrOID('165')
+sorm_request_connection_term_access = SkrOID('170')
+sorm_request_connection_voip = SkrOID('168')
+sorm_request_dictionaries = SkrOID('240')
+sorm_request_identifier_cdma = SkrOID('143')
+sorm_request_identifier_data_network = SkrOID('144')
+sorm_request_identifier_gsm = SkrOID('142')
+sorm_request_identifier_pager = SkrOID('140')
+sorm_request_identifier_pstn = SkrOID('141')
+sorm_request_identifier_voip = SkrOID('145')
+sorm_request_location = SkrOID('200')
+sorm_request_payment_balance_fillups = SkrOID('226')
+sorm_request_payment_bank_account_transfer = SkrOID('229')
+sorm_request_payment_bank_card_transfer = SkrOID('228')
+sorm_request_payment_bank_division_transfer = SkrOID('227')
+sorm_request_payment_bank_transaction = SkrOID('220')
+sorm_request_payment_cross_account = SkrOID('224')
+sorm_request_payment_express_pays = SkrOID('221')
+sorm_request_payment_service_center = SkrOID('223')
+sorm_request_payment_telephone_card = SkrOID('225')
+sorm_request_payment_terminal_pays = SkrOID('222')
+sorm_request_presense = SkrOID('260')

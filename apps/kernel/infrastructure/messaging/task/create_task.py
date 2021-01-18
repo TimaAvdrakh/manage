@@ -23,7 +23,7 @@ class CreateTaskRequest(base.OutgoingMessage):
         return fields
 
     def encode_data(self):
-        reqs = asn1.NRST_CreateTaskRequest(
+        reqs = asn1.SkrCreateTaskRequest(
             tagSet=(
                 tag.initTagSet(
                     tag.Tag(

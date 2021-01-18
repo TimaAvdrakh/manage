@@ -55,7 +55,7 @@ def sequence_of_to_list(sequence_of_, transformer_=None):
 
 
 def to_date_and_time(value_):
-    if isinstance(value_, asn1.NRST_DateAndTime):
+    if isinstance(value_, asn1.SkrDateAndTime):
         if value_.hasValue():
             return bytes(value_).decode()
     if isinstance(value_, str):

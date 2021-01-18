@@ -21,7 +21,7 @@ class BankTransactionTask(base.ASN1Constructable):
         return ['items']
 
     def to_asn1(self):
-        task = asn1.NRST_PaymentsTask(
+        task = asn1.SkrPaymentsTask(
             tagSet=(
                 tag.initTagSet(
                     tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 4)
@@ -33,9 +33,9 @@ class BankTransactionTask(base.ASN1Constructable):
         return task
 
     def encode_data(self):
-        body = asn1.NRST_RequestedBankTransactionPays()
+        body = asn1.SkrRequestedBankTransactionPays()
         for item in self.items:
-            choice = asn1.NRST_RequestedBankTransactionPaysParameters()
+            choice = asn1.SkrRequestedBankTransactionPaysParameters()
             if isinstance(item, operations.LogicalOperation):
                 choice.setComponentByName('separator', item.code)
             else:
@@ -64,7 +64,7 @@ class ExpressCardTask(base.ASN1Constructable):
         return ['items']
 
     def to_asn1(self):
-        task = asn1.NRST_PaymentsTask(
+        task = asn1.SkrPaymentsTask(
             tagSet=(
                 tag.initTagSet(
                     tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 4)
@@ -76,9 +76,9 @@ class ExpressCardTask(base.ASN1Constructable):
         return task
 
     def encode_data(self):
-        body = asn1.NRST_RequestedExpressPays()
+        body = asn1.SkrRequestedExpressPays()
         for item in self.items:
-            choice = asn1.NRST_RequestedExpressPaysParameters()
+            choice = asn1.SkrRequestedExpressPaysParameters()
             if isinstance(item, operations.LogicalOperation):
                 choice.setComponentByName('separator', item.code)
             else:
@@ -104,7 +104,7 @@ class PublicTerminalTask(base.ASN1Constructable):
         return ['items']
 
     def to_asn1(self):
-        task = asn1.NRST_PaymentsTask(
+        task = asn1.SkrPaymentsTask(
             tagSet=(
                 tag.initTagSet(
                     tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 4)
@@ -116,9 +116,9 @@ class PublicTerminalTask(base.ASN1Constructable):
         return task
 
     def encode_data(self):
-        body = asn1.NRST_RequestedTerminalPays()
+        body = asn1.SkrRequestedTerminalPays()
         for item in self.items:
-            choice = asn1.NRST_RequestedTerminalPaysParameters()
+            choice = asn1.SkrRequestedTerminalPaysParameters()
             if isinstance(item, operations.LogicalOperation):
                 choice.setComponentByName('separator', item.code)
             else:
@@ -153,7 +153,7 @@ class ServiceCenterTask(base.ASN1Constructable):
             'items']
 
     def to_asn1(self):
-        task = asn1.NRST_PaymentsTask(
+        task = asn1.SkrPaymentsTask(
             tagSet=(
                 tag.initTagSet(
                     tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 4)
@@ -165,9 +165,9 @@ class ServiceCenterTask(base.ASN1Constructable):
         return task
 
     def encode_data(self):
-        body = asn1.NRST_RequestedServiceCenterPays()
+        body = asn1.SkrRequestedServiceCenterPays()
         for item in self.items:
-            choice = asn1.NRST_RequestedServiceCenterPaysParameters()
+            choice = asn1.SkrRequestedServiceCenterPaysParameters()
             if isinstance(item, operations.LogicalOperation):
                 choice.setComponentByName('separator', item.code)
             else:
@@ -198,7 +198,7 @@ class CrossAccountTask(base.ASN1Constructable):
         return ['items']
 
     def to_asn1(self):
-        task = asn1.NRST_PaymentsTask(
+        task = asn1.SkrPaymentsTask(
             tagSet=(
                 tag.initTagSet(
                     tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 4)
@@ -210,9 +210,9 @@ class CrossAccountTask(base.ASN1Constructable):
         return task
 
     def encode_data(self):
-        body = asn1.NRST_RequestedCrossAccountPays()
+        body = asn1.SkrRequestedCrossAccountPays()
         for item in self.items:
-            choice = asn1.NRST_RequestedCrossAccountPaysParameters()
+            choice = asn1.SkrRequestedCrossAccountPaysParameters()
             if isinstance(item, operations.LogicalOperation):
                 choice.setComponentByName('separator', item.code)
             else:
@@ -245,7 +245,7 @@ class TelephoneCardTask(base.ASN1Constructable):
         return ['items']
 
     def to_asn1(self):
-        task = asn1.NRST_PaymentsTask(
+        task = asn1.SkrPaymentsTask(
             tagSet=(
                 tag.initTagSet(
                     tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 4)
@@ -257,9 +257,9 @@ class TelephoneCardTask(base.ASN1Constructable):
         return task
 
     def encode_data(self):
-        body = asn1.NRST_RequestedTelephoneCardPays()
+        body = asn1.SkrRequestedTelephoneCardPays()
         for item in self.items:
-            choice = asn1.NRST_RequestedTelephoneCardPaysParameters()
+            choice = asn1.SkrRequestedTelephoneCardPaysParameters()
             if isinstance(item, operations.LogicalOperation):
                 choice.setComponentByName('separator', item.code)
             else:
@@ -286,7 +286,7 @@ class BalanceFillUpTask(base.ASN1Constructable):
             'items']
 
     def to_asn1(self):
-        task = asn1.NRST_PaymentsTask(
+        task = asn1.SkrPaymentsTask(
             tagSet=(
                 tag.initTagSet(
                     tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 4)
@@ -298,9 +298,9 @@ class BalanceFillUpTask(base.ASN1Constructable):
         return task
 
     def encode_data(self):
-        body = asn1.NRST_RequestedBalanceFillups()
+        body = asn1.SkrRequestedBalanceFillups()
         for item in self.items:
-            choice = asn1.NRST_RequestedBalanceFillupsParameters()
+            choice = asn1.SkrRequestedBalanceFillupsParameters()
             if isinstance(item, operations.LogicalOperation):
                 choice.setComponentByName('separator', item.code)
             else:
@@ -337,7 +337,7 @@ class BankDivisionTransferTask(base.ASN1Constructable):
             'items']
 
     def to_asn1(self):
-        task = asn1.NRST_PaymentsTask(
+        task = asn1.SkrPaymentsTask(
             tagSet=(
                 tag.initTagSet(
                     tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 4)
@@ -349,9 +349,9 @@ class BankDivisionTransferTask(base.ASN1Constructable):
         return task
 
     def encode_data(self):
-        body = asn1.NRST_RequestedBankDivisionTransferPays()
+        body = asn1.SkrRequestedBankDivisionTransferPays()
         for item in self.items:
-            choice = asn1.NRST_RequestedTransferParameters()
+            choice = asn1.SkrRequestedTransferParameters()
             if isinstance(item, operations.LogicalOperation):
                 choice.setComponentByName('separator', item.code)
             else:
@@ -390,7 +390,7 @@ class BankCardTransferTask(base.ASN1Constructable):
             'items']
 
     def to_asn1(self):
-        task = asn1.NRST_PaymentsTask(
+        task = asn1.SkrPaymentsTask(
             tagSet=(
                 tag.initTagSet(
                     tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 4)
@@ -402,9 +402,9 @@ class BankCardTransferTask(base.ASN1Constructable):
         return task
 
     def encode_data(self):
-        body = asn1.NRST_RequestedBankCardTransferPays()
+        body = asn1.SkrRequestedBankCardTransferPays()
         for item in self.items:
-            choice = asn1.NRST_RequestedTransferParameters()
+            choice = asn1.SkrRequestedTransferParameters()
             if isinstance(item, operations.LogicalOperation):
                 choice.setComponentByName('separator', item.code)
             else:
@@ -443,7 +443,7 @@ class BankAccountTransferTask(base.ASN1Constructable):
             'items']
 
     def to_asn1(self):
-        task = asn1.NRST_PaymentsTask(
+        task = asn1.SkrPaymentsTask(
             tagSet=(
                 tag.initTagSet(
                     tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 4)
@@ -455,9 +455,9 @@ class BankAccountTransferTask(base.ASN1Constructable):
         return task
 
     def encode_data(self):
-        body = asn1.NRST_RequestedBankCardTransferPays()
+        body = asn1.SkrRequestedBankCardTransferPays()
         for item in self.items:
-            choice = asn1.NRST_RequestedTransferParameters()
+            choice = asn1.SkrRequestedTransferParameters()
             if isinstance(item, operations.LogicalOperation):
                 choice.setComponentByName('separator', item.code)
             else:

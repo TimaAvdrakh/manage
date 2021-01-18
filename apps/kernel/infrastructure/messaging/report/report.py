@@ -25,7 +25,7 @@ class Acknowledgement(base.OutgoingMessage):
         return fields
 
     def encode_data(self):
-        ack = asn1.NRST_Acknowledgement(
+        ack = asn1.SkrAcknowledgement(
             tagSet=(
                 tag.initTagSet(
                     tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 1)
@@ -71,7 +71,7 @@ def create(raw_message_, payload_):
     try:
         return creator(raw_message_, payload_)
     except error.PyAsn1Error:
-        if isinstance(payload_, asn1.NRST_Report):
+        if isinstance(payload_, asn1.SkrReport):
             task_id = int(payload_.getComponentByName('task-id'))
             block_number = int(payload_.getComponentByName('block-number'))
             logger.instance().error(

@@ -26,7 +26,7 @@ class MACAddress(object):
 class IPAddress(base.ASN1Copyable):
 
     @staticmethod
-    def create(address_: asn1.NRST_IPAddress):
+    def create(address_: asn1.SkrIPAddress):
         return IPAddress(bytes(address_.getComponent()))
 
     def __init__(self, address_):
@@ -54,7 +54,7 @@ class IPAddress(base.ASN1Copyable):
 class IPMask(base.ASN1Copyable):
 
     @staticmethod
-    def create(mask_: asn1.NRST_IPMask):
+    def create(mask_: asn1.SkrIPMask):
         return IPMask(bytes(mask_.getComponent()))
 
     def __init__(self, mask_):
@@ -68,7 +68,7 @@ class IPMask(base.ASN1Copyable):
     def __repr__(self):
         return str(self.mask)
 
-    def copy_to(self, target_: asn1.NRST_IPMask):
+    def copy_to(self, target_: asn1.SkrIPMask):
         if isinstance(self.mask, ipaddress.IPv4Address):
             target_.setComponentByName(
                 'ipv4-mask', ipaddress.v4_int_to_packed(int(self.mask))
@@ -82,7 +82,7 @@ class IPMask(base.ASN1Copyable):
 class DataNetworkATM(base.ASN1Copyable):
 
     @staticmethod
-    def create(payload_: asn1.NRST_DataNetworkATM):
+    def create(payload_: asn1.SkrDataNetworkATM):
         return DataNetworkATM(
             payload_['vpi'], tools.get_optional_bytes(payload_['vci'])
         )
@@ -109,7 +109,7 @@ class DataNetworkATM(base.ASN1Copyable):
 class DataNetworkEquipment(base.ASN1ChoiceBase):
 
     @staticmethod
-    def create(payload_: asn1.NRST_DataNetworkEquipment):
+    def create(payload_: asn1.SkrDataNetworkEquipment):
         if payload_.getName() == 'mac':
             return DataNetworkEquipment(
                 'mac', MACAddress(bytes(payload_.getComponent()))
@@ -120,7 +120,7 @@ class DataNetworkEquipment(base.ASN1ChoiceBase):
             )
 
     def __init__(self, name_, value_):
-        super().__init__(asn1.NRST_DataNetworkEquipment(), name_, value_)
+        super().__init__(asn1.SkrDataNetworkEquipment(), name_, value_)
 
     def copy_to(self, target_):
         self.set_component(
@@ -135,7 +135,7 @@ class DataNetworkEquipment(base.ASN1ChoiceBase):
 class Bunch(base.ASN1ChoiceBase):
 
     @staticmethod
-    def create(payload_: asn1.NRST_Bunch):
+    def create(payload_: asn1.SkrBunch):
         if payload_.getName() == 'gsm':
             return Bunch('gsm', int(payload_.getComponent()))
         else:
@@ -145,7 +145,7 @@ class Bunch(base.ASN1ChoiceBase):
             )
 
     def __init__(self, name_, value_):
-        super(Bunch, self).__init__(asn1.NRST_Bunch(), name_, value_)
+        super(Bunch, self).__init__(asn1.SkrBunch(), name_, value_)
 
     def copy_to(self, target_):
         self.set_component(target_, self.component_name, self.component_value)
@@ -154,7 +154,7 @@ class Bunch(base.ASN1ChoiceBase):
 class NetworkPeerInfo(base.ASN1Copyable):
 
     @staticmethod
-    def create(payload_: asn1.NRST_NetworkPeerInfo):
+    def create(payload_: asn1.SkrNetworkPeerInfo):
         return NetworkPeerInfo(
             IPAddress.create(payload_['ip-address']),
             tools.get_optional_value(
@@ -170,7 +170,7 @@ class NetworkPeerInfo(base.ASN1Copyable):
     def __dir__(self):
         return ['address', 'port']
 
-    def copy_to(self, target_: asn1.NRST_NetworkPeerInfo):
+    def copy_to(self, target_: asn1.SkrNetworkPeerInfo):
         self.set_component(target_, 'ip-address', self.address)
         self.set_component(target_, 'ip-port', self.port)
 
@@ -178,7 +178,7 @@ class NetworkPeerInfo(base.ASN1Copyable):
 class DataVoipNumber(base.ASN1Copyable):
 
     @staticmethod
-    def create(payload_: asn1.NRST_DataVoipNumber):
+    def create(payload_: asn1.SkrDataVoipNumber):
         return DataVoipNumber(
             str(payload_['original-number']),
             tools.get_optional_str(payload_['translated-number']),
@@ -195,7 +195,7 @@ class DataVoipNumber(base.ASN1Copyable):
             'original_number', 'translated_number', 'e164_number'
         ]
 
-    def copy_to(self, target_: asn1.NRST_DataVoipNumber):
+    def copy_to(self, target_: asn1.SkrDataVoipNumber):
         self.set_component(target_, 'original-number', self.original_number)
         self.set_component(
             target_, 'translated-number', self.translated_number

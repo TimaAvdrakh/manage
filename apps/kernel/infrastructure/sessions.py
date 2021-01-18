@@ -245,7 +245,7 @@ class Channel:
             self.receive_data(append_data)
             try:
                 raw_message, rest = ber_decode(
-                    self.undecoded_data, asn1.NRST_Message()
+                    self.undecoded_data, asn1.SkrMessage()
                 )
                 self.undecoded_data = rest
                 break

@@ -19,7 +19,7 @@ class ReportedPstnIdentifier(basic.PrintableObject):
 
     @staticmethod
     def create(payload_):
-        item, rest = ber_decode(payload_, asn1.NRST_ReportedPstnIdentifier())
+        item, rest = ber_decode(payload_, asn1.SkrReportedPstnIdentifier())
         return ReportedPstnIdentifier(
             str(item['directory-number']),
             tools.get_optional_str(item['internal-number'])
@@ -39,7 +39,7 @@ class ReportedGsmIdentifier(basic.PrintableObject):
 
     @staticmethod
     def create(payload_):
-        item, rest = ber_decode(payload_, asn1.NRST_ReportedGsmIdentifier())
+        item, rest = ber_decode(payload_, asn1.SkrReportedGsmIdentifier())
         return ReportedGsmIdentifier(
             str(item['directory-number']),
             str(item['imsi']),
@@ -63,7 +63,7 @@ class ReportedCdmaIdentifier(basic.PrintableObject):
 
     @staticmethod
     def create(payload_):
-        item, rest = ber_decode(payload_, asn1.NRST_ReportedCdmaIdentifier())
+        item, rest = ber_decode(payload_, asn1.SkrReportedCdmaIdentifier())
         return ReportedCdmaIdentifier(
             str(item['directory-number']),
             str(item['imsi']),
@@ -89,7 +89,7 @@ class ReportedDataNetworkIdentifier(basic.PrintableObject):
 
     @staticmethod
     def create(payload_):
-        item, rest = ber_decode(payload_, asn1.NRST_ReportedDataNetworkIdentifier())
+        item, rest = ber_decode(payload_, asn1.SkrReportedDataNetworkIdentifier())
         return ReportedDataNetworkIdentifier(
             tools.get_optional_value(
                 item['user-equipment'], network.DataNetworkEquipment.create
@@ -127,7 +127,7 @@ class ReportedVoipIdentifier(basic.PrintableObject):
 
     @staticmethod
     def create(payload_):
-        item, rest = ber_decode(payload_, asn1.NRST_ReportedVoipIdentifier())
+        item, rest = ber_decode(payload_, asn1.SkrReportedVoipIdentifier())
         ip_bytes = tools.get_optional_bytes(item['ip-address'])
         return ReportedVoipIdentifier(
             network.IPAddress(ip_bytes) if ip_bytes is not None else None, tools.get_optional_str(
@@ -147,7 +147,7 @@ class ReportedVoipIdentifier(basic.PrintableObject):
         ]
 
 
-def create(raw_identifier_: asn1.NRST_ReportedIdentifier):
+def create(raw_identifier_: asn1.SkrReportedIdentifier):
     raw_id = raw_identifier_['id']
     creator = identifier_creators.get(raw_id, None)
     if creator is None or not callable(creator):

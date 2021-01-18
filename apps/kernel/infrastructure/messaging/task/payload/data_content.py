@@ -14,7 +14,7 @@ class DataContentTask(base.ASN1Constructable):
          'data_content_id']
 
     def to_asn1(self):
-        return asn1.NRST_DataContentTask(
+        return asn1.SkrDataContentTask(
             (self.data_content_id),
             tagSet=(
                 tag.initTagSet(

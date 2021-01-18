@@ -8,7 +8,7 @@ from . import tools
 class MobileLocation(base.ASN1Copyable):
 
     @staticmethod
-    def create(payload_: asn1.NRST_MobileLocation):
+    def create(payload_: asn1.SkrMobileLocation):
         return MobileLocation(
             int(payload_['lac']),
             int(payload_['cell']),
@@ -24,7 +24,7 @@ class MobileLocation(base.ASN1Copyable):
         return [
          'lac', 'cell', 'ta']
 
-    def copy_to(self, target_: asn1.NRST_MobileLocation):
+    def copy_to(self, target_: asn1.SkrMobileLocation):
         target_.setComponentByName('lac', self.lac)
         target_.setComponentByName('cell', self.cell)
         if self.ta is not None:
@@ -34,7 +34,7 @@ class MobileLocation(base.ASN1Copyable):
 class WirelessLocation(base.ASN1Copyable):
 
     @staticmethod
-    def create(payload_: asn1.NRST_WirelessLocation):
+    def create(payload_: asn1.SkrWirelessLocation):
         return WirelessLocation(
             str(payload_['cell']), network.MACAddress(bytes(payload_['mac']))
         )
@@ -47,7 +47,7 @@ class WirelessLocation(base.ASN1Copyable):
         return [
          'cell', 'mac']
 
-    def copy_to(self, target_: asn1.NRST_WirelessLocation):
+    def copy_to(self, target_: asn1.SkrWirelessLocation):
         target_.setComponentByName('cell', self.cell)
         target_.setComponentByName('mac', bytes(self.mac))
 
@@ -55,7 +55,7 @@ class WirelessLocation(base.ASN1Copyable):
 class GeoLocation(base.ASN1Copyable):
 
     @staticmethod
-    def create(payload_: asn1.NRST_GeoLocation):
+    def create(payload_: asn1.SkrGeoLocation):
         return GeoLocation(
             float(payload_['latitude-grade']),
             float(payload_['longitude-grade']),
@@ -71,7 +71,7 @@ class GeoLocation(base.ASN1Copyable):
         return [
          'latitude_grade', 'longitude_grade', 'projection_type']
 
-    def copy_to(self, target_: asn1.NRST_GeoLocation):
+    def copy_to(self, target_: asn1.SkrGeoLocation):
         target_.setComponentByName('latitude-grade', self.latitude_grade)
         target_.setComponentByName('longitude-grade', self.longitude_grade)
         target_.setComponentByName('projection-type', self.projection_type)
@@ -80,7 +80,7 @@ class GeoLocation(base.ASN1Copyable):
 class Location(base.ASN1ChoiceBase):
 
     @staticmethod
-    def create(payload_: asn1.NRST_Location):
+    def create(payload_: asn1.SkrLocation):
         name = payload_.getName()
         if name == 'mobile-location':
             return Location(name, MobileLocation.create(payload_.getComponent()))
@@ -95,9 +95,9 @@ class Location(base.ASN1ChoiceBase):
 
     def __init__(self, component_name_, component_value_):
         super().__init__(
-            asn1.NRST_Location(), component_name_, component_value_
+            asn1.SkrLocation(), component_name_, component_value_
         )
 
-    def copy_to(self, target_: asn1.NRST_Location):
+    def copy_to(self, target_: asn1.SkrLocation):
         target_.setComponentByName(self.component_name)
         self.component_value.copy_to(target_.getComponent())

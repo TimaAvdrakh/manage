@@ -21,7 +21,7 @@ class AdjustmentRequest(base.OutgoingMessage):
         return fields
 
     def encode_data(self):
-        reqs = asn1.NRST_AdjustmentRequest(
+        reqs = asn1.SkrAdjustmentRequest(
             tagSet=(
                 tag.initTagSet(
                     tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 2)

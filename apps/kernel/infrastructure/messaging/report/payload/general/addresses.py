@@ -8,7 +8,7 @@ from apps.kernel.infrastructure.messaging import tools
 class ReportedAddress(basic.PrintableObject):
 
     @staticmethod
-    def create(payload_: asn1.NRST_ReportedAddress):
+    def create(payload_: asn1.SkrReportedAddress):
         info = payload_['address-info']
         return ReportedAddress(
             int(payload_['title']),
@@ -30,7 +30,7 @@ class ReportedAddress(basic.PrintableObject):
 class StructuredAddress(basic.PrintableObject):
 
     @staticmethod
-    def create(payload_: asn1.NRST_AddressStructInfoReport):
+    def create(payload_: asn1.SkrAddressStructInfoReport):
         return StructuredAddress(
             tools.get_optional_str(payload_['zip']),
             tools.get_optional_str(payload_['country']),

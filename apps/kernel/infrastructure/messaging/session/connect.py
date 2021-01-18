@@ -34,7 +34,7 @@ class ConnectRequest(base.OutgoingMessage):
         return fields
 
     def encode_data(self):
-        reqs = asn1.NRST_ConnectRequest(
+        reqs = asn1.SkrConnectRequest(
             tagSet=(
                 tag.initTagSet(
                     tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 0)

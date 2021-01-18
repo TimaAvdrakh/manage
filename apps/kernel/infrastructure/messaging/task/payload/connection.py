@@ -22,7 +22,7 @@ class BaseValidateConnectionsTask(base.ASN1Constructable):
         return ['items']
 
     def to_asn1(self):
-        task = asn1.NRST_ConnectionsTask(
+        task = asn1.SkrConnectionsTask(
             tagSet=(
                 tag.initTagSet(
                     tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 2)
@@ -31,7 +31,7 @@ class BaseValidateConnectionsTask(base.ASN1Constructable):
         )
         body = task.getComponentByName(self.component_name)
         for item in self.items:
-            choice = asn1.NRST_RequestedConnectionParameter()
+            choice = asn1.SkrRequestedConnectionParameter()
             if isinstance(item, operations.LogicalOperation):
                 choice.setComponentByName('separator', item.code)
             else:
@@ -87,7 +87,7 @@ class RequestedPagerIdentifier(base.ASN1Constructable):
         return f'{self.__class__.__name__}({self.value})'
 
     def to_asn1(self):
-        return asn1.NRST_RequestedPagerIdentifier(self.value)
+        return asn1.SkrRequestedPagerIdentifier(self.value)
 
 
 class RequestedPstnConnection(base.ASN1ChoiceBase):
@@ -109,12 +109,12 @@ class RequestedPstnConnection(base.ASN1ChoiceBase):
 
     def __init__(self, component_name_, component_value_):
         super().__init__(
-            asn1.NRST_RequestedConnectionPstnData(),
+            asn1.SkrRequestedConnectionPstnData(),
             component_name_,
             component_value_
         )
 
-    def copy_to(self, target_: asn1.NRST_RequestedConnectionPstnData):
+    def copy_to(self, target_: asn1.SkrRequestedConnectionPstnData):
         self.set_component(target_, self.component_name, self.component_value)
 
 
@@ -142,12 +142,12 @@ class RequestedMobileConnection(base.ASN1ChoiceBase):
 
     def __init__(self, component_name_, component_value_):
         super().__init__(
-            asn1.NRST_RequestedConnectionMobileData(),
+            asn1.SkrRequestedConnectionMobileData(),
             component_name_,
             component_value_
         )
 
-    def copy_to(self, target_: asn1.NRST_RequestedConnectionMobileData):
+    def copy_to(self, target_: asn1.SkrRequestedConnectionMobileData):
         self.set_component(target_, self.component_name, self.component_value)
 
 
@@ -178,12 +178,12 @@ class RequestedAAA(base.ASN1ChoiceBase):
 
     def __init__(self, component_name_, component_value_):
         super().__init__(
-            asn1.NRST_RequestedAAALoginData(),
+            asn1.SkrRequestedAAALoginData(),
             component_name_,
             component_value_
         )
 
-    def copy_to(self, target_: asn1.NRST_RequestedAAALoginData):
+    def copy_to(self, target_: asn1.SkrRequestedAAALoginData):
         self.set_component(target_, self.component_name, self.component_value)
 
 
@@ -200,12 +200,12 @@ class RequestedResource(base.ASN1ChoiceBase):
 
     def __init__(self, component_name, component_value):
         super().__init__(
-            asn1.NRST_RequestedResourceData(),
+            asn1.SkrRequestedResourceData(),
             component_name,
             component_value
         )
 
-    def copy_to(self, target_: asn1.NRST_RequestedResourceData):
+    def copy_to(self, target_: asn1.SkrRequestedResourceData):
         self.set_component(target_, self.component_name, self.component_value)
 
 
@@ -227,12 +227,12 @@ class RequestedEmail(base.ASN1ChoiceBase):
 
     def __init__(self, component_name_, component_value_):
         super().__init__(
-            asn1.NRST_RequestedEmailData(),
+            asn1.SkrRequestedEmailData(),
             component_name_,
             component_value_
         )
 
-    def copy_to(self, target_: asn1.NRST_RequestedEmailData):
+    def copy_to(self, target_: asn1.SkrRequestedEmailData):
         self.set_component(target_, self.component_name, self.component_value)
 
 
@@ -255,12 +255,12 @@ class RequestedIm(base.ASN1ChoiceBase):
 
     def __init__(self, component_name_, component_value_):
         super().__init__(
-            asn1.NRST_RequestedImData(),
+            asn1.SkrRequestedImData(),
             component_name_,
             component_value_
         )
 
-    def copy_to(self, target_: asn1.NRST_RequestedImData):
+    def copy_to(self, target_: asn1.SkrRequestedImData):
         self.set_component(target_, self.component_name, self.component_value)
 
 
@@ -284,10 +284,10 @@ class RequestedVoip(base.ASN1ChoiceBase):
 
     def __init__(self, component_name_, component_value_):
         super().__init__(
-            asn1.NRST_RequestedVoipData(), component_name_, component_value_
+            asn1.SkrRequestedVoipData(), component_name_, component_value_
         )
 
-    def copy_to(self, target_: asn1.NRST_RequestedVoipData):
+    def copy_to(self, target_: asn1.SkrRequestedVoipData):
         self.set_component(target_, self.component_name, self.component_value)
 
 
@@ -305,12 +305,12 @@ class RequestedFileTransfer(base.ASN1ChoiceBase):
 
     def __init__(self, component_name_, component_value_):
         super().__init__(
-            asn1.NRST_RequestedFileTransferData(),
+            asn1.SkrRequestedFileTransferData(),
             component_name_,
             component_value_
         )
 
-    def copy_to(self, target_: asn1.NRST_RequestedFileTransferData):
+    def copy_to(self, target_: asn1.SkrRequestedFileTransferData):
         self.set_component(target_, self.component_name, self.component_value)
 
 
@@ -324,12 +324,12 @@ class RequestedTermAccess(base.ASN1ChoiceBase):
 
     def __init__(self, component_name_, component_value_):
         super().__init__(
-            asn1.NRST_RequestedTermAccessData(),
+            asn1.SkrRequestedTermAccessData(),
             component_name_,
             component_value_
         )
 
-    def copy_to(self, target_: asn1.NRST_RequestedTermAccessData):
+    def copy_to(self, target_: asn1.SkrRequestedTermAccessData):
         self.set_component(target_, self.component_name, self.component_value)
 
 
@@ -344,12 +344,12 @@ class RequestedRawFlow(base.ASN1ChoiceBase):
 
     def __init__(self, component_name_, component_value_):
         super().__init__(
-            asn1.NRST_RequestedRawFlowsData(),
+            asn1.SkrRequestedRawFlowsData(),
             component_name_,
             component_value_
         )
 
-    def copy_to(self, target_: asn1.NRST_RequestedRawFlowsData):
+    def copy_to(self, target_: asn1.SkrRequestedRawFlowsData):
         self.set_component(target_, self.component_name, self.component_value)
 
 
@@ -363,12 +363,12 @@ class RequestedAddressTranslation(base.ASN1ChoiceBase):
 
     def __init__(self, component_name, component_value):
         super().__init__(
-            asn1.NRST_RequestedAddressTranslationsData(),
+            asn1.SkrRequestedAddressTranslationsData(),
             component_name,
             component_value
         )
 
-    def copy_to(self, target_: asn1.NRST_RequestedAddressTranslationsData):
+    def copy_to(self, target_: asn1.SkrRequestedAddressTranslationsData):
         self.set_component(target_, self.component_name, self.component_value)
 
 
@@ -380,7 +380,7 @@ class RequestedPstnConnectionIdentifier(identifiers.RequestedPstnIdentifier):
         )
 
     def copy_to(self, target_):
-        identifier = asn1.NRST_RequestedPstnIdentifier()
+        identifier = asn1.SkrRequestedPstnIdentifier()
         self.set_component(
             identifier, 'directory-number', self.directory_number
         )
@@ -395,50 +395,50 @@ RequestedCdmaConnectionIdentifier = identifiers.RequestedCdmaIdentifier
 RequestedGsmConnectionIdentifier = identifiers.RequestedGsmIdentifier
 tagged_components = {
     RequestedPagerIdentifier.__name__: (
-        asn1.sorm_request_connection_pager, asn1.NRST_RequestedPagerIdentifier
+        asn1.sorm_request_connection_pager, asn1.SkrRequestedPagerIdentifier
     ),
     RequestedPstnConnection.__name__: (
         asn1.sorm_request_connection_pstn,
-        asn1.NRST_RequestedConnectionPstnData
+        asn1.SkrRequestedConnectionPstnData
     ),
     RequestedMobileConnection.__name__: (
         asn1.sorm_request_connection_mobile,
-        asn1.NRST_RequestedConnectionMobileData
+        asn1.SkrRequestedConnectionMobileData
     ),
     RequestedAAA.__name__: (
         asn1.sorm_request_connection_aaa_login,
-        asn1.NRST_RequestedAAALoginData
+        asn1.SkrRequestedAAALoginData
     ),
     RequestedResource.__name__: (
         asn1.sorm_request_connection_resource,
-        asn1.NRST_RequestedResourceData
+        asn1.SkrRequestedResourceData
     ),
     RequestedEmail.__name__: (
         asn1.sorm_request_connection_email,
-        asn1.NRST_RequestedEmailData
+        asn1.SkrRequestedEmailData
     ),
     RequestedIm.__name__: (
         asn1.sorm_request_connection_im,
-        asn1.NRST_RequestedImData
+        asn1.SkrRequestedImData
     ),
     RequestedVoip.__name__: (
         asn1.sorm_request_connection_voip,
-        asn1.NRST_RequestedVoipData
+        asn1.SkrRequestedVoipData
     ),
     RequestedFileTransfer.__name__: (
         asn1.sorm_request_connection_file_transfer,
-        asn1.NRST_RequestedFileTransferData
+        asn1.SkrRequestedFileTransferData
     ),
     RequestedTermAccess.__name__: (
         asn1.sorm_request_connection_term_access,
-        asn1.NRST_RequestedTermAccessData
+        asn1.SkrRequestedTermAccessData
     ),
     RequestedRawFlow.__name__: (
         asn1.sorm_request_connection_raw_flows,
-        asn1.NRST_RequestedRawFlowsData
+        asn1.SkrRequestedRawFlowsData
     ),
     RequestedAddressTranslation.__name__: (
         asn1.sorm_request_connection_address_translations,
-        asn1.NRST_RequestedAddressTranslationsData
+        asn1.SkrRequestedAddressTranslationsData
     )
 }

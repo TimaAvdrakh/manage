@@ -19,7 +19,7 @@ class PSTNConnectionReport(report.BaseReport):
     @staticmethod
     def create(raw_message_, message_payload_, report_payload_):
         sequence_of, rest = ber_decode(
-            bytes(report_payload_), asn1.NRST_PstnRecordData()
+            bytes(report_payload_), asn1.SkrPstnRecordData()
         )
         records = tools.sequence_of_to_list(
             sequence_of, PSTNConnectionReportRecord.create
@@ -50,7 +50,7 @@ class PSTNConnectionReport(report.BaseReport):
 class PSTNConnectionReportRecord(basic.PrintableObject):
 
     @staticmethod
-    def create(payload_: asn1.NRST_PstnRecordContent):
+    def create(payload_: asn1.SkrPstnRecordContent):
         return PSTNConnectionReportRecord(
             int(payload_['telco-id']),
             str(payload_['begin-connection-time']),
@@ -120,7 +120,7 @@ class MobileConnectionReport(report.BaseReport):
     @staticmethod
     def create(raw_message_, message_payload_, report_payload_):
         sequence_of, rest = ber_decode(
-            bytes(report_payload_), asn1.NRST_MobileRecordData()
+            bytes(report_payload_), asn1.SkrMobileRecordData()
         )
         records = tools.sequence_of_to_list(
             sequence_of, MobileConnectionReportRecord.create
@@ -151,7 +151,7 @@ class MobileConnectionReport(report.BaseReport):
 class MobileConnectionReportRecord(basic.PrintableObject):
 
     @staticmethod
-    def create(payload_: asn1.NRST_MobileRecordContent):
+    def create(payload_: asn1.SkrMobileRecordContent):
         return MobileConnectionReportRecord(
             int(payload_['telco-id']),
             str(payload_['begin-connection-time']),
@@ -240,7 +240,7 @@ class AAAConnectionReport(report.BaseReport):
 
     @staticmethod
     def create(raw_message_, message_payload_, report_payload_):
-        sequence_of, rest = ber_decode(bytes(report_payload_), asn1.NRST_DataAAARecordData())
+        sequence_of, rest = ber_decode(bytes(report_payload_), asn1.SkrDataAAARecordData())
         records = tools.sequence_of_to_list(sequence_of, AAAConnectionReportRecord.create)
         return AAAConnectionReport(
             raw_message_['version'],
@@ -267,7 +267,7 @@ class AAAConnectionReport(report.BaseReport):
 class AAAConnectionReportRecord(basic.PrintableObject):
 
     @staticmethod
-    def create(payload_: asn1.NRST_DataAAARecordContent):
+    def create(payload_: asn1.SkrDataAAARecordContent):
         return AAAConnectionReportRecord(
             int(payload_['telco-id']),
             int(payload_['point-id']),
@@ -367,7 +367,7 @@ class HTTPConnectionReport(report.BaseReport):
     @staticmethod
     def create(raw_message_, message_payload_, report_payload_):
         sequence_of, rest = ber_decode(
-            bytes(report_payload_), asn1.NRST_DataResourceRecordData()
+            bytes(report_payload_), asn1.SkrDataResourceRecordData()
         )
         records = tools.sequence_of_to_list(
             sequence_of, HTTPConnectionReportRecord.create
@@ -397,7 +397,7 @@ class HTTPConnectionReport(report.BaseReport):
 class HTTPConnectionReportRecord(basic.PrintableObject):
 
     @staticmethod
-    def create(payload_: asn1.NRST_DataResourceRecordContent):
+    def create(payload_: asn1.SkrDataResourceRecordContent):
         return HTTPConnectionReportRecord(
             DataNetworkCdrHeader.create(payload_['res-cdr-header']),
             str(payload_['res-url']),
@@ -445,7 +445,7 @@ class EMailConnectionReport(report.BaseReport):
     @staticmethod
     def create(raw_message_, message_payload_, report_payload_):
         sequence_of, rest = ber_decode(
-            bytes(report_payload_), asn1.NRST_DataEmailRecordData()
+            bytes(report_payload_), asn1.SkrDataEmailRecordData()
         )
         records = tools.sequence_of_to_list(
             sequence_of, create_email_connection_report_record
@@ -475,7 +475,7 @@ class EMailConnectionReport(report.BaseReport):
 
 
 def create_email_connection_report_record(
-        payload_: asn1.NRST_DataEmailRecordContent):
+        payload_: asn1.SkrDataEmailRecordContent):
     component_name = payload_.getName()
     if component_name == 'mail-aaa':
         return EMailConnectionReportRecordAAA.create(payload_.getComponent())
@@ -490,7 +490,7 @@ def create_email_connection_report_record(
 class EMailConnectionReportRecordAAA(basic.PrintableObject):
 
     @staticmethod
-    def create(payload_: asn1.NRST_DataEmailRecordContentAAA):
+    def create(payload_: asn1.SkrDataEmailRecordContentAAA):
         return EMailConnectionReportRecordAAA(
             DataNetworkCdrHeader.create(payload_['mail-cdr-header']),
             int(payload_['mail-event']),
@@ -526,7 +526,7 @@ class EMailConnectionReportRecordAAA(basic.PrintableObject):
 class EMailConnectionReportRecordIPDR(basic.PrintableObject):
 
     @staticmethod
-    def create(payload_: asn1.NRST_DataEmailRecordContentIPDR):
+    def create(payload_: asn1.SkrDataEmailRecordContentIPDR):
         return EMailConnectionReportRecordIPDR(
             DataNetworkCdrHeader.create(payload_['mail-cdr-header']),
             int(payload_['mail-event']),
@@ -588,7 +588,7 @@ class IMConnectionReport(report.BaseReport):
     @staticmethod
     def create(raw_message_, message_payload_, report_payload_):
         sequence_of, rest = ber_decode(
-            bytes(report_payload_), asn1.NRST_DataImRecordData()
+            bytes(report_payload_), asn1.SkrDataImRecordData()
         )
         records = tools.sequence_of_to_list(
             sequence_of, IMConnectionReportRecord.create
@@ -619,7 +619,7 @@ class IMConnectionReport(report.BaseReport):
 class IMConnectionReportRecord(basic.PrintableObject):
 
     @staticmethod
-    def create(payload_: asn1.NRST_DataImRecordContent):
+    def create(payload_: asn1.SkrDataImRecordContent):
         return IMConnectionReportRecord(
             DataNetworkCdrHeader.create(payload_['im-cdr-header']),
             str(payload_['im-user-login']),
@@ -677,7 +677,7 @@ class IMConnectionReportRecord(basic.PrintableObject):
 class IMReceiver(basic.PrintableObject):
 
     @staticmethod
-    def create(payload_: asn1.NRST_ImReceiver):
+    def create(payload_: asn1.SkrImReceiver):
         return IMReceiver(
             str(payload_['im-receiver-screen-name']),
             str(payload_['im-receiver-uin'])
@@ -698,7 +698,7 @@ class VOIPConnectionReport(report.BaseReport):
     @staticmethod
     def create(raw_message_, message_payload_, report_payload_):
         sequence_of, rest = ber_decode(
-            bytes(report_payload_), asn1.NRST_DataVoipRecordData()
+            bytes(report_payload_), asn1.SkrDataVoipRecordData()
         )
         records = tools.sequence_of_to_list(
             sequence_of, VOIPConnectionReportRecord.create
@@ -729,7 +729,7 @@ class VOIPConnectionReport(report.BaseReport):
 class VOIPConnectionReportRecord(basic.PrintableObject):
 
     @staticmethod
-    def create(payload_: asn1.NRST_DataVoipRecordContent):
+    def create(payload_: asn1.SkrDataVoipRecordContent):
         return VOIPConnectionReportRecord(
             DataNetworkCdrHeader.create(payload_['voip-cdr-header']),
             str(payload_['voip-session-id']),
@@ -812,7 +812,7 @@ class FTPConnectionReport(report.BaseReport):
     @staticmethod
     def create(raw_message_, message_payload_, report_payload_):
         sequence_of, rest = ber_decode(
-            bytes(report_payload_), asn1.NRST_DataFileTransferRecordData()
+            bytes(report_payload_), asn1.SkrDataFileTransferRecordData()
         )
         records = tools.sequence_of_to_list(
             sequence_of, FTPConnectionReportRecord.create
@@ -844,7 +844,7 @@ class FTPConnectionReport(report.BaseReport):
 class FTPConnectionReportRecord(basic.PrintableObject):
 
     @staticmethod
-    def create(payload_: asn1.NRST_DataFileTransferRecordContent):
+    def create(payload_: asn1.SkrDataFileTransferRecordContent):
         return FTPConnectionReportRecord(
             DataNetworkCdrHeader.create(payload_['file-cdr-header']),
             str(payload_['file-server-name']),
@@ -895,7 +895,7 @@ class TerminalConnectionReport(report.BaseReport):
     @staticmethod
     def create(raw_message_, message_payload_, report_payload_):
         sequence_of, rest = ber_decode(
-            bytes(report_payload_), asn1.NRST_DataTermAccessRecordData()
+            bytes(report_payload_), asn1.SkrDataTermAccessRecordData()
         )
         records = tools.sequence_of_to_list(
             sequence_of, TerminalConnectionReportRecord.create
@@ -926,7 +926,7 @@ class TerminalConnectionReport(report.BaseReport):
 class TerminalConnectionReportRecord(basic.PrintableObject):
 
     @staticmethod
-    def create(payload_: asn1.NRST_DataTermAccessRecordContent):
+    def create(payload_: asn1.SkrDataTermAccessRecordContent):
         return TerminalConnectionReportRecord(
             DataNetworkCdrHeader.create(payload_['term-cdr-header']),
             int(payload_['term-in-bytes-count']),
@@ -967,7 +967,7 @@ class RawFlowsConnectionReport(report.BaseReport):
     @staticmethod
     def create(raw_message_, message_payload_, report_payload_):
         sequence_of, rest = ber_decode(
-            bytes(report_payload_), asn1.NRST_DataRawFlowsRecordData()
+            bytes(report_payload_), asn1.SkrDataRawFlowsRecordData()
         )
         records = tools.sequence_of_to_list(
             sequence_of, RawFlowsConnectionReportRecord.create
@@ -998,7 +998,7 @@ class RawFlowsConnectionReport(report.BaseReport):
 class RawFlowsConnectionReportRecord(basic.PrintableObject):
 
     @staticmethod
-    def create(payload_: asn1.NRST_DataRawFlowsRecordContent):
+    def create(payload_: asn1.SkrDataRawFlowsRecordContent):
         return RawFlowsConnectionReportRecord(
             DataNetworkCdrHeader.create(payload_['flow-cdr-header']),
             int(payload_['flow-in-bytes-count']),
@@ -1040,7 +1040,7 @@ class NATConnectionReport(report.BaseReport):
     def create(raw_message_, message_payload_, report_payload_):
         sequence_of, rest = ber_decode(
             bytes(report_payload_),
-            asn1.NRST_DataAddressTranslationRecordData()
+            asn1.SkrDataAddressTranslationRecordData()
         )
         records = tools.sequence_of_to_list(
             sequence_of, NATConnectionReportRecord.create
@@ -1070,7 +1070,7 @@ class NATConnectionReport(report.BaseReport):
 class NATConnectionReportRecord(basic.PrintableObject):
 
     @staticmethod
-    def create(payload_: asn1.NRST_DataAddressTranslationRecordContent):
+    def create(payload_: asn1.SkrDataAddressTranslationRecordContent):
         return NATConnectionReportRecord(
             int(payload_['telco-id']),
             int(payload_['point-id']),
@@ -1104,7 +1104,7 @@ class NATConnectionReportRecord(basic.PrintableObject):
 class DataNetworkCdrHeader(basic.PrintableObject):
 
     @staticmethod
-    def create(payload_: asn1.NRST_DataNetworkCdrHeader):
+    def create(payload_: asn1.SkrDataNetworkCdrHeader):
         if payload_['id'] != asn1.sorm_report_connection_ipdr_header:
             raise exceptions.GeneralFault(
                 'unable to create "{0}", invalid OID - {1}'.format(
@@ -1142,7 +1142,7 @@ class DataNetworkCdrHeader(basic.PrintableObject):
 class IPAAAInformation(basic.PrintableObject):
 
     @staticmethod
-    def create(payload_: asn1.NRST_IP_AAAInformation):
+    def create(payload_: asn1.SkrIP_AAAInformation):
         return IPAAAInformation(
             str(payload_['username']),
             tools.get_optional_int(payload_['aaaResult'])

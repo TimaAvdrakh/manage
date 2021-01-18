@@ -20,7 +20,7 @@ class DataLoadRequest(base.OutgoingMessage):
         return fields
 
     def encode_data(self):
-        reqs = asn1.NRST_DataLoadRequest(
+        reqs = asn1.SkrDataLoadRequest(
             value=(self.task_id),
             tagSet=(
                 tag.initTagSet(

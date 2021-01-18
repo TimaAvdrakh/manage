@@ -21,7 +21,7 @@ class ValidateSubscribersTask(base.ASN1Constructable):
             'items']
 
     def to_asn1(self):
-        task = asn1.NRST_AbonentsTask(
+        task = asn1.SkrAbonentsTask(
             tagSet=(
                 tag.initTagSet(
                     tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 1)
@@ -30,7 +30,7 @@ class ValidateSubscribersTask(base.ASN1Constructable):
         )
         body = task.getComponentByName('validate-abonents-task')
         for item in self.items:
-            choice = asn1.NRST_RequestedIdentifierParameters()
+            choice = asn1.SkrRequestedIdentifierParameters()
             if isinstance(item, operations.LogicalOperation):
                 choice.setComponentByName('separator', item.code)
             else:
@@ -49,7 +49,7 @@ class ValidateIdentifiersTask(base.ASN1Constructable):
         return ['items']
 
     def to_asn1(self):
-        task = asn1.NRST_AbonentsTask(
+        task = asn1.SkrAbonentsTask(
             tagSet=(
                 tag.initTagSet(
                     tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 1)
@@ -58,13 +58,13 @@ class ValidateIdentifiersTask(base.ASN1Constructable):
         )
         body = task.getComponentByName('validate-identifiers')
         for item in self.items:
-            choice = asn1.NRST_RequestedAbonentsParameters()
+            choice = asn1.SkrRequestedAbonentsParameters()
             if isinstance(item, operations.LogicalOperation):
                 choice.setComponentByName('separator', item.code)
             else:
                 component = choice.getComponentByName('find-mask')
                 if isinstance(item, RequestedPerson):
-                    predicate = asn1.NRST_RequestedPerson()
+                    predicate = asn1.SkrRequestedPerson()
                     item.copy_to(predicate)
                     component.setComponentByName(
                         'id', asn1.sorm_request_abonent_person
@@ -74,7 +74,7 @@ class ValidateIdentifiersTask(base.ASN1Constructable):
                     )
                 else:
                     if isinstance(item, RequestedOrganization):
-                        predicate = asn1.NRST_RequestedOrganization()
+                        predicate = asn1.SkrRequestedOrganization()
                         item.copy_to(predicate)
                         component.setComponentByName(
                             'id', asn1.sorm_request_abonent_organization
@@ -101,7 +101,7 @@ class ValidateServicesTask(base.ASN1Constructable):
         return ['items']
 
     def to_asn1(self):
-        task = asn1.NRST_AbonentsTask(
+        task = asn1.SkrAbonentsTask(
             tagSet=(
                 tag.initTagSet(
                     tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 1)
@@ -110,7 +110,7 @@ class ValidateServicesTask(base.ASN1Constructable):
         )
         body = task.getComponentByName('validate-services')
         for item in self.items:
-            choice = asn1.NRST_ValidateServicesParameters()
+            choice = asn1.SkrValidateServicesParameters()
             if isinstance(item, operations.LogicalOperation):
                 choice.setComponentByName('separator', item.code)
             else:
@@ -131,7 +131,7 @@ class ValidateServicesTask(base.ASN1Constructable):
                     ) or isinstance(
                         item, identifiers.RequestedDataNetworkIdentifier
                     ):
-                        identifier = asn1.NRST_RequestedIdentifier(
+                        identifier = asn1.SkrRequestedIdentifier(
                             tagSet=(
                                 tag.initTagSet(
                                     tag.Tag(

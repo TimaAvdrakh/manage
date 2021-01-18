@@ -21,7 +21,7 @@ class SubscriberReport(report.BaseReport):
     @staticmethod
     def create(raw_message_, message_payload_, report_payload_):
         sequence_of, rest = ber_decode(
-            bytes(report_payload_), asn1.NRST_ReportAbonentData()
+            bytes(report_payload_), asn1.SkrReportAbonentData()
         )
         records = tools.sequence_of_to_list(
             sequence_of, SubscriberReportRecord.create
@@ -52,7 +52,7 @@ class SubscriberReport(report.BaseReport):
 class SubscriberReportRecord(basic.PrintableObject):
 
     @staticmethod
-    def create(payload_: asn1.NRST_AbonentsRecord):
+    def create(payload_: asn1.SkrAbonentsRecord):
         return SubscriberReportRecord(
             int(payload_['telco-id']),
             identifiers.create(payload_['idents']),
@@ -112,7 +112,7 @@ class ServiceReport(report.BaseReport):
     @staticmethod
     def create(raw_message_, message_payload_, report_payload_):
         sequence_of, rest = ber_decode(
-            bytes(report_payload_), asn1.NRST_ReportServiceData()
+            bytes(report_payload_), asn1.SkrReportServiceData()
         )
         records = tools.sequence_of_to_list(
             sequence_of, Service.create
@@ -140,14 +140,14 @@ class ServiceReport(report.BaseReport):
         self.records = records_
 
 
-def create_subscriber_info(payload_: asn1.NRST_AbonentInfo):
+def create_subscriber_info(payload_: asn1.SkrAbonentInfo):
     oid = payload_['id']
     if oid == asn1.sorm_report_abonent_person:
-        item, rest = ber_decode(payload_['data'], asn1.NRST_AbonentPerson())
+        item, rest = ber_decode(payload_['data'], asn1.SkrAbonentPerson())
         return PersonInfo.create(item)
     if oid == asn1.sorm_report_abonent_organization:
         item, rest = ber_decode(
-            payload_['data'], asn1.NRST_AbonentOrganization()
+            payload_['data'], asn1.SkrAbonentOrganization()
         )
         return OrganizationInfo.create(item)
     raise exceptions.GeneralFault(
@@ -158,7 +158,7 @@ def create_subscriber_info(payload_: asn1.NRST_AbonentInfo):
 class PersonInfo(basic.PrintableObject):
 
     @staticmethod
-    def create(payload_: asn1.NRST_AbonentPerson):
+    def create(payload_: asn1.SkrAbonentPerson):
         name_item = payload_['name-info']
 
         if name_item.getName() == 'unstruct-name':
@@ -191,7 +191,7 @@ class PersonInfo(basic.PrintableObject):
 class PersonStructuredName(basic.PrintableObject):
 
     @staticmethod
-    def create(payload_: asn1.NRST_PersonStructNameInfoReport):
+    def create(payload_: asn1.SkrPersonStructNameInfoReport):
         return PersonStructuredName(
             str(payload_['given-name']),
             str(payload_['initial']),
@@ -212,7 +212,7 @@ class PersonStructuredName(basic.PrintableObject):
 class PersonDocumentInfo(basic.PrintableObject):
 
     @staticmethod
-    def create(payload_: asn1.NRST_PassportInfoReport):
+    def create(payload_: asn1.SkrPassportInfoReport):
         item = payload_['ident-card-info']
 
         if item.getName() == 'unstruct-info':
@@ -238,7 +238,7 @@ class PersonDocumentInfo(basic.PrintableObject):
 class StructuredDocumentInfo(basic.PrintableObject):
 
     @staticmethod
-    def create(payload_: asn1.NRST_IdentCardStructInfoReport):
+    def create(payload_: asn1.SkrIdentCardStructInfoReport):
         return StructuredDocumentInfo(
             str(payload_['ident-card-serial']),
             str(payload_['ident-card-number']),
@@ -259,7 +259,7 @@ class StructuredDocumentInfo(basic.PrintableObject):
 class OrganizationInfo(basic.PrintableObject):
 
     @staticmethod
-    def create(payload_: asn1.NRST_AbonentOrganization):
+    def create(payload_: asn1.SkrAbonentOrganization):
         return OrganizationInfo(
             str(payload_['full-name']),
             str(payload_['inn']),
@@ -293,7 +293,7 @@ class OrganizationInfo(basic.PrintableObject):
 class InternalUser(basic.PrintableObject):
 
     @staticmethod
-    def create(payload_: asn1.NRST_InternalUsersRecord):
+    def create(payload_: asn1.SkrInternalUsersRecord):
         return InternalUser(
             str(payload_['user-name']),
             str(payload_['internal-number'])
@@ -312,7 +312,7 @@ class InternalUser(basic.PrintableObject):
 class Service(basic.PrintableObject):
 
     @staticmethod
-    def create(payload_: asn1.NRST_AbonentService):
+    def create(payload_: asn1.SkrAbonentService):
         return Service(
             int(payload_['telco-id']),
             int(payload_['service-id']),
@@ -343,7 +343,7 @@ class Service(basic.PrintableObject):
 class LineData(basic.PrintableObject):
 
     @staticmethod
-    def create(payload_: asn1.NRST_LineData):
+    def create(payload_: asn1.SkrLineData):
         return LineData(
             tools.get_optional_str(payload_['object']),
             tools.get_optional_str(payload_['cross']),

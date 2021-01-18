@@ -19,7 +19,7 @@ class DictionaryTask(base.ASN1Constructable):
         return ['id', 'data']
 
     def to_asn1(self):
-        task = asn1.NRST_DictionaryTask(
+        task = asn1.SkrDictionaryTask(
             tagSet=(
                 tag.initTagSet(
                     tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 0)

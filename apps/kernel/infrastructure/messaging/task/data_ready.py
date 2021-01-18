@@ -17,7 +17,7 @@ class DataReadyRequest(base.OutgoingMessage):
         super().__init__(None, asn1.sorm_message_task)
 
     def encode_data(self):
-        reqs = asn1.NRST_DataReadyRequest(
+        reqs = asn1.SkrDataReadyRequest(
             tagSet=(
                 tag.initTagSet(
                     tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 0)

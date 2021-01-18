@@ -97,16 +97,16 @@ class OutgoingMessage(BaseMessage):
     def __init__(self, message_id_, id_):
         super().__init__(
             asn1.vers,
-            asn1.NRST_MessageID(
+            asn1.SkrMessageID(
                 message_id_ if message_id_ is not None else OutgoingMessage.get_next_message_id()
             ),
-            asn1.NRST_DateAndTime(time.strftime('%y%m%d%H%M%SZ', time.localtime())),
+            asn1.SkrDateAndTime(time.strftime('%y%m%d%H%M%SZ', time.localtime())),
             None,
             id_
         )
 
     def encode(self):
-        message = asn1.NRST_Message()
+        message = asn1.SkrMessage()
         message['version'] = self.version
         message['message-id'] = self.message_id
         message['message-time'] = self.message_time
@@ -151,26 +151,26 @@ from .unformatted import factory as unformatted_factory
 
 message_descriptors = {
     str(asn1.sorm_message_filter): PayloadDescriptor(
-        asn1.NRST_FilterMessageData, filter_factory.create_typed_message
+        asn1.SkrFilterMessageData, filter_factory.create_typed_message
     ),
     str(asn1.sorm_message_management): PayloadDescriptor(
-        asn1.NRST_ManagementMessageData,
+        asn1.SkrManagementMessageData,
         management_factory.create_typed_message
     ),
     str(asn1.sorm_message_report): PayloadDescriptor(
-        asn1.NRST_ReportMessageData, report_factory.create_typed_message
+        asn1.SkrReportMessageData, report_factory.create_typed_message
     ),
     str(asn1.sorm_message_session): PayloadDescriptor(
-        asn1.NRST_SessionMessageData, session_factory.create_typed_message
+        asn1.SkrSessionMessageData, session_factory.create_typed_message
     ),
     str(asn1.sorm_message_task): PayloadDescriptor(
-        asn1.NRST_TaskMessageData, task_factory.create_typed_message
+        asn1.SkrTaskMessageData, task_factory.create_typed_message
     ),
     str(asn1.sorm_message_trap): PayloadDescriptor(
-        asn1.NRST_TrapMessageData, trap_factory.create_typed_message
+        asn1.SkrTrapMessageData, trap_factory.create_typed_message
     ),
     str(asn1.sorm_message_unformatted): PayloadDescriptor(
-        asn1.NRST_UnformattedMessageData,
+        asn1.SkrUnformattedMessageData,
         unformatted_factory.create_typed_message
     )
 }

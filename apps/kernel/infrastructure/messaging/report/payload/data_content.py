@@ -15,7 +15,7 @@ class RawRecordContentReport(report.BaseReport):
     def create(raw_message_, message_payload_, report_payload_):
         sequence_of, rest = ber_decode(
             bytes(report_payload_),
-            asn1.NRST_ReportDataContentRawData()
+            asn1.SkrReportDataContentRawData()
         )
         records = tools.sequence_of_to_list(
             sequence_of, RawRecordContentRecord.create
@@ -46,7 +46,7 @@ class RawRecordContentReport(report.BaseReport):
 class RawRecordContentRecord(basic.PrintableObject):
 
     @staticmethod
-    def create(payload_: asn1.NRST_RawRecordContent):
+    def create(payload_: asn1.SkrRawRecordContent):
         return RawRecordContentRecord(
             bool(payload_['successful']),
             tools.get_optional_bytes(payload_['data']),

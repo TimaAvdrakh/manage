@@ -22,7 +22,7 @@ class BankTransactionReport(report.BaseReport):
     @staticmethod
     def create(raw_message_, message_payload_, report_payload_):
         sequence_of, rest = ber_decode(
-            bytes(report_payload_), asn1.NRST_BankTransactionReportData()
+            bytes(report_payload_), asn1.SkrBankTransactionReportData()
         )
         records = tools.sequence_of_to_list(
             sequence_of, BankTransactionReportRecord.create
@@ -53,7 +53,7 @@ class BankTransactionReport(report.BaseReport):
 class BankTransactionReportRecord(basic.PrintableObject):
 
     @staticmethod
-    def create(payload_: asn1.NRST_BankTransactionRecord):
+    def create(payload_: asn1.SkrBankTransactionRecord):
         return BankTransactionReportRecord(
             int(payload_['telco-id']),
             identifiers.create(payload_['device-id']),
@@ -86,7 +86,7 @@ class ExpressCardReport(report.BaseReport):
     @staticmethod
     def create(raw_message_, message_payload_, report_payload_):
         sequence_of, rest = ber_decode(
-            bytes(report_payload_), asn1.NRST_ExpressCardReportData()
+            bytes(report_payload_), asn1.SkrExpressCardReportData()
         )
         records = tools.sequence_of_to_list(
             sequence_of, ExpressCardReportRecord.create
@@ -117,7 +117,7 @@ class ExpressCardReport(report.BaseReport):
 class ExpressCardReportRecord(basic.PrintableObject):
 
     @staticmethod
-    def create(payload_: asn1.NRST_ExpressPaysRecord):
+    def create(payload_: asn1.SkrExpressPaysRecord):
         return ExpressCardReportRecord(
             int(payload_['telco-id']),
             identifiers.create(payload_['device-id']),
@@ -145,7 +145,7 @@ class PublicTerminalReport(report.BaseReport):
     @staticmethod
     def create(raw_message_, message_payload_, report_payload_):
         sequence_of, rest = ber_decode(
-            bytes(report_payload_), asn1.NRST_PublicTerminalReportData()
+            bytes(report_payload_), asn1.SkrPublicTerminalReportData()
         )
         records = tools.sequence_of_to_list(
             sequence_of, PublicTerminalReportRecord.create
@@ -176,7 +176,7 @@ class PublicTerminalReport(report.BaseReport):
 class PublicTerminalReportRecord(basic.PrintableObject):
 
     @staticmethod
-    def create(payload_: asn1.NRST_PublicTerminalRecord):
+    def create(payload_: asn1.SkrPublicTerminalRecord):
         return PublicTerminalReportRecord(
             int(payload_['telco-id']),
             identifiers.create(payload_['device-id']),
@@ -213,7 +213,7 @@ class ServiceCenterReport(report.BaseReport):
     @staticmethod
     def create(raw_message_, message_payload_, report_payload_):
         sequence_of, rest = ber_decode(
-            bytes(report_payload_), asn1.NRST_ServiceCenterReport()
+            bytes(report_payload_), asn1.SkrServiceCenterReport()
         )
         records = tools.sequence_of_to_list(
             sequence_of, ServiceCenterReportRecord.create
@@ -244,7 +244,7 @@ class ServiceCenterReport(report.BaseReport):
 class ServiceCenterReportRecord(basic.PrintableObject):
 
     @staticmethod
-    def create(payload_: asn1.NRST_ServiceCenterRecord):
+    def create(payload_: asn1.SkrServiceCenterRecord):
         return ServiceCenterReportRecord(
             int(payload_['telco-id']),
             identifiers.create(payload_['device-id']),
@@ -275,7 +275,7 @@ class CrossAccountReport(report.BaseReport):
     @staticmethod
     def create(raw_message_, message_payload_, report_payload_):
         sequence_of, rest = ber_decode(
-            bytes(report_payload_), asn1.NRST_CrossAccountReportData()
+            bytes(report_payload_), asn1.SkrCrossAccountReportData()
         )
         records = tools.sequence_of_to_list(
             sequence_of, CrossAccountReportRecord.create
@@ -306,7 +306,7 @@ class CrossAccountReport(report.BaseReport):
 class CrossAccountReportRecord(basic.PrintableObject):
 
     @staticmethod
-    def create(payload_: asn1.NRST_CrossAccountRecord):
+    def create(payload_: asn1.SkrCrossAccountRecord):
         return CrossAccountReportRecord(
             int(payload_['telco-id']),
             identifiers.create(payload_['device-id']),
@@ -334,7 +334,7 @@ class TelephoneCardReport(report.BaseReport):
     @staticmethod
     def create(raw_message_, message_payload_, report_payload_):
         sequence_of, rest = ber_decode(
-            bytes(report_payload_), asn1.NRST_TelephoneCardReportData()
+            bytes(report_payload_), asn1.SkrTelephoneCardReportData()
         )
         records = tools.sequence_of_to_list(
             sequence_of, TelephoneCardReportRecord.create
@@ -365,7 +365,7 @@ class TelephoneCardReport(report.BaseReport):
 class TelephoneCardReportRecord(basic.PrintableObject):
 
     @staticmethod
-    def create(payload_: asn1.NRST_ValidateTelephoneCardRecord):
+    def create(payload_: asn1.SkrValidateTelephoneCardRecord):
         return TelephoneCardReportRecord(
             int(payload_['telco-id']),
             identifiers.create(payload_['activator-device-id']),
@@ -393,7 +393,7 @@ class BalanceFillUpReport(report.BaseReport):
     @staticmethod
     def create(raw_message_, message_payload_, report_payload_):
         sequence_of, rest = ber_decode(
-            bytes(report_payload_), asn1.NRST_BalanceFillupReportData()
+            bytes(report_payload_), asn1.SkrBalanceFillupReportData()
         )
         records = tools.sequence_of_to_list(
             sequence_of, BalanceFillUpReportRecord.create
@@ -424,7 +424,7 @@ class BalanceFillUpReport(report.BaseReport):
 class BalanceFillUpReportRecord(basic.PrintableObject):
 
     @staticmethod
-    def create(payload_: asn1.NRST_ValidateBalanceFillupRecord):
+    def create(payload_: asn1.SkrValidateBalanceFillupRecord):
         return BalanceFillUpReportRecord(
             int(payload_['telco-id']),
             int(payload_['pay-type-id']),

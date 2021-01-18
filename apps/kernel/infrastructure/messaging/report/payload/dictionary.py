@@ -18,7 +18,7 @@ class BunchesReport(report.BaseReport):
     @staticmethod
     def create(raw_message_, message_payload_, report_payload_):
         sequence_of, rest = ber_decode(
-            bytes(report_payload_), asn1.NRST_BunchesRecordsData()
+            bytes(report_payload_), asn1.SkrBunchesRecordsData()
         )
         records = tools.sequence_of_to_list(
             sequence_of, BunchesReportRecord.create
@@ -49,7 +49,7 @@ class BunchesReport(report.BaseReport):
 class BunchesReportRecord(basic.PrintableObject):
 
     @staticmethod
-    def create(payload_: asn1.NRST_BunchRecord):
+    def create(payload_: asn1.SkrBunchRecord):
         return BunchesReportRecord(
             int(payload_['telco-id']),
             str(payload_['begin-time']),
@@ -82,7 +82,7 @@ class SwitchesReport(report.BaseReport):
     @staticmethod
     def create(raw_message_, message_payload_, report_payload_):
         sequence_of, rest = ber_decode(
-            bytes(report_payload_), asn1.NRST_SwitchesRecordsData()
+            bytes(report_payload_), asn1.SkrSwitchesRecordsData()
         )
         records = tools.sequence_of_to_list(
             sequence_of, SwitchesReportRecord.create
@@ -113,7 +113,7 @@ class SwitchesReport(report.BaseReport):
 class SwitchesReportRecord(basic.PrintableObject):
 
     @staticmethod
-    def create(payload_: asn1.NRST_SwitchesRecord):
+    def create(payload_: asn1.SkrSwitchesRecord):
         return SwitchesReportRecord(
             int(payload_['telco-id']),
             str(payload_['begin-time']),
@@ -151,7 +151,7 @@ class GatesReport(report.BaseReport):
     @staticmethod
     def create(raw_message_, message_payload_, report_payload_):
         sequence_of, rest = ber_decode(
-            bytes(report_payload_), asn1.NRST_GatesRecordsData()
+            bytes(report_payload_), asn1.SkrGatesRecordsData()
         )
         records = tools.sequence_of_to_list(
             sequence_of, GatesReportRecord.create
@@ -182,7 +182,7 @@ class GatesReport(report.BaseReport):
 class GatesReportRecord(basic.PrintableObject):
 
     @staticmethod
-    def create(payload_: asn1.NRST_GatesRecord):
+    def create(payload_: asn1.SkrGatesRecord):
         return GatesReportRecord(
             int(payload_['telco-id']),
             str(payload_['begin-time']),
@@ -219,7 +219,7 @@ class CallTypesReport(report.BaseReport):
     @staticmethod
     def create(raw_message_, message_payload_, report_payload_):
         sequence_of, rest = ber_decode(
-            bytes(report_payload_), asn1.NRST_CallTypesRecordsData()
+            bytes(report_payload_), asn1.SkrCallTypesRecordsData()
         )
         records = tools.sequence_of_to_list(
             sequence_of, CallTypesReportRecord.create
@@ -250,7 +250,7 @@ class CallTypesReport(report.BaseReport):
 class CallTypesReportRecord(basic.PrintableObject):
 
     @staticmethod
-    def create(payload_: asn1.NRST_CallsTypesRecord):
+    def create(payload_: asn1.SkrCallsTypesRecord):
         return CallTypesReportRecord(
             int(payload_['telco-id']),
             str(payload_['begin-time']),
@@ -279,7 +279,7 @@ class SupplementServicesReport(report.BaseReport):
     @staticmethod
     def create(raw_message_, message_payload_, report_payload_):
         sequence_of, rest = ber_decode(
-            bytes(report_payload_), asn1.NRST_SupplementServicesRecordsData()
+            bytes(report_payload_), asn1.SkrSupplementServicesRecordsData()
         )
         records = tools.sequence_of_to_list(
             sequence_of, SupplementServicesReportRecord.create
@@ -310,7 +310,7 @@ class SupplementServicesReport(report.BaseReport):
 class SupplementServicesReportRecord(basic.PrintableObject):
 
     @staticmethod
-    def create(payload_: asn1.NRST_SupplementServicesRecord):
+    def create(payload_: asn1.SkrSupplementServicesRecord):
         return SupplementServicesReportRecord(
             int(payload_['telco-id']),
             str(payload_['begin-time']),
@@ -341,7 +341,7 @@ class PayTypesReport(report.BaseReport):
     @staticmethod
     def create(raw_message_, message_payload_, report_payload_):
         sequence_of, rest = ber_decode(
-            bytes(report_payload_), asn1.NRST_PayTypesRecordsData()
+            bytes(report_payload_), asn1.SkrPayTypesRecordsData()
         )
         records = tools.sequence_of_to_list(
             sequence_of, PayTypesReportRecord.create
@@ -371,7 +371,7 @@ class PayTypesReport(report.BaseReport):
 class PayTypesReportRecord(basic.PrintableObject):
 
     @staticmethod
-    def create(payload_: asn1.NRST_PayTypesRecord):
+    def create(payload_: asn1.SkrPayTypesRecord):
         return PayTypesReportRecord(
             int(payload_['telco-id']),
             str(payload_['begin-time']),
@@ -400,7 +400,7 @@ class TerminationCausesReport(report.BaseReport):
     @staticmethod
     def create(raw_message_, message_payload_, report_payload_):
         sequence_of, rest = ber_decode(
-            bytes(report_payload_), asn1.NRST_TerminationCausesRecordsData()
+            bytes(report_payload_), asn1.SkrTerminationCausesRecordsData()
         )
         records = tools.sequence_of_to_list(
             sequence_of, TerminationCausesReportRecord.create
@@ -431,7 +431,7 @@ class TerminationCausesReport(report.BaseReport):
 class TerminationCausesReportRecord(basic.PrintableObject):
 
     @staticmethod
-    def create(payload_: asn1.NRST_TerminationCausesRecord):
+    def create(payload_: asn1.SkrTerminationCausesRecord):
         return TerminationCausesReportRecord(
             int(payload_['telco-id']),
             str(payload_['begin-time']),
@@ -462,7 +462,7 @@ class IPNumberingPlansReport(report.BaseReport):
     @staticmethod
     def create(raw_message_, message_payload_, report_payload_):
         sequence_of, rest = ber_decode(
-            bytes(report_payload_), asn1.NRST_IpNumberingPlanRecordsData()
+            bytes(report_payload_), asn1.SkrIpNumberingPlanRecordsData()
         )
         records = tools.sequence_of_to_list(
             sequence_of, IPNumberingPlansReportRecord.create
@@ -493,7 +493,7 @@ class IPNumberingPlansReport(report.BaseReport):
 class IPNumberingPlansReportRecord(basic.PrintableObject):
 
     @staticmethod
-    def create(payload_: asn1.NRST_IpNumberingPlanRecord):
+    def create(payload_: asn1.SkrIpNumberingPlanRecord):
         return IPNumberingPlansReportRecord(
             int(payload_['telco-id']),
             str(payload_['begin-time']),
@@ -525,7 +525,7 @@ class TelephoneNumberingPlansReport(report.BaseReport):
     def create(raw_message_, message_payload_, report_payload_):
         sequence_of, rest = ber_decode(
             bytes(report_payload_),
-            asn1.NRST_TelephoneNumberingPlanRecordsData()
+            asn1.SkrTelephoneNumberingPlanRecordsData()
         )
         records = tools.sequence_of_to_list(
             sequence_of, TelephoneNumberingPlansReportRecord.create
@@ -556,7 +556,7 @@ class TelephoneNumberingPlansReport(report.BaseReport):
 class TelephoneNumberingPlansReportRecord(basic.PrintableObject):
 
     @staticmethod
-    def create(payload_: asn1.NRST_TelephoneNumberingPlanRecord):
+    def create(payload_: asn1.SkrTelephoneNumberingPlanRecord):
         return TelephoneNumberingPlansReportRecord(
             int(payload_['telco-id']),
             str(payload_['iso-3166-alpha-2']),
@@ -636,7 +636,7 @@ class DocumentTypesReport(report.BaseReport):
     @staticmethod
     def create(raw_message_, message_payload_, report_payload_):
         sequence_of, rest = ber_decode(
-            bytes(report_payload_), asn1.NRST_DocTypesRecordsData()
+            bytes(report_payload_), asn1.SkrDocTypesRecordsData()
         )
         records = tools.sequence_of_to_list(
             sequence_of, DocumentTypesReportRecord.create
@@ -667,7 +667,7 @@ class DocumentTypesReport(report.BaseReport):
 class DocumentTypesReportRecord(basic.PrintableObject):
 
     @staticmethod
-    def create(payload_: asn1.NRST_DocTypesRecord):
+    def create(payload_: asn1.SkrDocTypesRecord):
         return DocumentTypesReportRecord(
             int(payload_['telco-id']),
             str(payload_['begin-time']),
@@ -695,7 +695,7 @@ class TelcosReport(report.BaseReport):
     @staticmethod
     def create(raw_message_, message_payload_, report_payload_):
         sequence_of, rest = ber_decode(
-            bytes(report_payload_), asn1.NRST_TelcosRecordsData()
+            bytes(report_payload_), asn1.SkrTelcosRecordsData()
         )
         records = tools.sequence_of_to_list(
             sequence_of, TelcosReportRecord.create
@@ -726,7 +726,7 @@ class TelcosReport(report.BaseReport):
 class TelcosReportRecord(basic.PrintableObject):
 
     @staticmethod
-    def create(payload_: asn1.NRST_TelcosRecord):
+    def create(payload_: asn1.SkrTelcosRecord):
         return TelcosReportRecord(
             int(payload_['telco-id']),
             str(payload_['begin-time']),
@@ -757,7 +757,7 @@ class IPDataPointsReport(report.BaseReport):
     @staticmethod
     def create(raw_message_, message_payload_, report_payload_):
         sequence_of, rest = ber_decode(
-            bytes(report_payload_), asn1.NRST_IpDataPointsRecordsData()
+            bytes(report_payload_), asn1.SkrIpDataPointsRecordsData()
         )
         records = tools.sequence_of_to_list(
             sequence_of, IPDataPointsReportRecord.create
@@ -788,7 +788,7 @@ class IPDataPointsReport(report.BaseReport):
 class IPDataPointsReportRecord(basic.PrintableObject):
 
     @staticmethod
-    def create(payload_: asn1.NRST_IpDataPointRecord):
+    def create(payload_: asn1.SkrIpDataPointRecord):
         return IPDataPointsReportRecord(
             int(payload_['telco-id']),
             str(payload_['begin-time']),
@@ -816,7 +816,7 @@ class BunchesMapReport(report.BaseReport):
     @staticmethod
     def create(raw_message_, message_payload_, report_payload_):
         sequence_of, rest = ber_decode(
-            bytes(report_payload_), asn1.NRST_BunchesMapRecordsData()
+            bytes(report_payload_), asn1.SkrBunchesMapRecordsData()
         )
         records = tools.sequence_of_to_list(
             sequence_of, BunchesMapReportRecord.create
@@ -847,7 +847,7 @@ class BunchesMapReport(report.BaseReport):
 class BunchesMapReportRecord(basic.PrintableObject):
 
     @staticmethod
-    def create(payload_: asn1.NRST_BunchesMapRecord):
+    def create(payload_: asn1.SkrBunchesMapRecord):
         return BunchesMapReportRecord(
             str(payload_['begin-time']),
             tools.get_optional_str(payload_['end-time']),
@@ -870,7 +870,7 @@ class BunchesMapReportRecord(basic.PrintableObject):
 class BunchMapPoint(basic.PrintableObject):
 
     @staticmethod
-    def create(payload_: asn1.NRST_BunchMapPoint):
+    def create(payload_: asn1.SkrBunchMapPoint):
         return BunchMapPoint(
             int(payload_['telco-id']),
             str(payload_['switch-id']),
@@ -893,7 +893,7 @@ class SpecialNumbersReport(report.BaseReport):
     @staticmethod
     def create(raw_message_, message_payload_, report_payload_):
         sequence_of, rest = ber_decode(
-            bytes(report_payload_), asn1.NRST_SpecialNumbersRecordsData()
+            bytes(report_payload_), asn1.SkrSpecialNumbersRecordsData()
         )
         records = tools.sequence_of_to_list(
             sequence_of, SpecialNumbersReportRecord.create
@@ -924,7 +924,7 @@ class SpecialNumbersReport(report.BaseReport):
 class SpecialNumbersReportRecord(basic.PrintableObject):
 
     @staticmethod
-    def create(payload_: asn1.NRST_SpecialNumberRecord):
+    def create(payload_: asn1.SkrSpecialNumberRecord):
         return SpecialNumbersReportRecord(
             int(payload_['telco-id']),
             str(payload_['directory-number']),
@@ -955,7 +955,7 @@ class SS7SignalPointCodeReport(report.BaseReport):
     @staticmethod
     def create(raw_message_, message_payload_, report_payload_):
         sequence_of, rest = ber_decode(
-            bytes(report_payload_), asn1.NRST_SignalPointCodesRecordsData()
+            bytes(report_payload_), asn1.SkrSignalPointCodesRecordsData()
         )
         records = tools.sequence_of_to_list(
             sequence_of, SS7SignalPointCodeReportRecord.create
@@ -986,7 +986,7 @@ class SS7SignalPointCodeReport(report.BaseReport):
 class SS7SignalPointCodeReportRecord(basic.PrintableObject):
 
     @staticmethod
-    def create(payload_: asn1.NRST_SignalPointCodesRecord):
+    def create(payload_: asn1.SkrSignalPointCodesRecord):
         return SS7SignalPointCodeReportRecord(
             int(payload_['ss7-point-code']),
             str(payload_['switch-id']),

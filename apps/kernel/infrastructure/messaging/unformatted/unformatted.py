@@ -22,7 +22,7 @@ class RawRequest(base.OutgoingMessage):
         return fields
 
     def encode_data(self):
-        reqs = asn1.NRST_RawRequest(
+        reqs = asn1.SkrRawRequest(
             tagSet=(
                 tag.initTagSet(
                     tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 0)
@@ -54,7 +54,7 @@ class DataTypesRequest(base.ASN1Constructable):
         return ['raw_data_type']
 
     def to_asn1(self):
-        task = asn1.NRST_RawRequestTask()
+        task = asn1.SkrRawRequestTask()
         task.setComponentByName('data-types-request', self.raw_data_type)
         return task
 
@@ -102,7 +102,7 @@ class DataStartRequest(base.ASN1Constructable):
         return ['time_from', 'time_to', 'raw_data_type']
 
     def to_asn1(self):
-        task = asn1.NRST_RawRequestTask()
+        task = asn1.SkrRawRequestTask()
         body = task.getComponentByName('data-start-request')
         body['time-from'] = self.time_from
         body['time-to'] = self.time_to
@@ -145,7 +145,7 @@ class DataStopRequest(base.ASN1Constructable):
         return []
 
     def to_asn1(self):
-        task = asn1.NRST_RawRequestTask()
+        task = asn1.SkrRawRequestTask()
         task.setComponentByName('data-stop-request')
         return task
 
@@ -179,7 +179,7 @@ class DataStopResponse(base.IncomingMessage):
 class RawReport(base.IncomingMessage):
 
     @staticmethod
-    def create(raw_message_, payload_: asn1.NRST_RawReport):
+    def create(raw_message_, payload_: asn1.SkrRawReport):
         report_block = payload_['report-block']
         if report_block.getName() != 'raw-cdr':
             raise exceptions.GeneralFault(
@@ -234,7 +234,7 @@ class RawAcknowledgement(base.OutgoingMessage):
         return fields
 
     def encode_data(self):
-        ack = asn1.NRST_Acknowledgement(
+        ack = asn1.SkrAcknowledgement(
             tagSet=(
                 tag.initTagSet(
                     tag.Tag(tag.tagClassContext, tag.tagFormatConstructed, 3)
