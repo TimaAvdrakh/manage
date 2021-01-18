@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'apps.system',
     'apps.userapp',
     'apps.dictionary',
+    'apps.integration',
 ]
 
 MIDDLEWARE = [
