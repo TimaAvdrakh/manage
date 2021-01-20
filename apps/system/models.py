@@ -52,10 +52,21 @@ class UserRequest(TimestampMixin):
         verbose_name = 'Запрос пользователя'
         verbose_name_plural = 'Запросы пользователя'
 
-    link = models.CharField(
-        max_length=512,
-        db_index=True,
-        verbose_name='Ссылка'
+    user = models.ForeignKey(
+        'userapp.MainUser',
+        on_delete=models.PROTECT,
+        verbose_name='Пользователь',
+        null=True,
+        blank=True
+    )
+    kind = models.CharField(
+        max_length=10,
+        verbose_name='Тип запроса',
+        default='simple',
+        choices=(
+            ('simple', 'Простой'),
+            ('foreign', 'Внешний'),
+        )
     )
     class_name = models.CharField(
         max_length=256,
@@ -70,20 +81,64 @@ class UserRequest(TimestampMixin):
         null=True,
         blank=True
     )
-    name = models.CharField(
+    status = models.CharField(
+        max_length=16,
+        default='new',
+        verbose_name='Статус',
+        choices=(
+            ('new', 'Новый'),
+            ('processing', 'В работе'),
+            ('complete', 'Завершён'),
+            ('error', 'Ошибка'),
+        )
+    )
+    note = models.CharField(
         max_length=512,
         db_index=True,
-        verbose_name='Наименование',
+        verbose_name='Заметка',
         null=True,
         blank=True
     )
 
     def __str__(self):
-        return f'{self.number} - {self.name}'
+        return f'{self.number} - {self.kind}'
 
 
-# class AuditLog(TimestampMixin):
-#     class Meta:
-#         verbose_name = 'Журнал аудита'
-#         verbose_name_plural = 'Журнал аудита'
-#
+class AuditLog(TimestampMixin):
+    class Meta:
+        verbose_name = 'Журнал аудита'
+        verbose_name_plural = 'Журнал аудита'
+
+    user = models.ForeignKey(
+        'userapp.MainUser',
+        on_delete=models.PROTECT,
+        null=True,
+        blank=True,
+        verbose_name='Пользователь'
+    )
+    ip_address = models.GenericIPAddressField(
+        null=True,
+        blank=True
+    )
+    user_request = models.ForeignKey(
+        'UserRequest',
+        on_delete=models.PROTECT,
+        null=True,
+        blank=True,
+        verbose_name='Запрос пользователя'
+    )
+    description = models.TextField(
+        null=True,
+        blank=True,
+        verbose_name='Описание'
+    )
+    before = models.TextField(
+        null=True,
+        blank=True,
+        verbose_name='До изменения'
+    )
+    after = models.TextField(
+        null=True,
+        blank=True,
+        verbose_name='После изменения'
+    )
