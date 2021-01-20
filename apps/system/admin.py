@@ -16,9 +16,9 @@ class AppModelAdmin(admin.ModelAdmin):
 
 @admin.register(models.UserRequest)
 class UserRequestAdmin(admin.ModelAdmin):
-    list_display = ('user', 'kind', 'number', 'created_at', 'class_name')
+    list_display = ('id', 'user', 'kind', 'number', 'created_at', 'class_name')
 
 
 @admin.register(models.AuditLog)
 class AuditLogAdmin(admin.ModelAdmin):
-    list_display = ('user', 'user_request', 'created_at')
+    list_display = ('id', 'user', 'user_request', 'created_at')

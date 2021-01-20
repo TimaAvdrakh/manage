@@ -4,6 +4,7 @@ from apps.system import (
     models,
     utils,
 )
+from apps.system.helpers import handler
 
 
 class MainMixin(object):
@@ -66,6 +67,12 @@ class UserRequestMixin(AuditMixin):
 
         if inspect.isclass(self.class_name) is False:
             raise Exception('Не верно указан class-handler')
+
+        if issubclass(self.class_name, handler.AbstractHandler) is False:
+            raise Exception(
+                f'Класс {self.class_name} не является дочерним ' +
+                f'классом {handler.AbstractHandler}'
+            )
 
         if self.kind is None:
             raise Exception('Не указа вид запроса')
