@@ -12,3 +12,8 @@ class PermissionAdmin(admin.ModelAdmin):
 @admin.register(models.AppModel)
 class AppModelAdmin(admin.ModelAdmin):
     list_display = ('name', 'link', 'state')
+
+
+@admin.register(models.UserRequest)
+class UserRequestAdmin(admin.ModelAdmin):
+    pass

@@ -35,7 +35,6 @@ class AppModel(models.Model):
     )
     codename = models.CharField(
         max_length=32,
-
     )
     link = models.CharField(
         max_length=512,
@@ -47,7 +46,42 @@ class AppModel(models.Model):
         verbose_name='Состояние'
     )
 
-#
+
+class UserRequest(TimestampMixin):
+    class Meta:
+        verbose_name = 'Запрос пользователя'
+        verbose_name_plural = 'Запросы пользователя'
+
+    link = models.CharField(
+        max_length=512,
+        db_index=True,
+        verbose_name='Ссылка'
+    )
+    class_name = models.CharField(
+        max_length=256,
+        null=True,
+        blank=True,
+        verbose_name='Имя класса'
+    )
+    number = models.CharField(
+        max_length=32,
+        db_index=True,
+        verbose_name='Номер запроса',
+        null=True,
+        blank=True
+    )
+    name = models.CharField(
+        max_length=512,
+        db_index=True,
+        verbose_name='Наименование',
+        null=True,
+        blank=True
+    )
+
+    def __str__(self):
+        return f'{self.number} - {self.name}'
+
+
 # class AuditLog(TimestampMixin):
 #     class Meta:
 #         verbose_name = 'Журнал аудита'
