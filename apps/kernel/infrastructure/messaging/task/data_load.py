@@ -10,9 +10,9 @@ from apps.kernel.infrastructure.messaging import (
 
 class DataLoadRequest(base.OutgoingMessage):
 
-    def __init__(self, task_id_):
+    def __init__(self, task_id):
         super().__init__(None, asn1.sorm_message_task)
-        self.task_id = task_id_
+        self.task_id = task_id
 
     def __dir__(self):
         fields = super().__dir__()
@@ -21,7 +21,7 @@ class DataLoadRequest(base.OutgoingMessage):
 
     def encode_data(self):
         reqs = asn1.SkrDataLoadRequest(
-            value=(self.task_id),
+            value=self.task_id,
             tagSet=(
                 tag.initTagSet(
                     tag.Tag(tag.tagClassContext, tag.tagFormatSimple, 2)
@@ -34,29 +34,29 @@ class DataLoadRequest(base.OutgoingMessage):
 class DataLoadResponse(base.IncomingMessage):
 
     @staticmethod
-    def create(raw_message_, payload_):
+    def create(raw_message, payload):
         return DataLoadResponse(
-            raw_message_['version'],
-            raw_message_['message-id'],
-            raw_message_['message-time'],
-            tools.get_optional_value(raw_message_['operator-name']),
-            raw_message_['id'],
-            int(payload_['task-id']),
-            bool(payload_['data-exists']),
-            tools.get_optional_int(payload_['data-blocks-number']),
-            tools.get_optional_str(payload_['error-description'])
+            raw_message['version'],
+            raw_message['message-id'],
+            raw_message['message-time'],
+            tools.get_optional_value(raw_message['operator-name']),
+            raw_message['id'],
+            int(payload['task-id']),
+            bool(payload['data-exists']),
+            tools.get_optional_int(payload['data-blocks-number']),
+            tools.get_optional_str(payload['error-description'])
         )
 
-    def __init__(self, version_, message_id_, message_time_, operator_name_,
-                 id_, task_id_, data_exists_, data_blocks_number_,
-                 error_description_):
+    def __init__(self, version, message_id, message_time, operator_name,
+                 id, task_id, data_exists, data_blocks_number,
+                 error_description):
         super().__init__(
-            version_, message_id_, message_time_, operator_name_, id_
+            version, message_id, message_time, operator_name, id
         )
-        self.task_id = task_id_
-        self.data_exists = data_exists_
-        self.data_blocks_number = data_blocks_number_
-        self.error_description = error_description_
+        self.task_id = task_id
+        self.data_exists = data_exists
+        self.data_blocks_number = data_blocks_number
+        self.error_description = error_description
 
     def __dir__(self):
         fields = super().__dir__()

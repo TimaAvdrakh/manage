@@ -10,12 +10,12 @@ from apps.kernel.infrastructure.messaging import (
 
 class CreateTaskRequest(base.OutgoingMessage):
 
-    def __init__(self, telco_codes_, range_, report_limit_, task_):
+    def __init__(self, telco_codes, range_, report_limit, task):
         super().__init__(None, asn1.sorm_message_task)
-        self.telco_codes = telco_codes_
+        self.telco_codes = telco_codes
         self.range = range_
-        self.report_limit = report_limit_
-        self.task = task_
+        self.report_limit = report_limit
+        self.task = task
 
     def __dir__(self):
         fields = super().__dir__()
@@ -51,26 +51,26 @@ class CreateTaskRequest(base.OutgoingMessage):
 class CreateTaskResponse(base.IncomingMessage):
 
     @staticmethod
-    def create(raw_message_, payload_):
+    def create(raw_message, payload):
         return CreateTaskResponse(
-            raw_message_['version'],
-            raw_message_['message-id'],
-            raw_message_['message-time'],
-            tools.get_optional_str(raw_message_['operator-name']),
-            raw_message_['id'],
-            tools.get_optional_int(payload_['task-id']),
-            payload_['successful'],
-            tools.get_optional_str(payload_['error-description'])
+            raw_message['version'],
+            raw_message['message-id'],
+            raw_message['message-time'],
+            tools.get_optional_str(raw_message['operator-name']),
+            raw_message['id'],
+            tools.get_optional_int(payload['task-id']),
+            payload['successful'],
+            tools.get_optional_str(payload['error-description'])
         )
 
-    def __init__(self, version_, message_id_, message_time_, operator_name_,
-                 id_, task_id_, successful_, error_description_):
+    def __init__(self, version_, message_id, message_time, operator_name,
+                 id_, task_id, successful, error_description):
         super().__init__(
-            version_, message_id_, message_time_, operator_name_, id_
+            version_, message_id, message_time, operator_name, id_
         )
-        self.task_id = task_id_
-        self.successful = successful_
-        self.error_description = error_description_
+        self.task_id = task_id
+        self.successful = successful
+        self.error_description = error_description
 
     def __dir__(self):
         fields = super().__dir__()

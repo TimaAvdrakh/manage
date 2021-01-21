@@ -1,14 +1,14 @@
 from apps.system.lib import exceptions
 
 
-def create_typed_message(raw_message_, payload_):
-    name = payload_.getName()
+def create_typed_message(raw_message, payload):
+    name = payload.getName()
     creator = message_creators.get(name, None)
     if creator is None or not callable(creator):
         raise exceptions.GeneralFault(
             f'unable to chose task message by "{name}" name'
         )
-    return creator(raw_message_, payload_.getComponent())
+    return creator(raw_message, payload.getComponent())
 
 
 from .create_task import CreateTaskResponse

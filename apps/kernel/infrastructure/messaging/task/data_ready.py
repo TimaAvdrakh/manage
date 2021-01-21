@@ -29,13 +29,13 @@ class DataReadyRequest(base.OutgoingMessage):
 
 class TaskStatus(basic.PrintableObject):
 
-    def __init__(self, task_id_, status_, report_records_,
-                 report_limit_exceeded_, error_description_):
-        self.task_id = task_id_
-        self.status = status_
-        self.report_records = report_records_
-        self.report_limit_exceeded = report_limit_exceeded_
-        self.error_description = error_description_
+    def __init__(self, task_id, status, report_records,
+                 report_limit_exceeded, error_description):
+        self.task_id = task_id
+        self.status = status
+        self.report_records = report_records
+        self.report_limit_exceeded = report_limit_exceeded
+        self.error_description = error_description
 
     def __dir__(self):
         return [
@@ -47,25 +47,25 @@ class TaskStatus(basic.PrintableObject):
 class DataReadyResponse(base.IncomingMessage):
 
     @staticmethod
-    def create(raw_message_, payload_):
+    def create(raw_message, payload):
         return DataReadyResponse(
-            raw_message_['version'],
-            raw_message_['message-id'],
-            raw_message_['message-time'],
-            tools.get_optional_value(raw_message_['operator-name']),
-            raw_message_['id'],
-            payload_
+            raw_message['version'],
+            raw_message['message-id'],
+            raw_message['message-time'],
+            tools.get_optional_value(raw_message['operator-name']),
+            raw_message['id'],
+            payload
         )
 
-    def __init__(self, version_, message_id_, message_time_, operator_name_,
-                 id_, task_statuses_):
+    def __init__(self, version, message_id, message_time, operator_name,
+                 id_, task_statuses):
         super().__init__(
-            version_, message_id_, message_time_, operator_name_, id_
+            version, message_id, message_time, operator_name, id_
         )
 
-        def transform(asn1_item_):
-            task_id = int(asn1_item_['task-id'])
-            result = asn1_item_['result']
+        def transform(asn1_item):
+            task_id = int(asn1_item['task-id'])
+            result = asn1_item['result']
             return TaskStatus(
                 task_id,
                 tools.get_optional_int(result['result']),
@@ -75,7 +75,7 @@ class DataReadyResponse(base.IncomingMessage):
             )
 
         self.task_statuses = tools.sequence_of_to_list(
-            task_statuses_, transform
+            task_statuses, transform
         )
 
     def __dir__(self):

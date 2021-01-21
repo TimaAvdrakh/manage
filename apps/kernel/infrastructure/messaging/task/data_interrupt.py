@@ -10,9 +10,9 @@ from apps.kernel.infrastructure.messaging import (
 
 class DataInterruptRequest(base.OutgoingMessage):
 
-    def __init__(self, task_id_):
+    def __init__(self, task_id):
         super().__init__(None, asn1.sorm_message_task)
-        self.task_id = task_id_
+        self.task_id = task_id
 
     def __dir__(self):
         fields = super().__dir__()
@@ -34,29 +34,29 @@ class DataInterruptRequest(base.OutgoingMessage):
 class DataInterruptResponse(base.IncomingMessage):
 
     @staticmethod
-    def create(raw_message_, payload_):
+    def create(raw_message, payload):
         return DataInterruptResponse(
-            raw_message_['version'],
-            raw_message_['message-id'],
-            raw_message_['message-time'],
-            tools.get_optional_value(raw_message_['operator-name']),
-            raw_message_['id'],
-            int(payload_['request-id']),
-            bool(payload_['successful']),
-            tools.get_optional_int(payload_['data-blocks-available']),
-            tools.get_optional_str(payload_['error-description'])
+            raw_message['version'],
+            raw_message['message-id'],
+            raw_message['message-time'],
+            tools.get_optional_value(raw_message['operator-name']),
+            raw_message['id'],
+            int(payload['request-id']),
+            bool(payload['successful']),
+            tools.get_optional_int(payload['data-blocks-available']),
+            tools.get_optional_str(payload['error-description'])
         )
 
-    def __init__(self, version_, message_id_, message_time_, operator_name_,
-                 id_, request_id_, successful_, data_blocks_available_,
-                 error_description_):
+    def __init__(self, version, message_id, message_time, operator_name,
+                 id_, request_id, successful, data_blocks_available,
+                 error_description):
         super().__init__(
-            version_, message_id_, message_time_, operator_name_, id_
+            version, message_id, message_time, operator_name, id_
         )
-        self.request_id = request_id_
-        self.successful = successful_
-        self.data_blocks_available = data_blocks_available_
-        self.error_description = error_description_
+        self.request_id = request_id
+        self.successful = successful
+        self.data_blocks_available = data_blocks_available
+        self.error_description = error_description
 
     def __dir__(self):
         fields = super().__dir__()

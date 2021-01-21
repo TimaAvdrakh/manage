@@ -151,7 +151,7 @@ class Worker:
 
         try:
 
-            tasks_info = tm.wait_for_tasks_completion(timeout_=301)
+            tasks_info = tm.wait_for_tasks_completion(timeout=301)
             total_records = 0
             loaded_records = 0
             loading_statistics = {}
