@@ -88,7 +88,7 @@ class UserRequestMixin(AuditMixin):
                 number=self.user_request_number
             )
 
-            obj = self.class_name()
+            obj = self.class_name(request)
             obj.exec()
 
             return super().dispatch(
