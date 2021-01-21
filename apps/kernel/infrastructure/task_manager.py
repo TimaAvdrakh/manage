@@ -345,7 +345,6 @@ class TaskManager:
         while time.time() < finish_time:
             for task_id in list_of_task_id:
                 report_blocks = self.reports.get(task_id, None)
-                print(f'REPB: {report_blocks}')
                 if report_blocks is not None and len(report_blocks) > 0:
                     return report_blocks.pop(0)
                 continue
