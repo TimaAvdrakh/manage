@@ -140,3 +140,7 @@ AUTH_USER_MODEL = 'userapp.MainUser'
 
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/login/'
+
+
+REDIS_HOST = 'localhost'
+REDIS_PORT = 6379
