@@ -13,10 +13,14 @@ from django.views.generic import (
     DeleteView,
 )
 
+from apps.system.mixins import UserRequestMixin
 from apps.kernel import (
     serializers,
     models,
     forms,
+)
+from apps.kernel.handlers import (
+    communication_object,
 )
 
 
@@ -42,10 +46,24 @@ class CommunicationObjectViewAPI(mixins.RetrieveModelMixin,
     queryset = models.CommunicationObject.objects.all()
 
 
-class CommunicationObjectCreateView(CreateView):
+class CommunicationObjectCreateView(UserRequestMixin, CreateView):
     model = models.CommunicationObject
     form_class = forms.CommunicationObjectForm
     success_url = '/communication_objects/'
+
+    user_request_number = 'Запрос 1.А'
+    class_name = communication_object.CreateCommunicationObjectHandler
+    kind = 'simple'
+
+    def description(self) -> str:
+        return '''        ◦ Наименование органа, осуществляющего проведение ОРМ или надзор;
+        ◦ права доступа;
+        ◦ папка (папки) заданий;
+        ◦ срок действия учетной записи;
+        ◦ статус доступа.
+
+
+'''
 
 
 class CommunicationObjectEditView(UpdateView):
