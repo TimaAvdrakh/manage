@@ -1,6 +1,9 @@
-Django
-django-filter
-djangorestframework
+Django==3.1.5
+django-filter==2.4.0
+django-redis==4.12.1
+djangorestframework==3.12.2
 
 asn1tools==0.153.2
 pyasn1==0.4.8
+
+redis==3.5.3
