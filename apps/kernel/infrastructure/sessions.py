@@ -26,24 +26,24 @@ from apps.kernel.infrastructure.messaging.unformatted import unformatted
 
 class ChannelParameters:
 
-    def __init__(self, inactivity_timeout_, max_data_length_,
-                 data_packet_window_size_, data_load_timeout_,
-                 request_response_timeout_, data_packet_response_timeout_):
-        self.inactivity_timeout = inactivity_timeout_
-        self.max_data_length = max_data_length_
-        self.data_packet_window_size = data_packet_window_size_
-        self.data_load_timeout = data_load_timeout_
-        self.request_response_timeout = request_response_timeout_
-        self.data_packet_response_timeout = data_packet_response_timeout_
+    def __init__(self, inactivity_timeout, max_data_length,
+                 data_packet_window_size, data_load_timeout,
+                 request_response_timeout, data_packet_response_timeout):
+        self.inactivity_timeout = inactivity_timeout
+        self.max_data_length = max_data_length
+        self.data_packet_window_size = data_packet_window_size
+        self.data_load_timeout = data_load_timeout
+        self.request_response_timeout = request_response_timeout
+        self.data_packet_response_timeout = data_packet_response_timeout
 
 
 class Channel:
 
-    def __init__(self, id_, host_, port_):
+    def __init__(self, id_, host, port):
         self.lg = logger.instance()
         self.id = id_
-        self.host = host_
-        self.port = port_
+        self.host = host
+        self.port = port
         self.sock = None
         self.channel_parameters = ChannelParameters(60, 1000, 5, 60, 60, 60)
         self.undecoded_data = bytes()
@@ -122,8 +122,8 @@ class Channel:
             )
         )
 
-    def wait_for_initialization(self, timeout_):
-        finish = time.time() + timeout_
+    def wait_for_initialization(self, timeout):
+        finish = time.time() + timeout
         while time.time() < finish:
             if self.initialized:
                 return True
@@ -131,15 +131,15 @@ class Channel:
 
         return self.initialized
 
-    def send_message(self, message_):
-        encoded_data = message_.encode()
+    def send_message(self, message):
+        encoded_data = message.encode()
         rest_size = len(encoded_data)
         self.lg.diagnostic(
-            f'Sending the {message_.__class__.__name__,} message on t' +
+            f'Sending the {message.__class__.__name__,} message on t' +
             f'he channel {self.get_full_name()}...'
         )
         self.lg.debug(
-            f'The message to send: {message_}'
+            f'The message to send: {message}'
         )
         self.lg.log_memory_dump(
             logger.llvl_debug, 'Data to send:', encoded_data
@@ -153,17 +153,17 @@ class Channel:
         self.not_responded_requests.update({request.message_id: request})
         self.send_message(request)
 
-    def register_incoming_message(self, message_):
-        request = self.not_responded_requests.pop(message_.message_id, None)
+    def register_incoming_message(self, message):
+        request = self.not_responded_requests.pop(message.message_id, None)
         if request is not None:
             return request
         raise exceptions.GeneralFault(
             f'unable to find sent request for received response' +
-            f' {message_.__class__.__name__} (message_id: {message_.message_id})'
+            f' {message.__class__.__name__} (message_id: {message.message_id})'
         )
 
-    def wait_for_requests_completion(self, timeout_):
-        finish = time.time() + timeout_
+    def wait_for_requests_completion(self, timeout):
+        finish = time.time() + timeout
         while time.time() < finish:
             if len(self.not_responded_requests) == 0:
                 return True
@@ -171,10 +171,10 @@ class Channel:
 
         return len(self.not_responded_requests) == 0
 
-    def receive_data(self, callback_):
+    def receive_data(self, callback):
         ready = select.select([self.sock], [], [], 0.2)
         if len(ready[0]) > 0:
-            callback_(self.sock.recv(4096))
+            callback(self.sock.recv(4096))
 
     def inactivity_timeout_expired(self):
         self.expired_inactivity_timeouts += 1
@@ -227,8 +227,8 @@ class Channel:
             )
             self.lg.log_back_trace(logger.llvl_critical, sys.exc_info()[2])
 
-    def set_user_message_handler(self, class_reference_, function_):
-        self.user_message_handlers[class_reference_.__name__] = function_
+    def set_user_message_handler(self, class_reference, function):
+        self.user_message_handlers[class_reference.__name__] = function
 
     def reset_user_message_handler(self, class_reference_):
         del self.user_message_handlers[class_reference_.__name__]
@@ -272,12 +272,12 @@ class Channel:
                 f'the "{message_.__class__.__name__}" received message'
             )
 
-    def run_user_handler(self, request_, incoming_message_):
+    def run_user_handler(self, request_, incoming_message):
         handler = self.user_message_handlers.get(
-            incoming_message_.__class__.__name__, None
+            incoming_message.__class__.__name__, None
         )
         if handler is not None and callable(handler):
-            handler(self, request_, incoming_message_)
+            handler(self, request_, incoming_message)
             return True
         else:
             return False
@@ -309,10 +309,10 @@ class Channel:
                 self.last_activity_time = time.time()
                 seconds_to_expiry = time.time() - self.last_activity_time + self.channel_parameters.inactivity_timeout
 
-    def handle_connect_response(self, response_):
-        request = self.register_incoming_message(response_)
-        self.run_user_handler(request, response_)
-        self.send_request(adjustment.AdjustmentRequest(response_.supports))
+    def handle_connect_response(self, response):
+        request = self.register_incoming_message(response)
+        self.run_user_handler(request, response)
+        self.send_request(adjustment.AdjustmentRequest(response.supports))
 
     def handle_adjustment_response(self, response):
         request = self.register_incoming_message(response)
@@ -323,15 +323,15 @@ class Channel:
         self.send_message(trap.TrapAck(message.message_id))
         self.run_user_handler(None, message)
 
-    def handle_trap_ack(self, message_):
-        request = self.register_incoming_message(message_)
-        if message_.message_id == self.last_heartbeat_trap.message_id:
+    def handle_trap_ack(self, message):
+        request = self.register_incoming_message(message)
+        if message.message_id == self.last_heartbeat_trap.message_id:
             self.last_heartbeat_trap = None
         else:
             self.lg.warning(
                 f'Ignoring trap ack for the old {trap.Trap.__name__} heartbeat trap...'
             )
-        self.run_user_handler(request, message_)
+        self.run_user_handler(request, message)
 
 
 ChannelsList = typing.List[Channel]
@@ -343,21 +343,21 @@ class Session:
     def create_channels_list() -> ChannelsList:
         return [None, None, None, None, None]
 
-    def __init__(self, host_, channel_ports_):
-        if len(channel_ports_) != 5:
+    def __init__(self, host, channel_ports):
+        if len(channel_ports) != 5:
             raise exceptions.GeneralFault(
-                f'5 channel ports required, but {len(channel_ports_)} are provided'
+                f'5 channel ports required, but {len(channel_ports)} are provided'
             )
         self.lg = logger.instance()
         self.channels = self.create_channels_list()
         self.there_were_errors = False
         channel_id = 0
         have_channels = False
-        for port in channel_ports_:
+        for port in channel_ports:
             channel_id += 1
             if port is not None:
                 have_channels = True
-                self.channels[channel_id - 1] = Channel(channel_id, host_, port)
+                self.channels[channel_id - 1] = Channel(channel_id, host, port)
 
         if not have_channels:
             raise exceptions.GeneralFault('no one channel port is provided')
@@ -372,12 +372,12 @@ class Session:
                         f'channel {channel.get_full_name()}'
                     )
 
-    def channel(self, channel_id_):
-        return self.channels[(channel_id_ - 1)]
+    def channel(self, channel_id):
+        return self.channels[(channel_id - 1)]
 
-    def register_error(self, message_):
+    def register_error(self, message):
         self.there_were_errors = True
-        self.lg.error(message_)
+        self.lg.error(message)
 
     def have_errors(self):
         if self.there_were_errors:
