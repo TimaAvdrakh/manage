@@ -316,7 +316,7 @@ class TaskManager:
                 self.session.channel(1).send_request(data_interrupt.DataInterruptRequest(task_info.task_id))
 
         if timeout is None:
-            timeout_ = self.session.channel(1).channel_parameters.request_response_timeout
+            timeout = self.session.channel(1).channel_parameters.request_response_timeout
 
         self.wait_for_responses(time.time() + timeout)
 
@@ -333,7 +333,7 @@ class TaskManager:
                 )
 
         if timeout is None:
-            timeout_ = self.session.channel(1).channel_parameters.request_response_timeout
+            timeout = self.session.channel(1).channel_parameters.request_response_timeout
 
         self.wait_for_responses(time.time() + timeout)
 
