@@ -7042,7 +7042,7 @@ class SkrVersion(char.PrintableString):
     pass
 
 
-vers = SkrVersion('3.0.0')
+vers = SkrVersion('0.0.1')
 
 
 class SkrMessage(univ.Sequence):
